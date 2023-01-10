@@ -10,7 +10,7 @@ module.exports = {
     'plugin:prettier/recommended' // 添加 prettier 插件
   ],
   parserOptions: {
-    ecmaVersion: 'latest',
+    ecmaVersion: 12,
     sourceType: 'module'
   },
   globals: {
