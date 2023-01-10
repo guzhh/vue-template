@@ -2,15 +2,24 @@
   "name": "vue-template",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite --config ./config/vite.config.dev.js --mode development ",
     "build": "vite build --config ./config/vite.config.prod.js --mode production",
     "report": "cross-env REPORT=true npm run build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint --ext .vue,.js ./",
+    "lint:fix": "eslint --fix --ext .vue,.js ./"
   },
   "dependencies": {
-    "vue": "^3.2.45"
+    "@layui/layer-vue": "^1.4.7",
+    "axios": "^1.2.2",
+    "naive-ui": "^2.34.3",
+    "pinia": "^2.0.28",
+    "pinia-plugin-persist": "^1.0.0",
+    "store": "^2.0.12",
+    "vfonts": "^0.0.3",
+    "vue": "^3.2.45",
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",
@@ -27,6 +36,8 @@
     "mockjs": "^1.1.0",
     "prettier": "2.7.1",
     "rollup-plugin-visualizer": "^5.9.0",
+    "unplugin-auto-import": "^0.12.1",
+    "unplugin-vue-components": "^0.22.12",
     "vite": "^4.0.0",
     "vite-plugin-compression": "^0.5.1",
     "vite-plugin-eslint": "^1.8.1",
