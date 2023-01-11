@@ -6,6 +6,7 @@ import router, { setupRouter } from "@/router";
 import { setupLayer } from "@/plugins/layer";
 import { setupStore } from "@/store";
 import { setupCustomComponents, setupDirectives, setupGlobalMethods } from "@/plugins";
+import { setupIcon } from "@/plugins/icons";
 
 // createApp(App).mount("#app");
 
@@ -17,6 +18,8 @@ async function bootstrap() {
 	setupLayer(app);
 	// 挂载状态管理
 	setupStore(app);
+	// 注册全局图标
+	setupIcon(app);
 	// 注册全局自定义组件
 	setupCustomComponents(app);
 	// 注册全局自定义指令，如：v-permission权限指令

@@ -215,7 +215,7 @@
     chalk "^2.0.0"
     js-tokens "^4.0.0"
 
-"@babel/parser@^7.16.4", "@babel/parser@^7.20.7":
+"@babel/parser@^7.16.4", "@babel/parser@^7.20.5", "@babel/parser@^7.20.7":
   version "7.20.7"
   resolved "https://registry.npmjs.org/@babel/parser/-/parser-7.20.7.tgz#66fe23b3c8569220817d5feb8b9dcdc95bb4f71b"
   integrity sha512-T3Z9oHybU+0vZlY9CiDSJQTD5ZapcW18ZctFMi0MOAl/4BjFF4ul7NVSARLdbGO5vDqy9eQiGTV0LtKfvCYvcg==
@@ -268,7 +268,7 @@
     debug "^4.1.0"
     globals "^11.1.0"
 
-"@babel/types@^7.0.0", "@babel/types@^7.18.6", "@babel/types@^7.19.0", "@babel/types@^7.20.0", "@babel/types@^7.20.2", "@babel/types@^7.20.7":
+"@babel/types@^7.0.0", "@babel/types@^7.18.6", "@babel/types@^7.19.0", "@babel/types@^7.20.0", "@babel/types@^7.20.2", "@babel/types@^7.20.5", "@babel/types@^7.20.7":
   version "7.20.7"
   resolved "https://registry.npmjs.org/@babel/types/-/types-7.20.7.tgz#54ec75e252318423fc07fb644dc6a58a64c09b7f"
   integrity sha512-69OnhBxSSgK0OzTJai4kyPDiKTIe3j+ctaHdIGVbRahTLAT7L3R9oeXHC2aVSuGYt3cVnoAMDmOCgJ2yaiLMvg==
@@ -702,6 +702,21 @@
   dependencies:
     "@types/node" "*"
 
+"@vicons/antd@^0.12.0":
+  version "0.12.0"
+  resolved "https://registry.npmjs.org/@vicons/antd/-/antd-0.12.0.tgz#56612381fb3fc79c0bf8d117c2f4de24de52cbbd"
+  integrity sha512-C0p6aO1EmGG1QHrqgUWQS1No20934OdWSRQshM5NIDK5H1On6tC26U0hT6Rmp40KfUsvhvX5YW8BoWJdNFifPg==
+
+"@vicons/fa@^0.12.0":
+  version "0.12.0"
+  resolved "https://registry.npmjs.org/@vicons/fa/-/fa-0.12.0.tgz#a5f92db45990f8a47b5eeedcdb9b673f0dababc8"
+  integrity sha512-g2PIeJLsTHUjt6bK63LxqC0uYQB7iu+xViJOxvp1s8b9/akpXVPVWjDTTsP980/0KYyMMe4U7F/aUo7wY+MsXA==
+
+"@vicons/ionicons5@^0.12.0":
+  version "0.12.0"
+  resolved "https://registry.npmjs.org/@vicons/ionicons5/-/ionicons5-0.12.0.tgz#c39fda04420dfae3b58053faf8aaf3555253299d"
+  integrity sha512-Iy1EUVRpX0WWxeu1VIReR1zsZLMc4fqpt223czR+Rpnrwu7pt46nbnC2ycO7ItI/uqDLJxnbcMC7FujKs9IfFA==
+
 "@vitejs/plugin-vue-jsx@^3.0.0":
   version "3.0.0"
   resolved "https://registry.npmjs.org/@vitejs/plugin-vue-jsx/-/plugin-vue-jsx-3.0.0.tgz#42e89d6d9eb89604d109ff9a615d77c3c080dd25"
@@ -715,6 +730,16 @@
   version "4.0.0"
   resolved "https://registry.npmjs.org/@vitejs/plugin-vue/-/plugin-vue-4.0.0.tgz#93815beffd23db46288c787352a8ea31a0c03e5e"
   integrity sha512-e0X4jErIxAB5oLtDqbHvHpJe/uWNkdpYV83AOG2xo2tEVSzCzewgJMtREZM30wXnM5ls90hxiOtAuVU6H5JgbA==
+
+"@vue-macros/common@~0.13.7":
+  version "0.13.7"
+  resolved "https://registry.npmjs.org/@vue-macros/common/-/common-0.13.7.tgz#74222b5df9ed3e827457f5c7f20ed7ce1d76d070"
+  integrity sha512-EHBUsE8dGJdyDlkgcOs4IyrDMYjH/EjPTK+evTLVsrEfn1i4O3qrxUS/VW/PYIi/UCLrOcuG9SBbR3xxD5fCDg==
+  dependencies:
+    "@babel/types" "^7.20.7"
+    "@vue/compiler-sfc" "^3.2.45"
+    local-pkg "^0.4.2"
+    magic-string "^0.27.0"
 
 "@vue/babel-helper-vue-transform-on@^1.0.2":
   version "1.0.2"
@@ -754,7 +779,7 @@
     "@vue/compiler-core" "3.2.45"
     "@vue/shared" "3.2.45"
 
-"@vue/compiler-sfc@3.2.45", "@vue/compiler-sfc@^3.2.20":
+"@vue/compiler-sfc@3.2.45", "@vue/compiler-sfc@^3.2.20", "@vue/compiler-sfc@^3.2.45":
   version "3.2.45"
   resolved "https://registry.npmjs.org/@vue/compiler-sfc/-/compiler-sfc-3.2.45.tgz#7f7989cc04ec9e7c55acd406827a2c4e96872c70"
   integrity sha512-1jXDuWah1ggsnSAOGsec8cFjT/K6TMZ0sPL3o3d84Ft2AYZi2jWJgRMjw4iaK0rBfA89L5gw427H4n1RZQBu6Q==
@@ -940,6 +965,14 @@ array.prototype.flat@^1.2.5:
     define-properties "^1.1.4"
     es-abstract "^1.20.4"
     es-shim-unscopables "^1.0.0"
+
+ast-walker-scope@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.npmjs.org/ast-walker-scope/-/ast-walker-scope-0.3.1.tgz#f137801cfaec341da64584efc6e2045c5324c01d"
+  integrity sha512-c+tWaEoA+b4yJp0NUI8/hYKUv1ELqpCMU/fogGazXxu7EXlry37q1wdfhaQqVmQn4l4agMeo4ek76LyKFIxkKA==
+  dependencies:
+    "@babel/parser" "^7.20.5"
+    "@babel/types" "^7.20.5"
 
 async-validator@^4.0.7:
   version "4.2.5"
@@ -3717,6 +3750,11 @@ minimist@^1.1.3, minimist@^1.2.0, minimist@^1.2.6:
   resolved "https://registry.npmjs.org/minimist/-/minimist-1.2.7.tgz#daa1c4d91f507390437c6a8bc01078e7000c4d18"
   integrity sha512-bzfL1YUZsP41gmu/qjrEk0Q6i2ix/cVeAhbCbqH9u3zYutS1cLg00qhrD0M2MVdCcx4Sc0UpP2eBWo9rotpq6g==
 
+mitt@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/mitt/-/mitt-3.0.0.tgz#69ef9bd5c80ff6f57473e8d89326d01c414be0bd"
+  integrity sha512-7dX2/10ITVyqh4aOSVI9gdape+t9l2/8QxHrFmUXu4EEUpdlxl6RudZUPZoc+zuY2hk1j7XxVroIVIan/pD/SQ==
+
 mlly@^1.0.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/mlly/-/mlly-1.1.0.tgz#9e23c5e675ef7b10cc47ee6281795cb1a7aa3aa2"
@@ -3871,6 +3909,11 @@ npm-run-path@^4.0.0, npm-run-path@^4.0.1:
   integrity sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==
   dependencies:
     path-key "^3.0.0"
+
+nprogress@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.npmjs.org/nprogress/-/nprogress-0.2.0.tgz#cb8f34c53213d895723fcbab907e9422adbcafb1"
+  integrity sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==
 
 nth-check@^2.0.1:
   version "2.1.1"
@@ -4308,6 +4351,13 @@ punycode@^2.1.0:
   version "2.1.1"
   resolved "https://registry.npmjs.org/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
+
+qs@^6.11.0:
+  version "6.11.0"
+  resolved "https://registry.npmjs.org/qs/-/qs-6.11.0.tgz#fd0d963446f7a65e1367e01abd85429453f0c37a"
+  integrity sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q==
+  dependencies:
+    side-channel "^1.0.4"
 
 query-string@^5.0.1:
   version "5.1.1"
@@ -5068,6 +5118,16 @@ unplugin-vue-components@^0.22.12:
     magic-string "^0.27.0"
     minimatch "^5.1.1"
     resolve "^1.22.1"
+    unplugin "^1.0.1"
+
+unplugin-vue-define-options@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.npmjs.org/unplugin-vue-define-options/-/unplugin-vue-define-options-1.1.3.tgz#89036ceae75ad2d752e3f6915c5bd412ea6531a9"
+  integrity sha512-OfGYQhsvTCkjEsRTrWC0sSFciLy6aIa4bE96ZNmFSQrv1/Cu512F4WTd8WMKyaRhaN6Cy8EM2cbGLMWAHBAz4A==
+  dependencies:
+    "@rollup/pluginutils" "^5.0.2"
+    "@vue-macros/common" "~0.13.7"
+    ast-walker-scope "^0.3.1"
     unplugin "^1.0.1"
 
 unplugin@^1.0.1:

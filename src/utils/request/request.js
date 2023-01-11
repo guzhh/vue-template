@@ -1,7 +1,7 @@
-import storage from "store";
 import { layer } from "@layui/layer-vue";
 import router from "@/router";
 import Request from "./axios";
+import { clearToken, getToken } from "@/utils/auth";
 
 const ACCESS_TOKEN = import.meta.env.VITE_BASE_API_URL;
 
@@ -23,7 +23,7 @@ export default new Request({
 			if (config.method === "get" || config.method === "GET") {
 				config.params = { ...config.params, t: new Date().getTime() };
 			}
-			const token = storage.get(ACCESS_TOKEN);
+			const token = getToken(); // storage.get(ACCESS_TOKEN);
 			if (token) {
 				config.headers[ACCESS_TOKEN] = token;
 			}
@@ -35,17 +35,37 @@ export default new Request({
 			if (response.config.customs?.isLoading) {
 				layer.close(response.config?.customs?.loadingInstance);
 			}
-			if (response.status === 203) {
-				window.$notification.error({ content: "登录过期", meta: response.data.message, keepAliveOnHover: true });
+			if (response.data?.status === "60001") {
+				window.$notification.error({
+					content: "您尚未登录",
+					meta: response.data.message,
+					keepAliveOnHover: true,
+					duration: 3000
+				});
 				router.push({ name: "Login" });
-				storage.clearAll();
+				clearToken();
+			} else if (response.data?.status === "60002") {
+				window.$notification.error({
+					content: "登录失效",
+					meta: response.data.message,
+					keepAliveOnHover: true,
+					duration: 3000
+				});
+				router.push({ name: "Login" });
+				clearToken();
 			} else if (response.data?.status === "403") {
-				window.$notification.error({ content: "无权访问", meta: `地址：${response.config.url}`, keepAliveOnHover: true });
+				window.$notification.error({
+					content: "无权访问",
+					meta: `地址：${response.config.url}`,
+					keepAliveOnHover: true,
+					duration: 3000
+				});
 			} else if (response.data?.success === false) {
 				window.$notification.error({
 					content: import.meta.env.MODE === "development" ? `接口返回失败：${response.config.url}` : "操作失败",
 					meta: response.data.message,
-					keepAliveOnHover: true
+					keepAliveOnHover: true,
+					duration: 3000
 				});
 			}
 			// 接口请求成功提示
@@ -59,7 +79,12 @@ export default new Request({
 			if (error.config.customs?.isLoading) {
 				layer.close(error.config?.customs?.loadingInstance);
 			}
-			window.$notification.error({ content: `网络请求错误：${error.config.url}`, meta: error.message, keepAliveOnHover: true });
+			window.$notification.error({
+				content: `网络请求错误：${error.config.url}`,
+				meta: error.message,
+				keepAliveOnHover: true,
+				duration: 3000
+			});
 			return Promise.reject(error);
 		}
 	}

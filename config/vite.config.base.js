@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import svgLoader from "vite-svg-loader";
 import vueJsx from "@vitejs/plugin-vue-jsx";
+import DefineOptions from "unplugin-vue-define-options/vite";
 import { createHtmlPlugin } from "vite-plugin-html";
 import packageJson from "../package.json";
 import configNaiveResolverPlugin from "./plugin/arcoResolver";
@@ -12,6 +13,7 @@ export default defineConfig({
 	plugins: [
 		vue(),
 		vueJsx(),
+		DefineOptions(),
 		svgLoader({ svgoConfig: {} }),
 		configNaiveResolverPlugin(), // naive自动引入
 		// 为index插入
