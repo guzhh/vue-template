@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import defaultSettings from "@/config/settings.js";
 import useUserStore from "@/store/modules/user/index";
-import { generatorDynamicRouter } from "@/router/constants";
+import { setTreeData } from "@/utils/tree";
 
 const useAppStore = defineStore("app", {
 	state: () => ({ ...defaultSettings }),
@@ -17,11 +17,23 @@ const useAppStore = defineStore("app", {
 		}
 	},
 	actions: {
-		async fetchServerMenuConfig(router) {
+		updateSettings(partial) {
+			this.$patch(partial);
+		},
+		async fetchServerMenuConfig() {
 			const userStore = useUserStore();
-			// console.log("-------", userStore.resourceList);
-			const routes = await generatorDynamicRouter(userStore.resourceList, router);
-			this.serverMenu = routes;
+			const menus = userStore.resourceList.filter(item => item.meta.type === 1);
+			this.serverMenu = setTreeData(menus);
+		},
+		// 更改主题颜色
+		toggleTheme(dark) {
+			if (dark) {
+				this.theme = "dark";
+				document.body.setAttribute("naive-theme", "dark");
+			} else {
+				this.theme = "light";
+				document.body.removeAttribute("naive-theme");
+			}
 		}
 	}
 });

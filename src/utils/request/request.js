@@ -42,7 +42,7 @@ export default new Request({
 					keepAliveOnHover: true,
 					duration: 3000
 				});
-				router.push({ name: "Login" });
+				router.push({ name: "login" });
 				clearToken();
 			} else if (response.data?.status === "60002") {
 				window.$notification.error({
@@ -51,7 +51,7 @@ export default new Request({
 					keepAliveOnHover: true,
 					duration: 3000
 				});
-				router.push({ name: "Login" });
+				router.push({ name: "login" });
 				clearToken();
 			} else if (response.data?.status === "403") {
 				window.$notification.error({

@@ -1,6 +1,7 @@
 <template>
-	<n-config-provider :locale="zhCN" :date-locale="dateZhCN">
+	<n-config-provider :theme="theme" :locale="zhCN" :date-locale="dateZhCN">
 		<n-theme-editor>
+			<n-global-style />
 			<n-notification-provider>
 				<n-message-provider>
 					<n-dialog-provider>
@@ -13,7 +14,12 @@
 </template>
 
 <script setup>
-import { zhCN, dateZhCN, NThemeEditor } from "naive-ui";
+import { computed } from "vue";
+import { zhCN, dateZhCN, NThemeEditor, darkTheme } from "naive-ui";
+import { useAppStore } from "@/store";
+
+const appStore = useAppStore();
+const theme = computed(() => (appStore.theme === "dark" ? darkTheme : null));
 </script>
 
-<style scoped></style>
+<style lang="less"></style>

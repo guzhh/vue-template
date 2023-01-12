@@ -25,7 +25,7 @@ import LoginBanner from "./components/banner.vue";
 import LoginForm from "./components/login-form.vue";
 import pkLogo from "@/assets/images/pk-logo.png";
 
-defineOptions({ name: "Login" });
+defineOptions({ name: "login" });
 
 const title = import.meta.env.VITE_SYSTEM_NAME;
 

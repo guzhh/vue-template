@@ -1,17 +1,20 @@
 import NProgress from "nprogress";
-import { useAppStore } from "@/store";
+import { useAppStore, useUserStore } from "@/store";
 import usePermission from "@/hooks/permission";
-import { NOT_FOUND, WHITE_LIST } from "../constants";
+import { generatorDynamicRouter, NOT_FOUND, WHITE_LIST } from "../constants";
 
 export default function setupPermissionGuard(router) {
 	router.beforeEach(async (to, from, next) => {
 		const appStore = useAppStore();
+		const userStore = useUserStore();
 		const Permission = usePermission();
 		const permissionsAllow = Permission.accessRouter(to);
 
 		if (!appStore.appAsyncMenus.length && !WHITE_LIST.find(el => el.name === to.name)) {
-			// 获取到动态路由和菜单
-			await appStore.fetchServerMenuConfig(router);
+			// 生成动态路由
+			await generatorDynamicRouter(userStore.resourceList, router);
+			// 生成动态菜单
+			await appStore.fetchServerMenuConfig();
 			next({ ...to, replace: true });
 		} else {
 			// 拿到

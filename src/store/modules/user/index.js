@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { login as userLogin, logout as userLogout, getUserInfo } from "@/api/users/user";
 import { clearToken, setToken } from "@/utils/auth";
+import { formatTheResource } from "@/router/constants";
 
 const useUserStore = defineStore("user", {
 	state: () => ({
@@ -53,10 +54,12 @@ const useUserStore = defineStore("user", {
 			} finally {
 				this.logoutCallBack();
 			}
+			return Promise.resolve();
 		},
 		// 获取用户信息
 		async info() {
 			const res = await getUserInfo();
+			res.result.resourceList = formatTheResource(res.result.resourceList); // 处理资源为符合前端要求的资源
 			this.setInfo(res.result);
 		}
 	}

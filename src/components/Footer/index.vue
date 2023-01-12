@@ -10,6 +10,8 @@
 // 全局公共变量
 import { useThemeVars } from "naive-ui";
 
+defineOptions({ name: "Footer" });
+
 const systemCopyright = import.meta.env.VITE_SYSTEM_COPYRIGHT;
 
 const themeVars = useThemeVars();
