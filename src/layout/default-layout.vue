@@ -35,7 +35,6 @@
 					<Menu />
 				</n-drawer>
 				<n-layout class="layout-content" :style="paddingStyle">
-					{{ appStore.tabBar }}
 					<tab-bar v-if="appStore.tabBar" />
 					<n-layout-content>
 						<PageLayout />
@@ -49,22 +48,27 @@
 
 <script setup>
 import { computed, provide, ref } from "vue";
+import { useThemeVars } from "naive-ui";
 import { useAppStore } from "@/store";
 import NavBar from "@/components/Navbar/index.vue";
 import Menu from "@/components/Menu/index.vue";
 import Footer from "@/components/footer/index.vue";
 import PageLayout from "./page-layout.vue";
 import TabBar from "@/components/TabBar/index.vue";
+import useResponsive from "@/hooks/responsive";
 
 defineOptions({ name: "DefaultLayout" });
 
 const appStore = useAppStore();
-const navbarHeight = `60px`;
+useResponsive(true);
+const navbarHeight = `48px`;
 const navbar = computed(() => appStore.navbar); // 是否开启头部标题栏
 const renderMenu = computed(() => appStore.menu); // 是否渲染左侧菜单栏
 const hideMenu = computed(() => appStore.hideMenu); // 是否隐藏左侧菜单栏
 const collapsed = computed(() => appStore.menuCollapse); // 是否折叠菜单栏
 const footer = computed(() => appStore.footer); // 是否显示底部
+
+const themeVars = useThemeVars(); // 全局公共CSS变量
 const menuWidth = computed(() => {
 	return appStore.menuCollapse ? 48 : appStore.menuWidth; // 菜单栏宽度
 });
@@ -72,7 +76,7 @@ const menuWidth = computed(() => {
 const paddingStyle = computed(() => {
 	const paddingLeft = renderMenu.value && !hideMenu.value ? { paddingLeft: `${menuWidth.value}px` } : {};
 	const paddingTop = navbar.value ? { paddingTop: navbarHeight } : {};
-	return { ...paddingLeft, ...paddingTop };
+	return { ...paddingLeft, ...paddingTop, backgroundColor: themeVars.value.actionColor, minHeight: "100vh" };
 });
 
 const setCollapsed = val => {
@@ -105,6 +109,7 @@ provide("toggleDrawerMenu", () => {
 	z-index: 100;
 	width: 100%;
 	height: @nav-size-height;
+	background-color: v-bind("themeVars.bodyColor");
 }
 
 .layout-sider {
@@ -114,6 +119,7 @@ provide("toggleDrawerMenu", () => {
 	z-index: 99;
 	height: 100%;
 	transition: all 0.2s cubic-bezier(0.34, 0.69, 0.1, 1);
+
 	&::after {
 		position: absolute;
 		top: 0;

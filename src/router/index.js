@@ -18,7 +18,7 @@ const router = createRouter({
 			}
 		}
 	],
-	strict: true, // 不允许路由末尾为/ 斜杠
+	// strict: true, // 不允许路由末尾为/ 斜杠
 	scrollBehavior: () => ({ left: 0, top: 0 })
 });
 

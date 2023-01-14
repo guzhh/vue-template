@@ -9,7 +9,7 @@
 	</router-view>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 import { computed } from "vue";
 import { useTabBarStore } from "@/store";
 

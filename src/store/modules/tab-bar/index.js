@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 const formatTag = route => {
 	const { name, meta, fullPath, query } = route;
 	return {
-		title: meta.locale || "",
+		title: meta.title || "",
 		name: String(name),
 		fullPath,
 		query,

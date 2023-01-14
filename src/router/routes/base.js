@@ -6,13 +6,13 @@ export const REDIRECT_MAIN = {
 	name: "redirectWrapper",
 	component: DEFAULT_LAYOUT,
 	meta: {
-		requiresAuth: true,
-		hideInMenu: true
+		noAffix: true,
+		ignoreCache: false
 	},
 	children: [
 		{
 			path: "/redirect/:path",
-			name: "redirect",
+			name: "Redirect",
 			component: () => import("@/views/exception/redirect.vue"),
 			meta: {
 				requiresAuth: true,

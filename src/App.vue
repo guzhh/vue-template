@@ -6,6 +6,7 @@
 				<n-message-provider>
 					<n-dialog-provider>
 						<router-view></router-view>
+						<global-setting />
 					</n-dialog-provider>
 				</n-message-provider>
 			</n-notification-provider>
@@ -17,6 +18,7 @@
 import { computed } from "vue";
 import { zhCN, dateZhCN, NThemeEditor, darkTheme } from "naive-ui";
 import { useAppStore } from "@/store";
+import GlobalSetting from "@/components/GlobalSetting/index.vue";
 
 const appStore = useAppStore();
 const theme = computed(() => (appStore.theme === "dark" ? darkTheme : null));

@@ -3,7 +3,7 @@ import router from "@/router";
 import Request from "./axios";
 import { clearToken, getToken } from "@/utils/auth";
 
-const ACCESS_TOKEN = import.meta.env.VITE_BASE_API_URL;
+const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN_KEY;
 
 export default new Request({
 	baseURL: import.meta.env.VITE_API_BASE_URL,

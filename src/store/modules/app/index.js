@@ -20,11 +20,6 @@ const useAppStore = defineStore("app", {
 		updateSettings(partial) {
 			this.$patch(partial);
 		},
-		async fetchServerMenuConfig() {
-			const userStore = useUserStore();
-			const menus = userStore.resourceList.filter(item => item.meta.type === 1);
-			this.serverMenu = setTreeData(menus);
-		},
 		// 更改主题颜色
 		toggleTheme(dark) {
 			if (dark) {
@@ -34,6 +29,17 @@ const useAppStore = defineStore("app", {
 				this.theme = "light";
 				document.body.removeAttribute("naive-theme");
 			}
+		},
+		toggleDevice(device) {
+			this.device = device;
+		},
+		toggleMenu(value) {
+			this.hideMenu = value;
+		},
+		async fetchServerMenuConfig() {
+			const userStore = useUserStore();
+			const menus = userStore.resourceList.filter(item => item.meta.type === 1);
+			this.serverMenu = setTreeData(menus, "id", "pid");
 		}
 	}
 });
