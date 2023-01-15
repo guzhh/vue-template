@@ -1,0 +1,59 @@
+/* 默认dark主题 */
+:root {
+  --table-bg: rgb(24, 24, 28);
+  --table-heade-bg: #26262a;
+  --table-header-text-color: rgba(255, 255, 255, 0.82);
+  --table-border-color: rgba(45, 45, 48, 1);
+  --table-th-color: #18181c;
+  --table-th-text-color: rgba(255, 255, 255, 0.9);
+  --modal-color: rgb(44, 44, 50);
+  --text-color: #fff;
+}
+
+
+body[naive-theme="dark"]{
+  .vxe-header--column {
+    background-color: var(--table-heade-bg);
+    color: var(--table-header-text-color);
+    border-color: var(--table-border-color);
+  }
+
+  .vxe-body--column {
+    background-color: var(--table-th-color);
+    color: var(--table-th-text-color);
+    border-color: var(--table-border-color);
+  }
+
+  .vxe-table--body {
+    border-color: var(--table-border-color) !important;
+  }
+
+  .vxe-body--column {
+    border-left-color: var(--table-border-color) !important;
+    border-bottom-color: var(--table-border-color) !important;
+  }
+
+  th.vxe-header--column {
+    border-left-color: var(--table-border-color) !important;
+    border-bottom-color: var(--table-border-color) !important;
+  }
+
+  /*.vxe-table .vxe-table--header-wrapper .vxe-table--header-border-line {*/
+  /*  border-color: var(--table-border-color) !important;*/
+  /*}*/
+
+  .vxe-table--render-default.border--inner .vxe-body--column {
+    background-image: linear-gradient(var(--table-border-color), var(--table-border-color));
+  }
+
+  .vxe-table--render-default .vxe-table--body-wrapper{
+    background-color: var(--table-bg) !important;
+  }
+
+  .layui-layer{
+    background-color: var(--modal-color);
+  }
+  .layui-layer-title{
+    color: var(--text-color);
+  }
+}

@@ -22,12 +22,19 @@ const useAppStore = defineStore("app", {
 		},
 		// 更改主题颜色
 		toggleTheme(dark) {
+			// if (dark) {
+			// 	this.theme = "dark";
+			// 	document.documentElement.setAttribute("naive-theme", "dark");
+			// } else {
+			// 	this.theme = "light";
+			// 	document.documentElement.removeAttribute("naive-theme");
+			// }
 			if (dark) {
 				this.theme = "dark";
-				document.documentElement.setAttribute("naive-theme", "dark");
+				document.body.setAttribute("naive-theme", "dark");
 			} else {
 				this.theme = "light";
-				document.documentElement.removeAttribute("naive-theme");
+				document.body.removeAttribute("naive-theme");
 			}
 		},
 		toggleDevice(device) {

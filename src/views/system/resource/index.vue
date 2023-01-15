@@ -2,7 +2,7 @@
 	<page-content>
 		<n-card size="small" title="资源列表">
 			<template #header-extra>
-				<n-button type="primary" size="small">新增资源</n-button>
+				<n-button type="primary" size="small" @click="addNewResources">新增资源</n-button>
 				<n-tooltip>
 					<span>折叠</span>
 					<template #trigger>
@@ -109,6 +109,7 @@
 				</vxe-column>
 			</vxe-table>
 		</n-card>
+		<resource-form ref="resourceFormRef"></resource-form>
 	</page-content>
 </template>
 
@@ -118,12 +119,14 @@ import { useWindowSize } from "@/hooks/useWindowSize";
 import { getResourceList } from "@/api/system/resource";
 import { setTreeData } from "@/utils/tree";
 import useTable from "@/hooks/useTable";
+import ResourceForm from "@/views/system/resource/components/resource-form.vue";
 
 defineOptions({ name: "resource" });
 
 const { height } = useWindowSize();
 const { tableSizeOptions, tableSize } = useTable();
 
+const resourceFormRef = ref();
 const tableLoading = ref();
 const tableData = ref([]);
 
@@ -140,6 +143,10 @@ const getData = () => {
 		});
 };
 getData();
+
+const addNewResources = () => {
+	resourceFormRef.value.openModal();
+};
 </script>
 
 <style scoped></style>
