@@ -47,12 +47,11 @@ const themeVars = useThemeVars();
 <style scoped lang="less">
 .tab-bar-container {
 	position: relative;
-	background-color: v-bind("themeVars.bodyColor");
-
+	background-color: v-bind("themeVars.cardColor");
 	.tab-bar-box {
 		display: flex;
 		padding: 0 0 0 20px;
-		background-color: v-bind("themeVars.bodyColor");
+		//background-color: v-bind("themeVars.bodyColor");
 		border-bottom: 1px solid v-bind("themeVars.borderColor");
 		.tab-bar-scroll {
 			height: 32px;

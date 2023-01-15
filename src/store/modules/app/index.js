@@ -24,10 +24,10 @@ const useAppStore = defineStore("app", {
 		toggleTheme(dark) {
 			if (dark) {
 				this.theme = "dark";
-				document.body.setAttribute("naive-theme", "dark");
+				document.documentElement.setAttribute("naive-theme", "dark");
 			} else {
 				this.theme = "light";
-				document.body.removeAttribute("naive-theme");
+				document.documentElement.removeAttribute("naive-theme");
 			}
 		},
 		toggleDevice(device) {
@@ -41,6 +41,27 @@ const useAppStore = defineStore("app", {
 			const menus = userStore.resourceList.filter(item => item.meta.type === 1);
 			this.serverMenu = setTreeData(menus, "id", "pid");
 		}
+	},
+	persist: {
+		enabled: true, // 开启store持久化
+		strategies: [
+			{
+				key: "panku_app_state",
+				storage: localStorage,
+				paths: [
+					"navbar",
+					"menu",
+					"hideMenu",
+					"menuCollapse",
+					"footer",
+					"themeColor",
+					"menuWidth",
+					"globalSettings",
+					"tabBar",
+					"device"
+				]
+			}
+		]
 	}
 });
 

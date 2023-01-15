@@ -2,7 +2,6 @@
 	<div class="navbar">
 		<div class="left-side">
 			<n-space align="center">
-				<!--				<img alt="logo" :src="PkLogo" />-->
 				<n-h5 :style="{ margin: 0, fontSize: '18px' }">{{ title }}</n-h5>
 				<n-icon
 					size="22"
@@ -160,7 +159,7 @@ const themeVars = useThemeVars();
 	display: flex;
 	justify-content: space-between;
 	height: 100%;
-	background-color: var("themeVars.baseColor");
+	background-color: v-bind("themeVars.cardColor");
 	border-bottom: 1px solid v-bind("themeVars.borderColor");
 }
 

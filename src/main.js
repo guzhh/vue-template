@@ -7,6 +7,7 @@ import { setupLayer } from "@/plugins/layer";
 import { setupStore } from "@/store";
 import { setupCustomComponents, setupDirectives, setupGlobalMethods } from "@/plugins";
 import { setupIcon } from "@/plugins/icons";
+import { setupVxeTable } from "@/plugins/vxeTable";
 
 // createApp(App).mount("#app");
 
@@ -16,6 +17,8 @@ async function bootstrap() {
 	const app = createApp(App);
 	// 挂载 layer-vue
 	setupLayer(app);
+	// 挂载vxe-table
+	setupVxeTable(app);
 	// 挂载状态管理
 	setupStore(app);
 	// 注册全局图标

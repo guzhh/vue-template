@@ -25,5 +25,7 @@ const themeVars = useThemeVars();
 	height: 40px;
 	color: v-bind("themeVars.textColor3");
 	text-align: center;
+	//background-color: v-bind("themeVars.badyColor");
+	//margin-top: 10px;
 }
 </style>

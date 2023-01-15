@@ -5,6 +5,7 @@
 		:collapsed="collapsed"
 		:collapsed-width="50"
 		key-field="name"
+		:indent="20"
 		:value="route.name"
 		:collapsed-icon-size="22"
 		:options="menuTree"

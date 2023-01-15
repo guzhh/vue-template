@@ -76,7 +76,7 @@ const menuWidth = computed(() => {
 const paddingStyle = computed(() => {
 	const paddingLeft = renderMenu.value && !hideMenu.value ? { paddingLeft: `${menuWidth.value}px` } : {};
 	const paddingTop = navbar.value ? { paddingTop: navbarHeight } : {};
-	return { ...paddingLeft, ...paddingTop, backgroundColor: themeVars.value.actionColor, minHeight: "100vh" };
+	return { ...paddingLeft, ...paddingTop };
 });
 
 const setCollapsed = val => {
@@ -109,7 +109,7 @@ provide("toggleDrawerMenu", () => {
 	z-index: 100;
 	width: 100%;
 	height: @nav-size-height;
-	background-color: v-bind("themeVars.bodyColor");
+	background-color: v-bind("themeVars.cardColor");
 }
 
 .layout-sider {

@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import svgLoader from "vite-svg-loader";
 import vueJsx from "@vitejs/plugin-vue-jsx";
+import { createStyleImportPlugin, VxeTableResolve } from "vite-plugin-style-import";
 import DefineOptions from "unplugin-vue-define-options/vite";
 import { createHtmlPlugin } from "vite-plugin-html";
 import packageJson from "../package.json";
@@ -16,6 +17,10 @@ export default defineConfig({
 		DefineOptions(),
 		svgLoader({ svgoConfig: {} }),
 		configNaiveResolverPlugin(), // naive自动引入
+		// vxe-table 自动导入
+		createStyleImportPlugin({
+			resolves: [VxeTableResolve()]
+		}),
 		// 为index插入
 		createHtmlPlugin({
 			inject: {
