@@ -58,7 +58,8 @@ const useAppStore = defineStore("app", {
 					"menuWidth",
 					"globalSettings",
 					"tabBar",
-					"device"
+					"device",
+					"tableSize"
 				]
 			}
 		]

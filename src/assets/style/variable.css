@@ -34,10 +34,14 @@ th.vxe-header--column {
   border-bottom-color: var(--table-border-color) !important;
 }
 
-.vxe-table .vxe-table--header-wrapper .vxe-table--header-border-line {
-  border-color: var(--table-border-color) !important;
-}
+/*.vxe-table .vxe-table--header-wrapper .vxe-table--header-border-line {*/
+/*  border-color: var(--table-border-color) !important;*/
+/*}*/
 
 .vxe-table--render-default.border--inner .vxe-body--column {
   background-image: linear-gradient(var(--table-border-color), var(--table-border-color));
+}
+
+.vxe-table--render-default .vxe-table--body-wrapper{
+  background-color: var(--table-bg) !important;
 }

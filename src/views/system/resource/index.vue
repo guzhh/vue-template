@@ -6,16 +6,18 @@
 				<n-tooltip>
 					<span>折叠</span>
 					<template #trigger>
-						<n-icon @click="$refs.tableRef.clearTreeExpand()" size="17" style="margin-left: 15px"
-							><ArrowBetweenDown24Filled
-						/></n-icon>
+						<n-icon @click="$refs.tableRef.clearTreeExpand()" size="17" style="margin-left: 15px">
+							<ArrowBetweenDown24Filled />
+						</n-icon>
 					</template>
 				</n-tooltip>
 				<n-divider vertical />
 				<n-tooltip>
 					<span>刷新</span>
 					<template #trigger>
-						<n-icon size="17" @click="getData"><Refresh /></n-icon>
+						<n-icon size="17" @click="getData">
+							<Refresh />
+						</n-icon>
 					</template>
 				</n-tooltip>
 				<n-divider vertical />
@@ -23,7 +25,9 @@
 					<span>密度</span>
 					<template #trigger>
 						<n-popselect v-model:value="tableSize" :options="tableSizeOptions" trigger="click">
-							<n-icon size="17"><AutoFitHeight20Filled /></n-icon>
+							<n-icon size="17">
+								<AutoFitHeight20Filled />
+							</n-icon>
 						</n-popselect>
 					</template>
 				</n-tooltip>
@@ -31,20 +35,22 @@
 				<n-tooltip>
 					<span>列设置</span>
 					<template #trigger>
-						<n-icon size="17"><Settings48Regular /></n-icon>
+						<n-icon size="17">
+							<Settings48Regular />
+						</n-icon>
 					</template>
 				</n-tooltip>
 			</template>
 
 			<vxe-table
-				:size="tableSize"
-				:height="height - 95"
-				:loading="tableLoading"
-				resizable
 				border
+				resizable
 				row-id="id"
 				align="center"
 				ref="tableRef"
+				:size="tableSize"
+				:height="height - 95"
+				:loading="tableLoading"
 				style="margin-top: 10px"
 				:tree-config="{ children: 'children', expandAll: true, reserve: true }"
 				:data="tableData"
@@ -111,13 +117,13 @@ import { ref } from "vue";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { getResourceList } from "@/api/system/resource";
 import { setTreeData } from "@/utils/tree";
-import { tableSizeOptions } from "@/constant/table";
+import useTable from "@/hooks/useTable";
 
 defineOptions({ name: "resource" });
 
 const { height } = useWindowSize();
+const { tableSizeOptions, tableSize } = useTable();
 
-const tableSize = ref("small");
 const tableLoading = ref();
 const tableData = ref([]);
 

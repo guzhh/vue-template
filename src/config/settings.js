@@ -11,5 +11,6 @@ export default {
 	globalSettings: false, // 是否显示 全局设置
 	tabBar: true, // 是否开启多页签
 	device: "desktop", // 当前界面模式 desktop || mobile
+	tableSize: "small", // table size
 	serverMenu: [] // 后端返回的路由资源
 };
