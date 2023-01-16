@@ -1,0 +1,62 @@
+import qs from "qs";
+import request from "@/utils/request/request";
+
+/**
+ * 获取字典列表
+ * @returns {Promise<*>}
+ */
+export function getDictList(params) {
+	return request.post({
+		url: "/p/auth/auth-dict/getDictList",
+		data: qs.stringify(params),
+		customs: {
+			isLoading: true,
+			loadingText: "字典列表获取中..."
+		}
+	});
+}
+
+/**
+ * 保存或新增字典信息
+ * @returns {Promise<*>}
+ */
+export function saveOrUptDict(params) {
+	return request.post({
+		url: "/p/auth/auth-dict/saveOrUptDict",
+		data: qs.stringify(params),
+		customs: {
+			isLoading: true,
+			loadingText: "字典保存中..."
+		}
+	});
+}
+
+/**
+ * 删除字典信息
+ * @returns {Promise<*>}
+ */
+export function delDict(params) {
+	return request.post({
+		url: "/p/auth/auth-dict/delDict",
+		data: qs.stringify(params),
+		customs: {
+			isLoading: true,
+			loadingText: "参数删除中..."
+		}
+	});
+}
+
+/**
+ * 根据父ids获取下级字典集合
+ * @returns {Promise<*>}
+ */
+export function getDictByPids(params) {
+	return request.post({
+		url: "/p/auth/auth-dict/getDictByPids",
+		data: qs.stringify(params),
+		customs: {
+			isLoading: true,
+			loadingText: "参数删除中..."
+		}
+	});
+}

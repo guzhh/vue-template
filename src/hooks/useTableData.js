@@ -1,5 +1,5 @@
 import { reactive, ref } from "vue";
-import { ElMessage } from "element-plus";
+import { useMessage } from "naive-ui";
 
 /**
  * table table公共方法
@@ -19,6 +19,7 @@ export default function ({
 	processTheData,
 	initDataCallBack = () => {}
 }) {
+	const message = useMessage();
 	const tableList = ref([]);
 	const tableLoading = ref(false);
 	const searchForm = ref({ ...formData });
@@ -52,7 +53,7 @@ export default function ({
 					}
 					initDataCallBack();
 				} else {
-					ElMessage.error(res.message);
+					message.error(res.message);
 				}
 			})
 			.finally(() => {
