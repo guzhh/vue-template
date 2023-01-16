@@ -4,7 +4,8 @@ import {
 	UserOutlined,
 	MenuOutlined,
 	OrderedListOutlined,
-	PicCenterOutlined
+	PicCenterOutlined,
+	FileMarkdownOutlined
 } from "@vicons/antd";
 import { CubeOutline } from "@vicons/ionicons5";
 
@@ -21,6 +22,7 @@ export const Icons = {
 	PicCenterOutlined,
 	Refresh,
 	FoldDown,
+	FileMarkdownOutlined,
 	ArrowBetweenDown24Filled,
 	Settings48Regular,
 	AutoFitHeight20Filled

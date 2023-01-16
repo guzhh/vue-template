@@ -69,57 +69,52 @@
 				<vxe-column field="permissionFlag" title="权限标识" min-width="120px" show-overflow="title"></vxe-column>
 				<vxe-column field="type" title="资源类型" min-width="80px" show-overflow="title">
 					<template #default="{ row }">
-						<span v-if="row.type === 1">菜单</span>
-						<span v-else-if="row.type === 2">按钮</span>
-						<span v-else-if="row.type === 3">扩展页面</span>
+						<option-badge :options="typeFlagOptions" :val="row.type" />
 					</template>
 				</vxe-column>
-				<vxe-column field="hidden" title="是否隐藏菜单" min-width="120px" show-overflow="title">
+				<vxe-column field="ifHidden" title="是否隐藏菜单" min-width="120px" show-overflow="title">
 					<template #default="{ row }">
-						<n-tag type="info" v-if="row.hidden == 0">否</n-tag>
-						<n-tag type="error" v-else>是</n-tag>
+						<option-badge :options="ifcacheOptions" :val="row.ifHidden" />
 					</template>
 				</vxe-column>
 				<vxe-column field="ifcache" title="是否缓存" min-width="80px" show-overflow="title">
 					<template #default="{ row }">
-						<n-tag type="info" v-if="row.ifcache == 0">否</n-tag>
-						<n-tag type="error" v-else>是</n-tag>
+						<option-badge :options="ifcacheOptions" :val="row.ifcache" />
 					</template>
 				</vxe-column>
 				<vxe-column field="linkType" title="链接类型" min-width="80px" show-overflow="title">
 					<template #default="{ row }">
-						<n-tag type="info" v-if="row.linkType == 1">外部链接</n-tag>
-						<n-tag type="error" v-else-if="row.linkType == 2">内嵌链接</n-tag>
-						<n-tag type="success" v-else-if="row.linkType == 3">非链接</n-tag>
+						<option-badge :options="lintTypeOptions" :val="row.linkType" />
 					</template>
 				</vxe-column>
 				<vxe-column field="linkValue" title="链接值" min-width="120px" show-overflow="title"></vxe-column>
 				<vxe-column field="extend" title="扩展字段" min-width="120px" show-overflow="title"></vxe-column>
 				<vxe-column title="操作" width="180px" fixed="right">
-					<!--          <template #default="{ row }">-->
-					<!--            <n-button quaternary type="primary" size="small" @click="editResources(row)">编辑</n-button>-->
-					<!--            <n-button quaternary type="info" size="small" @click="cloning(row)">克隆</n-button>-->
-					<!--            <n-popconfirm @positive-click="deleteById(row)">-->
-					<!--              <template #trigger>-->
-					<!--                <n-button type="error" quaternary size="small">删除</n-button>-->
-					<!--              </template>-->
-					<!--              是否确定删除该资源?-->
-					<!--            </n-popconfirm>-->
-					<!--          </template>-->
+					<template #default="{ row }">
+						<n-button quaternary type="primary" size="small" @click="editResources(row)">编辑</n-button>
+						<n-button quaternary type="info" size="small" @click="cloning(row)">克隆</n-button>
+						<n-popconfirm @positive-click="deleteById(row)">
+							<template #trigger>
+								<n-button type="error" quaternary size="small">删除</n-button>
+							</template>
+							是否确定删除该资源?
+						</n-popconfirm>
+					</template>
 				</vxe-column>
 			</vxe-table>
 		</n-card>
-		<resource-form ref="resourceFormRef"></resource-form>
+		<resource-form :treeData="tableData" ref="resourceFormRef" @ok="getData"></resource-form>
 	</page-content>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useWindowSize } from "@/hooks/useWindowSize";
-import { getResourceList } from "@/api/system/resource";
+import { getResourceList, delResource } from "@/api/system/resource";
 import { setTreeData } from "@/utils/tree";
 import useTable from "@/hooks/useTable";
 import ResourceForm from "@/views/system/resource/components/resource-form.vue";
+import { lintTypeOptions, ifcacheOptions, typeFlagOptions } from "@/constant/system/resource";
 
 defineOptions({ name: "resource" });
 
@@ -144,8 +139,27 @@ const getData = () => {
 };
 getData();
 
+// 添加资源
 const addNewResources = () => {
 	resourceFormRef.value.openModal();
+};
+
+// 编辑资源
+const editResources = row => {
+	resourceFormRef.value.edit(row);
+};
+
+// 克隆资源
+const cloning = row => {
+	resourceFormRef.value.cloning(row);
+};
+
+const deleteById = row => {
+	delResource({ id: row.id }).then(res => {
+		if (res.success) {
+			getData();
+		}
+	});
 };
 </script>
 
