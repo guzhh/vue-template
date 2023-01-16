@@ -1,7 +1,7 @@
 <template>
 	<div class="banner">
 		<div class="banner-inner">
-			<n-carousel show-arrow class="carousel">
+			<n-carousel show-arrow class="carousel" autoplay>
 				<div :key="item.slogan" class="carousel-item" v-for="item in carouselItem">
 					<div class="carousel-title">{{ item.slogan }}</div>
 					<div class="carousel-sub-title">{{ item.subSlogan }}</div>

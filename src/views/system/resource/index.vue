@@ -43,7 +43,6 @@
 			</template>
 
 			<vxe-table
-				border
 				resizable
 				row-id="id"
 				align="center"
@@ -62,7 +61,7 @@
 				<vxe-column field="icon" title="资源图标" min-width="80px" show-overflow="title">
 					<template #default="{ row }">
 						<div style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center">
-							<component :is="row.icon" style="width: 24px" />
+							<component :is="row.icon" style="width: 18px" />
 						</div>
 					</template>
 				</vxe-column>

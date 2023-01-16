@@ -1,4 +1,3 @@
-import NProgress from "nprogress";
 import { useAppStore, useUserStore } from "@/store";
 import usePermission from "@/hooks/permission";
 import { generatorDynamicRouter, NOT_FOUND, WHITE_LIST } from "../constants";
@@ -34,6 +33,5 @@ export default function setupPermissionGuard(router) {
 				next();
 			} else next(NOT_FOUND);
 		}
-		NProgress.done();
 	});
 }

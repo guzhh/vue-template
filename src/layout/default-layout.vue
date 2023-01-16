@@ -91,6 +91,7 @@ const drawerCancel = () => {
 provide("toggleDrawerMenu", () => {
 	drawerVisible.value = !drawerVisible.value;
 });
+console.log(themeVars);
 </script>
 
 <style scoped lang="less">
@@ -109,7 +110,7 @@ provide("toggleDrawerMenu", () => {
 	z-index: 100;
 	width: 100%;
 	height: @nav-size-height;
-	background-color: v-bind("themeVars.cardColor");
+	background-color: v-bind("themeVars.baseColor");
 }
 
 .layout-sider {
