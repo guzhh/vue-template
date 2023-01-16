@@ -5,5 +5,6 @@ export const constantRouterComponents = {
 	resource: () => import("@/views/system/resource/index.vue"), // 资源管理
 	param: () => import("@/views/system/param/paramList.vue"), // 参数管理
 	childSys: () => import("@/views/system/childSys/childSys.vue"), // 子系统管理
-	dict: () => import("@/views/system/dict/dictList.vue") // 字典管理
+	dict: () => import("@/views/system/dict/dictList.vue"), // 字典管理
+	role: () => import("@/views/system/role/index.vue") // 角色管理
 };
