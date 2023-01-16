@@ -26,7 +26,7 @@
 			<n-grid x-gap="12" :cols="3">
 				<n-gi>
 					<n-form-item path="sysId" label="所属系统">
-						<n-select v-model:value="formValue.sysId" :options="systemList" placeholder="请选择所属系统" />
+						<n-select filterable v-model:value="formValue.sysId" :options="systemList" placeholder="请选择所属系统" />
 					</n-form-item>
 				</n-gi>
 				<n-gi>

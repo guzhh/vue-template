@@ -8,7 +8,7 @@
 			</template>
 		</n-button>
 	</div>
-	<n-drawer @after-leave="cancel" :width="300" unmount-on-close :show="visible">
+	<n-drawer close-on-esc @after-leave="cancel" @mask-click="cancel" @esc="cancel" :width="300" :show="visible">
 		<n-drawer-content title="页面设置">
 			<Block :options="contentOpts" title="内容区域" />
 			<Block :options="othersOpts" title="其他设置" />

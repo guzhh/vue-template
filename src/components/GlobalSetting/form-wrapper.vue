@@ -1,7 +1,7 @@
 <template>
 	<n-input-number
 		v-if="type === 'number'"
-		:style="{ width: '80px' }"
+		:style="{ width: '90px' }"
 		size="small"
 		:default-value="defaultValue"
 		@update:value="handleChange"
