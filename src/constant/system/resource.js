@@ -16,3 +16,13 @@ export const lintTypeOptions = [
 	{ label: "内嵌链接", value: 2, type: "error" },
 	{ label: "非链接", value: 3, type: "warning" }
 ];
+
+export const disableEnableOption = [
+	{ label: "禁用", value: 0, type: "error" },
+	{ label: "启用", value: 1, type: "success" }
+];
+
+export const ifDeletedOption = [
+	{ label: "未删除", value: 0, type: "success" },
+	{ label: "已删除", value: 1, type: "error" }
+];

@@ -70,8 +70,7 @@
 				<vxe-column field="dictVal" min-width="200px" show-overflow="title" title="字典值"></vxe-column>
 				<vxe-column field="state" min-width="100px" show-overflow="title" title="字典状态">
 					<template #default="{ row }">
-						<n-tag v-if="row.state === 0" type="error">禁用</n-tag>
-						<n-tag v-else-if="row.state === 1" type="success">启用</n-tag>
+						<option-badge :options="disableEnableOption" :val="row.state" />
 					</template>
 				</vxe-column>
 				<vxe-column title="操作" width="200px">
@@ -100,6 +99,7 @@ import { useWindowSize } from "@/hooks/useWindowSize";
 import { getDictList, getDictByPids, delDict } from "@/api/system/dictList";
 import CreateForm from "@/views/system/dict/modules/createForm.vue";
 import useTable from "@/hooks/useTable";
+import { disableEnableOption } from "@/constant/system/resource";
 
 defineOptions({ name: "dict" });
 

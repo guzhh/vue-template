@@ -84,8 +84,7 @@
 				<vxe-column field="sysIndexUrl" min-width="200px" show-overflow="title" title="系统首页地址"></vxe-column>
 				<vxe-column field="ifInternal" min-width="100px" show-overflow="title" title="是否内部系统">
 					<template #default="{ row }">
-						<n-tag v-if="row.ifInternal === 1" type="success">是</n-tag>
-						<n-tag v-else-if="row.ifInternal === 0" type="error">否</n-tag>
+						<option-badge :options="ifcacheOptions" :val="row.ifInternal" />
 					</template>
 				</vxe-column>
 				<vxe-column field="sysType" min-width="100px" show-overflow="title" title="系统类型">
@@ -98,8 +97,7 @@
 				<vxe-column field="showNum" min-width="100px" show-overflow="title" title="显示顺序"></vxe-column>
 				<vxe-column field="ifDel" min-width="100px" show-overflow="title" title="是否删除">
 					<template #default="{ row }">
-						<n-tag v-if="row.ifDel === 0" type="success">未删除</n-tag>
-						<n-tag v-else-if="row.ifDel === 1" type="error">已删除</n-tag>
+						<option-badge :options="ifDeletedOption" :val="row.ifDel" />
 					</template>
 				</vxe-column>
 				<vxe-column title="操作" width="150px">
@@ -147,6 +145,7 @@ import { useWindowSize } from "@/hooks/useWindowSize";
 import { getAuthSystemList, delSystem, cancelDelSystem } from "@/api/system/childSys";
 import CreateForm from "@/views/system/childSys/modules/createForm.vue";
 import useTable from "@/hooks/useTable";
+import { ifcacheOptions, ifDeletedOption } from "@/constant/system/resource";
 
 defineOptions({ name: "childSys" });
 

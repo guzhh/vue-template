@@ -39,7 +39,14 @@
 					<n-input v-model:value="formValue.dictVal" placeholder="请输入字典值" />
 				</n-form-item>
 				<n-form-item label="状态" path="state">
-					<n-select v-model:value="formValue.state" :options="options" placeholder="请选择字典状态" />
+					<!--					<n-select v-model:value="formValue.state" :options="options" placeholder="请选择字典状态" />-->
+					<n-radio-group v-model:value="formValue.state" name="radiogroup">
+						<n-space>
+							<n-radio v-for="item in options" :key="item.value" :value="item.value">
+								{{ item.label }}
+							</n-radio>
+						</n-space>
+					</n-radio-group>
 				</n-form-item>
 			</n-form>
 		</div>
@@ -67,7 +74,7 @@ const formValue = ref({
 	code: "",
 	name: "",
 	dictVal: "",
-	state: undefined
+	state: 1
 });
 
 const rules = {
@@ -87,14 +94,25 @@ const add = pid => {
 const edit = row => {
 	title.value = "编辑字典";
 	visible.value = true;
-	formValue.value = {
-		id: `${row.id}`,
-		pid: `${row.pid}`,
-		code: row.code,
-		name: row.name,
-		dictVal: row.dictVal,
-		state: row.state
-	};
+	if (row.pid === 0) {
+		formValue.value = {
+			id: `${row.id}`,
+			pid: "",
+			code: row.code,
+			name: row.name,
+			dictVal: row.dictVal,
+			state: row.state
+		};
+	} else {
+		formValue.value = {
+			id: `${row.id}`,
+			pid: `${row.pid}`,
+			code: row.code,
+			name: row.name,
+			dictVal: row.dictVal,
+			state: row.state
+		};
+	}
 };
 
 const handleClose = () => {
@@ -107,7 +125,7 @@ const handleClose = () => {
 		code: "",
 		dictName: "",
 		dictValue: "",
-		state: undefined
+		state: 1
 	};
 };
 
