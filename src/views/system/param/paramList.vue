@@ -49,7 +49,7 @@
 			</template>
 			<vxe-table
 				:data="tableList"
-				:height="height - 190"
+				:height="height - 188"
 				:loading="tableLoading"
 				:size="tableSize"
 				align="center"

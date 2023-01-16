@@ -45,7 +45,7 @@
 			<vxe-table
 				ref="tableRef"
 				:data="tableData"
-				:height="height - 110"
+				:height="height - 85"
 				:loading="tableLoading"
 				:size="tableSize"
 				:tree-config="{
