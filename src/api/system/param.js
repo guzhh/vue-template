@@ -5,9 +5,9 @@ import request from "@/utils/request/request";
  * 获取参数列表
  * @returns {Promise<*>}
  */
-export function getDictList(params) {
+export function getParamList(params) {
 	return request.post({
-		url: "/p/auth/auth-param/getDictList",
+		url: "/p/auth/auth-param/getParamList",
 		data: qs.stringify(params),
 		customs: {
 			isLoading: true,

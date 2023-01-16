@@ -1,6 +1,6 @@
 <template>
 	<page-content>
-		<n-card size="small">
+		<n-card class="search-card" size="small">
 			<div style="display: flex; justify-content: space-between">
 				<n-form ref="formRef" :label-width="120" :model="searchForm" inline label-placement="left">
 					<n-form-item label="系统名称:" path="sysName">
@@ -218,7 +218,9 @@ const reset = () => {
 </script>
 
 <style lang="less" scoped>
-::v-deep(.n-form-item-feedback-wrapper) {
-	display: none;
+.search-card {
+	::v-deep(.n-form-item-feedback-wrapper) {
+		display: none;
+	}
 }
 </style>

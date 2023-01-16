@@ -1,6 +1,6 @@
 <template>
 	<page-content>
-		<n-card size="small">
+		<n-card class="search-card" size="small">
 			<div style="display: flex; justify-content: space-between">
 				<n-form ref="formRef" :label-width="80" :model="searchForm" inline label-placement="left">
 					<n-form-item label="查询:" path="query">
@@ -98,7 +98,7 @@
 <script setup>
 import { ref } from "vue";
 import { useMessage } from "naive-ui";
-import { getDictList, delParam } from "@/api/system/param";
+import { getParamList, delParam } from "@/api/system/param";
 import useTableData from "@/hooks/useTableData.js";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import ParamForm from "@/views/system/param/modules/paramForm.vue";
@@ -113,7 +113,7 @@ const { height } = useWindowSize();
 const formData = { query: "" };
 // eslint-disable-next-line no-unused-vars
 const { tableList, tableLoading, searchForm, page, onChange, onUpdatePageSize, resetTableList, getTableData } = useTableData({
-	requestMethod: getDictList,
+	requestMethod: getParamList,
 	formData
 });
 
@@ -144,7 +144,9 @@ const deleteParam = row => {
 </script>
 
 <style lang="less" scoped>
-::v-deep(.n-form-item-feedback-wrapper) {
-	display: none;
+.search-card {
+	::v-deep(.n-form-item-feedback-wrapper) {
+		display: none;
+	}
 }
 </style>

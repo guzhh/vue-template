@@ -14,7 +14,7 @@
 		area="700px"
 		@close="handleClose"
 	>
-		<div style="width: 100%; margin-top: 20px; padding: 0 50px">
+		<div class="form" style="width: 100%; margin-top: 20px; padding: 0 50px">
 			<n-form
 				ref="formRef"
 				:model="formValue"
@@ -108,7 +108,7 @@ const formValue = ref({
 	sysType: undefined,
 	sysDescr: "",
 	sysIndexUrl: "",
-	ifInternal: 1,
+	ifInternal: "1",
 	sysLogo: "",
 	showNum: null
 });
@@ -175,8 +175,4 @@ const handleOk = () => {
 defineExpose({ add, edit });
 </script>
 
-<style lang="less" scoped>
-::v-deep(.n-form-item) {
-	margin-bottom: 15px;
-}
-</style>
+<style lang="less" scoped></style>

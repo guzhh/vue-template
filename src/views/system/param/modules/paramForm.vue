@@ -117,8 +117,4 @@ const handleOk = () => {
 defineExpose({ add, edit });
 </script>
 
-<style lang="less" scoped>
-::v-deep(.n-form-item) {
-	margin-bottom: 15px;
-}
-</style>
+<style lang="less" scoped></style>
