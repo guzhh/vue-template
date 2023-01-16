@@ -1,17 +1,18 @@
 <template>
-	<s3-layer
-		v-model="showModal"
-		:btn="['确定', '取消']"
+	<lay-layer
+		v-model="visible"
+		:btn="[
+			{ text: '确认', callback: handleOk },
+			{ text: '取消', callback: handleClose }
+		]"
 		:maxmin="true"
-		:scrollbar="false"
+		:resize="true"
+		:shadeClose="false"
 		:title="title"
 		:type="1"
 		:zIndex="100"
-		area="800px"
-		skin="layui-layer-lan"
-		@btn2="handleClose"
-		@cancel="handleClose"
-		@yes="handleOk"
+		area="700px"
+		@close="handleClose"
 	>
 		<div style="width: 100%; margin-top: 20px; padding: 0 50px">
 			<n-form
@@ -39,18 +40,17 @@
 				</n-form-item>
 			</n-form>
 		</div>
-	</s3-layer>
+	</lay-layer>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useMessage } from "naive-ui";
-import { layer } from "vue3-layer";
 import { saveOrUptParam } from "@/api/system/param";
 
 const emits = defineEmits(["ok"]);
 const title = ref("");
-const showModal = ref(false);
+const visible = ref(false);
 const formRef = ref();
 const message = useMessage();
 
@@ -71,12 +71,12 @@ const rules = {
 
 const add = () => {
 	title.value = "新增参数";
-	showModal.value = true;
+	visible.value = true;
 };
 
 const edit = row => {
 	title.value = "编辑参数";
-	showModal.value = true;
+	visible.value = true;
 	formValue.value = {
 		id: `${row.id}`,
 		paramCode: row.paramCode,
@@ -88,7 +88,7 @@ const edit = row => {
 
 const handleClose = () => {
 	formRef.value?.restoreValidation();
-	showModal.value = false;
+	visible.value = false;
 	title.value = "";
 	formValue.value = {
 		id: "",
@@ -99,21 +99,17 @@ const handleClose = () => {
 	};
 };
 
+// eslint-disable-next-line no-unused-vars
 const handleOk = () => {
 	formRef.value?.validate(errors => {
 		if (!errors) {
-			const index = layer.load();
-			saveOrUptParam({ ...formValue.value })
-				.then(res => {
-					if (res.success) {
-						message.success("参数提交成功");
-						emits("ok");
-						handleClose();
-					}
-				})
-				.finally(() => {
-					layer.close(index);
-				});
+			saveOrUptParam({ ...formValue.value }).then(res => {
+				if (res.success) {
+					message.success("参数提交成功");
+					emits("ok");
+					handleClose();
+				}
+			});
 		}
 	});
 };
@@ -121,4 +117,8 @@ const handleOk = () => {
 defineExpose({ add, edit });
 </script>
 
-<style scoped></style>
+<style lang="less" scoped>
+::v-deep(.n-form-item) {
+	margin-bottom: 15px;
+}
+</style>

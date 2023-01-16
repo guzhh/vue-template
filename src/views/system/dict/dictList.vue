@@ -1,12 +1,53 @@
 <template>
-	<n-card :content-style="{ height: windowSize.height.value - 10 + 'px', width: '100%', padding: '15px' }">
-		<div style="display: flex; justify-content: flex-end; margin-bottom: 10px">
-			<n-button type="primary" @click="addDict"> 新增</n-button>
-		</div>
-		<div :style="{ height: windowSize.height.value - 80 + 'px' }">
+	<page-content>
+		<n-card size="small" title="字典列表">
+			<template #header-extra>
+				<n-button size="small" type="primary" @click="addDict('')"> 新增字典</n-button>
+				<n-tooltip>
+					<span>折叠</span>
+					<template #trigger>
+						<n-icon size="17" style="margin-left: 15px" @click="$refs.tableRef.clearTreeExpand()">
+							<ArrowBetweenDown24Filled />
+						</n-icon>
+					</template>
+				</n-tooltip>
+				<n-divider vertical />
+				<n-tooltip>
+					<span>刷新</span>
+					<template #trigger>
+						<n-icon size="17" @click="getTableData">
+							<Refresh />
+						</n-icon>
+					</template>
+				</n-tooltip>
+				<n-divider vertical />
+				<n-tooltip>
+					<span>密度</span>
+					<template #trigger>
+						<n-popselect v-model:value="tableSize" :options="tableSizeOptions" trigger="click">
+							<n-icon size="17">
+								<AutoFitHeight20Filled />
+							</n-icon>
+						</n-popselect>
+					</template>
+				</n-tooltip>
+				<n-divider vertical />
+				<n-tooltip>
+					<span>列设置</span>
+					<template #trigger>
+						<n-icon size="17">
+							<Settings48Regular />
+						</n-icon>
+					</template>
+				</n-tooltip>
+			</template>
+
 			<vxe-table
+				ref="tableRef"
 				:data="tableData"
+				:height="height - 110"
 				:loading="tableLoading"
+				:size="tableSize"
 				:tree-config="{
 					transform: true,
 					rowField: 'id',
@@ -17,12 +58,10 @@
 				}"
 				align="center"
 				border="inner"
-				height="100%"
 				resizable
 				row-id="code"
 				show-header-overflow="title"
 				show-overflow
-				size="small"
 			>
 				<vxe-column field="id" show-overflow="title" title="字典id" tree-node width="80px"></vxe-column>
 				<vxe-column field="pid" show-overflow="title" title="上级字典id" width="150px"></vxe-column>
@@ -48,9 +87,9 @@
 					</template>
 				</vxe-column>
 			</vxe-table>
-		</div>
+		</n-card>
 		<create-form ref="createFormRef" @ok="getTableData"></create-form>
-	</n-card>
+	</page-content>
 </template>
 
 <script setup>
@@ -60,10 +99,15 @@ import { useWindowSize } from "@/hooks/useWindowSize";
 // eslint-disable-next-line no-unused-vars
 import { getDictList, getDictByPids, delDict } from "@/api/system/dictList";
 import CreateForm from "@/views/system/dict/modules/createForm.vue";
+import useTable from "@/hooks/useTable";
 
+defineOptions({ name: "dict" });
+
+const tableRef = ref();
+const { tableSizeOptions, tableSize } = useTable();
 const message = useMessage();
 const createFormRef = ref();
-const windowSize = useWindowSize();
+const { height } = useWindowSize();
 const tableData = ref([]);
 const tableLoading = ref(false);
 

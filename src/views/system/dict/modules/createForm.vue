@@ -1,17 +1,18 @@
 <template>
-	<s3-layer
-		v-model="showModal"
-		:btn="['确定', '取消']"
+	<lay-layer
+		v-model="visible"
+		:btn="[
+			{ text: '确认', callback: handleOk },
+			{ text: '取消', callback: handleClose }
+		]"
 		:maxmin="true"
-		:scrollbar="false"
+		:resize="true"
+		:shadeClose="false"
 		:title="title"
 		:type="1"
 		:zIndex="100"
-		area="800px"
-		skin="layui-layer-lan"
-		@btn2="handleClose"
-		@cancel="handleClose"
-		@yes="handleOk"
+		area="700px"
+		@close="handleClose"
 	>
 		<div style="width: 100%; margin-top: 20px; padding: 0 50px">
 			<n-form
@@ -42,18 +43,17 @@
 				</n-form-item>
 			</n-form>
 		</div>
-	</s3-layer>
+	</lay-layer>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useMessage } from "naive-ui";
-import { layer } from "vue3-layer";
 import { saveOrUptDict } from "@/api/system/dictList";
 
 const emits = defineEmits(["ok"]);
 const title = ref("");
-const showModal = ref(false);
+const visible = ref(false);
 const formRef = ref();
 const message = useMessage();
 const options = [
@@ -78,14 +78,15 @@ const rules = {
 };
 
 const add = pid => {
+	console.log(pid, "pid");
 	title.value = "新增字典";
-	showModal.value = true;
-	formValue.value.pid = pid ? `${pid}` : `${0}`;
+	visible.value = true;
+	formValue.value.pid = pid ? `${pid}` : "";
 };
 
 const edit = row => {
 	title.value = "编辑字典";
-	showModal.value = true;
+	visible.value = true;
 	formValue.value = {
 		id: `${row.id}`,
 		pid: `${row.pid}`,
@@ -98,7 +99,7 @@ const edit = row => {
 
 const handleClose = () => {
 	formRef.value?.restoreValidation();
-	showModal.value = false;
+	visible.value = false;
 	title.value = "";
 	formValue.value = {
 		id: "",
@@ -110,21 +111,17 @@ const handleClose = () => {
 	};
 };
 
+// eslint-disable-next-line no-unused-vars
 const handleOk = () => {
 	formRef.value?.validate(errors => {
 		if (!errors) {
-			const index = layer.load();
-			saveOrUptDict({ ...formValue.value })
-				.then(res => {
-					if (res.success) {
-						message.success("字典提交成功");
-						emits("ok");
-						handleClose();
-					}
-				})
-				.finally(() => {
-					layer.close(index);
-				});
+			saveOrUptDict({ ...formValue.value }).then(res => {
+				if (res.success) {
+					message.success("字典提交成功");
+					emits("ok");
+					handleClose();
+				}
+			});
 		}
 	});
 };
