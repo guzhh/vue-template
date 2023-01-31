@@ -1,10 +1,5 @@
 <template>
-	<n-config-provider
-		:theme="theme"
-		:locale="zhCN"
-		:date-locale="dateZhCN"
-		:theme-overrides="theme === null ? lightThemeOverrides : darkThemeOverrides"
-	>
+	<n-config-provider :theme="theme" :locale="zhCN" :date-locale="dateZhCN" :theme-overrides="themeOverrides">
 		<n-theme-editor>
 			<n-global-style />
 			<n-notification-provider>
@@ -23,22 +18,41 @@
 import { computed } from "vue";
 import { zhCN, dateZhCN, NThemeEditor, darkTheme } from "naive-ui";
 import { useAppStore } from "@/store";
+import { lighten } from "@/utils";
 import GlobalSetting from "@/components/GlobalSetting/index.vue";
 
 const appStore = useAppStore();
 const theme = computed(() => (appStore.theme === "dark" ? darkTheme : null));
 
-const lightThemeOverrides = {
-	common: {
-		bodyColor: "rgb(242,243,245)"
+const themeOverrides = computed(() => {
+	const appTheme = appStore.themeColor;
+	const lightenStr = lighten(appStore.themeColor, 6);
+	const darkStr = lighten(appStore.themeColor, 30);
+	if (theme.value === null) {
+		return {
+			common: {
+				bodyColor: "rgb(242,243,245)",
+				primaryColor: appTheme,
+				primaryColorHover: lightenStr,
+				primaryColorPressed: lightenStr,
+				successColor: appTheme,
+				successColorHover: lightenStr,
+				successColorPressed: lightenStr
+			}
+		};
 	}
-};
-
-const darkThemeOverrides = {
-	common: {
-		bodyColor: "#29292c"
-	}
-};
+	return {
+		common: {
+			bodyColor: "#29292c",
+			primaryColor: darkStr,
+			primaryColorHover: lightenStr,
+			primaryColorPressed: lightenStr,
+			successColor: darkStr,
+			successColorHover: lightenStr,
+			successColorPressed: lightenStr
+		}
+	};
+});
 </script>
 
 <style lang="less"></style>

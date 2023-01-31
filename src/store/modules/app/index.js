@@ -14,13 +14,16 @@ const useAppStore = defineStore("app", {
 		},
 		appAsyncMenus(state) {
 			return state.serverMenu;
+		},
+		appThemeColor(state) {
+			return state.themeColor;
 		}
 	},
 	actions: {
 		updateSettings(partial) {
 			this.$patch(partial);
 		},
-		// 更改主题颜色
+		// 更改主题
 		toggleTheme(dark) {
 			// if (dark) {
 			// 	this.theme = "dark";
@@ -43,6 +46,12 @@ const useAppStore = defineStore("app", {
 		toggleMenu(value) {
 			this.hideMenu = value;
 		},
+
+		// 设置系统主题色
+		toggleThemeColor(value) {
+			this.themeColor = value;
+		},
+
 		async fetchServerMenuConfig() {
 			const userStore = useUserStore();
 			const menus = userStore.resourceList.filter(item => item.meta.type === 1);

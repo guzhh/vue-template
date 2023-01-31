@@ -1,5 +1,6 @@
 <template>
 	<n-menu
+		accordion
 		:render-label="renderMenuLabel"
 		:render-icon="renderMenuIcon"
 		:collapsed="collapsed"
