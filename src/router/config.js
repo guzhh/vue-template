@@ -1,5 +1,8 @@
 export const constantRouterComponents = {
 	DEFAULT_LAYOUT: () => import("@/layout/default-layout.vue"),
+	LINK_LAYOUT: () => import("@/layout/link-layout.vue"),
+	PAGE_VIEW: () => import("@/layout/page-view.vue"),
+	LINK_VIEW: () => import("@/layout/link-view.vue"),
 	// --------------------系统管理
 	user: () => import("@/views/system/user/index.vue"), // 用户管理
 	resource: () => import("@/views/system/resource/index.vue"), // 资源管理

@@ -71,6 +71,9 @@
 							</template>
 							是否确定删除该角色吗?
 						</n-popconfirm>
+						<n-dropdown trigger="click" :options="moreOptions" @select="key => moreHandleSelect(key, row)">
+							<n-button quaternary type="info" size="small">更多操作</n-button>
+						</n-dropdown>
 					</template>
 				</vxe-column>
 				<template #empty>
@@ -92,6 +95,8 @@
 			</n-pagination>
 		</n-card>
 		<role-form ref="roleFormRef" :system-list="systemList" @ok="getTableData"></role-form>
+		<allocate-resources ref="allocateResourcesRef" @ok="getTableData"></allocate-resources>
+		<data-rules ref="dataRulesRef"></data-rules>
 	</page-content>
 </template>
 
@@ -103,10 +108,18 @@ import { useWindowSize } from "@/hooks/useWindowSize";
 import useTable from "@/hooks/useTable";
 import { getSystemList } from "@/api/system/resource";
 import RoleForm from "@/views/system/role/components/role-form.vue";
+import AllocateResources from "@/views/system/role/components/allocate-resources.vue";
+import DataRules from "@/views/system/role/components/data-rules.vue";
 
 defineOptions({ name: "role" });
 
+const moreOptions = [
+	{ label: "分配资源", key: "distribution" },
+	{ label: "数据规则", key: "dataRules" }
+];
 const roleFormRef = ref();
+const dataRulesRef = ref();
+const allocateResourcesRef = ref();
 const { height } = useWindowSize();
 const { tableSizeOptions, tableSize } = useTable();
 
@@ -116,6 +129,13 @@ const { tableList, tableLoading, searchForm, page, onChange, onUpdatePageSize, g
 	formData: { name: "", sysId: null }
 });
 
+// 选择更多操作
+const moreHandleSelect = (key, row) => {
+	if (key === "distribution") allocateResourcesRef.value.open(row);
+	if (key === "dataRules") dataRulesRef.value.open(row);
+};
+
+// 获取系统列表
 getSystemList({ ifInternal: 1 }).then(res => {
 	if (res.success) {
 		systemList.value = res.result.map(item => {
@@ -124,6 +144,7 @@ getSystemList({ ifInternal: 1 }).then(res => {
 	}
 });
 
+// 删除角色
 const deleteRole = row => {
 	delRole({ id: row.id }).then(res => {
 		if (res.success) {
@@ -132,10 +153,12 @@ const deleteRole = row => {
 	});
 };
 
+// 新增角色
 const addRole = () => {
 	roleFormRef.value.addRole();
 };
 
+// 编辑角色
 const editRole = row => {
 	roleFormRef.value.editRole(row);
 };

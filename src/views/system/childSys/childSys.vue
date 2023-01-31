@@ -2,10 +2,7 @@
 	<page-content>
 		<n-card class="search-card" size="small">
 			<div style="display: flex; justify-content: space-between">
-				<n-form ref="formRef" :label-width="120" :model="searchForm" inline label-placement="left">
-					<n-form-item label="系统名称:" path="sysName">
-						<n-input v-model:value="searchForm.sysName" placeholder="请输入系统名称" @keydown.enter.prevent="resetTableList" />
-					</n-form-item>
+				<n-form ref="formRef" :label-width="100" :model="searchForm" inline label-placement="left">
 					<n-form-item label="是否内部系统:" path="sysName">
 						<n-select
 							v-model:value="searchForm.ifInternal"
@@ -14,6 +11,9 @@
 							style="width: 200px"
 							@update:value="resetTableList"
 						/>
+					</n-form-item>
+					<n-form-item label="系统名称:" path="sysName">
+						<n-input v-model:value="searchForm.sysName" placeholder="请输入系统名称" @keydown.enter.prevent="resetTableList" />
 					</n-form-item>
 					<n-form-item label="系统类型:" path="sysType">
 						<n-select

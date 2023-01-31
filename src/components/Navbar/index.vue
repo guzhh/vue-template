@@ -80,8 +80,9 @@
 						round
 						:size="32"
 						:style="{ marginRight: '8px', cursor: 'pointer' }"
-						src="	http://lf1-xgcdn-tos.pstatp.com/obj/vcloud/vadmin/start.8e0e4855ee346a46ccff8ff3e24db27b.png"
+						src="http://aw.vueadminwork.com/assets/img_avatar.1d4c4a34.gif"
 					/>
+					<!--          http://lf1-xgcdn-tos.pstatp.com/obj/vcloud/vadmin/start.8e0e4855ee346a46ccff8ff3e24db27b.png-->
 				</n-dropdown>
 			</li>
 		</ul>

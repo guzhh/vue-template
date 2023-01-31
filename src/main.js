@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import "@/assets/style/global.less";
+import VXETable from "vxe-table";
 import { AppProvider } from "@/components/Application";
 import App from "@/App.vue";
 import router, { setupRouter } from "@/router";
@@ -7,7 +8,7 @@ import { setupLayer } from "@/plugins/layer";
 import { setupStore } from "@/store";
 import { setupCustomComponents, setupDirectives, setupGlobalMethods } from "@/plugins";
 import { setupIcon } from "@/plugins/icons";
-import { setupVxeTable } from "@/plugins/vxeTable";
+import "xe-utils"; // 全局导入方式，所有版本通用
 
 // createApp(App).mount("#app");
 
@@ -18,7 +19,7 @@ async function bootstrap() {
 	// 挂载 layer-vue
 	setupLayer(app);
 	// 挂载vxe-table
-	setupVxeTable(app);
+	app.use(VXETable);
 	// 挂载状态管理
 	setupStore(app);
 	// 注册全局图标
