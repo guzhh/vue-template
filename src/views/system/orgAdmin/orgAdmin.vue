@@ -2,7 +2,7 @@
 	<page-content>
 		<n-card size="small" title="机构列表">
 			<template #header-extra>
-				<n-button size="small" type="primary" @click="addNewOrg({})">新增机构</n-button>
+				<n-button v-action:addButton size="small" type="primary" @click="addNewOrg({})">新增机构</n-button>
 				<n-tooltip>
 					<span>折叠</span>
 					<template #trigger>

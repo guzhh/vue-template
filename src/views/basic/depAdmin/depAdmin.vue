@@ -13,7 +13,7 @@
 			</n-card>
 			<n-card size="small" title="科室列表">
 				<template #header-extra>
-					<n-button size="small" type="primary" @click="addNewDep({})">新增科室</n-button>
+					<n-button v-action:addButton size="small" type="primary" @click="addNewDep({})">新增科室</n-button>
 					<n-tooltip>
 						<span>折叠</span>
 						<template #trigger>
