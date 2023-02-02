@@ -38,6 +38,7 @@
 							show-overflow
 							:size="tableSize"
 							align="center"
+							ref="authRoleTableRef"
 							:height="height - 40"
 							:data="authRoleList"
 							:column-config="{ resizable: true }"
@@ -47,6 +48,7 @@
 							<vxe-column
 								field="name"
 								title="规则名称"
+								min-width="100"
 								:edit-render="{ autofocus: '.vxe-input--inner', placeholder: '请点击输入规则名称...' }"
 							>
 								<template #edit="{ row }">
@@ -56,6 +58,7 @@
 							<vxe-column
 								field="ruleField"
 								title="规则字段"
+								min-width="100"
 								:edit-render="{ autofocus: '.vxe-input--inner', placeholder: '请点击输入规则字段...' }"
 							>
 								<template #edit="{ row }">
@@ -65,6 +68,7 @@
 							<vxe-column
 								field="ruleExpress"
 								title="规则表达式"
+								min-width="100"
 								:edit-render="{ autofocus: '.vxe-input--inner', placeholder: '请点击输入规则表达式...' }"
 							>
 								<template #edit="{ row }">
@@ -74,29 +78,35 @@
 							<vxe-column
 								field="ruleVal"
 								title="规则值"
+								min-width="100"
 								:edit-render="{ autofocus: '.vxe-input--inner', placeholder: '请点击输入规则值...' }"
 							>
 								<template #edit="{ row }">
 									<n-input v-model:value="row.ruleVal" placeholder="请输入规则值" />
 								</template>
 							</vxe-column>
-							<vxe-column field="state" title="规则状态">
+							<vxe-column field="state" title="规则状态" min-width="100">
 								<template #default="{ row }">
-									<n-switch v-model:value="row.state" :checked-value="1" :unchecked-value="0">
-										<template #checked> 启用 </template>
-										<template #unchecked> 禁用 </template>
+									<n-switch
+										v-model:value="row.state"
+										:checked-value="1"
+										:unchecked-value="0"
+										@update:value="val => handleUpdateState(row, val)"
+									>
+										<template #checked> 启用</template>
+										<template #unchecked> 禁用</template>
 									</n-switch>
 								</template>
 							</vxe-column>
 							<vxe-column title="操作" width="120px" fixed="right">
-								<template #default>
-									<n-popconfirm>
+								<template #default="{ row }">
+									<n-popconfirm @positive-click="delTheRule(row)">
 										<template #trigger>
 											<n-button type="error" quaternary size="small">删除</n-button>
 										</template>
 										是否确定删除该规则吗?
 									</n-popconfirm>
-									<n-button quaternary type="primary" size="small">保存</n-button>
+									<n-button quaternary type="primary" size="small" @click="saveTheRule(row)">保存</n-button>
 								</template>
 							</vxe-column>
 						</vxe-table>
@@ -110,15 +120,19 @@
 <script setup>
 import { ref } from "vue";
 // import { useMessage } from "naive-ui";
+import { useDialog } from "naive-ui";
 import useTable from "@/hooks/useTable";
 import { setTreeData } from "@/utils/tree";
-import { getRoleAllRes, getRoleResRuleList } from "@/api/system/role";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { typeFlagOptions } from "@/constant/system/resource";
+import { delRoleResRule, getRoleAllRes, getRoleResRuleList, saveOrUptRoleResRule, uptRoleResRuleState } from "@/api/system/role";
+import validator from "@/validator";
+import { authRoleSchema } from "@/validator/system/role";
 
 defineOptions({ name: "dataRules" });
 
-// const message = useMessage();
+const dialog = useDialog();
+const authRoleTableRef = ref(null);
 const resourceTableRef = ref(null);
 const { height } = useWindowSize();
 const { tableSize } = useTable();
@@ -126,19 +140,15 @@ const active = ref(false); // 模态框关闭开启
 const roleData = ref({}); // 当前选中的角色
 const resourceData = ref({}); // 当前选中的资源
 const resourceList = ref([]); // 角色拥有的资源列表
-const authRoleList = ref([
-	{
-		id: 0,
-		name: "规则名称",
-		ruleField: "规则字段",
-		ruleExpress: "规则表达式",
-		ruleVal: "规则值",
-		state: 1
-	}
-]); // 角色资源规则列表
+const authRoleList = ref([]); // 角色资源规则列表
 
+// 获取到角色资源规则
 const getAythRoleList = () => {
-	getRoleResRuleList({});
+	getRoleResRuleList({ roleId: roleData.value.id, resId: resourceData.value.id }).then(res => {
+		if (res.success) {
+			authRoleList.value = res.result;
+		}
+	});
 };
 
 const open = row => {
@@ -159,25 +169,74 @@ const open = row => {
 // 切换资源
 const currentChangeEvent = ({ row }) => {
 	resourceData.value = row;
+	getAythRoleList();
 };
 
+// 关闭弹窗
 const handleClose = () => {
 	active.value = false;
 	roleData.value = {};
 	resourceData.value = {};
+	authRoleList.value = [];
+};
+
+// 修改规则状态
+const handleUpdateState = row => {
+	if (row.id) {
+		dialog.warning({
+			title: "警告",
+			content: `请问是否确认${row.state === 1 ? "启用" : "禁用"}${row.name}`,
+			positiveText: "确定",
+			negativeText: "不确定",
+			onPositiveClick: () => {
+				uptRoleResRuleState({ id: row.id, state: row.state });
+			},
+			onNegativeClick: () => {
+				row.state = row.state === 1 ? 0 : 1;
+			}
+		});
+	}
+};
+
+// 保存规则
+const saveTheRule = row => {
+	validator({ data: row, schema: authRoleSchema }).then(() => {
+		saveOrUptRoleResRule(row).then(res => {
+			if (res.success) {
+				row.id = res.result;
+			}
+		});
+	});
+};
+
+// 删除规则
+const delTheRule = row => {
+	if (!row.id) {
+		authRoleTableRef.value.remove(row);
+	} else {
+		delRoleResRule({ id: row.id }).then(res => {
+			if (res.success) {
+				authRoleTableRef.value.remove(row);
+			}
+		});
+	}
 };
 
 // 添加规则
-const addARule = () => {
-	// const authRole = authRoleList.value.reduce((accumulator, currentValue, currentIndex) => {
-	// 	if (!currentValue.id) {
-	// 		return [...accumulator, currentIndex];
-	// 	}
-	// 	return accumulator;
-	// }, []);
-	// if (authRole.length > 0) {
-	// 	message.warning(`当前第${authRole.join("、")}条规则未进行保存，请先保存在添加数据`);
-	// }
+const addARule = async () => {
+	if (resourceData.value.id) {
+		const record = {
+			id: null,
+			roleId: roleData.value.id,
+			resId: resourceData.value.id,
+			name: null,
+			ruleField: null,
+			ruleExpress: null,
+			ruleVal: null,
+			state: 0
+		};
+		await authRoleTableRef.value.insertAt(record);
+	}
 };
 
 defineExpose({ open });

@@ -4,7 +4,7 @@ import useUserStore from "@/store/modules/user/index";
 import { setTreeData } from "@/utils/tree";
 
 const useAppStore = defineStore("app", {
-	state: () => ({ ...defaultSettings }),
+	state: () => ({ ...defaultSettings, serverMenu: [] }),
 	getters: {
 		appCurrentSetting(state) {
 			return { ...state };
