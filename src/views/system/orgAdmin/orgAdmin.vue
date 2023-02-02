@@ -66,7 +66,7 @@
 				show-header-overflow="title"
 				show-overflow
 			>
-				<vxe-column field="name" min-width="150px" show-overflow="title" title="资源名称" tree-node></vxe-column>
+				<vxe-column field="name" min-width="150px" show-overflow="title" title="机构名称" tree-node></vxe-column>
 				<vxe-column field="code" min-width="120px" show-overflow="title" title="机构编码"></vxe-column>
 				<vxe-column field="pcode" min-width="80px" show-overflow="title" title="上级机构编码"></vxe-column>
 				<vxe-column field="descr" min-width="120px" show-overflow="title" title="机构描述"></vxe-column>
@@ -83,7 +83,7 @@
 							<template #trigger>
 								<n-button quaternary size="small" type="error">删除</n-button>
 							</template>
-							是否确定删除该资源?
+							是否确定删除该机构吗?
 						</n-popconfirm>
 						<n-popconfirm v-if="row.ifDel === 1" @positive-click="recoverOrg(row)">
 							<template #trigger>
@@ -221,6 +221,8 @@ const saveSuccess = (data, isEdit) => {
 		// 新增机构后重新获取机构列表
 		getOrg();
 	} else {
+		// eslint-disable-next-line no-param-reassign
+		data.hasChild = true;
 		// 添加下级机构重新加载子机构
 		const $table = tableRef.value;
 		$table.reloadTreeExpand(data);

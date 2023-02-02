@@ -1,18 +1,18 @@
 <template>
 	<lay-layer
 		v-model="visible"
-		:resize="true"
-		:shadeClose="false"
-		:maxmin="true"
-		:type="1"
-		:zIndex="100"
-		area="1000px"
-		:title="title"
-		@close="handleClose"
 		:btn="[
 			{ text: '确认', callback: handleOk },
 			{ text: '取消', callback: handleClose }
 		]"
+		:maxmin="true"
+		:resize="true"
+		:shadeClose="false"
+		:title="title"
+		:type="1"
+		:zIndex="100"
+		area="1000px"
+		@close="handleClose"
 	>
 		<n-form
 			ref="formRef"
@@ -23,82 +23,82 @@
 			require-mark-placement="left"
 			style="padding: 15px 10px 0 10px"
 		>
-			<n-grid x-gap="12" :cols="3">
+			<n-grid :cols="3" x-gap="12">
 				<n-gi>
-					<n-form-item path="sysId" label="所属系统">
-						<n-select filterable v-model:value="formValue.sysId" :options="systemList" placeholder="请选择所属系统" />
+					<n-form-item label="所属系统" path="sysId">
+						<n-select v-model:value="formValue.sysId" :options="systemList" filterable placeholder="请选择所属系统" />
 					</n-form-item>
 				</n-gi>
 				<n-gi>
-					<n-form-item path="pid" label="上级资源">
+					<n-form-item label="上级资源" path="pid">
 						<n-tree-select
-							default-expand-all
-							placeholder="请选择上级资源"
 							v-model:value="formValue.pid"
 							:options="[{ name: '顶级资源', id: 0 }, ...treeData]"
-							label-field="name"
-							key-field="id"
 							children-field="children"
+							default-expand-all
+							key-field="id"
+							label-field="name"
+							placeholder="请选择上级资源"
 						/>
 					</n-form-item>
 				</n-gi>
 				<n-gi>
-					<n-form-item path="showNum" label="资源序号">
+					<n-form-item label="资源序号" path="showNum">
 						<n-input-number v-model:value="formValue.showNum" clearable placeholder="请输入资源序号" style="width: 100%" />
 					</n-form-item>
 				</n-gi>
 				<n-gi>
-					<n-form-item path="name" label="资源名称">
+					<n-form-item label="资源名称" path="name">
 						<n-input v-model:value="formValue.name" placeholder="请输入资源名称" />
 					</n-form-item>
 				</n-gi>
 				<n-gi>
-					<n-form-item path="permissionFlag" label="权限标识">
+					<n-form-item label="权限标识" path="permissionFlag">
 						<n-input v-model:value="formValue.permissionFlag" placeholder="请输入资源权限标识" />
 					</n-form-item>
 				</n-gi>
 				<n-gi>
-					<n-form-item path="type" label="资源类型">
+					<n-form-item label="资源类型" path="type">
 						<n-select v-model:value="formValue.type" :options="typeFlagOptions" placeholder="请选择资源类型" />
 					</n-form-item>
 				</n-gi>
 				<n-gi v-if="formValue.type == 1">
-					<n-form-item path="linkType" label="链接类型">
+					<n-form-item label="链接类型" path="linkType">
 						<n-select v-model:value="formValue.linkType" :options="lintTypeOptions" placeholder="请选择连接类型" />
 					</n-form-item>
 				</n-gi>
 				<n-gi v-if="formValue.type != 2 && formValue.linkType != 1">
-					<n-form-item path="url" label="资源地址">
+					<n-form-item label="资源地址" path="url">
 						<n-input v-model:value="formValue.url" placeholder="请输入资源地址" />
 					</n-form-item>
 				</n-gi>
 				<n-gi v-if="formValue.type != 2 && formValue.linkType != 1">
-					<n-form-item path="compName" label="组件名称">
+					<n-form-item label="组件名称" path="compName">
 						<n-input v-model:value="formValue.compName" placeholder="请输入组件名称" />
 					</n-form-item>
 				</n-gi>
 				<n-gi v-if="formValue.type != 2 && formValue.linkType != 1">
-					<n-form-item path="ifcache" label="是否缓存">
+					<n-form-item label="是否缓存" path="ifcache">
 						<n-select v-model:value="formValue.ifcache" :options="ifcacheOptions" placeholder="请选择是否缓存" />
 					</n-form-item>
 				</n-gi>
 				<n-gi v-if="formValue.type == 1">
-					<n-form-item path="hidden" label="是否隐藏菜单">
+					<n-form-item label="是否隐藏菜单" path="hidden">
 						<n-select v-model:value="formValue.hidden" :options="ifcacheOptions" placeholder="请选择是否隐藏菜单" />
 					</n-form-item>
 				</n-gi>
 				<n-gi v-if="formValue.linkType != 3">
-					<n-form-item path="linkValue" label="链接地址">
+					<n-form-item label="链接地址" path="linkValue">
 						<n-input v-model:value="formValue.linkValue" placeholder="请输入链接地址" />
 					</n-form-item>
 				</n-gi>
 				<n-gi>
-					<n-form-item path="extend" label="扩展字段">
+					<n-form-item label="扩展字段" path="extend">
 						<n-input v-model:value="formValue.extend" placeholder="请输入扩展字段值" />
 					</n-form-item>
 				</n-gi>
 				<n-gi>
-					<n-form-item path="icon" label="资源图标">
+					<n-form-item label="资源图标" path="icon">
 						<n-input v-model:value="formValue.icon" placeholder="请输入资源图标" />
 					</n-form-item>
 				</n-gi>
@@ -194,6 +194,7 @@ const handleClose = () => {
 
 const handleOk = () => {
 	visible.value = false;
+	console.log(formValue.value, "formValue.value");
 	formRef.value?.validate(errors => {
 		if (!errors) {
 			saveOrUptResource(formValue.value).then(res => {

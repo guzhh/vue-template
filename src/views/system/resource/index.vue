@@ -2,11 +2,11 @@
 	<page-content>
 		<n-card size="small" title="资源列表">
 			<template #header-extra>
-				<n-button type="primary" size="small" @click="addNewResources">新增资源</n-button>
+				<n-button size="small" type="primary" @click="addNewResources">新增资源</n-button>
 				<n-tooltip>
 					<span>折叠</span>
 					<template #trigger>
-						<n-icon @click="$refs.tableRef.clearTreeExpand()" size="17" style="margin-left: 15px">
+						<n-icon size="17" style="margin-left: 15px" @click="$refs.tableRef.clearTreeExpand()">
 							<ArrowBetweenDown24Filled />
 						</n-icon>
 					</template>
@@ -43,58 +43,58 @@
 			</template>
 
 			<vxe-table
-				resizable
-				row-id="id"
-				align="center"
 				ref="tableRef"
-				:size="tableSize"
+				:data="tableData"
 				:height="height - 95"
 				:loading="tableLoading"
-				style="margin-top: 10px"
+				:size="tableSize"
 				:tree-config="{ children: 'children', expandAll: true, reserve: true }"
-				:data="tableData"
+				align="center"
+				resizable
+				row-id="id"
+				style="margin-top: 10px"
 			>
-				<vxe-column field="name" title="资源名称" tree-node min-width="150px" show-overflow="title"></vxe-column>
-				<vxe-column field="url" title="资源地址" min-width="120px" show-overflow="title"></vxe-column>
-				<vxe-column field="compName" title="组件名称" min-width="120px" show-overflow="title"></vxe-column>
-				<vxe-column field="showNum" title="资源序号" min-width="80px" show-overflow="title"></vxe-column>
-				<vxe-column field="icon" title="资源图标" min-width="80px" show-overflow="title">
+				<vxe-column field="name" min-width="150px" show-overflow="title" title="资源名称" tree-node></vxe-column>
+				<vxe-column field="url" min-width="120px" show-overflow="title" title="资源地址"></vxe-column>
+				<vxe-column field="compName" min-width="120px" show-overflow="title" title="组件名称"></vxe-column>
+				<vxe-column field="showNum" min-width="80px" show-overflow="title" title="资源序号"></vxe-column>
+				<vxe-column field="icon" min-width="80px" show-overflow="title" title="资源图标">
 					<template #default="{ row }">
 						<div style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center">
 							<component :is="row.icon" style="width: 18px" />
 						</div>
 					</template>
 				</vxe-column>
-				<vxe-column field="permissionFlag" title="权限标识" min-width="120px" show-overflow="title"></vxe-column>
-				<vxe-column field="type" title="资源类型" min-width="80px" show-overflow="title">
+				<vxe-column field="permissionFlag" min-width="120px" show-overflow="title" title="权限标识"></vxe-column>
+				<vxe-column field="type" min-width="80px" show-overflow="title" title="资源类型">
 					<template #default="{ row }">
 						<option-badge :options="typeFlagOptions" :val="row.type" />
 					</template>
 				</vxe-column>
-				<vxe-column field="ifHidden" title="是否隐藏菜单" min-width="120px" show-overflow="title">
+				<vxe-column field="ifHidden" min-width="120px" show-overflow="title" title="是否隐藏菜单">
 					<template #default="{ row }">
 						<option-badge :options="ifcacheOptions" :val="row.ifHidden" />
 					</template>
 				</vxe-column>
-				<vxe-column field="ifcache" title="是否缓存" min-width="80px" show-overflow="title">
+				<vxe-column field="ifcache" min-width="80px" show-overflow="title" title="是否缓存">
 					<template #default="{ row }">
 						<option-badge :options="ifcacheOptions" :val="row.ifcache" />
 					</template>
 				</vxe-column>
-				<vxe-column field="linkType" title="链接类型" min-width="80px" show-overflow="title">
+				<vxe-column field="linkType" min-width="80px" show-overflow="title" title="链接类型">
 					<template #default="{ row }">
 						<option-badge :options="lintTypeOptions" :val="row.linkType" />
 					</template>
 				</vxe-column>
-				<vxe-column field="linkValue" title="链接值" min-width="120px" show-overflow="title"></vxe-column>
-				<vxe-column field="extend" title="扩展字段" min-width="120px" show-overflow="title"></vxe-column>
-				<vxe-column title="操作" width="180px" fixed="right">
+				<vxe-column field="linkValue" min-width="120px" show-overflow="title" title="链接值"></vxe-column>
+				<vxe-column field="extend" min-width="120px" show-overflow="title" title="扩展字段"></vxe-column>
+				<vxe-column fixed="right" title="操作" width="180px">
 					<template #default="{ row }">
-						<n-button quaternary type="primary" size="small" @click="editResources(row)">编辑</n-button>
-						<n-button quaternary type="info" size="small" @click="cloning(row)">克隆</n-button>
+						<n-button quaternary size="small" type="primary" @click="editResources(row)">编辑</n-button>
+						<n-button quaternary size="small" type="info" @click="cloning(row)">克隆</n-button>
 						<n-popconfirm @positive-click="deleteById(row)">
 							<template #trigger>
-								<n-button type="error" quaternary size="small">删除</n-button>
+								<n-button quaternary size="small" type="error">删除</n-button>
 							</template>
 							是否确定删除该资源?
 						</n-popconfirm>
@@ -102,7 +102,7 @@
 				</vxe-column>
 			</vxe-table>
 		</n-card>
-		<resource-form :treeData="tableData" ref="resourceFormRef" @ok="getData"></resource-form>
+		<resource-form ref="resourceFormRef" :treeData="tableData" @ok="getData"></resource-form>
 	</page-content>
 </template>
 

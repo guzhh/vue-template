@@ -10,5 +10,6 @@ export const constantRouterComponents = {
 	childSys: () => import("@/views/system/childSys/childSys.vue"), // 子系统管理
 	dict: () => import("@/views/system/dict/dictList.vue"), // 字典管理
 	role: () => import("@/views/system/role/index.vue"), // 角色管理
-	orgAdmin: () => import("@/views/system/orgAdmin/orgAdmin.vue") // 机构管理
+	orgAdmin: () => import("@/views/system/orgAdmin/orgAdmin.vue"), // 机构管理
+	depAdmin: () => import("@/views/basic/depAdmin/depAdmin.vue") // 科室管理
 };
