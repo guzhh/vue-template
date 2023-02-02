@@ -97,3 +97,51 @@ export function getRoleResRuleList(params) {
 		}
 	});
 }
+
+/**
+ * 新增或编辑角色资源规则
+ * @param params
+ * @returns {Promise<*>}
+ */
+export function saveOrUptRoleResRule(params) {
+	return request.post({
+		url: "/p/auth/auth-role-res-rule/saveOrUptRoleResRule",
+		data: qs.stringify(params),
+		customs: {
+			isLoading: true,
+			loadingText: "角色资源规则保存中..."
+		}
+	});
+}
+
+/**
+ * 删除角色资源规则
+ * @param params
+ * @returns {Promise<*>}
+ */
+export function delRoleResRule(params) {
+	return request.post({
+		url: "/p/auth/auth-role-res-rule/delRoleResRule",
+		data: qs.stringify(params),
+		customs: {
+			isLoading: true,
+			loadingText: "角色资源规则删除中..."
+		}
+	});
+}
+
+/**
+ * 修改用户角色资源状态
+ * @param params
+ * @returns {Promise<*>}
+ */
+export function uptRoleResRuleState(params) {
+	return request.post({
+		url: "/p/auth/auth-role-res-rule/uptRoleResRuleState",
+		data: qs.stringify(params),
+		customs: {
+			isLoading: true,
+			loadingText: "角色资源状态修改中..."
+		}
+	});
+}

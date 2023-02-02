@@ -145,7 +145,7 @@ const addNewResources = () => {
 
 // 编辑资源
 const editResources = row => {
-	resourceFormRef.value.edit(row);
+	resourceFormRef.value.edit({ ...row, children: undefined });
 };
 
 // 克隆资源

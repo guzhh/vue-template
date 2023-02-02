@@ -14,11 +14,11 @@
 			<theme-color />
 			<Block :options="othersOpts" title="其他设置" />
 			<n-alert :show-icon="false" type="warning"
-				>配置之后仅是临时生效，要想真正作用于项目，点击下方的 "复制配置" 按钮，将配置替换到 src/settings.js 中即可。</n-alert
-			>
+				>配置之后仅是临时生效，要想真正作用于项目，点击下方的 "复制配置" 按钮，将配置替换到 src/settings.js 中即可。
+			</n-alert>
 			<template #footer>
-				<n-button @click="cancel"> 关闭 </n-button>
-				<n-button @click="copySettings" type="success" style="margin-left: 20px"> 复制配置 </n-button>
+				<n-button @click="cancel"> 关闭</n-button>
+				<n-button @click="copySettings" type="success" style="margin-left: 20px"> 复制配置</n-button>
 			</template>
 		</n-drawer-content>
 	</n-drawer>
@@ -84,7 +84,9 @@ const cancel = () => {
 };
 
 const copySettings = async () => {
-	const text = JSON.stringify(appStore.$state, null, 2);
+	const setting = { ...appStore.$state };
+	delete setting.serverMenu;
+	const text = JSON.stringify(setting, null, 2);
 	await copy(text);
 	message.success("复制成功，请粘贴到 src/settings.js 文件中");
 };

@@ -96,6 +96,7 @@ import { MenuFoldOutlined, SearchOutlined, SettingOutlined, UserOutlined, Export
 import { FullScreenMaximize24Regular, FullScreenMinimize24Regular } from "@vicons/fluent";
 import { SunnyOutline, MoonSharp } from "@vicons/ionicons5";
 import { useFullscreen } from "@vueuse/core";
+import { useRouter } from "vue-router";
 import { useAppStore } from "@/store";
 import useHandleTheme from "@/hooks/useHandleTheme";
 import { renderIcon } from "@/utils/render";
@@ -103,6 +104,7 @@ import useUser from "@/hooks/useUser";
 
 defineOptions({ name: "Navbar" });
 
+const router = useRouter();
 const appStore = useAppStore();
 const { logout } = useUser();
 const { theme, handleToggleTheme } = useHandleTheme(); // 主题调整
@@ -141,7 +143,9 @@ const handleLogout = () => {
 };
 
 const handleOptionsFun = {
-	userCenter: () => {}, // 前往用户中心
+	userCenter: () => {
+		router.push({ name: "personal" });
+	}, // 前往用户中心
 	userSettings: () => {}, // 用户设置
 	logout: handleLogout
 };
