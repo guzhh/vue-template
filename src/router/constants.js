@@ -1,6 +1,6 @@
 import { constantRouterComponents } from "@/router/config";
 import NotPage from "@/views/exception/403.vue";
-import { NOT_FOUND_ROUTE, REDIRECT_MAIN } from "@/router/routes/base";
+import { BASE_MAIN, NOT_FOUND_ROUTE, REDIRECT_MAIN } from "@/router/routes/base";
 
 export const REDIRECT_ROUTE_NAME = "Redirect";
 
@@ -50,9 +50,11 @@ export const generatorDynamicRouter = (routeList, router) => {
 				redirect: routes.length > 0 ? { name: routes[0].name } : { name: "login" }, // routes.length > 0 ? routes[0].path : "login",
 				children: routes
 			},
+			BASE_MAIN,
 			REDIRECT_MAIN,
 			NOT_FOUND_ROUTE
 		];
+		console.log("---------", routeTreeList);
 		routeTreeList.forEach(item => router.addRoute(item));
 		resolve(routes);
 	});
