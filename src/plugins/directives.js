@@ -13,10 +13,16 @@ export function setupDirectives(app) {
 	 * @returns {boolean}
 	 */
 	function checkArray(key) {
-		const permissionList = userStore.resourceList.map(item => item.permissionFlag);
+		const { permissionList } = userStore;
 		const index = permissionList.indexOf(key);
 		return index > -1;
 	}
+
+	/**
+	 * 将权限校验方法挂载到全局
+	 * @type {(function(*): (boolean))|*}
+	 */
+	app.config.globalProperties.$checkArray = checkArray;
 
 	/**
 	 * Action 权限指令

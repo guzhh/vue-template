@@ -41,7 +41,8 @@ export function delDept(params) {
 		data: qs.stringify(params),
 		customs: {
 			isLoading: true,
-			loadingText: "删除科室中..."
+			loadingText: "删除科室中...",
+			successTip: "科室删除成功"
 		}
 	});
 }
@@ -56,7 +57,8 @@ export function cancelDelDept(params) {
 		data: qs.stringify(params),
 		customs: {
 			isLoading: true,
-			loadingText: "撤销删除中..."
+			loadingText: "撤销删除中...",
+			successTip: "科室删除撤销成功"
 		}
 	});
 }

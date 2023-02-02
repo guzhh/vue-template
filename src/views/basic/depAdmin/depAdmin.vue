@@ -1,19 +1,20 @@
 <template>
 	<page-content>
 		<div style="display: flex; justify-content: space-between">
-			<n-card size="small" style="width: 300px" title="机构列表:">
+			<n-card size="small" style="width: 200px" title="机构列表:">
 				<n-tree
 					:cancelable="false"
 					:data="treeData"
+					:render-label="treeRenderLabel"
 					:default-selected-keys="defaultSelect"
 					:on-load="handleLoad"
 					block-line
 					@update-selected-keys="select"
 				/>
 			</n-card>
-			<n-card size="small" title="科室列表">
+			<n-card size="small" title="科室列表" style="margin-left: 5px">
 				<template #header-extra>
-					<n-button v-action:addButton size="small" type="primary" @click="addNewDep({})">新增科室</n-button>
+					<n-button v-action:addDeptButton size="small" type="primary" @click="addNewDep({})">新增科室</n-button>
 					<n-tooltip>
 						<span>折叠</span>
 						<template #trigger>
@@ -116,7 +117,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { h, ref } from "vue";
 import { useMessage } from "naive-ui";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import useTable from "@/hooks/useTable";
@@ -138,23 +139,10 @@ const tableData = ref([]);
 const treeData = ref([]);
 const defaultSelect = ref([]);
 const orgCode = ref("");
-// 获取机构列表
-const getOrg = () => {
-	getOrgList({ pcode: "" }).then(res => {
-		if (res.success) {
-			treeData.value = res.result.map(item => {
-				return { ...item, key: item.code, label: item.name, isLeaf: false };
-			});
-			if (treeData.value[0]?.key) {
-				defaultSelect.value.push(treeData.value[0]?.key);
-				orgCode.value = treeData.value[0]?.key;
-				// eslint-disable-next-line no-use-before-define
-				getDepartList();
-			}
-		}
-	});
+
+const treeRenderLabel = ({ option }) => {
+	return h("span", { style: "display: block; overflow: hidden; white-space: nowrap; text-overflow:ellipsis;" }, option.label);
 };
-getOrg();
 
 // 获取科室列表
 const getDepartList = () => {
@@ -174,26 +162,38 @@ const getDepartList = () => {
 		});
 };
 
+// 获取机构列表
+const getOrg = () => {
+	getOrgList({ pcode: "" }).then(res => {
+		if (res.success) {
+			treeData.value = res.result.map(item => {
+				return { ...item, key: item.code, label: item.name, isLeaf: false };
+			});
+			if (treeData.value[0]?.key) {
+				defaultSelect.value.push(treeData.value[0]?.key);
+				orgCode.value = treeData.value[0]?.key;
+				getDepartList();
+			}
+		}
+	});
+};
+getOrg();
+
 // 新增科室
 const addNewDep = row => {
-	console.log("新增科室");
 	depCreateFormRef.value.add({ row, orgCode: orgCode.value });
 };
 
 // 编辑科室信息
 // eslint-disable-next-line no-unused-vars
 const editDep = row => {
-	console.log(row, "编辑科室信息");
 	depCreateFormRef.value.edit(row);
 };
 
 // 删除科室
-// eslint-disable-next-line no-unused-vars
 const deleteDep = row => {
-	console.log(row, "删除科室");
 	delDept({ id: row.id }).then(res => {
 		if (res.success) {
-			message.success("删除成功");
 			const $table = tableRef.value;
 			const data = $table.getRowById(row.pcode);
 			if (data?.id) {
@@ -208,10 +208,8 @@ const deleteDep = row => {
 // 撤销删除
 // eslint-disable-next-line no-unused-vars
 const recoverDep = row => {
-	console.log(row, "撤销删除");
 	cancelDelDept({ id: row.id }).then(res => {
 		if (res.success) {
-			message.success("撤销成功");
 			const $table = tableRef.value;
 			const data = $table.getRowById(row.pcode);
 			if (data?.id) {
@@ -245,7 +243,6 @@ const loadChildrenMethod = ({ row }) => {
 
 // 保存成功
 const saveSuccess = (data, isEdit) => {
-	console.log(data, "data");
 	if (isEdit) {
 		const $table = tableRef.value;
 		const Pdata = $table.getRowById(data.pcode);
@@ -258,7 +255,6 @@ const saveSuccess = (data, isEdit) => {
 		// 新增科室后重新获取科室列表
 		getDepartList();
 	} else {
-		console.log(111);
 		// eslint-disable-next-line no-param-reassign
 		data.hasChild = true;
 		// 添加下级机构重新加载子机构

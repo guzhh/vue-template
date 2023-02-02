@@ -15,7 +15,8 @@ const useUserStore = defineStore("user", {
 		createType: null,
 		ifOnline: null, // 是否在线
 		roleList: [], // 角色列表
-		resourceList: [] // 资源列表
+		resourceList: [], // 资源列表
+		permissionList: [] // 权限标识
 	}),
 
 	getters: {
@@ -59,8 +60,9 @@ const useUserStore = defineStore("user", {
 		// 获取用户信息
 		async info() {
 			const res = await getUserInfo();
+			const permissionList = res.result.resourceList.map(item => item.permissionFlag);
 			res.result.resourceList = formatTheResource(res.result.resourceList); // 处理资源为符合前端要求的资源
-			this.setInfo(res.result);
+			this.setInfo({ ...res.result, permissionList });
 		}
 	}
 });

@@ -16,7 +16,7 @@ export default function setupPermissionGuard(router) {
 			await appStore.fetchServerMenuConfig();
 			next({ ...to, replace: true });
 		} else {
-			// 拿到
+			// 拿到全部路由表
 			const serverMenuConfig = [...appStore.appAsyncMenus, ...WHITE_LIST];
 
 			// 循环判断当前访问的资源是否在路由表中

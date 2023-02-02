@@ -5,32 +5,26 @@ export const DEFAULT_LAYOUT = () => import("@/layout/default-layout.vue");
  * @type {{path: string, component: (function(): Promise<{}>), children: [{path: string, component: (function(): Promise<{}>), meta: {title: string}, name: string}], meta: {title: string}, name: string}}
  */
 export const BASE_MAIN = {
-	// path: "user",
-	// name: "userPersonal",
-	// component: () => import("@/layout/default-layout.vue"),
-	// meta: {
-	// 	title: "基础数据",
-	// 	noAffix: false, // 是否显示标签页
-	// 	ignoreCache: false // 是否缓存
-	// },
-	// children: [
-	// 	{
-	// 		path: "personal",
-	// 		name: "personal",
-	// 		component: () => import("@/views/users/personal/index.vue"),
-	// 		meta: {
-	// 			title: "基础数据",
-	// 			noAffix: false, // 是否显示标签页
-	// 			ignoreCache: false // 是否缓存
-	// 		}
-	// 	}
-	// ],
-	path: "/sssss",
-	name: "sssss",
-	component: () => import("@/views/users/login/index.vue"),
+	path: "/user",
+	name: "userPersonal",
+	component: () => import("@/layout/default-layout.vue"),
 	meta: {
-		title: "登录"
-	}
+		title: "用户中心",
+		noAffix: true, // 是否在标签页中显示 true 不显示
+		ignoreCache: false // 是否缓存
+	},
+	children: [
+		{
+			path: "personal",
+			name: "personal",
+			component: () => import("@/views/users/personal/index.vue"),
+			meta: {
+				title: "个人中心",
+				noAffix: false, // 是否显示标签页
+				ignoreCache: false // 是否缓存
+			}
+		}
+	]
 };
 
 // 重定向包装器

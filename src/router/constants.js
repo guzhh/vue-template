@@ -4,14 +4,10 @@ import { BASE_MAIN, NOT_FOUND_ROUTE, REDIRECT_MAIN } from "@/router/routes/base"
 
 export const REDIRECT_ROUTE_NAME = "Redirect";
 
-export const WHITE_LIST = [
-	{ name: "notFound", children: [] },
-	{ name: "login", children: [] },
-	{ name: "Redirect", children: [] }
-];
+export const WHITE_LIST = [{ name: "login", children: [] }, BASE_MAIN, NOT_FOUND_ROUTE, REDIRECT_MAIN];
 
 export const NOT_FOUND = {
-	name: "notFound"
+	path: "notFound"
 };
 
 export function formatTheRoute(data) {
@@ -54,7 +50,6 @@ export const generatorDynamicRouter = (routeList, router) => {
 			REDIRECT_MAIN,
 			NOT_FOUND_ROUTE
 		];
-		console.log("---------", routeTreeList);
 		routeTreeList.forEach(item => router.addRoute(item));
 		resolve(routes);
 	});
