@@ -141,7 +141,20 @@ const defaultSelect = ref([]);
 const orgCode = ref("");
 
 const treeRenderLabel = ({ option }) => {
-	return h("span", { style: "display: block; overflow: hidden; white-space: nowrap; text-overflow:ellipsis;" }, option.label);
+	// display: block; overflow: hidden; white-space: nowrap; text-overflow:ellipsis;
+	return h(
+		"span",
+		{
+			style: {
+				display: "block",
+				overflow: "hidden",
+				whiteSpace: "nowrap",
+				textOverflow: "ellipsis"
+			},
+			title: option.label
+		},
+		option.label
+	);
 };
 
 // 获取科室列表
