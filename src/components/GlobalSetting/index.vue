@@ -10,8 +10,9 @@
 	</div>
 	<n-drawer close-on-esc @after-leave="cancel" @mask-click="cancel" @esc="cancel" :width="300" :show="visible">
 		<n-drawer-content title="页面设置">
-			<Block :options="contentOpts" title="内容区域" />
+			<sidebar-style />
 			<theme-color />
+			<Block :options="contentOpts" title="内容区域" />
 			<Block :options="othersOpts" title="其他设置" />
 			<n-alert :show-icon="false" type="warning"
 				>配置之后仅是临时生效，要想真正作用于项目，点击下方的 "复制配置" 按钮，将配置替换到 src/settings.js 中即可。
@@ -32,6 +33,7 @@ import { useMessage } from "naive-ui";
 import { useAppStore } from "@/store";
 import Block from "./block.vue";
 import ThemeColor from "./theme-color.vue";
+import SidebarStyle from "./sidebar-style.vue";
 
 const emit = defineEmits(["cancel"]);
 

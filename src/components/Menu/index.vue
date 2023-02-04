@@ -7,6 +7,7 @@
 		:collapsed-width="50"
 		key-field="name"
 		:indent="20"
+		:inverted="inverted"
 		:value="route.name"
 		:collapsed-icon-size="22"
 		:options="menuTree"
@@ -33,6 +34,7 @@ const collapsed = computed({
 		appStore.updateSettings({ menuCollapse: value });
 	}
 });
+const inverted = computed(() => appStore.sideTheme === "dark");
 const menuTree = computed(() => appStore.appAsyncMenus);
 
 const renderMenuLabel = option => {

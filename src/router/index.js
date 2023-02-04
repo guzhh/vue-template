@@ -10,7 +10,9 @@ const router = createRouter({
 			name: "login",
 			component: () => import("@/views/users/login/index.vue"),
 			meta: {
-				title: "登录"
+				title: "登录",
+				noAffix: true, // 是否在标签页中显示 true 不显示
+				ignoreCache: false // 是否缓存
 			}
 		}
 	],

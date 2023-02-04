@@ -52,6 +52,11 @@ const useAppStore = defineStore("app", {
 			this.themeColor = value;
 		},
 
+		// 设置侧边栏样式
+		toggleSideTheme(val) {
+			this.sideTheme = val;
+		},
+
 		async fetchServerMenuConfig() {
 			const userStore = useUserStore();
 			const menus = userStore.resourceList.filter(item => item.meta.type === 1);
@@ -64,19 +69,7 @@ const useAppStore = defineStore("app", {
 			{
 				key: "panku_app_state",
 				storage: localStorage,
-				paths: [
-					"navbar",
-					"menu",
-					"hideMenu",
-					"menuCollapse",
-					"footer",
-					"themeColor",
-					"menuWidth",
-					"globalSettings",
-					"tabBar",
-					"device",
-					"tableSize"
-				]
+				paths: Object.keys(defaultSettings)
 			}
 		]
 	}

@@ -2,7 +2,7 @@
 	<div class="navbar">
 		<div class="left-side">
 			<n-space align="center">
-				<n-h5 :style="{ margin: 0, fontSize: '18px' }">{{ title }}</n-h5>
+				<!--				<n-h5 :style="{ margin: 0, fontSize: '18px' }">{{ title }}</n-h5>-->
 				<n-icon
 					size="22"
 					style="display: flex; align-items: center"
@@ -110,7 +110,7 @@ const { logout } = useUser();
 const { theme, handleToggleTheme } = useHandleTheme(); // 主题调整
 const { isFullscreen, toggle: toggleFullScreen } = useFullscreen(); // 全屏
 
-const title = import.meta.env.VITE_SYSTEM_NAME; // 系统标题
+// const title = import.meta.env.VITE_SYSTEM_NAME; // 系统标题
 const userHandleOptions = [
 	{
 		label: "用户中心",
