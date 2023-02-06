@@ -59,3 +59,18 @@ export function getUserInfo() {
 		}
 	});
 }
+
+/**
+ * 用户自行修改密码
+ * @returns {Promise<*>}
+ */
+export function uptPasswd() {
+	return request.post({
+		url: "/p/user/uptPasswd",
+		customs: {
+			isLoading: true,
+			loadingText: "用户密码修改中...",
+			successTip: "密码修改成功"
+		}
+	});
+}

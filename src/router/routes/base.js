@@ -23,6 +23,16 @@ export const BASE_MAIN = {
 				noAffix: false, // 是否显示标签页
 				ignoreCache: false // 是否缓存
 			}
+		},
+		{
+			path: "settings",
+			name: "settings",
+			component: () => import("@/views/users/settings/index.vue"),
+			meta: {
+				title: "个人设置",
+				noAffix: false, // 是否显示标签页
+				ignoreCache: false // 是否缓存
+			}
 		}
 	]
 };

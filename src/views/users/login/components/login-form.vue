@@ -17,6 +17,7 @@
 					ref="passwordRef"
 					@keyup.enter="handleValidateClick"
 					type="password"
+					show-password-on="mousedown"
 					v-model:value="userInfo.passwd"
 					placeholder="请输入密码"
 				>

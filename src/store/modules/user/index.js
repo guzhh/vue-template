@@ -12,7 +12,10 @@ const useUserStore = defineStore("user", {
 		name: null,
 		errCount: null,
 		state: null,
+		phone: null,
+		email: null,
 		createType: null,
+		createTime: null,
 		ifOnline: null, // 是否在线
 		roleList: [], // 角色列表
 		resourceList: [], // 资源列表

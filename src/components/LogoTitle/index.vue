@@ -37,11 +37,12 @@ const SYSTEM_NAME = import.meta.env.VITE_SYSTEM_NAME; // 系统标题
 	}
 
 	.title {
+		margin: 0;
+		padding: 0;
 		font-size: 25px;
 		letter-spacing: 1px;
-		font-family: blazed;
-		padding: 0;
-		margin: 0;
+		//font-family: blazed;
+		font-family: 楷体;
 	}
 }
 </style>

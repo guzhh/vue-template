@@ -146,7 +146,9 @@ const handleOptionsFun = {
 	userCenter: () => {
 		router.push({ name: "personal" });
 	}, // 前往用户中心
-	userSettings: () => {}, // 用户设置
+	userSettings: () => {
+		router.push({ name: "settings" });
+	}, // 用户设置
 	logout: handleLogout
 };
 

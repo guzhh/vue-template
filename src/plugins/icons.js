@@ -5,12 +5,18 @@ import {
 	MenuOutlined,
 	OrderedListOutlined,
 	PicCenterOutlined,
-	FileMarkdownOutlined
+	FileMarkdownOutlined,
+	PhoneOutlined
 } from "@vicons/antd";
 import { CubeOutline } from "@vicons/ionicons5";
 
 import { Refresh, FoldDown } from "@vicons/tabler";
-import { ArrowBetweenDown24Filled, Settings48Regular, AutoFitHeight20Filled } from "@vicons/fluent";
+import {
+	ArrowBetweenDown24Filled,
+	Settings48Regular,
+	AutoFitHeight20Filled,
+	VoicemailArrowForward16Regular
+} from "@vicons/fluent";
 
 export const Icons = {
 	UsergroupAddOutlined,
@@ -25,7 +31,9 @@ export const Icons = {
 	FileMarkdownOutlined,
 	ArrowBetweenDown24Filled,
 	Settings48Regular,
-	AutoFitHeight20Filled
+	AutoFitHeight20Filled,
+	PhoneOutlined,
+	VoicemailArrowForward16Regular
 };
 
 export function setupIcon(app) {
