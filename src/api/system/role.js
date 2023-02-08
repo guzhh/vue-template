@@ -1,4 +1,3 @@
-import qs from "qs";
 import request from "@/utils/request/request";
 
 /**
@@ -8,7 +7,7 @@ import request from "@/utils/request/request";
 export function getRoleList(params) {
 	return request.post({
 		url: "/p/auth/auth-role/getRoleList",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "角色列表获取中..."
@@ -24,7 +23,7 @@ export function getRoleList(params) {
 export function delRole(params) {
 	return request.post({
 		url: "/p/auth/auth-role/delRole",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "角色删除中...",
@@ -41,7 +40,7 @@ export function delRole(params) {
 export function saveOrUptRole(params) {
 	return request.post({
 		url: "/p/auth/auth-role/saveOrUptRole",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "角色提交中...",
@@ -49,6 +48,7 @@ export function saveOrUptRole(params) {
 		}
 	});
 }
+
 /**
  * 角色权限分配
  * @param params
@@ -57,7 +57,7 @@ export function saveOrUptRole(params) {
 export function roleResBind(params) {
 	return request.post({
 		url: "/p/auth/auth-role/roleResBind",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "角色资源提交中...",
@@ -74,7 +74,7 @@ export function roleResBind(params) {
 export function getRoleAllRes(params) {
 	return request.post({
 		url: "/p/auth/auth-role/getRoleAllRes",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "角色绑定资源获取中..."
@@ -90,7 +90,7 @@ export function getRoleAllRes(params) {
 export function getRoleResRuleList(params) {
 	return request.post({
 		url: "/p/auth/auth-role-res-rule/getRoleResRuleList",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "角色资源规则获取中..."
@@ -106,7 +106,7 @@ export function getRoleResRuleList(params) {
 export function saveOrUptRoleResRule(params) {
 	return request.post({
 		url: "/p/auth/auth-role-res-rule/saveOrUptRoleResRule",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "角色资源规则保存中..."
@@ -122,7 +122,7 @@ export function saveOrUptRoleResRule(params) {
 export function delRoleResRule(params) {
 	return request.post({
 		url: "/p/auth/auth-role-res-rule/delRoleResRule",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "角色资源规则删除中..."
@@ -138,7 +138,7 @@ export function delRoleResRule(params) {
 export function uptRoleResRuleState(params) {
 	return request.post({
 		url: "/p/auth/auth-role-res-rule/uptRoleResRuleState",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "角色资源状态修改中..."

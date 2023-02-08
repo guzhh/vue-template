@@ -1,4 +1,3 @@
-import qs from "qs";
 import request from "@/utils/request/request";
 
 /**
@@ -8,7 +7,7 @@ import request from "@/utils/request/request";
 export function getDictList(params) {
 	return request.post({
 		url: "/p/auth/auth-dict/getDictList",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "字典列表获取中..."
@@ -23,7 +22,7 @@ export function getDictList(params) {
 export function saveOrUptDict(params) {
 	return request.post({
 		url: "/p/auth/auth-dict/saveOrUptDict",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "字典保存中..."
@@ -38,7 +37,7 @@ export function saveOrUptDict(params) {
 export function delDict(params) {
 	return request.post({
 		url: "/p/auth/auth-dict/delDict",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "参数删除中..."
@@ -53,7 +52,7 @@ export function delDict(params) {
 export function getDictByPids(params) {
 	return request.post({
 		url: "/p/auth/auth-dict/getDictByPids",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "参数删除中..."

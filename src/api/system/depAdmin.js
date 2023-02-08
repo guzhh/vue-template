@@ -1,4 +1,3 @@
-import qs from "qs";
 import request from "@/utils/request/request";
 
 /**
@@ -8,7 +7,7 @@ import request from "@/utils/request/request";
 export function getDeptList(params) {
 	return request.post({
 		url: "/p/auth/auth-depart/getDeptList",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "科室列表获取中..."
@@ -23,7 +22,7 @@ export function getDeptList(params) {
 export function saveOrUptDept(params) {
 	return request.post({
 		url: "/p/auth/auth-depart/saveOrUptDept",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "保存数据中..."
@@ -38,7 +37,7 @@ export function saveOrUptDept(params) {
 export function delDept(params) {
 	return request.post({
 		url: "/p/auth/auth-depart/delDept",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "删除科室中...",
@@ -54,7 +53,7 @@ export function delDept(params) {
 export function cancelDelDept(params) {
 	return request.post({
 		url: "/p/auth/auth-depart/cancelDelDept",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "撤销删除中...",

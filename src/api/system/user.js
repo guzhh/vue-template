@@ -1,4 +1,3 @@
-import qs from "qs";
 import request from "@/utils/request/request";
 
 /**
@@ -8,7 +7,7 @@ import request from "@/utils/request/request";
 export function getUserList(params) {
 	return request.post({
 		url: "/p/user/list",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "用户列表获取中..."
@@ -23,7 +22,7 @@ export function getUserList(params) {
 export function saveOrUpt(params) {
 	return request.post({
 		url: "/p/user/saveOrUpt",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "用户信息保存中..."
@@ -38,7 +37,7 @@ export function saveOrUpt(params) {
 export function uptPasswd(params) {
 	return request.post({
 		url: "/p/user/uptPasswd",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true
 		}
@@ -52,7 +51,7 @@ export function uptPasswd(params) {
 export function restPasswd(params) {
 	return request.post({
 		url: "/p/user/restPasswd",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true
 		}
@@ -66,7 +65,7 @@ export function restPasswd(params) {
 export function kickout(params) {
 	return request.post({
 		url: "/p/user/kickout",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true
 		}
@@ -80,7 +79,7 @@ export function kickout(params) {
 export function disableOrDelUser(params) {
 	return request.post({
 		url: "/p/user/disableOrDelUser",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true
 		}
@@ -94,7 +93,7 @@ export function disableOrDelUser(params) {
 export function recoveryUser(params) {
 	return request.post({
 		url: "/p/user/recoveryUser",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true
 		}
@@ -108,7 +107,7 @@ export function recoveryUser(params) {
 export function unlock(params) {
 	return request.post({
 		url: "/p/user/unlock",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true
 		}
@@ -158,7 +157,7 @@ export function downLoadTemplate(params) {
 export function setUserRole(params) {
 	return request.post({
 		url: "/p/user/setUserRole",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true
 		}
@@ -172,7 +171,7 @@ export function setUserRole(params) {
 export function getRoleAllList(params) {
 	return request.post({
 		url: "/p/auth/auth-role/getRoleAllList",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true
 		}
@@ -186,7 +185,7 @@ export function getRoleAllList(params) {
 export function getUserRoleAll(params) {
 	return request.post({
 		url: "/p/auth/auth-role/getUserRoleAll",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true
 		}

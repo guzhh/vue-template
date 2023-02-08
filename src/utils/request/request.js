@@ -1,7 +1,9 @@
+import qs from "qs";
 import { layer } from "@layui/layer-vue";
 import router from "@/router";
 import Request from "./axios";
 import { clearToken, getToken } from "@/utils/auth";
+import { useUserStore } from "@/store";
 
 const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN_KEY;
 
@@ -15,13 +17,18 @@ export default new Request({
 	interceptors: {
 		// 实例级请求拦截器
 		requestInterceptor: config => {
+			const userStore = useUserStore();
 			// 打开全局请求loading
 			if (config.customs?.isLoading) {
 				config.customs.loadingInstance = layer.load(0);
 			}
 			// 防止缓存，给get请求加上时间戳
 			if (config.method === "get" || config.method === "GET") {
-				config.params = { ...config.params, t: new Date().getTime() };
+				config.params = { orgCode: userStore.currentOrgCode, ...config.params, t: new Date().getTime() };
+			} else if (config.method === "post" || config.method === "POST") {
+				if (config.headers["Content-Type"] === "application/x-www-form-urlencoded;charset=UTF-8") {
+					config.data = qs.stringify({ orgCode: userStore.currentOrgCode, ...config.data });
+				}
 			}
 			const token = getToken(); // storage.get(ACCESS_TOKEN);
 			if (token) {

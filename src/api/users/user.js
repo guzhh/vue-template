@@ -1,4 +1,3 @@
-import qs from "qs";
 import request from "@/utils/request/request";
 
 /**
@@ -9,7 +8,7 @@ import request from "@/utils/request/request";
 export function login(data) {
 	return request.post({
 		url: "/p/login",
-		data: qs.stringify(data),
+		data,
 		customs: {
 			isLoading: true,
 			loadingText: "系统登录中..."

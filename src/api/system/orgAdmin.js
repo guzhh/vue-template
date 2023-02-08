@@ -1,4 +1,3 @@
-import qs from "qs";
 import request from "@/utils/request/request";
 
 /**
@@ -8,7 +7,7 @@ import request from "@/utils/request/request";
 export function getOrgList(params) {
 	return request.post({
 		url: "/p/auth/auth-org/getOrgList",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "机构列表获取中..."
@@ -23,7 +22,7 @@ export function getOrgList(params) {
 export function saveOrUptOrg(params) {
 	return request.post({
 		url: "/p/auth/auth-org/saveOrUptOrg",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "保存机构信息中..."
@@ -38,7 +37,7 @@ export function saveOrUptOrg(params) {
 export function delOrg(params) {
 	return request.post({
 		url: "/p/auth/auth-org/delOrg",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "删除机构信息中..."
@@ -53,7 +52,7 @@ export function delOrg(params) {
 export function cancelDelOrg(params) {
 	return request.post({
 		url: "/p/auth/auth-org/cancelDelOrg",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "撤销中..."
@@ -69,7 +68,7 @@ export function cancelDelOrg(params) {
 export function getOrgInfoByCode(params) {
 	return request.post({
 		url: "/p/auth/auth-org/getOrgInfoByCode",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: false
 		}

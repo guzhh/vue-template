@@ -1,4 +1,3 @@
-import qs from "qs";
 import request from "@/utils/request/request";
 
 /**
@@ -8,7 +7,7 @@ import request from "@/utils/request/request";
 export function getParamList(params) {
 	return request.post({
 		url: "/p/auth/auth-param/getParamList",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "参数列表获取中..."
@@ -23,7 +22,7 @@ export function getParamList(params) {
 export function saveOrUptParam(params) {
 	return request.post({
 		url: "/p/auth/auth-param/saveOrUptParam",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "参数保存中..."
@@ -38,7 +37,7 @@ export function saveOrUptParam(params) {
 export function delParam(params) {
 	return request.post({
 		url: "/p/auth/auth-param/delParam",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "参数删除中..."

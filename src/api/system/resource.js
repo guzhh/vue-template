@@ -1,4 +1,3 @@
-import qs from "qs";
 import request from "@/utils/request/request";
 
 /**
@@ -8,7 +7,7 @@ import request from "@/utils/request/request";
 export function getResourceList(params) {
 	return request.post({
 		url: "/p/auth/auth-resource/getResourceList",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "资源列表获取中..."
@@ -24,7 +23,7 @@ export function getResourceList(params) {
 export function saveOrUptResource(params) {
 	return request.post({
 		url: "/p/auth/auth-resource/saveOrUptResource",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "资源提交中...",
@@ -41,7 +40,7 @@ export function saveOrUptResource(params) {
 export function getSystemList(params) {
 	return request.post({
 		url: "/p/auth/auth-system/getSystemList",
-		data: qs.stringify(params)
+		data: params
 	});
 }
 
@@ -53,7 +52,7 @@ export function getSystemList(params) {
 export function delResource(params) {
 	return request.post({
 		url: "/p/auth/auth-resource/delResource",
-		data: qs.stringify(params),
+		data: params,
 		customs: {
 			isLoading: true,
 			loadingText: "资源删除中...",
