@@ -29,6 +29,9 @@
 			<n-form-item label="角色名称" path="name">
 				<n-input v-model:value="formValue.name" placeholder="请输入角色名称" />
 			</n-form-item>
+			<n-form-item path="sysId" label="数据范围">
+				<n-select filterable v-model:value="formValue.dataScope" :options="dataScopeOptions" placeholder="请选择角色数据范围" />
+			</n-form-item>
 			<n-form-item label="角色描述" path="descr">
 				<n-input v-model:value="formValue.descr" placeholder="请输入角色描述" />
 			</n-form-item>
@@ -39,6 +42,7 @@
 <script setup>
 import { ref } from "vue";
 import { saveOrUptRole } from "@/api/system/role";
+import { dataScopeOptions } from "@/constant/system/role";
 
 defineProps({
 	systemList: {
@@ -49,6 +53,7 @@ defineProps({
 		}
 	}
 });
+
 const emits = defineEmits(["ok"]);
 
 const formRef = ref();
@@ -58,6 +63,7 @@ const title = ref("");
 const defaultForm = {
 	id: null,
 	sysId: null,
+	dataScope: null,
 	name: "",
 	descr: ""
 };

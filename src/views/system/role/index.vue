@@ -59,6 +59,11 @@
 				<vxe-column field="id" title="ID" width="50" show-overflow="title"></vxe-column>
 				<vxe-column field="sysId" title="所属系统ID" width="100" show-overflow="title"></vxe-column>
 				<vxe-column field="name" title="角色名称" min-width="100" show-overflow="title"></vxe-column>
+				<vxe-column field="dataScope" min-width="120" show-overflow="title" title="数据范围">
+					<template #default="{ row }">
+						<option-badge :options="dataScopeOptions" :val="row.dataScope" />
+					</template>
+				</vxe-column>
 				<vxe-column field="descr" title="角色描述" min-width="200" show-overflow="title"></vxe-column>
 				<vxe-column field="createTime" title="创建时间" width="200" show-overflow="title"></vxe-column>
 				<vxe-column title="操作" width="200px" fixed="right">
@@ -110,6 +115,7 @@ import { getSystemList } from "@/api/system/resource";
 import RoleForm from "@/views/system/role/components/role-form.vue";
 import AllocateResources from "@/views/system/role/components/allocate-resources.vue";
 import DataRules from "@/views/system/role/components/data-rules.vue";
+import { dataScopeOptions } from "@/constant/system/role";
 
 defineOptions({ name: "role" });
 
