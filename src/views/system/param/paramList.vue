@@ -38,14 +38,6 @@
 					</template>
 				</n-tooltip>
 				<n-divider vertical />
-				<n-tooltip>
-					<span>列设置</span>
-					<template #trigger>
-						<n-icon size="17">
-							<Settings48Regular />
-						</n-icon>
-					</template>
-				</n-tooltip>
 			</template>
 			<vxe-table
 				:data="tableList"
