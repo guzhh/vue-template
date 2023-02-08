@@ -1,25 +1,25 @@
 <template>
-	<n-drawer v-model:show="active" resizable default-width="100%" :mask-closable="false" @after-leave="handleClose">
-		<n-drawer-content title="数据规则设置" closable>
-			<n-grid x-gap="12" :cols="5">
+	<n-drawer v-model:show="active" :mask-closable="false" default-width="100%" resizable @after-leave="handleClose">
+		<n-drawer-content closable title="数据规则设置">
+			<n-grid :cols="5" x-gap="12">
 				<n-gi span="2">
-					<n-card title="资源列表" size="small">
+					<n-card size="small" title="资源列表">
 						<vxe-table
-							resizable
-							border
-							row-id="id"
-							align="center"
-							:size="tableSize"
-							:height="height - 40"
 							ref="resourceTableRef"
-							@current-change="currentChangeEvent"
-							:row-config="{ keyField: 'id', useKey: true, isCurrent: true, isHover: true }"
-							:tree-config="{ children: 'children', expandAll: true, reserve: true }"
 							:data="resourceList"
+							:height="height - 40"
+							:row-config="{ keyField: 'id', useKey: true, isCurrent: true, isHover: true }"
+							:size="tableSize"
+							:tree-config="{ children: 'children', expandAll: true, reserve: true }"
+							align="center"
+							border
+							resizable
+							row-id="id"
+							@current-change="currentChangeEvent"
 						>
-							<vxe-column tree-node field="name" title="资源名称" min-width="150px" show-overflow="title"></vxe-column>
-							<vxe-column field="permissionFlag" title="权限标识" min-width="120px" show-overflow="title"></vxe-column>
-							<vxe-column field="type" title="资源类型" min-width="80px" show-overflow="title">
+							<vxe-column field="name" min-width="150px" show-overflow="title" title="资源名称" tree-node></vxe-column>
+							<vxe-column field="permissionFlag" min-width="120px" show-overflow="title" title="权限标识"></vxe-column>
+							<vxe-column field="type" min-width="80px" show-overflow="title" title="资源类型">
 								<template #default="{ row }">
 									<option-badge :options="typeFlagOptions" :val="row.type" />
 								</template>
@@ -28,64 +28,64 @@
 					</n-card>
 				</n-gi>
 				<n-gi span="3">
-					<n-card title="数据规则" size="small">
+					<n-card size="small" title="数据规则">
 						<template #header-extra>
-							<n-button size="small" quaternary type="primary" @click="addARule">添加规则</n-button>
+							<n-button quaternary size="small" type="primary" @click="addARule">添加规则</n-button>
 						</template>
 						<vxe-table
+							ref="authRoleTableRef"
+							:column-config="{ resizable: true }"
+							:data="authRoleList"
+							:edit-config="{ trigger: 'click', mode: 'cell', showStatus: true }"
+							:height="height - 40"
+							:size="tableSize"
+							align="center"
 							border
 							keep-source
 							show-overflow
-							:size="tableSize"
-							align="center"
-							ref="authRoleTableRef"
-							:height="height - 40"
-							:data="authRoleList"
-							:column-config="{ resizable: true }"
-							:edit-config="{ trigger: 'click', mode: 'cell', showStatus: true }"
 						>
 							<vxe-column type="seq" width="60"></vxe-column>
 							<vxe-column
-								field="name"
-								title="规则名称"
-								min-width="100"
 								:edit-render="{ autofocus: '.vxe-input--inner', placeholder: '请点击输入规则名称...' }"
+								field="name"
+								min-width="100"
+								title="规则名称"
 							>
 								<template #edit="{ row }">
 									<n-input v-model:value="row.name" placeholder="请输入规则名称" />
 								</template>
 							</vxe-column>
 							<vxe-column
-								field="ruleField"
-								title="规则字段"
-								min-width="100"
 								:edit-render="{ autofocus: '.vxe-input--inner', placeholder: '请点击输入规则字段...' }"
+								field="ruleField"
+								min-width="100"
+								title="规则字段"
 							>
 								<template #edit="{ row }">
 									<n-input v-model:value="row.ruleField" placeholder="请输入规则字段" />
 								</template>
 							</vxe-column>
 							<vxe-column
-								field="ruleExpress"
-								title="规则表达式"
-								min-width="100"
 								:edit-render="{ autofocus: '.vxe-input--inner', placeholder: '请点击输入规则表达式...' }"
+								field="ruleExpress"
+								min-width="100"
+								title="规则表达式"
 							>
 								<template #edit="{ row }">
 									<n-input v-model:value="row.ruleExpress" placeholder="请输入规则表达式" />
 								</template>
 							</vxe-column>
 							<vxe-column
-								field="ruleVal"
-								title="规则值"
-								min-width="100"
 								:edit-render="{ autofocus: '.vxe-input--inner', placeholder: '请点击输入规则值...' }"
+								field="ruleVal"
+								min-width="100"
+								title="规则值"
 							>
 								<template #edit="{ row }">
 									<n-input v-model:value="row.ruleVal" placeholder="请输入规则值" />
 								</template>
 							</vxe-column>
-							<vxe-column field="state" title="规则状态" min-width="100">
+							<vxe-column field="state" min-width="100" title="规则状态">
 								<template #default="{ row }">
 									<n-switch
 										v-model:value="row.state"
@@ -98,15 +98,15 @@
 									</n-switch>
 								</template>
 							</vxe-column>
-							<vxe-column title="操作" width="120px" fixed="right">
+							<vxe-column fixed="right" title="操作" width="120px">
 								<template #default="{ row }">
 									<n-popconfirm @positive-click="delTheRule(row)">
 										<template #trigger>
-											<n-button type="error" quaternary size="small">删除</n-button>
+											<n-button quaternary size="small" type="error">删除</n-button>
 										</template>
 										是否确定删除该规则吗?
 									</n-popconfirm>
-									<n-button quaternary type="primary" size="small" @click="saveTheRule(row)">保存</n-button>
+									<n-button quaternary size="small" type="primary" @click="saveTheRule(row)">保存</n-button>
 								</template>
 							</vxe-column>
 						</vxe-table>
@@ -192,6 +192,9 @@ const handleUpdateState = row => {
 				uptRoleResRuleState({ id: row.id, state: row.state });
 			},
 			onNegativeClick: () => {
+				row.state = row.state === 1 ? 0 : 1;
+			},
+			onClose: () => {
 				row.state = row.state === 1 ? 0 : 1;
 			}
 		});
