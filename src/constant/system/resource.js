@@ -26,3 +26,15 @@ export const ifDeletedOption = [
 	{ label: "未删除", value: 0, type: "success" },
 	{ label: "已删除", value: 1, type: "error" }
 ];
+
+export const ifOnLineOption = [
+	{ label: "离线", value: 0, type: "error" },
+	{ label: "在线", value: 1, type: "success" }
+];
+
+export const stateJudgeOption = [
+	{ label: "启用", value: 1, type: "success" },
+	{ label: "禁用", value: 2, type: "warning" },
+	{ label: "删除", value: 3, type: "error" },
+	{ label: "锁定", value: 4, type: "warning" }
+];

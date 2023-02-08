@@ -8,9 +8,9 @@ import {
 	FileMarkdownOutlined,
 	PhoneOutlined
 } from "@vicons/antd";
-import { CubeOutline } from "@vicons/ionicons5";
+import { CubeOutline, Search } from "@vicons/ionicons5";
 
-import { Refresh, FoldDown } from "@vicons/tabler";
+import { Refresh, FoldDown, Download, Upload } from "@vicons/tabler";
 import {
 	ArrowBetweenDown24Filled,
 	Settings48Regular,
@@ -32,6 +32,9 @@ export const Icons = {
 	ArrowBetweenDown24Filled,
 	Settings48Regular,
 	AutoFitHeight20Filled,
+	Search,
+	Download,
+	Upload,
 	PhoneOutlined,
 	VoicemailArrowForward16Regular
 };
