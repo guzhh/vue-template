@@ -8,14 +8,15 @@ import {
 	FileMarkdownOutlined,
 	PhoneOutlined
 } from "@vicons/antd";
-import { CubeOutline, Search, ChevronDown } from "@vicons/ionicons5";
+import { CubeOutline, Search, ChevronDown, ListOutline } from "@vicons/ionicons5";
 
-import { Refresh, FoldDown, Download, Upload } from "@vicons/tabler";
+import { Refresh, FoldDown, Download, Upload, Edit } from "@vicons/tabler";
 import {
 	ArrowBetweenDown24Filled,
 	Settings48Regular,
 	AutoFitHeight20Filled,
-	VoicemailArrowForward16Regular
+	VoicemailArrowForward16Regular,
+	Delete16Regular
 } from "@vicons/fluent";
 
 export const Icons = {
@@ -37,7 +38,10 @@ export const Icons = {
 	Upload,
 	PhoneOutlined,
 	ChevronDown,
-	VoicemailArrowForward16Regular
+	VoicemailArrowForward16Regular,
+	ListOutline,
+	Edit,
+	Delete16Regular
 };
 
 export function setupIcon(app) {

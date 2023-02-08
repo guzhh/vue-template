@@ -11,5 +11,6 @@ export const constantRouterComponents = {
 	dict: () => import("@/views/system/dict/dictList.vue"), // 字典管理
 	role: () => import("@/views/system/role/index.vue"), // 角色管理
 	orgAdmin: () => import("@/views/system/orgAdmin/orgAdmin.vue"), // 机构管理
-	depAdmin: () => import("@/views/basic/depAdmin/depAdmin.vue") // 科室管理
+	depAdmin: () => import("@/views/basic/depAdmin/depAdmin.vue"), // 科室管理
+	projectDependency: () => import("@/views/projectDependency/index.vue") // 项目依赖
 };

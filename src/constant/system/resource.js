@@ -22,16 +22,19 @@ export const disableEnableOption = [
 	{ label: "启用", value: 1, type: "success" }
 ];
 
+// 子系统管理、 科室管理、机构管理状态
 export const ifDeletedOption = [
 	{ label: "未删除", value: 0, type: "success" },
 	{ label: "已删除", value: 1, type: "error" }
 ];
 
+// 用户管理用户在线状态
 export const ifOnLineOption = [
 	{ label: "离线", value: 0, type: "error" },
 	{ label: "在线", value: 1, type: "success" }
 ];
 
+// 用户管理用户状态
 export const stateJudgeOption = [
 	{ label: "启用", value: 1, type: "success" },
 	{ label: "禁用", value: 2, type: "warning" },
