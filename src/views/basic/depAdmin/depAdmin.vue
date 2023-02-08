@@ -5,14 +5,14 @@
 				<n-tree
 					:cancelable="false"
 					:data="treeData"
-					:render-label="treeRenderLabel"
 					:default-selected-keys="defaultSelect"
 					:on-load="handleLoad"
+					:render-label="treeRenderLabel"
 					block-line
 					@update-selected-keys="select"
 				/>
 			</n-card>
-			<n-card size="small" title="科室列表" style="margin-left: 5px">
+			<n-card size="small" style="margin-left: 5px" title="科室列表">
 				<template #header-extra>
 					<n-button v-action:addDeptButton size="small" type="primary" @click="addNewDep({})">新增科室</n-button>
 					<n-tooltip>
@@ -90,17 +90,17 @@
 					</vxe-column>
 					<vxe-column fixed="right" title="操作" width="240px">
 						<template #default="{ row }">
-							<n-button quaternary size="small" type="primary" @click="addNewDep(row)">添加下级</n-button>
-							<n-button quaternary size="small" type="primary" @click="editDep(row)">编辑</n-button>
+							<n-button v-action:addDeptSub quaternary size="small" type="primary" @click="addNewDep(row)">添加下级 </n-button>
+							<n-button v-action:editDeptButton quaternary size="small" type="primary" @click="editDep(row)">编辑 </n-button>
 							<n-popconfirm v-if="row.ifDel === 0" @positive-click="deleteDep(row)">
 								<template #trigger>
-									<n-button quaternary size="small" type="error">删除</n-button>
+									<n-button v-action:delDeptButton quaternary size="small" type="error">删除</n-button>
 								</template>
 								是否确定删除该科室吗?
 							</n-popconfirm>
 							<n-popconfirm v-if="row.ifDel === 1" @positive-click="recoverDep(row)">
 								<template #trigger>
-									<n-button quaternary size="small" type="info">撤销删除</n-button>
+									<n-button v-action:repealDelDept quaternary size="small" type="info">撤销删除</n-button>
 								</template>
 								是否确定撤销删除?
 							</n-popconfirm>
@@ -121,10 +121,11 @@ import { h, ref } from "vue";
 import { useMessage } from "naive-ui";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import useTable from "@/hooks/useTable";
-import { getOrgList } from "@/api/system/orgAdmin.js";
+import { getOrgList, getOrgInfoByCode } from "@/api/system/orgAdmin.js";
 import { ifDeletedOption } from "@/constant/system/resource";
 import CreateForm from "@/views/basic/depAdmin/modules/createForm.vue";
 import { getDeptList, delDept, cancelDelDept } from "@/api/system/depAdmin.js";
+import useUserStore from "@/store/modules/user/index.js";
 
 defineOptions({ name: "depAdmin" });
 
@@ -139,6 +140,7 @@ const tableData = ref([]);
 const treeData = ref([]);
 const defaultSelect = ref([]);
 const orgCode = ref("");
+const userStore = useUserStore();
 
 const treeRenderLabel = ({ option }) => {
 	// display: block; overflow: hidden; white-space: nowrap; text-overflow:ellipsis;
@@ -177,12 +179,10 @@ const getDepartList = () => {
 
 // 获取机构列表
 const getOrg = () => {
-	getOrgList({ pcode: "" }).then(res => {
+	getOrgInfoByCode({ orgCode: userStore.orgCode }).then(res => {
 		if (res.success) {
-			treeData.value = res.result.map(item => {
-				return { ...item, key: item.code, label: item.name, isLeaf: false };
-			});
-			if (treeData.value[0]?.key) {
+			if (res.result?.id) {
+				treeData.value = [{ ...res.result, key: res.result.code, label: res.result.name, isLeaf: false }];
 				defaultSelect.value.push(treeData.value[0]?.key);
 				orgCode.value = treeData.value[0]?.key;
 				getDepartList();

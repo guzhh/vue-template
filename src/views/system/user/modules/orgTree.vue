@@ -14,11 +14,13 @@
 
 <script setup>
 import { h, ref } from "vue";
-import { getOrgList } from "@/api/system/orgAdmin";
+import { getOrgList, getOrgInfoByCode } from "@/api/system/orgAdmin";
+import useUserStore from "@/store/modules/user/index.js";
 
 const treeData = ref([]);
 const defaultSelect = ref([]);
 const emits = defineEmits(["selectOrg"]);
+const userStore = useUserStore();
 
 const treeRenderLabel = ({ option }) => {
 	return h("span", { style: "display: block; overflow: hidden; white-space: nowrap; text-overflow:ellipsis;" }, option.label);
@@ -26,12 +28,10 @@ const treeRenderLabel = ({ option }) => {
 
 // 获取机构列表
 const getOrg = () => {
-	getOrgList({ pcode: "" }).then(res => {
+	getOrgInfoByCode({ orgCode: userStore.orgCode }).then(res => {
 		if (res.success) {
-			treeData.value = res.result.map(item => {
-				return { ...item, key: item.code, label: item.name, isLeaf: false };
-			});
-			if (res.result.length > 0) {
+			if (res.result?.id) {
+				treeData.value = [{ ...res.result, key: res.result.code, label: res.result.name, isLeaf: false }];
 				defaultSelect.value.push(treeData.value[0]?.key);
 				emits("selectOrg", { orgCode: treeData.value[0].code, orgName: treeData.value[0].name, ifExist: true });
 			} else {

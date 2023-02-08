@@ -95,6 +95,7 @@ defineExpose({ open });
 <style lang="scss" scoped>
 .girdItem {
 	padding-bottom: 20px;
+	margin-bottom: 10px;
 	border-bottom: 1px solid #ccc;
 
 	.itemTitle {

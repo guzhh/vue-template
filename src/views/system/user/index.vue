@@ -126,11 +126,13 @@
 						<vxe-column fixed="right" title="操作" width="240px">
 							<template #default="{ row }">
 								<div class="dropDown">
-									<n-button quaternary size="small" type="primary" @click="edit(row)">编辑</n-button>
-									<n-button quaternary size="small" type="primary" @click="openBindRoles(row)">分配角色</n-button>
+									<n-button v-action:editUserButton quaternary size="small" type="primary" @click="edit(row)">编辑 </n-button>
+									<n-button v-action:userAssignRoles quaternary size="small" type="primary" @click="openBindRoles(row)">
+										分配角色
+									</n-button>
 									<n-popover placement="bottom" trigger="click">
 										<template #trigger>
-											<n-button quaternary size="small" type="info">更多操作</n-button>
+											<n-button v-action:userMoreHandle quaternary size="small" type="info">更多操作</n-button>
 										</template>
 
 										<div style="display: flex; flex-direction: column; align-items: center">
@@ -167,9 +169,6 @@
 											>
 												恢复状态
 											</n-button>
-											<n-button quaternary size="small" type="info" @click="moreHandleSelect('changePassword', row)">
-												修改密码
-											</n-button>
 											<n-button quaternary size="small" type="info" @click="moreHandleSelect('resetPassword', row)">
 												重置密码
 											</n-button>
@@ -204,7 +203,6 @@
 						<template #suffix> 共 {{ page.totalResult }} 条数据</template>
 					</n-pagination>
 					<create-form ref="userCreateFormRef" @ok="resetTableList"></create-form>
-					<change-password ref="changePasswordRef" @ok="resetTableList"></change-password>
 					<bind-roles ref="bindRolesRef"></bind-roles>
 				</n-card>
 			</div>
@@ -219,7 +217,6 @@ import { useWindowSize } from "@/hooks/useWindowSize";
 import useTable from "@/hooks/useTable";
 import { ifOnLineOption, stateJudgeOption } from "@/constant/system/resource";
 import CreateForm from "@/views/system/user/modules/createForm.vue";
-import ChangePassword from "@/views/system/user/modules/changePassword.vue";
 import DepTree from "@/views/system/user/modules/depTree.vue";
 import OrgTree from "@/views/system/user/modules/orgTree.vue";
 import {
@@ -240,7 +237,6 @@ defineOptions({ name: "user" });
 
 const DepTreeRef = ref();
 const bindRolesRef = ref();
-const changePasswordRef = ref();
 const tableRef = ref();
 const userCreateFormRef = ref();
 // eslint-disable-next-line no-unused-vars
@@ -282,7 +278,6 @@ const moreOptions = [
 	{ label: "删除", key: "delete" },
 	{ label: "解锁", key: "unlock" },
 	{ label: "恢复状态", key: "recoverState" },
-	{ label: "修改密码", key: "changePassword" },
 	{ label: "重置密码", key: "resetPassword" },
 	{ label: "强制离线", key: "forcedOffline" }
 ];
@@ -356,7 +351,6 @@ const edit = row => {
 // 选择更多操作
 // eslint-disable-next-line no-unused-vars
 const moreHandleSelect = (key, row) => {
-	if (key === "changePassword") changePasswordRef.value.open(row);
 	if (key === "resetPassword") {
 		dialog.warning({
 			title: "重置密码",

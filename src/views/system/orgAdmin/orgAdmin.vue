@@ -77,17 +77,17 @@
 				</vxe-column>
 				<vxe-column fixed="right" title="操作" width="240px">
 					<template #default="{ row }">
-						<n-button quaternary size="small" type="primary" @click="addNewOrg(row)">添加下级</n-button>
-						<n-button quaternary size="small" type="primary" @click="editOrg(row)">编辑</n-button>
+						<n-button v-action:addOrgSub quaternary size="small" type="primary" @click="addNewOrg(row)">添加下级 </n-button>
+						<n-button v-action:editOrgButton quaternary size="small" type="primary" @click="editOrg(row)">编辑 </n-button>
 						<n-popconfirm v-if="row.ifDel === 0" @positive-click="deleteOrg(row)">
 							<template #trigger>
-								<n-button quaternary size="small" type="error">删除</n-button>
+								<n-button v-action:delOrgButton quaternary size="small" type="error">删除</n-button>
 							</template>
 							是否确定删除该机构吗?
 						</n-popconfirm>
 						<n-popconfirm v-if="row.ifDel === 1" @positive-click="recoverOrg(row)">
 							<template #trigger>
-								<n-button quaternary size="small" type="info">撤销删除</n-button>
+								<n-button v-action:repealDelOrg quaternary size="small" type="info">撤销删除</n-button>
 							</template>
 							是否确定撤销删除?
 						</n-popconfirm>
@@ -104,12 +104,15 @@ import { ref } from "vue";
 import { useMessage } from "naive-ui";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import useTable from "@/hooks/useTable";
-import { getOrgList, delOrg, cancelDelOrg } from "@/api/system/orgAdmin.js";
+// eslint-disable-next-line no-unused-vars
+import { getOrgList, delOrg, cancelDelOrg, getOrgInfoByCode } from "@/api/system/orgAdmin.js";
 import { ifDeletedOption } from "@/constant/system/resource";
 import CreateForm from "@/views/system/orgAdmin/modules/createForm.vue";
+import useUserStore from "@/store/modules/user/index.js";
 
 defineOptions({ name: "orgAdmin" });
 
+const userStore = useUserStore();
 const tableRef = ref();
 const orgCreateFormRef = ref();
 // eslint-disable-next-line no-unused-vars
@@ -122,12 +125,12 @@ const tableData = ref([]);
 // 获取机构列表
 const getOrg = () => {
 	tableLoading.value = true;
-	getOrgList({ pcode: "" })
+	getOrgInfoByCode({ orgCode: userStore.orgCode })
 		.then(res => {
 			if (res.success) {
-				tableData.value = res.result.map(item => {
-					return { ...item, hasChild: true };
-				});
+				if (res.result?.id) {
+					tableData.value = [{ ...res.result, hasChild: true }];
+				}
 			}
 		})
 		.finally(() => {
