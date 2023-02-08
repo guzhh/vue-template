@@ -8,7 +8,7 @@ import {
 	FileMarkdownOutlined,
 	PhoneOutlined
 } from "@vicons/antd";
-import { CubeOutline, Search } from "@vicons/ionicons5";
+import { CubeOutline, Search, ChevronDown } from "@vicons/ionicons5";
 
 import { Refresh, FoldDown, Download, Upload } from "@vicons/tabler";
 import {
@@ -36,6 +36,7 @@ export const Icons = {
 	Download,
 	Upload,
 	PhoneOutlined,
+	ChevronDown,
 	VoicemailArrowForward16Regular
 };
 

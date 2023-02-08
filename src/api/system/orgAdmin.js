@@ -60,3 +60,18 @@ export function cancelDelOrg(params) {
 		}
 	});
 }
+
+/**
+ * 根据机构编码获取当前机构信息
+ * @param params
+ * @returns {Promise<*>}
+ */
+export function getOrgInfoByCode(params) {
+	return request.post({
+		url: "/p/auth/auth-org/getOrgInfoByCode",
+		data: qs.stringify(params),
+		customs: {
+			isLoading: false
+		}
+	});
+}

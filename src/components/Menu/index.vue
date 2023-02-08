@@ -4,7 +4,7 @@
 		:render-label="renderMenuLabel"
 		:render-icon="renderMenuIcon"
 		:collapsed="collapsed"
-		:collapsed-width="50"
+		:collapsed-width="menuCollapsedWidth"
 		key-field="name"
 		:indent="20"
 		:inverted="inverted"
@@ -36,6 +36,7 @@ const collapsed = computed({
 });
 const inverted = computed(() => appStore.sideTheme === "dark");
 const menuTree = computed(() => appStore.appAsyncMenus);
+const menuCollapsedWidth = computed(() => appStore.menuCollapsedWidth);
 
 const renderMenuLabel = option => {
 	if (option?.meta.linkType === 1) {

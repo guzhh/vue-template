@@ -65,6 +65,12 @@ const contentOpts = computed(() => [
 		key: "menuWidth",
 		defaultVal: appStore.menuWidth,
 		type: "number"
+	},
+	{
+		name: "菜单折叠宽度 (px)",
+		key: "menuCollapsedWidth",
+		defaultVal: appStore.menuCollapsedWidth,
+		type: "number"
 	}
 ]);
 

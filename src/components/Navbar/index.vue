@@ -12,6 +12,9 @@
 					<MenuFoldOutlined />
 				</n-icon>
 			</n-space>
+			<span class="navbar-org" title="点击可以切换机构" @click="selectAnInstitution">
+				{{ orgData.code ? orgData.name : "未知机构" }} <n-icon size="15" style="margin-left: 5px"> <ChevronDown /> </n-icon
+			></span>
 		</div>
 		<ul class="right-side">
 			<li>
@@ -86,18 +89,21 @@
 				</n-dropdown>
 			</li>
 		</ul>
+		<org-switch ref="orgSwitchRef"></org-switch>
 	</div>
 </template>
 
 <script setup>
-import { inject } from "vue";
-import { useThemeVars } from "naive-ui";
-import { MenuFoldOutlined, SearchOutlined, SettingOutlined, UserOutlined, ExportOutlined } from "@vicons/antd";
-import { FullScreenMaximize24Regular, FullScreenMinimize24Regular } from "@vicons/fluent";
-import { SunnyOutline, MoonSharp } from "@vicons/ionicons5";
-import { useFullscreen } from "@vueuse/core";
 import { useRouter } from "vue-router";
-import { useAppStore } from "@/store";
+import { useThemeVars } from "naive-ui";
+import { useFullscreen } from "@vueuse/core";
+import { inject, computed, watch, ref } from "vue";
+import { SunnyOutline, MoonSharp } from "@vicons/ionicons5";
+import { FullScreenMaximize24Regular, FullScreenMinimize24Regular } from "@vicons/fluent";
+import { MenuFoldOutlined, SearchOutlined, SettingOutlined, UserOutlined, ExportOutlined } from "@vicons/antd";
+import OrgSwitch from "@/components/OrgSwitch/index.vue";
+import { getOrgInfoByCode } from "@/api/system/orgAdmin";
+import { useAppStore, useUserStore } from "@/store";
 import useHandleTheme from "@/hooks/useHandleTheme";
 import { renderIcon } from "@/utils/render";
 import useUser from "@/hooks/useUser";
@@ -105,10 +111,21 @@ import useUser from "@/hooks/useUser";
 defineOptions({ name: "Navbar" });
 
 const router = useRouter();
+const orgSwitchRef = ref();
 const appStore = useAppStore();
+const userStore = useUserStore();
 const { logout } = useUser();
 const { theme, handleToggleTheme } = useHandleTheme(); // 主题调整
 const { isFullscreen, toggle: toggleFullScreen } = useFullscreen(); // 全屏
+const navbarLeftPadding = computed(() => {
+	if (!appStore.menu || appStore.hideMenu) {
+		return "0px";
+	}
+	if (appStore.menuCollapse) {
+		return `${appStore.menuCollapsedWidth}px`;
+	}
+	return `${appStore.menuWidth}px`;
+});
 
 // const title = import.meta.env.VITE_SYSTEM_NAME; // 系统标题
 const userHandleOptions = [
@@ -128,6 +145,22 @@ const userHandleOptions = [
 		icon: renderIcon(ExportOutlined)
 	}
 ];
+
+const orgData = ref({});
+
+watch(
+	() => userStore.currentOrgCode,
+	newValue => {
+		if (newValue) {
+			getOrgInfoByCode({ orgCode: newValue }).then(res => {
+				if (res.success) {
+					orgData.value = res.result;
+				}
+			});
+		}
+	},
+	{ deep: true, immediate: true }
+);
 
 // 打开全局设置面板
 const setVisible = () => {
@@ -157,6 +190,10 @@ const dropdownSelect = key => {
 	handleOptionsFun[key]();
 };
 
+const selectAnInstitution = () => {
+	orgSwitchRef.value.handleOrg();
+};
+
 // 全局公共CSS变量
 const themeVars = useThemeVars();
 </script>
@@ -168,6 +205,14 @@ const themeVars = useThemeVars();
 	height: 100%;
 	background-color: v-bind("themeVars.cardColor");
 	border-bottom: 1px solid v-bind("themeVars.borderColor");
+	box-sizing: border-box;
+	padding-left: v-bind(navbarLeftPadding);
+}
+
+.navbar-org {
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
 }
 
 .left-side {

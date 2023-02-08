@@ -33,6 +33,7 @@ export default {
 	footer: true, // 是否显示
 	themeColor: appThemeList[0], // 系统主题色
 	menuWidth: 180, // 菜单宽度
+	menuCollapsedWidth: 48, // 菜单折叠后宽度
 	globalSettings: false, // 是否显示 全局设置
 	tabBar: true, // 是否开启多页签
 	device: "desktop", // 当前界面模式 desktop || mobile

@@ -7,7 +7,7 @@
 			class="layout-sider"
 			:icon-size="16"
 			:inverted="inverted"
-			:collapsed-width="64"
+			:collapsed-width="appStore.menuCollapsedWidth"
 			:collapsed="collapsed"
 			:width="menuWidth"
 			collapse-mode="width"
@@ -71,7 +71,7 @@ const footer = computed(() => appStore.footer); // 是否显示底部
 
 const themeVars = useThemeVars(); // 全局公共CSS变量
 const menuWidth = computed(() => {
-	return appStore.menuCollapse ? 48 : appStore.menuWidth; // 菜单栏宽度
+	return appStore.menuCollapse ? appStore.menuCollapsedWidth : appStore.menuWidth; // 菜单栏宽度
 });
 
 const paddingStyle = computed(() => {
