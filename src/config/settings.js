@@ -24,7 +24,7 @@ export const appThemeList = [
 
 export default {
 	theme: "light", // 主题
-	sideTheme: "dark", // 菜单栏主题 'dark' | 'white' | 'image'
+	sideTheme: "white", // 菜单栏主题 'dark' | 'white'
 	colorWeak: true, // 色弱模式
 	navbar: true, // 是否开启头部标题栏
 	menu: true, // 是否有菜单栏
