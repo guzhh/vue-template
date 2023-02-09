@@ -222,9 +222,9 @@ import { useMessage, useDialog } from "naive-ui";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import useTable from "@/hooks/useTable";
 import { ifOnLineOption, stateJudgeOption } from "@/constant/system/resource";
-import CreateForm from "@/views/system/user/modules/createForm.vue";
-import DepTree from "@/views/system/user/modules/depTree.vue";
-import OrgTree from "@/views/system/user/modules/orgTree.vue";
+import CreateForm from "@/views/system/user/components/create-form.vue";
+import DepTree from "@/views/system/user/components/dep-tree.vue";
+import OrgTree from "@/views/system/user/components/org-tree.vue";
 import {
 	getUserList,
 	restPasswd,
@@ -237,7 +237,7 @@ import {
 } from "@/api/system/user";
 import useTableData from "@/hooks/useTableData";
 import file from "@/utils/file";
-import BindRoles from "@/views/system/user/modules/bindRoles.vue";
+import BindRoles from "@/views/system/user/components/bind-roles.vue";
 
 defineOptions({ name: "user" });
 

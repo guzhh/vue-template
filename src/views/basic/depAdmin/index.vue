@@ -115,7 +115,7 @@ import { useWindowSize } from "@/hooks/useWindowSize";
 import useTable from "@/hooks/useTable";
 import { getOrgList, getOrgInfoByCode } from "@/api/system/orgAdmin.js";
 import { ifDeletedOption } from "@/constant/system/resource";
-import CreateForm from "@/views/basic/depAdmin/modules/createForm.vue";
+import CreateForm from "@/views/basic/depAdmin/components/create-form.vue";
 import { getDeptList, delDept, cancelDelDept } from "@/api/system/depAdmin.js";
 import useUserStore from "@/store/modules/user/index.js";
 

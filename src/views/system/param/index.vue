@@ -93,7 +93,7 @@ import { useMessage } from "naive-ui";
 import { getParamList, delParam } from "@/api/system/param";
 import useTableData from "@/hooks/useTableData.js";
 import { useWindowSize } from "@/hooks/useWindowSize";
-import ParamForm from "@/views/system/param/modules/paramForm.vue";
+import ParamForm from "@/views/system/param/components/param-form.vue";
 import useTable from "@/hooks/useTable";
 
 defineOptions({ name: "paramList" });

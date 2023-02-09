@@ -6,11 +6,11 @@ export const constantRouterComponents = {
 	// --------------------系统管理
 	user: () => import("@/views/system/user/index.vue"), // 用户管理
 	resource: () => import("@/views/system/resource/index.vue"), // 资源管理
-	paramList: () => import("@/views/system/param/paramList.vue"), // 参数管理
-	childSys: () => import("@/views/system/childSys/childSys.vue"), // 子系统管理
-	dict: () => import("@/views/system/dict/dictList.vue"), // 字典管理
+	paramList: () => import("@/views/system/param/index.vue"), // 参数管理
+	childSys: () => import("@/views/system/childSys/index.vue"), // 子系统管理
+	dict: () => import("@/views/system/dict/index.vue"), // 字典管理
 	role: () => import("@/views/system/role/index.vue"), // 角色管理
-	orgAdmin: () => import("@/views/system/orgAdmin/orgAdmin.vue"), // 机构管理
-	depAdmin: () => import("@/views/basic/depAdmin/depAdmin.vue"), // 科室管理
+	orgAdmin: () => import("@/views/basic/orgAdmin/index.vue"), // 机构管理
+	depAdmin: () => import("@/views/basic/depAdmin/index.vue"), // 科室管理
 	projectDependency: () => import("@/views/projectDependency/index.vue") // 项目依赖
 };

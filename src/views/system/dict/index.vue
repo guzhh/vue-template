@@ -89,7 +89,7 @@ import { useMessage } from "naive-ui";
 import { useWindowSize } from "@/hooks/useWindowSize";
 // eslint-disable-next-line no-unused-vars
 import { getDictList, getDictByPids, delDict } from "@/api/system/dictList";
-import CreateForm from "@/views/system/dict/modules/createForm.vue";
+import CreateForm from "@/views/system/dict/components/create-form.vue";
 import useTable from "@/hooks/useTable";
 import { disableEnableOption } from "@/constant/system/resource";
 

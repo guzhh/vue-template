@@ -147,7 +147,7 @@ import { useMessage } from "naive-ui";
 import useTableData from "@/hooks/useTableData.js";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { getAuthSystemList, delSystem, cancelDelSystem } from "@/api/system/childSys";
-import CreateForm from "@/views/system/childSys/modules/createForm.vue";
+import CreateForm from "@/views/system/childSys/components/create-form.vue";
 import useTable from "@/hooks/useTable";
 import { ifcacheOptions, ifDeletedOption } from "@/constant/system/resource";
 

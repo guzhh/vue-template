@@ -99,8 +99,8 @@ import useTable from "@/hooks/useTable";
 // eslint-disable-next-line no-unused-vars
 import { getOrgList, delOrg, cancelDelOrg, getOrgInfoByCode } from "@/api/system/orgAdmin.js";
 import { ifDeletedOption } from "@/constant/system/resource";
-import CreateForm from "@/views/system/orgAdmin/modules/createForm.vue";
-import useUserStore from "@/store/modules/user/index.js";
+import CreateForm from "@/views/basic/orgAdmin/components/create-form.vue";
+import useUserStore from "@/store/modules/user";
 
 defineOptions({ name: "orgAdmin" });
 
