@@ -225,7 +225,6 @@ defineExpose({ add, edit });
 	width: 150px;
 	height: 150px;
 	border: 1px dashed #ccc;
-
 	cursor: pointer;
 
 	:deep(.n-upload-trigger) {
