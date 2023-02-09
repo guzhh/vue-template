@@ -11,11 +11,10 @@
 		<n-drawer
 			v-model:show="active"
 			:block-scroll="false"
-			:height="height"
 			:placement="placement"
 			:to="to"
 			:trap-focus="false"
-			:width="width"
+			:width="placement === 'left' || placement === 'right' ? width : undefined"
 		>
 			<n-drawer-content>
 				<slot></slot>
@@ -53,14 +52,7 @@ const props = defineProps({
 			return 200;
 		}
 	},
-	// 抽屉的高度（只在placement为top、bottom时生效）
-	height: {
-		type: Number,
-		required: false,
-		default: () => {
-			return 200;
-		}
-	},
+
 	// 抽屉出现的区域
 	to: {
 		type: String,

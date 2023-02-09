@@ -17,33 +17,47 @@
 								:model="searchForm"
 								inline
 								label-placement="left"
-								label-width="auto"
+								label-width="100px"
 								require-mark-placement="left"
 							>
-								<n-form-item label="用户姓名:" path="name">
-									<n-input v-model:value="searchForm.name" placeholder="请输入用户姓名" />
-								</n-form-item>
-								<n-form-item label="手机号:" path="phone">
-									<n-input v-model:value="searchForm.phone" placeholder="请输入用户手机号" />
-								</n-form-item>
-								<n-form-item label="用户账号:" path="account">
-									<n-input v-model:value="searchForm.account" :resizable="false" placeholder="请输入账号" />
-								</n-form-item>
-								<n-form-item label="是否在线:" path="ifOnline">
-									<n-select v-model:value="searchForm.ifOnline" :options="onLineOption" style="width: 200px" />
-								</n-form-item>
-								<n-form-item label="状态:" path="state">
-									<n-select v-model:value="searchForm.state" :options="stateOption" style="width: 200px" />
-								</n-form-item>
-								<n-form-item label="创建时间:" path="dateTimeRange">
-									<n-date-picker
-										v-model:value="dateTimeRange"
-										:forma="'YYYY-mm-dd HH:MM:SS'"
-										clearable
-										type="datetimerange"
-										@update-value="changeTime"
-									/>
-								</n-form-item>
+								<n-grid cols="2 s:3 m:3 l:3 xl:4 2xl:5" responsive="screen">
+									<n-grid-item>
+										<n-form-item label="用户姓名:" path="name">
+											<n-input v-model:value="searchForm.name" placeholder="请输入用户姓名" />
+										</n-form-item>
+									</n-grid-item>
+									<n-grid-item>
+										<n-form-item label="手机号:" path="phone">
+											<n-input v-model:value="searchForm.phone" placeholder="请输入用户手机号" />
+										</n-form-item>
+									</n-grid-item>
+									<n-grid-item>
+										<n-form-item label="用户账号:" path="account">
+											<n-input v-model:value="searchForm.account" :resizable="false" placeholder="请输入账号" />
+										</n-form-item>
+									</n-grid-item>
+									<n-grid-item>
+										<n-form-item label="是否在线:" path="ifOnline">
+											<n-select v-model:value="searchForm.ifOnline" :options="onLineOption" style="width: 100%" />
+										</n-form-item>
+									</n-grid-item>
+									<n-grid-item>
+										<n-form-item label="状态:" path="state">
+											<n-select v-model:value="searchForm.state" :options="stateOption" style="width: 100%" />
+										</n-form-item>
+									</n-grid-item>
+									<n-grid-item>
+										<n-form-item label="创建时间:" path="dateTimeRange">
+											<n-date-picker
+												v-model:value="dateTimeRange"
+												:forma="'YYYY-mm-dd HH:MM:SS'"
+												clearable
+												type="datetimerange"
+												@update-value="changeTime"
+											/>
+										</n-form-item>
+									</n-grid-item>
+								</n-grid>
 							</n-form>
 						</search-box>
 						<n-divider vertical />
