@@ -1,6 +1,6 @@
 <template>
 	<default-view>
-		<page-content :style="{ height: height - 5 + 'px', overflow: 'auto' }">
+		<page-content>
 			<n-card size="small" style="margin-bottom: 5px">
 				<span style="font-size: 18px; margin-right: 5px">版本号:</span>
 				<a
@@ -47,6 +47,7 @@ import packageJson from "../../../package.json";
 import { useWindowSize } from "@/hooks/useWindowSize.js";
 
 defineOptions({ name: "projectDependency" });
+// eslint-disable-next-line no-unused-vars
 const { height } = useWindowSize();
 const fun = obj => {
 	const array = [];
