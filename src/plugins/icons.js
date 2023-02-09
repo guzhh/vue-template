@@ -10,7 +10,7 @@ import {
 } from "@vicons/antd";
 import { CubeOutline, Search, ChevronDown, ListOutline } from "@vicons/ionicons5";
 
-import { Refresh, FoldDown, Download, Upload, Edit } from "@vicons/tabler";
+import { Refresh, FoldDown, Download, Upload, Edit, Plus } from "@vicons/tabler";
 import {
 	ArrowBetweenDown24Filled,
 	Settings48Regular,
@@ -41,7 +41,8 @@ export const Icons = {
 	VoicemailArrowForward16Regular,
 	ListOutline,
 	Edit,
-	Delete16Regular
+	Delete16Regular,
+	Plus
 };
 
 export function setupIcon(app) {

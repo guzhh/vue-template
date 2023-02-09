@@ -93,7 +93,11 @@
 						<span v-else-if="row.sysType === 2">C/S架构</span>
 					</template>
 				</vxe-column>
-				<vxe-column field="sysLogo" min-width="100px" show-overflow="title" title="系统logo"></vxe-column>
+				<vxe-column field="sysLogo" min-width="100px" show-overflow="title" title="系统logo">
+					<template #default="{ row }">
+						<n-image v-if="row.sysLogo" :src="BaseUrl + '/' + row.sysLogo" style="width: 40px; height: 40px" />
+					</template>
+				</vxe-column>
 				<vxe-column field="showNum" min-width="100px" show-overflow="title" title="显示顺序"></vxe-column>
 				<vxe-column field="ifDel" min-width="100px" show-overflow="title" title="是否删除">
 					<template #default="{ row }">
@@ -149,6 +153,7 @@ import { ifcacheOptions, ifDeletedOption } from "@/constant/system/resource";
 
 defineOptions({ name: "childSys" });
 
+const BaseUrl = import.meta.env.VITE_BASE_IMAGE_URL;
 const { tableSizeOptions, tableSize } = useTable();
 const createFormRef = ref();
 // eslint-disable-next-line no-unused-vars

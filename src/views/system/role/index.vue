@@ -1,28 +1,28 @@
 <template>
 	<page-content>
 		<n-card size="small">
-			<n-form class="search-card" inline label-placement="left" ref="formRef" :label-width="80" :model="searchForm">
-				<n-form-item path="sysId" label="所属系统">
+			<n-form ref="formRef" :label-width="80" :model="searchForm" class="search-card" inline label-placement="left">
+				<n-form-item label="所属系统" path="sysId">
 					<n-select
-						filterable
-						style="width: 180px"
 						v-model:value="searchForm.sysId"
 						:options="systemList"
+						filterable
 						placeholder="请选择所属系统"
+						style="width: 180px"
 					/>
 				</n-form-item>
 				<n-form-item label="角色名称" path="name">
-					<n-input v-model:value="searchForm.user" placeholder="请输入角色名称" />
+					<n-input v-model:value="searchForm.name" placeholder="请输入角色名称" />
 				</n-form-item>
 				<n-form-item>
-					<n-button type="primary" attr-type="button" @click="getTableData">搜 索</n-button>
+					<n-button attr-type="button" type="primary" @click="getTableData">搜 索</n-button>
 					<n-button attr-type="button" style="margin-left: 10px" @click="reset">重 置</n-button>
 				</n-form-item>
 			</n-form>
 		</n-card>
-		<n-card size="small" title="角色列表" style="margin-top: 10px">
+		<n-card size="small" style="margin-top: 10px" title="角色列表">
 			<template #header-extra>
-				<n-button type="primary" size="small" @click="addRole">新增角色</n-button>
+				<n-button size="small" type="primary" @click="addRole">新增角色</n-button>
 				<n-divider vertical />
 				<n-tooltip>
 					<span>刷新</span>
@@ -46,38 +46,38 @@
 				<n-divider vertical />
 			</template>
 			<vxe-table
-				resizable
-				border
-				show-overflow
-				align="center"
 				:data="tableList"
-				:size="tableSize"
 				:height="height - 190"
 				:loading="tableLoading"
+				:size="tableSize"
+				align="center"
+				border
+				resizable
 				show-header-overflow="title"
+				show-overflow
 			>
-				<vxe-column field="id" title="ID" width="50" show-overflow="title"></vxe-column>
-				<vxe-column field="sysId" title="所属系统ID" width="100" show-overflow="title"></vxe-column>
-				<vxe-column field="name" title="角色名称" min-width="100" show-overflow="title"></vxe-column>
+				<vxe-column field="id" show-overflow="title" title="ID" width="50"></vxe-column>
+				<vxe-column field="sysId" show-overflow="title" title="所属系统ID" width="100"></vxe-column>
+				<vxe-column field="name" min-width="100" show-overflow="title" title="角色名称"></vxe-column>
 				<vxe-column field="dataScope" min-width="120" show-overflow="title" title="数据范围">
 					<template #default="{ row }">
 						<option-badge :options="dataScopeOptions" :val="row.dataScope" />
 					</template>
 				</vxe-column>
-				<vxe-column field="descr" title="角色描述" min-width="200" show-overflow="title"></vxe-column>
-				<vxe-column field="createTime" title="创建时间" width="200" show-overflow="title"></vxe-column>
-				<vxe-column title="操作" width="200px" fixed="right">
+				<vxe-column field="descr" min-width="200" show-overflow="title" title="角色描述"></vxe-column>
+				<vxe-column field="createTime" show-overflow="title" title="创建时间" width="200"></vxe-column>
+				<vxe-column fixed="right" title="操作" width="200px">
 					<template #default="{ row }">
 						<!--            <n-button quaternary type="info" size="small" @click="setRes(row)" v-if="row.id != 1">分配资源</n-button>-->
-						<n-button quaternary type="primary" size="small" @click="editRole(row)">编辑</n-button>
+						<n-button quaternary size="small" type="primary" @click="editRole(row)">编辑</n-button>
 						<n-popconfirm @positive-click="deleteRole(row)">
 							<template #trigger>
-								<n-button type="error" quaternary size="small">删除</n-button>
+								<n-button quaternary size="small" type="error">删除</n-button>
 							</template>
 							是否确定删除该角色吗?
 						</n-popconfirm>
-						<n-dropdown trigger="click" :options="moreOptions" @select="key => moreHandleSelect(key, row)">
-							<n-button quaternary type="info" size="small">更多操作</n-button>
+						<n-dropdown :options="moreOptions" trigger="click" @select="key => moreHandleSelect(key, row)">
+							<n-button quaternary size="small" type="info">更多操作</n-button>
 						</n-dropdown>
 					</template>
 				</vxe-column>
@@ -170,7 +170,7 @@ const editRole = row => {
 };
 </script>
 
-<style scoped lang="less">
+<style lang="less" scoped>
 .search-card {
 	::v-deep(.n-form-item-feedback-wrapper) {
 		display: none;

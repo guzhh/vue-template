@@ -11,7 +11,7 @@
 		:title="title"
 		:type="1"
 		:zIndex="100"
-		area="800px"
+		area="1000px"
 		@close="handleClose"
 	>
 		<n-form
