@@ -177,14 +177,14 @@ const openModal = () => {
 const edit = row => {
 	title.value = "编辑资源";
 	visible.value = true;
-	formValue.value = { ...row };
+	formValue.value = { ...row, children: undefined };
 };
 
 // 克隆资源
 const cloning = row => {
 	title.value = "新增资源";
 	visible.value = true;
-	formValue.value = { ...row, id: null };
+	formValue.value = { ...row, id: null, children: undefined };
 };
 
 const handleClose = () => {

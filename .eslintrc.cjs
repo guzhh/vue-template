@@ -39,7 +39,7 @@ module.exports = {
       'error',
       {
         props: true,
-        ignorePropertyModificationsFor: ['config', 'app', 'state', 'row', 'vnode']
+        ignorePropertyModificationsFor: ['config', 'app', 'state', 'row', 'vnode', 'ctx']
       }
     ],
     'newline-per-chained-call': 'off', // 允许使用链式调用

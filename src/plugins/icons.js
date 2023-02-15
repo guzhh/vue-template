@@ -6,9 +6,10 @@ import {
 	OrderedListOutlined,
 	PicCenterOutlined,
 	FileMarkdownOutlined,
-	PhoneOutlined
+	PhoneOutlined,
+	InsertRowBelowOutlined
 } from "@vicons/antd";
-import { CubeOutline, Search, ChevronDown, ListOutline, AppsSharp } from "@vicons/ionicons5";
+import { CubeOutline, Search, ChevronDown, ListOutline, AppsSharp, BarcodeOutline } from "@vicons/ionicons5";
 
 import { Refresh, FoldDown, Download, Upload, Edit, Plus } from "@vicons/tabler";
 import {
@@ -43,7 +44,9 @@ export const Icons = {
 	Edit,
 	Delete16Regular,
 	Plus,
-	AppsSharp
+	AppsSharp,
+	BarcodeOutline,
+	InsertRowBelowOutlined
 };
 
 export function setupIcon(app) {

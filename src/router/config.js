@@ -12,5 +12,8 @@ export const constantRouterComponents = {
 	role: () => import("@/views/system/role/index.vue"), // 角色管理
 	orgAdmin: () => import("@/views/basic/orgAdmin/index.vue"), // 机构管理
 	depAdmin: () => import("@/views/basic/depAdmin/index.vue"), // 科室管理
-	projectDependency: () => import("@/views/projectDependency/index.vue") // 项目依赖
+	projectDependency: () => import("@/views/projectDependency/index.vue"), // 项目依赖
+
+	// 前端项目生成器
+	tableGenerator: () => import("@/views/generator/tableGenerator/index.vue") // 表格生成器
 };
