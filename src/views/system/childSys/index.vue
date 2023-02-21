@@ -95,7 +95,7 @@
 				</vxe-column>
 				<vxe-column field="sysLogo" min-width="100px" show-overflow="title" title="系统logo">
 					<template #default="{ row }">
-						<n-image v-if="row.sysLogo" :src="BaseUrl + '/' + row.sysLogo" style="width: 40px; height: 40px" />
+						<div class="svg" style="width: 40px; height: 40px; margin: 0 auto" v-html="row.sysLogo"></div>
 					</template>
 				</vxe-column>
 				<vxe-column field="showNum" min-width="100px" show-overflow="title" title="显示顺序"></vxe-column>
@@ -153,7 +153,6 @@ import { ifcacheOptions, ifDeletedOption } from "@/constant/system/resource";
 
 defineOptions({ name: "childSys" });
 
-const BaseUrl = import.meta.env.VITE_BASE_IMAGE_URL;
 const { tableSizeOptions, tableSize } = useTable();
 const createFormRef = ref();
 // eslint-disable-next-line no-unused-vars
@@ -226,6 +225,18 @@ const reset = () => {
 .search-card {
 	::v-deep(.n-form-item-feedback-wrapper) {
 		display: none;
+	}
+}
+
+.svg {
+	::v-deep(svg) {
+		width: 100%;
+		height: 100%;
+	}
+
+	::v-deep(svg) > path {
+		fill: #30cd98 !important;
+		transition: 0.5s;
 	}
 }
 </style>

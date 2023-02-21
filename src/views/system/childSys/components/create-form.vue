@@ -64,21 +64,7 @@
 					/>
 				</n-form-item>
 				<n-form-item label="系统logo:" path="sysLogo">
-					<!--					<n-input v-model:value="formValue.sysLogo" placeholder="请输入系统logo" />-->
-					<n-upload
-						:custom-request="UPactions"
-						:show-file-list="false"
-						accept="image/*"
-						action=""
-						class="uploadImage"
-						list-type="image"
-						@before-upload="beforeUpload"
-					>
-						<n-image v-if="formValue.sysLogo" :preview-disabled="true" :src="BaseUrl + '/' + formValue.sysLogo" />
-						<n-icon v-else color="#ccc" size="30">
-							<Plus />
-						</n-icon>
-					</n-upload>
+					<n-input v-model:value="formValue.sysLogo" placeholder="请输入系统logo" />
 				</n-form-item>
 			</n-form>
 		</div>
@@ -89,10 +75,8 @@
 import { ref } from "vue";
 import { useMessage } from "naive-ui";
 import { saveOrUptSystem } from "@/api/system/childSys";
-import { uploadImage } from "@/api/system/index";
 
 const emits = defineEmits(["ok"]);
-const BaseUrl = import.meta.env.VITE_BASE_IMAGE_URL;
 const title = ref("");
 const visible = ref(false);
 const formRef = ref();
@@ -184,35 +168,6 @@ const handleOk = () => {
 					handleClose();
 				}
 			});
-		}
-	});
-};
-
-const beforeUpload = data => {
-	const isJpgOrPng =
-		data.file.type === "image/jpeg" ||
-		data.file.type === "image/png" ||
-		data.file.type === "image/jpg" ||
-		data.file.type === "image/webp" ||
-		data.file.type === "image/svg";
-	if (!isJpgOrPng) {
-		message.error("图片格式不正确！");
-	}
-	const isLt2M = data.file.file.size / 1024 / 1024 < 2;
-	if (!isLt2M) {
-		message.error("图片大小不能超过2MB!");
-	}
-	return isJpgOrPng && isLt2M;
-};
-const UPactions = ({ file, onFinish }) => {
-	const param = new FormData(); // 创建form对象
-	param.append("file", file.file, file.name);
-	param.append("type", 1);
-	console.log(param, "param");
-	uploadImage(param).then(res => {
-		if (res.success) {
-			formValue.value.sysLogo = res.result.url;
-			onFinish();
 		}
 	});
 };
