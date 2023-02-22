@@ -60,20 +60,23 @@ const open = row => {
 	active.value = true;
 	roles.value = { ...row };
 	tableData.value = [];
-	getResourceList({ sysId: row.sysId })
+	getRoleAllRes({ roleId: row.id })
 		.then(res => {
 			if (res.success) {
-				tableData.value = setTreeData(res.result, "id", "pid");
+				curCheckedRowIds.value = res.result.map(item => item.id);
 			}
 		})
 		.finally(() => {
-			tableLoading.value = false;
+			getResourceList({ sysId: row.sysId })
+				.then(res => {
+					if (res.success) {
+						tableData.value = setTreeData(res.result, "id", "pid");
+					}
+				})
+				.finally(() => {
+					tableLoading.value = false;
+				});
 		});
-	getRoleAllRes({ roleId: row.id }).then(res => {
-		if (res.success) {
-			curCheckedRowIds.value = res.result.map(item => item.id);
-		}
-	});
 };
 
 const handleClose = () => {
