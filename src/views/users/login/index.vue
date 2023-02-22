@@ -1,6 +1,6 @@
 <template>
 	<div class="container">
-		<div class="logo">
+		<div class="logo" style="display: none">
 			<img alt="logo" :src="pkLogo" />
 			<div class="logo-text">{{ title }}</div>
 		</div>
@@ -30,6 +30,7 @@ defineOptions({ name: "login" });
 const title = import.meta.env.VITE_SYSTEM_NAME;
 
 // 全局公共变量
+// eslint-disable-next-line no-unused-vars
 const themeVars = useThemeVars();
 </script>
 
@@ -37,6 +38,11 @@ const themeVars = useThemeVars();
 .container {
 	display: flex;
 	height: 100vh;
+
+	overflow: auto;
+	background-image: url("@/assets/images/bg.png");
+	background-repeat: no-repeat;
+	background-size: cover;
 
 	.banner {
 		width: 550px;
@@ -77,8 +83,9 @@ const themeVars = useThemeVars();
 	&-text {
 		margin-right: 4px;
 		margin-left: 4px;
-		color: v-bind("themeVars.baseColor");
-		font-size: 20px;
+		//color: v-bind("themeVars.baseColor");
+		color: #f7f8fa;
+		font-size: 18px;
 	}
 }
 </style>

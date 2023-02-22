@@ -104,7 +104,7 @@
 					<vxe-table
 						ref="tableRef"
 						:data="tableList"
-						:height="height - 125"
+						:height="height - 110"
 						:loading="tableLoading"
 						:size="tableSize"
 						align="center"

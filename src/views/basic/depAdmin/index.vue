@@ -49,7 +49,7 @@
 				<vxe-table
 					ref="tableRef"
 					:data="tableData"
-					:height="height - 85"
+					:height="height - 80"
 					:loading="tableLoading"
 					:row-config="{
 						keyField: 'code'

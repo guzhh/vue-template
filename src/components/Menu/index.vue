@@ -39,6 +39,9 @@ const menuTree = computed(() => appStore.appAsyncMenus);
 const menuCollapsedWidth = computed(() => appStore.menuCollapsedWidth);
 
 const renderMenuLabel = option => {
+	if (option?.children && option?.children.length > 0) {
+		return h("span", {}, option?.meta?.title);
+	}
 	if (option?.meta.linkType === 1) {
 		return h("a", { href: option?.meta?.linkValue, target: "_blank" }, option?.meta?.title);
 	}

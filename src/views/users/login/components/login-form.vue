@@ -1,10 +1,10 @@
 <template>
 	<div class="login-form-wrapper">
-		<div class="login-form-title">登录 {{ title }}</div>
-		<div class="login-form-sub-title">登录 {{ title }}</div>
+		<div class="login-form-title">{{ title }}</div>
+		<!--		<div class="login-form-sub-title">登录 {{ title }}</div>-->
 		<div class="login-form-error-msg">{{ errorMessage }}</div>
 
-		<n-form ref="formRef" :model="userInfo" :rules="rules" label-placement="left">
+		<n-form ref="formRef" :model="userInfo" :rules="rules" label-placement="left" size="large">
 			<n-form-item path="account">
 				<n-input @keyup.enter="accountEnter" v-model:value="userInfo.account" placeholder="请输入账号">
 					<template #prefix>
@@ -37,11 +37,13 @@
 import { reactive, ref } from "vue";
 import { useThemeVars } from "naive-ui";
 import { UserOutlined, LockOutlined } from "@vicons/antd";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { useUserStore } from "@/store";
 
 defineOptions({ name: "LoginForm" });
 
+// eslint-disable-next-line no-unused-vars
+const route = useRoute();
 const router = useRouter();
 const userStore = useUserStore();
 const formRef = ref();
@@ -89,15 +91,20 @@ const handleValidateClick = () => {
 </script>
 
 <style lang="less" scoped>
+.login-form-wrapper {
+	box-shadow: 0px 0px 30px 20px #f2f3f5;
+	//border: 1px solid #51a7ff;
+	padding: 24px 36px;
+}
 .login-form {
 	&-wrapper {
-		width: 320px;
+		width: 420px;
 	}
 
 	&-title {
 		color: v-bind("themeVars.textColor1");
-		font-weight: 500;
-		font-size: 24px;
+		font-weight: bold;
+		font-size: 36px;
 		line-height: 32px;
 		text-align: center;
 	}

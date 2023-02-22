@@ -14,6 +14,7 @@
 
 <script setup>
 import { computed } from "vue";
+
 import { useThemeVars } from "naive-ui";
 import bannerImage from "@/assets/images/login-banner.png";
 
@@ -38,6 +39,7 @@ const carouselItem = computed(() => [
 ]);
 
 // 全局公共变量
+// eslint-disable-next-line no-unused-vars
 const themeVars = useThemeVars();
 </script>
 
@@ -65,7 +67,8 @@ const themeVars = useThemeVars();
 	}
 
 	&-title {
-		color: v-bind("themeVars.baseColor");
+		//color: v-bind("themeVars.baseColor");
+		color: #f7f8fa;
 		font-weight: 500;
 		font-size: 20px;
 		line-height: 28px;
@@ -73,14 +76,15 @@ const themeVars = useThemeVars();
 
 	&-sub-title {
 		margin-top: 8px;
-		color: v-bind("themeVars.codeColor");
+		//color: v-bind("themeVars.codeColor");
+		color: #86909c;
 		font-size: 14px;
 		line-height: 22px;
 	}
 
 	&-image {
-		width: 320px;
-		margin-top: 30px;
+		width: 240px;
+		margin-top: 40px;
 	}
 }
 </style>

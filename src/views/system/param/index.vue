@@ -1,21 +1,17 @@
 <template>
 	<page-content>
-		<n-card class="search-card" size="small">
-			<div style="display: flex; justify-content: space-between">
-				<n-form ref="formRef" :label-width="80" :model="searchForm" inline label-placement="left">
-					<n-form-item label="查询:" path="query">
-						<n-input v-model:value="searchForm.query" placeholder="参数编码/参数名称" @keydown.enter.prevent="resetTableList" />
-					</n-form-item>
-					<n-form-item>
-						<n-button size="small" type="primary" @click="resetTableList"> 查询</n-button>
-					</n-form-item>
-					<n-form-item>
-						<n-button size="small" type="default" @click="reset"> 重置</n-button>
-					</n-form-item>
-				</n-form>
-			</div>
-		</n-card>
-		<n-card size="small" style="margin-top: 10px" title="参数列表">
+		<n-card size="small" title="参数列表">
+			<template #header>
+				<n-input
+					size="small"
+					style="width: 200px"
+					v-model:value="searchForm.query"
+					placeholder="参数编码/参数名称"
+					@keydown.enter.prevent="resetTableList"
+				/>
+				<n-button size="small" type="primary" @click="resetTableList" style="margin-left: 10px"> 查询</n-button>
+				<n-button size="small" type="default" @click="reset" style="margin-left: 10px"> 重置</n-button>
+			</template>
 			<template #header-extra>
 				<n-button size="small" style="margin-right: 20px" type="primary" @click="addParam">新增参数</n-button>
 				<n-tooltip>
@@ -41,7 +37,7 @@
 			</template>
 			<vxe-table
 				:data="tableList"
-				:height="height - 188"
+				:height="height - 110"
 				:loading="tableLoading"
 				:size="tableSize"
 				align="center"

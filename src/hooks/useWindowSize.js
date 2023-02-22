@@ -12,7 +12,7 @@ export function useWindowSize() {
 			paddingWidth += 40;
 		}
 		if (appStore.tabBar) {
-			paddingWidth += 30;
+			paddingWidth += 38;
 		}
 		if (appStore.navbar) {
 			paddingWidth += 54;
