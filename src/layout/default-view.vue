@@ -41,7 +41,9 @@
 			<n-layout-content>
 				<slot></slot>
 			</n-layout-content>
-			<Footer v-if="footer" />
+			<div style="padding: 0 10px">
+				<Footer v-if="footer" />
+			</div>
 		</n-layout>
 	</n-layout>
 </template>

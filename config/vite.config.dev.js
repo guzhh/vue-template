@@ -4,12 +4,12 @@ import eslint from "vite-plugin-eslint";
 import { viteMockServe } from "vite-plugin-mock";
 import baseConfig from "./vite.config.base";
 import { getEnv } from "./utils/index.js";
-import { devServerPlugin } from "./plugin/devServerPlugin.js";
+// import { devServerPlugin } from "./plugin/devServerPlugin.js";
 
 export default mergeConfig(
 	{
 		plugins: [
-			devServerPlugin(),
+			// devServerPlugin(),
 			eslint({
 				cache: false,
 				include: ["src/**/*.js", "src/**/*.jsx", "src/**/*.vue"],
@@ -38,14 +38,14 @@ export default mergeConfig(
 					secure: false, // 是否验证SSL证书
 					ws: true // 是否代理websocket
 					// rewrite: (urlPath) => urlPath.replace(/^\/api/, `/`)
-				},
-				[getEnv("VITE_DEV_NODE_API")]: {
-					target: `http://127.0.0.1:${getEnv("VITE_DEV_NODE_PROP")}`, // 要使用 url 模块解析的 url 字符串
-					changeOrigin: true, // 是否将发送请求头中host设置为target
-					secure: false, // 是否验证SSL证书
-					ws: true // 是否代理websocket
-					// rewrite: (urlPath) => urlPath.replace(/^\/api/, `/`)
 				}
+				// [getEnv("VITE_DEV_NODE_API")]: {
+				// 	target: `http://127.0.0.1:${getEnv("VITE_DEV_NODE_PROP")}`, // 要使用 url 模块解析的 url 字符串
+				// 	changeOrigin: true, // 是否将发送请求头中host设置为target
+				// 	secure: false, // 是否验证SSL证书
+				// 	ws: true // 是否代理websocket
+				// 	// rewrite: (urlPath) => urlPath.replace(/^\/api/, `/`)
+				// }
 			}
 		}
 	},

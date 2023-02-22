@@ -7,7 +7,6 @@
 						<tab-item v-for="(tag, index) in tagList" :key="tag.fullPath" :index="index" :item-data="tag" />
 					</div>
 				</div>
-				<div class="tag-bar-operation"></div>
 			</div>
 		</div>
 	</n-affix>
@@ -18,7 +17,6 @@ import { computed, onUnmounted } from "vue";
 import { useThemeVars } from "naive-ui";
 import { useAppStore, useTabBarStore } from "@/store";
 import { listenerRouteChange, removeRouteListener } from "@/utils/route-listener";
-import TabItem from "./tab-item.vue";
 
 const appStore = useAppStore();
 const tabBarStore = useTabBarStore();
@@ -38,6 +36,7 @@ const tabWidth = computed(() => (renderMenu.value && !hideMenu.value ? `calc(100
 
 // 监听路由变化
 listenerRouteChange(route => {
+	console.log("---------------", route);
 	if (!route.meta.noAffix && !tagList.value.some(tag => tag.fullPath === route.fullPath)) {
 		tabBarStore.updateTabList(route);
 	}
@@ -59,13 +58,16 @@ const themeVars = useThemeVars();
 
 	.tab-bar-box {
 		display: flex;
-		padding: 0 0 0 20px;
+		padding: 0 10px;
+		box-sizing: border-box;
 		//background-color: v-bind("themeVars.bodyColor");
 		border-bottom: 1px solid v-bind("themeVars.borderColor");
+
 		.tab-bar-scroll {
-			height: 32px;
-			flex: 1;
+			height: 38px;
+			width: 100%;
 			overflow: hidden;
+
 			.tags-wrap {
 				padding: 4px 0;
 				height: 48px;
@@ -85,10 +87,6 @@ const themeVars = useThemeVars();
 				}
 			}
 		}
-	}
-	.tag-bar-operation {
-		width: 100px;
-		height: 32px;
 	}
 }
 </style>

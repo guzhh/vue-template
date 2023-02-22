@@ -4,6 +4,7 @@ const formatTag = route => {
 	const { name, meta, fullPath, query } = route;
 	return {
 		title: meta.title || "",
+		icon: meta.icon || "",
 		name: String(name),
 		fullPath,
 		query,

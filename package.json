@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite --config ./config/vite.config.dev.js --mode development ",
+    "dev": "set DEBUG=vite:deps && vite --config ./config/vite.config.dev.js --mode development ",
     "build": "vite build --config ./config/vite.config.prod.js --mode production",
     "report": "cross-env REPORT=true npm run build",
     "preview": "vite preview",
@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@layui/layer-vue": "^1.4.7",
+    "@soybeanjs/vue-admin-tab": "^1.0.5",
     "@vicons/antd": "^0.12.0",
     "@vicons/fa": "^0.12.0",
     "@vicons/fluent": "^0.12.0",

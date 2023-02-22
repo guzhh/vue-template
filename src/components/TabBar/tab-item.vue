@@ -6,17 +6,21 @@
 		:options="options"
 		@select="handleSelect"
 	>
-		<n-tag
+		<chrome-tab
+			:dark-mode="theme === 'dark'"
+			:primary-color="themeVars.successColorPressed"
 			@contextmenu="handleContextMenu"
-			closable
-			size="small"
 			@click="goto(itemData)"
-			style="margin-right: 5px"
 			@close="tagClose(itemData, index)"
-			:type="itemData.fullPath === $route.fullPath ? 'success' : 'default'"
+			:is-active="itemData.fullPath === $route.fullPath"
 		>
-			{{ itemData.title }}
-		</n-tag>
+			<div style="display: flex; align-items: center">
+				<component :is="itemData.icon" style="width: 16px; height: 16px" />
+				<div style="padding-top: 3px">
+					<span style="margin-left: 8px">{{ itemData.title }}</span>
+				</div>
+			</div>
+		</chrome-tab>
 	</n-dropdown>
 </template>
 
@@ -25,9 +29,10 @@ import { ref, computed } from "vue";
 import { Refresh, CloseOutline } from "@vicons/ionicons5";
 import { ArrowRightOutlined, ArrowLeftOutlined, SwapOutlined } from "@vicons/antd";
 import { useRouter, useRoute } from "vue-router";
-import { useMessage } from "naive-ui";
+import { useMessage, useThemeVars } from "naive-ui";
+import { ChromeTab } from "@soybeanjs/vue-admin-tab";
 import { renderIcon } from "@/utils/render";
-import { useTabBarStore } from "@/store";
+import { useAppStore, useTabBarStore } from "@/store";
 import { REDIRECT_ROUTE_NAME } from "@/router/constants";
 
 const props = defineProps({
@@ -41,6 +46,12 @@ const props = defineProps({
 		type: Number,
 		default: 0
 	}
+});
+
+const appStore = useAppStore();
+
+const theme = computed(() => {
+	return appStore.theme;
 });
 
 const message = useMessage();
@@ -140,6 +151,9 @@ const handleSelect = async key => {
 		router.push({ name: itemData.name });
 	}
 };
+
+// 全局公共CSS变量
+const themeVars = useThemeVars();
 </script>
 
 <style scoped></style>

@@ -1,9 +1,7 @@
 <template>
-	<!-- eslint-disable vue/no-v-html -->
 	<n-layout-footer class="footer">
 		<span v-html="systemCopyright"></span>
 	</n-layout-footer>
-	<!--eslint-enable-->
 </template>
 
 <script setup>
@@ -17,7 +15,7 @@ const systemCopyright = import.meta.env.VITE_SYSTEM_COPYRIGHT;
 const themeVars = useThemeVars();
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
 .footer {
 	display: flex;
 	align-items: center;

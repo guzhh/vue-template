@@ -15,7 +15,7 @@ export function useWindowSize() {
 			paddingWidth += 30;
 		}
 		if (appStore.navbar) {
-			paddingWidth += 48;
+			paddingWidth += 54;
 		}
 		return aHeight.value - paddingWidth;
 	});
