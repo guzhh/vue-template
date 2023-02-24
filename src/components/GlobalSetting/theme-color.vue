@@ -15,18 +15,52 @@
 			</span>
 		</div>
 		<n-color-picker v-model:value="appStore.themeColor" :show-alpha="false" :modes="['hex']" />
+		<n-button block size="small" @click="moreTopics">更多主题色</n-button>
+		<n-modal
+			style="width: 640px"
+			:z-index="99999"
+			v-model:show="showColorModal"
+			class="custom-card"
+			preset="card"
+			title="中国传统色"
+			size="small"
+			content-style="padding: 0;"
+			:bordered="true"
+		>
+			<n-tabs type="line" size="small" :tabs-padding="20" pane-style="padding: 20px;">
+				<n-tab-pane :name="item.label" v-for="item in colors" :key="item.label">
+					<div class="color-tab">
+						<div class="color-bab-item" :key="color.color" v-for="color in item.data" @click="appTheme(color.color)">
+							<div class="color-box" :style="{ backgroundColor: color.color }">
+								<n-icon v-if="color.color === appStore.themeColor" size="18">
+									<CheckOutlined />
+								</n-icon>
+							</div>
+							<span style="margin-top: 5px">{{ color.label }}</span>
+						</div>
+					</div>
+				</n-tab-pane>
+			</n-tabs>
+		</n-modal>
 	</div>
 </template>
 
 <script setup>
 import { CheckOutlined } from "@vicons/antd";
+import { ref } from "vue";
 import { appThemeList } from "@/config/settings";
 import { useAppStore } from "@/store";
+import colors from "@/config/color.json";
 
 const appStore = useAppStore();
+const showColorModal = ref(false);
 
 const appTheme = color => {
 	appStore.toggleThemeColor(color);
+};
+
+const moreTopics = () => {
+	showColorModal.value = true;
 };
 </script>
 
@@ -58,6 +92,31 @@ const appTheme = color => {
 
 		.n-icon {
 			color: #fff;
+		}
+	}
+}
+
+.color-tab {
+	width: 100%;
+	display: flex;
+	justify-content: left;
+	flex-wrap: wrap;
+
+	.color-bab-item {
+		margin: 0 5px 10px 5px;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+
+		.color-box {
+			width: 64px;
+			height: 40px;
+			box-sizing: border-box;
+			border-radius: 5px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			color: #ffffff;
 		}
 	}
 }
