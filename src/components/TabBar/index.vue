@@ -36,7 +36,6 @@ const tabWidth = computed(() => (renderMenu.value && !hideMenu.value ? `calc(100
 
 // 监听路由变化
 listenerRouteChange(route => {
-	console.log("---------------", route);
 	if (!route.meta.noAffix && !tagList.value.some(tag => tag.fullPath === route.fullPath)) {
 		tabBarStore.updateTabList(route);
 	}

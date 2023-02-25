@@ -62,7 +62,13 @@
 								title="规则字段"
 							>
 								<template #edit="{ row }">
-									<n-input v-model:value="row.ruleField" placeholder="请输入规则字段" />
+									<!--									<n-input v-model:value="row.ruleField" placeholder="请输入规则字段" />-->
+									<n-mention
+										@select="(option, prefix) => ruleFieldSelect(option, prefix, row, 'ruleField')"
+										:options="ruleFieldOptions"
+										v-model:value="row.ruleField"
+										placeholder="请输入规则字段"
+									/>
 								</template>
 							</vxe-column>
 							<vxe-column
@@ -72,7 +78,13 @@
 								title="规则表达式"
 							>
 								<template #edit="{ row }">
-									<n-input v-model:value="row.ruleExpress" placeholder="请输入规则表达式" />
+									<!--									<n-input v-model:value="row.ruleExpress" placeholder="请输入规则表达式" />-->
+									<n-mention
+										@select="(option, prefix) => ruleFieldSelect(option, prefix, row, 'ruleExpress')"
+										:options="ruleExpressOptions"
+										v-model:value="row.ruleExpress"
+										placeholder="请输入规则字段"
+									/>
 								</template>
 							</vxe-column>
 							<vxe-column
@@ -128,6 +140,7 @@ import { typeFlagOptions } from "@/constant/system/resource";
 import { delRoleResRule, getRoleAllRes, getRoleResRuleList, saveOrUptRoleResRule, uptRoleResRuleState } from "@/api/system/role";
 import validator from "@/validator";
 import { authRoleSchema } from "@/validator/system/role";
+import { getDictByPids } from "@/api/system/dictList";
 
 defineOptions({ name: "dataRules" });
 
@@ -141,6 +154,27 @@ const roleData = ref({}); // 当前选中的角色
 const resourceData = ref({}); // 当前选中的资源
 const resourceList = ref([]); // 角色拥有的资源列表
 const authRoleList = ref([]); // 角色资源规则列表
+
+const ruleFieldOptions = ref([]);
+
+const ruleExpressOptions = ref([]);
+
+getDictByPids({ pids: "1,7" }).then(res => {
+	if (res.success) {
+		ruleFieldOptions.value = res.result[1].map(item => {
+			return { label: item.dictVal, value: item.dictVal };
+		});
+		ruleExpressOptions.value = res.result[7].map(item => {
+			return { label: item.dictVal, value: item.dictVal };
+		});
+	}
+});
+
+const ruleFieldSelect = (option, prefix, row, field) => {
+	// eslint-disable-next-line no-eval
+	const reg = eval(`/${prefix}${option.value} /g`);
+	row[field] = row[field].replace(reg, option.value);
+};
 
 // 获取到角色资源规则
 const getAythRoleList = () => {

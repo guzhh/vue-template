@@ -140,7 +140,7 @@ const userHandleOptions = [
 		icon: renderIcon(SettingOutlined)
 	},
 	{
-		label: "登出登录",
+		label: "退出登录",
 		key: "logout",
 		icon: renderIcon(ExportOutlined)
 	}

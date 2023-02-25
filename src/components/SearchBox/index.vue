@@ -35,7 +35,7 @@ import { ref } from "vue";
 
 const active = ref(false);
 const emits = defineEmits(["search", "reset"]);
-const props = defineProps({
+defineProps({
 	// 抽屉展示的位置
 	placement: {
 		type: String,
@@ -69,8 +69,6 @@ const props = defineProps({
 		}
 	}
 });
-
-console.log(props);
 
 // 展开搜索框体
 const handleActive = () => {

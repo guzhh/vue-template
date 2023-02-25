@@ -40,7 +40,7 @@ export function delDict(params) {
 		data: params,
 		customs: {
 			isLoading: true,
-			loadingText: "参数删除中..."
+			loadingText: "字典删除中..."
 		}
 	});
 }
@@ -52,10 +52,6 @@ export function delDict(params) {
 export function getDictByPids(params) {
 	return request.post({
 		url: "/p/auth/auth-dict/getDictByPids",
-		data: params,
-		customs: {
-			isLoading: true,
-			loadingText: "参数删除中..."
-		}
+		data: params
 	});
 }
