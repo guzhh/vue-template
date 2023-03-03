@@ -38,14 +38,14 @@ export default mergeConfig(
 					secure: false, // 是否验证SSL证书
 					ws: true // 是否代理websocket
 					// rewrite: (urlPath) => urlPath.replace(/^\/api/, `/`)
+				},
+				[getEnv("VITE_DEV_NODE_API")]: {
+					target: `http://127.0.0.1:${getEnv("VITE_DEV_NODE_PROP")}`, // 要使用 url 模块解析的 url 字符串
+					changeOrigin: true, // 是否将发送请求头中host设置为target
+					secure: false, // 是否验证SSL证书
+					ws: true // 是否代理websocket
+					// rewrite: (urlPath) => urlPath.replace(/^\/api/, `/`)
 				}
-				// [getEnv("VITE_DEV_NODE_API")]: {
-				// 	target: `http://127.0.0.1:${getEnv("VITE_DEV_NODE_PROP")}`, // 要使用 url 模块解析的 url 字符串
-				// 	changeOrigin: true, // 是否将发送请求头中host设置为target
-				// 	secure: false, // 是否验证SSL证书
-				// 	ws: true // 是否代理websocket
-				// 	// rewrite: (urlPath) => urlPath.replace(/^\/api/, `/`)
-				// }
 			}
 		}
 	},

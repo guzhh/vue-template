@@ -7,7 +7,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import DefineOptions from "unplugin-vue-define-options/vite";
 import { createHtmlPlugin } from "vite-plugin-html";
 import packageJson from "../package.json";
-import configNaiveResolverPlugin from "./plugin/arcoResolver";
+import configNaiveResolverPlugin from "./plugin/naiveResolver";
 import { getEnv } from "./utils";
 
 export default defineConfig({
