@@ -53,7 +53,7 @@
 		</n-card>
 		<n-card title="TABLE配置" size="small" style="margin-top: 5px">
 			<template #header-extra>
-				<n-button type="primary" @click="fileGeneration">文件生成</n-button>
+				<n-button size="small" type="primary" @click="fileGeneration">文件生成</n-button>
 			</template>
 			<vxe-table
 				:data="tableList"

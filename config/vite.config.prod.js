@@ -1,14 +1,24 @@
 import { mergeConfig } from "vite";
+import dayjs from "dayjs";
 import baseConfig from "./vite.config.base";
+import versionUpdatePlugin from "./plugin/versionUpdatePlugin.js";
 import configVisualizerPlugin from "./plugin/visualizer.js";
 import configImageminPlugin from "./plugin/imagemin.js";
 import configCompressPlugin from "./plugin/compress.js";
 import packageJson from "../package.json";
 
+const versionInfo = {
+	version: new Date().getTime(),
+	time: dayjs().format("YYYY-MM-DD HH:mm:ss")
+};
 export default mergeConfig(
 	{
 		mode: "production",
-		plugins: [configCompressPlugin("gzip"), configVisualizerPlugin(), configImageminPlugin()],
+		define: {
+			// 定义全局变量
+			__APP_VERSION__INFO__: versionInfo
+		},
+		plugins: [configCompressPlugin("gzip"), configVisualizerPlugin(), configImageminPlugin(), versionUpdatePlugin(versionInfo)],
 		build: {
 			target: "es2015", // 输出es版本
 			outDir: packageJson.name, // 输出目录

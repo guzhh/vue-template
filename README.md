@@ -1,6 +1,6 @@
 # 前端脚手架文档
 
-> 当前项目基于 vue3,vite4,naiveui等技术，以及集成公司内部全套机构、科室、角色、权限控制等的全套后台解决方案
+> 当前项目基于 vue3,vite4,naiveui 等技术，以及集成公司内部全套机构、科室、角色、权限控制等的全套后台解决方案
 
 ## 如何以前端脚手架创建前端项目
 
@@ -15,14 +15,14 @@
 2. 命令介绍
 
    1. 查看可支持命令 `pk help`
-   2. 查看版本  `pk -V`
+   2. 查看版本 `pk -V`
    3. 创建项目 `pk init 项目名`
 
 3. 创建项目介绍
 
    ![image-20230223115214205](https://cdn.jsdelivr.net/gh/gzh2157710760/img-lib/img/image-20230223115214205.png)
 
-## 项目结构 
+## 项目结构
 
 ```bash
 │  .editorconfig  编辑器配置文件
@@ -40,10 +40,10 @@
 │  └─utils   vite 公众方法
 ├─public 静态资源
 ├─server   系统内置 node koa 服务
-│  │  app.js  
-│  ├─app  
+│  │  app.js
+│  ├─app
 │  ├─bin
-│  │      www.js 
+│  │      www.js
 │  ├─config
 │  ├─dbhelper
 │  ├─middlewares
@@ -71,17 +71,21 @@
     └─views  页面目录
 ```
 
+## 项目部署
 
+> 一般我们的前端项目都使用 nginx 进行部署，部署时需要配置对 html 文件、JSON 文件不进行缓存
 
-
-
-
-
-
-
-
-
-
+```editorconfig
+location /pankuoa/ {
+    root html;
+    index index.html index.htm;
+    try_files $uri $uri/ /pankuoa/index.html last;
+    if ($request_filename ~* .*\.(?:htm|html|json)$)
+    {
+      add_header Cache-Control "private, no-store, no-cache, must-revalidate, proxy-revalidate";  # 对html文件、JSON文件设置永远不缓存
+    }
+}
+```
 
 ```shell
 # 查看当前分支下的所有 tag

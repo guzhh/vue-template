@@ -12,7 +12,7 @@ export default function file({ accept, number, size }) {
 		inputObj.setAttribute("id", "file");
 		inputObj.setAttribute("type", "file");
 		inputObj.setAttribute("name", "file");
-		inputObj.setAttribute("style", "visibility: hidden; display: none");
+		inputObj.setAttribute("style", "visibility:hidden;display: none");
 		inputObj.setAttribute("accept", accept || ""); // 设置文件格式
 		if (number && number > 1) {
 			inputObj.setAttribute("multiple", "multiple"); // 设置多选
