@@ -21,7 +21,7 @@
 			label-placement="left"
 			label-width="100px"
 			require-mark-placement="left"
-			style="padding: 15px 10px 0 10px"
+			style="padding: 15px 10px 0"
 		>
 			<n-form-item v-show="false" label="id" path="id">
 				<n-input v-model:value="formValue.id" />

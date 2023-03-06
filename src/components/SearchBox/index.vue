@@ -86,13 +86,13 @@ const reset = () => {
 
 <style lang="scss" scoped>
 .n-icon {
+	position: relative;
 	display: inline-block;
-	height: 1em;
 	width: 1em;
+	height: 1em;
 	line-height: 1em;
 	text-align: center;
-	position: relative;
-	fill: currentColor;
+	fill: currentcolor;
 	transform: translateZ(0);
 }
 </style>

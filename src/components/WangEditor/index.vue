@@ -1,6 +1,6 @@
 <template>
-	<div style="border: 1px solid #ccc">
-		<Toolbar style="border-bottom: 1px solid #ccc" :editor="editorRef" :defaultConfig="toolbarConfig" mode="default" />
+	<div style="border: 1px solid #cccccc">
+		<Toolbar style="border-bottom: 1px solid #cccccc" :editor="editorRef" :defaultConfig="toolbarConfig" mode="default" />
 		<Editor
 			mode="default"
 			v-model="valueHtml"

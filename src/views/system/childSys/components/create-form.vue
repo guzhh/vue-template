@@ -14,7 +14,7 @@
 		area="700px"
 		@close="handleClose"
 	>
-		<div class="form" style="width: 100%; margin-top: 20px; padding: 0 50px">
+		<div class="form" style="width: 100%; padding: 0 50px; margin-top: 20px">
 			<n-form
 				ref="formRef"
 				:model="formValue"

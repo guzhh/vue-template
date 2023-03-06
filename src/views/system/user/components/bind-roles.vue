@@ -96,11 +96,10 @@ defineExpose({ open });
 .girdItem {
 	padding-bottom: 20px;
 	margin-bottom: 10px;
-	border-bottom: 1px solid #ccc;
-
+	border-bottom: 1px solid #cccccc;
 	.itemTitle {
-		color: #51a7ff;
 		font-size: 16px;
+		color: #51a7ff;
 	}
 }
 </style>

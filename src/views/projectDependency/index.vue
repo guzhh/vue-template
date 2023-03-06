@@ -2,7 +2,7 @@
 	<default-view>
 		<page-content>
 			<n-card size="small" style="margin-bottom: 5px">
-				<span style="font-size: 18px; margin-right: 5px">版本号:</span>
+				<span style="margin-right: 5px; font-size: 18px">版本号:</span>
 				<a
 					href="https://github.com/guzhh/vue-template"
 					style="font-size: 18px; text-decoration: none"

@@ -8,8 +8,8 @@
 
 <style scoped>
 .content {
-	padding: 8px;
 	box-sizing: border-box;
 	width: 100%;
+	padding: 8px;
 }
 </style>

@@ -45,22 +45,22 @@ $border-radius: 4px;
 	width: 50px;
 	height: 40px;
 	margin: 0 auto;
-	border-radius: $border-radius;
 	background-color: transparent;
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 0 6px rgba(0, 0, 0, 0.04);
+	border-radius: $border-radius;
+	box-shadow: 0 2px 4px rgb(0 0 0 / 12%), 0 0 6px rgb(0 0 0 / 4%);
 	.left {
-		border-top-left-radius: $border-radius;
-		border-bottom-left-radius: $border-radius;
 		display: inline-block;
 		width: 30%;
 		height: 100%;
+		border-top-left-radius: $border-radius;
+		border-bottom-left-radius: $border-radius;
 	}
 	.right {
-		border-top-right-radius: $border-radius;
-		border-bottom-right-radius: $border-radius;
 		display: inline-block;
 		width: 70%;
 		height: 100%;
+		border-top-right-radius: $border-radius;
+		border-bottom-right-radius: $border-radius;
 		.right-top {
 			height: 20%;
 			border-top-right-radius: $border-radius;
@@ -72,15 +72,15 @@ $border-radius: 4px;
 	}
 }
 .circle-tip::after {
-	content: "";
 	display: block;
-	margin: 0 auto;
-	margin-top: 5px;
 	width: 8px;
 	height: 8px;
-	border-radius: 50%;
-	background-color: rgb(3, 190, 50);
+	margin: 0 auto;
+	margin-top: 5px;
 	text-align: center;
+	content: "";
+	background-color: rgb(3 190 50);
+	border-radius: 50%;
 }
 .extra-class {
 	.right {
@@ -90,8 +90,8 @@ $border-radius: 4px;
 			border-top-right-radius: $border-radius;
 		}
 		.right-bottom {
-			border-bottom-left-radius: $border-radius;
 			border-bottom-right-radius: $border-radius;
+			border-bottom-left-radius: $border-radius;
 		}
 	}
 	.left {
@@ -104,13 +104,13 @@ $border-radius: 4px;
 	}
 	.left::after {
 		position: relative;
-		background-color: #828282;
 		top: 0;
 		left: 5px;
-		content: "";
 		display: inline-block;
 		width: 10px;
 		height: 100%;
+		content: "";
+		background-color: #828282;
 	}
 }
 </style>

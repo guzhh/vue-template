@@ -44,11 +44,11 @@ const userStore = useUserStore();
 <style scoped>
 .header {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	flex-direction: column;
 	height: 204px;
-	background: url(@/assets/images/user-info.png) no-repeat;
+	background: url("@/assets/images/user-info.png") no-repeat;
 	background-size: cover;
 	border-radius: 4px;
 }

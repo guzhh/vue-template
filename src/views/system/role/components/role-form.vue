@@ -21,7 +21,7 @@
 			:rules="rules"
 			label-placement="left"
 			label-width="auto"
-			style="padding: 15px 10px 0 10px"
+			style="padding: 15px 10px 0"
 		>
 			<n-form-item path="sysId" label="所属系统">
 				<n-select filterable v-model:value="formValue.sysId" :options="systemList" placeholder="请选择所属系统" />

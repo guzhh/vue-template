@@ -52,7 +52,7 @@
 				<vxe-column field="showNum" min-width="80px" show-overflow="title" title="资源序号"></vxe-column>
 				<vxe-column field="icon" min-width="80px" show-overflow="title" title="资源图标">
 					<template #default="{ row }">
-						<div style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center">
+						<div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%">
 							<component :is="row.icon" style="width: 18px" />
 						</div>
 					</template>

@@ -21,7 +21,7 @@
 			:rules="rules"
 			label-placement="left"
 			require-mark-placement="left"
-			style="padding: 15px 10px 0 10px"
+			style="padding: 15px 10px 0"
 		>
 			<n-grid :cols="3" x-gap="12">
 				<n-gi>

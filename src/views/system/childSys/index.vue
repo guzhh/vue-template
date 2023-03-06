@@ -118,7 +118,7 @@
 					:page-sizes="page.pageSizes"
 					show-quick-jumper
 					show-size-picker
-					style="margin-top: 5px; display: flex; justify-content: right"
+					style="display: flex; justify-content: right; margin-top: 5px"
 					@update:page="onChange"
 					@update:page-size="onUpdatePageSize"
 				>
