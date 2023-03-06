@@ -7,9 +7,10 @@ import {
 	PicCenterOutlined,
 	FileMarkdownOutlined,
 	PhoneOutlined,
-	InsertRowBelowOutlined
+	InsertRowBelowOutlined,
+	EditOutlined
 } from "@vicons/antd";
-import { CubeOutline, Search, ChevronDown, ListOutline, AppsSharp, BarcodeOutline } from "@vicons/ionicons5";
+import { CubeOutline, Search, ChevronDown, ListOutline, AppsSharp, BarcodeOutline, LogoAppleAr } from "@vicons/ionicons5";
 
 import { Refresh, FoldDown, Download, Upload, Edit, Plus } from "@vicons/tabler";
 import {
@@ -30,6 +31,7 @@ export const Icons = {
 	PicCenterOutlined,
 	Refresh,
 	FoldDown,
+	EditOutlined,
 	FileMarkdownOutlined,
 	ArrowBetweenDown24Filled,
 	Settings48Regular,
@@ -45,6 +47,7 @@ export const Icons = {
 	Delete16Regular,
 	Plus,
 	AppsSharp,
+	LogoAppleAr,
 	BarcodeOutline,
 	InsertRowBelowOutlined
 };

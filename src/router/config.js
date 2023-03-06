@@ -15,5 +15,8 @@ export const constantRouterComponents = {
 	projectDependency: () => import("@/views/projectDependency/index.vue"), // 项目依赖
 
 	// 前端项目生成器
-	tableGenerator: () => import("@/views/generator/tableGenerator/index.vue") // 表格生成器
+	tableGenerator: () => import("@/views/generator/tableGenerator/index.vue"), // 表格生成器
+
+	// 组件、功能
+	richText: () => import("@/views/other/richText/index.vue") // 富文本编辑器
 };
