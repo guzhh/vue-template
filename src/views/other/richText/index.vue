@@ -4,7 +4,7 @@
 			<template #header-extra>
 				<n-button size="small" style="margin-right: 20px" type="primary" @click="viewTheContent">查看内容</n-button>
 			</template>
-			<wang-editor v-model:value="htmlVal" :height="height - 118" />
+			<wang-editor v-model:value="htmlVal" :height="height - 120" />
 		</n-card>
 	</page-content>
 </template>
