@@ -23,25 +23,16 @@ declare module "@vue/runtime-core" {
 		NBadge: typeof import("naive-ui")["NBadge"];
 		NButton: typeof import("naive-ui")["NButton"];
 		NCard: typeof import("naive-ui")["NCard"];
-		NCheckbox: typeof import("naive-ui")["NCheckbox"];
-		NCheckboxGroup: typeof import("naive-ui")["NCheckboxGroup"];
 		NColorPicker: typeof import("naive-ui")["NColorPicker"];
 		NConfigProvider: typeof import("naive-ui")["NConfigProvider"];
-		NDatePicker: typeof import("naive-ui")["NDatePicker"];
 		NDialogProvider: typeof import("naive-ui")["NDialogProvider"];
-		NDivider: typeof import("naive-ui")["NDivider"];
 		NDrawer: typeof import("naive-ui")["NDrawer"];
 		NDrawerContent: typeof import("naive-ui")["NDrawerContent"];
 		NDropdown: typeof import("naive-ui")["NDropdown"];
-		NEmpty: typeof import("naive-ui")["NEmpty"];
-		NForm: typeof import("naive-ui")["NForm"];
-		NFormItem: typeof import("naive-ui")["NFormItem"];
-		NGi: typeof import("naive-ui")["NGi"];
 		NGlobalStyle: typeof import("naive-ui")["NGlobalStyle"];
 		NGrid: typeof import("naive-ui")["NGrid"];
 		NGridItem: typeof import("naive-ui")["NGridItem"];
 		NIcon: typeof import("naive-ui")["NIcon"];
-		NInput: typeof import("naive-ui")["NInput"];
 		NInputGroup: typeof import("naive-ui")["NInputGroup"];
 		NInputNumber: typeof import("naive-ui")["NInputNumber"];
 		NLayout: typeof import("naive-ui")["NLayout"];
@@ -54,20 +45,12 @@ declare module "@vue/runtime-core" {
 		NModal: typeof import("naive-ui")["NModal"];
 		NNotificationProvider: typeof import("naive-ui")["NNotificationProvider"];
 		Notification: typeof import("./src/components/Notification/index.vue")["default"];
-		NPagination: typeof import("naive-ui")["NPagination"];
-		NPopconfirm: typeof import("naive-ui")["NPopconfirm"];
-		NPopover: typeof import("naive-ui")["NPopover"];
-		NPopselect: typeof import("naive-ui")["NPopselect"];
-		NRadio: typeof import("naive-ui")["NRadio"];
-		NRadioGroup: typeof import("naive-ui")["NRadioGroup"];
 		NResult: typeof import("naive-ui")["NResult"];
-		NSelect: typeof import("naive-ui")["NSelect"];
 		NSpace: typeof import("naive-ui")["NSpace"];
 		NSwitch: typeof import("naive-ui")["NSwitch"];
 		NTabPane: typeof import("naive-ui")["NTabPane"];
 		NTabs: typeof import("naive-ui")["NTabs"];
 		NTooltip: typeof import("naive-ui")["NTooltip"];
-		NTree: typeof import("naive-ui")["NTree"];
 		NTreeSelect: typeof import("naive-ui")["NTreeSelect"];
 		OptionBadge: typeof import("./src/components/OptionBadge/index.vue")["default"];
 		OrgSwitch: typeof import("./src/components/OrgSwitch/index.vue")["default"];
@@ -80,5 +63,6 @@ declare module "@vue/runtime-core" {
 		TabBar: typeof import("./src/components/TabBar/index.vue")["default"];
 		TabItem: typeof import("./src/components/TabBar/tab-item.vue")["default"];
 		ThemeColor: typeof import("./src/components/GlobalSetting/theme-color.vue")["default"];
+		WangEditor: typeof import("./src/components/WangEditor/index.vue")["default"];
 	}
 }
