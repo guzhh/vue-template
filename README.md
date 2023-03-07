@@ -87,6 +87,8 @@ location /pankuoa/ {
 }
 ```
 
+## 一些 git 命令
+
 ```shell
 # 查看当前分支下的所有 tag
 git tag
