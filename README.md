@@ -71,11 +71,65 @@
     └─views  页面目录
 ```
 
+## 公共组件
+
+### 富文本编辑器
+
+> 此富文本编辑器是基于 [wangEditor](https://www.wangeditor.com/) 封装的公共业务组件，组件封装了图片上传等功能，使用极其简单
+
+#### 使用示例
+
+```vue
+<template>
+	<page-content>
+		<n-card size="small" title="富文本编辑器">
+			<template #header-extra>
+				<n-button size="small" type="primary" @click="viewTheContent">查看内容</n-button>
+			</template>
+			<wang-editor v-model:value="htmlVal" :height="height - 120" />
+		</n-card>
+	</page-content>
+</template>
+
+<script setup>
+import { useWindowSize } from "@/hooks/useWindowSize";
+
+const { height } = useWindowSize();
+const htmlVal = ref("<p></p>");
+
+const viewTheContent = () => {
+	console.log(htmlVal.value);
+};
+</script>
+
+<style scoped></style>
+```
+
+### option-badge 徽标
+
+> 此组件主要是为了展示一个字段只有特定的几个值，每个值用不同的颜色进行标识
+> ![image-20230309160642772](http://qiniu.guzhh.xyz/image-20230309160642772.png)
+
+#### 使用事例
+
+```vue
+<template>
+	<option-badge :options="options" :val="1" />
+</template>
+
+<script setup>
+const options = ref([
+	{ label: "未删除", value: 0, type: "success" },
+	{ label: "已删除", value: 1, type: "error" }
+]);
+</script>
+```
+
 ## 项目部署
 
 > 一般我们的前端项目都使用 nginx 进行部署，部署时需要配置对 html 文件、JSON 文件不进行缓存
 
-```editorconfig
+```chef
 location /pankuoa/ {
     root html;
     index index.html index.htm;

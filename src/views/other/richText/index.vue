@@ -11,7 +11,6 @@
 
 <script setup>
 import { ref } from "vue";
-import WangEditor from "@/components/WangEditor/index.vue";
 import { useWindowSize } from "@/hooks/useWindowSize";
 
 const { height } = useWindowSize();

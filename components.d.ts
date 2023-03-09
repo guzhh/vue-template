@@ -31,8 +31,6 @@ declare module "@vue/runtime-core" {
 		NColorPicker: typeof import("naive-ui")["NColorPicker"];
 		NConfigProvider: typeof import("naive-ui")["NConfigProvider"];
 		NDatePicker: typeof import("naive-ui")["NDatePicker"];
-		NDescriptions: typeof import("naive-ui")["NDescriptions"];
-		NDescriptionsItem: typeof import("naive-ui")["NDescriptionsItem"];
 		NDialogProvider: typeof import("naive-ui")["NDialogProvider"];
 		NDivider: typeof import("naive-ui")["NDivider"];
 		NDrawer: typeof import("naive-ui")["NDrawer"];
