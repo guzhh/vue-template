@@ -12,22 +12,47 @@
 					<MenuFoldOutlined />
 				</n-icon>
 			</n-space>
-			<span class="navbar-org" title="点击可以切换机构" @click="selectAnInstitution">
-				{{ orgData.code ? orgData.name : "未知机构" }} <n-icon size="15" style="margin-left: 5px"> <ChevronDown /> </n-icon
-			></span>
+			<n-breadcrumb>
+				<n-breadcrumb-item v-for="item in router.currentRoute.value.matched" :key="item.path">
+					<router-link :to="item.path">
+						<n-button text v-if="item.path === '/'" size="tiny">
+							<template #icon>
+								<n-icon>
+									<!--                  HomeOutlined-->
+									<home-outlined />
+									<!--									<component :is="item.meta.icon" />-->
+								</n-icon>
+							</template>
+							首页
+						</n-button>
+						<n-button text v-else size="tiny">
+							<template #icon>
+								<n-icon>
+									<component :is="item.meta.icon" />
+								</n-icon>
+							</template>
+							{{ item.meta.title }}
+						</n-button>
+					</router-link>
+				</n-breadcrumb-item>
+			</n-breadcrumb>
 		</div>
+		<!--    router.currentRoute.matched-->
 		<ul class="right-side">
 			<li>
 				<n-tooltip>
-					<span>搜索</span>
+					<span>点击可以切换机构</span>
 					<template #trigger>
-						<n-button circle size="small">
-							<template #icon>
-								<n-icon>
-									<search-outlined />
-								</n-icon>
-							</template>
-						</n-button>
+						<span class="navbar-org" @click="selectAnInstitution">
+							{{ orgData.code ? orgData.name : "未知机构" }} <n-icon size="15" style="margin-left: 5px"> <ChevronDown /> </n-icon
+						></span>
+						<!--						<n-button circle size="small">-->
+						<!--							<template #icon>-->
+						<!--								<n-icon>-->
+						<!--									<search-outlined />-->
+						<!--								</n-icon>-->
+						<!--							</template>-->
+						<!--						</n-button>-->
 					</template>
 				</n-tooltip>
 			</li>
@@ -100,7 +125,7 @@ import { useFullscreen } from "@vueuse/core";
 import { inject, computed, watch, ref } from "vue";
 import { SunnyOutline, MoonSharp } from "@vicons/ionicons5";
 import { FullScreenMaximize24Regular, FullScreenMinimize24Regular } from "@vicons/fluent";
-import { MenuFoldOutlined, SearchOutlined, SettingOutlined, UserOutlined, ExportOutlined } from "@vicons/antd";
+import { MenuFoldOutlined, SettingOutlined, UserOutlined, ExportOutlined } from "@vicons/antd";
 import OrgSwitch from "@/components/OrgSwitch/index.vue";
 import { getOrgInfoByCode } from "@/api/system/orgAdmin";
 import { useAppStore, useUserStore } from "@/store";
@@ -213,6 +238,7 @@ const themeVars = useThemeVars();
 	cursor: pointer;
 	display: inline-flex;
 	align-items: center;
+	margin-left: 20px;
 }
 
 .left-side {

@@ -8,7 +8,8 @@ import {
 	FileMarkdownOutlined,
 	PhoneOutlined,
 	InsertRowBelowOutlined,
-	EditOutlined
+	EditOutlined,
+	HomeOutlined
 } from "@vicons/antd";
 import { CubeOutline, Search, ChevronDown, ListOutline, AppsSharp, BarcodeOutline, LogoAppleAr } from "@vicons/ionicons5";
 
@@ -48,6 +49,7 @@ export const Icons = {
 	Plus,
 	AppsSharp,
 	LogoAppleAr,
+	HomeOutlined,
 	BarcodeOutline,
 	InsertRowBelowOutlined
 };
