@@ -1,7 +1,14 @@
 <template>
 	<page-content>
 		<div style="display: flex; justify-content: space-between">
-			<n-card size="small" style="width: 200px" title="机构列表:">
+			<n-card
+				size="small"
+				style="width: 200px"
+				title="机构列表"
+				:segmented="{
+					content: true
+				}"
+			>
 				<n-tree
 					:cancelable="false"
 					:data="treeData"
@@ -301,4 +308,8 @@ const select = (keys, option) => {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+::v-deep(.n-tree .n-tree-node) {
+	padding: 7px 5px 2px 0;
+}
+</style>

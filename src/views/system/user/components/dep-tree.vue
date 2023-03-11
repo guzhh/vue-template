@@ -1,5 +1,12 @@
 <template>
-	<n-card size="small" style="width: 200px" title="科室列表:">
+	<n-card
+		size="small"
+		style="width: 200px"
+		title="科室列表"
+		:segmented="{
+			content: true
+		}"
+	>
 		<n-tree
 			v-if="reLoad"
 			:cancelable="false"
@@ -90,4 +97,8 @@ const select = (keys, option) => {
 defineExpose({ getDep });
 </script>
 
-<style scoped></style>
+<style scoped>
+::v-deep(.n-tree .n-tree-node) {
+	padding: 7px 5px 2px 0;
+}
+</style>

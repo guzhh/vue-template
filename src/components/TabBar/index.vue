@@ -4,7 +4,9 @@
 			<div class="tab-bar-box">
 				<div class="tab-bar-scroll">
 					<div class="tags-wrap">
-						<tab-item v-for="(tag, index) in tagList" :key="tag.fullPath" :index="index" :item-data="tag" />
+						<n-scrollbar x-scrollable>
+							<tab-item v-for="(tag, index) in tagList" :key="tag.fullPath" :index="index" :item-data="tag" />
+						</n-scrollbar>
 					</div>
 				</div>
 			</div>
@@ -17,6 +19,7 @@ import { computed, onUnmounted } from "vue";
 import { useThemeVars } from "naive-ui";
 import { useAppStore, useTabBarStore } from "@/store";
 import { listenerRouteChange, removeRouteListener } from "@/utils/route-listener";
+import TabItem from "./tab-item.vue";
 
 const appStore = useAppStore();
 const tabBarStore = useTabBarStore();

@@ -18,5 +18,6 @@ export const constantRouterComponents = {
 	tableGenerator: () => import("@/views/generator/tableGenerator/index.vue"), // 表格生成器
 
 	// 组件、功能
-	richText: () => import("@/views/other/richText/index.vue") // 富文本编辑器
+	richText: () => import("@/views/other/richText/index.vue"), // 富文本编辑器
+	dictOption: () => import("@/views/other/dictOption/index.vue") // 字典操作
 };

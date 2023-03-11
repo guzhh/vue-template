@@ -37,7 +37,8 @@ const themeOverrides = computed(() => {
 				primaryColorPressed: lightenStr,
 				successColor: appTheme,
 				successColorHover: lightenStr,
-				successColorPressed: lightenStr
+				successColorPressed: lightenStr,
+				primaryColorSuppl: appTheme
 			}
 		};
 	}
@@ -49,7 +50,8 @@ const themeOverrides = computed(() => {
 			primaryColorPressed: lightenStr,
 			successColor: darkStr,
 			successColorHover: lightenStr,
-			successColorPressed: lightenStr
+			successColorPressed: lightenStr,
+			primaryColorSuppl: darkStr
 		}
 	};
 });

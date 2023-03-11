@@ -9,7 +9,8 @@ import {
 	PhoneOutlined,
 	InsertRowBelowOutlined,
 	EditOutlined,
-	HomeOutlined
+	HomeOutlined,
+	AlignLeftOutlined
 } from "@vicons/antd";
 import { CubeOutline, Search, ChevronDown, ListOutline, AppsSharp, BarcodeOutline, LogoAppleAr } from "@vicons/ionicons5";
 
@@ -51,6 +52,7 @@ export const Icons = {
 	LogoAppleAr,
 	HomeOutlined,
 	BarcodeOutline,
+	AlignLeftOutlined,
 	InsertRowBelowOutlined
 };
 

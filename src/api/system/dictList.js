@@ -55,3 +55,15 @@ export function getDictByPids(params) {
 		data: params
 	});
 }
+
+/**
+ * 根据父级字典编码获取下级字典集合
+ * @param params
+ * @returns {Promise<*>}
+ */
+export function getDicLevelByCode(params) {
+	return request.post({
+		url: "/p/auth/auth-dict/getDicLevelByCode",
+		data: params
+	});
+}

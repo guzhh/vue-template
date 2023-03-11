@@ -10,6 +10,9 @@ declare module "@vue/runtime-core" {
 		Application: typeof import("./src/components/Application/Application.vue")["default"];
 		Block: typeof import("./src/components/GlobalSetting/block.vue")["default"];
 		DialogContent: typeof import("./src/components/DialogContent/index.vue")["default"];
+		DictMulti: typeof import("./src/components/DictSelect/dict-multi.vue")["default"];
+		DictSelect: typeof import("./src/components/DictSelect/dict-select.vue")["default"];
+		DictShow: typeof import("./src/components/DictSelect/dict-show.vue")["default"];
 		Footer: typeof import("./src/components/Footer/index.vue")["default"];
 		FormWrapper: typeof import("./src/components/GlobalSetting/form-wrapper.vue")["default"];
 		GlobalSetting: typeof import("./src/components/GlobalSetting/index.vue")["default"];
@@ -25,7 +28,6 @@ declare module "@vue/runtime-core" {
 		NBreadcrumbItem: typeof import("naive-ui")["NBreadcrumbItem"];
 		NButton: typeof import("naive-ui")["NButton"];
 		NCard: typeof import("naive-ui")["NCard"];
-		NCarousel: typeof import("naive-ui")["NCarousel"];
 		NCheckbox: typeof import("naive-ui")["NCheckbox"];
 		NCheckboxGroup: typeof import("naive-ui")["NCheckboxGroup"];
 		NColorPicker: typeof import("naive-ui")["NColorPicker"];
@@ -52,19 +54,16 @@ declare module "@vue/runtime-core" {
 		NLayoutFooter: typeof import("naive-ui")["NLayoutFooter"];
 		NLayoutSider: typeof import("naive-ui")["NLayoutSider"];
 		NLoadingBarProvider: typeof import("naive-ui")["NLoadingBarProvider"];
-		NMention: typeof import("naive-ui")["NMention"];
 		NMenu: typeof import("naive-ui")["NMenu"];
 		NMessageProvider: typeof import("naive-ui")["NMessageProvider"];
 		NModal: typeof import("naive-ui")["NModal"];
 		NNotificationProvider: typeof import("naive-ui")["NNotificationProvider"];
 		Notification: typeof import("./src/components/Notification/index.vue")["default"];
 		NPagination: typeof import("naive-ui")["NPagination"];
-		NPopconfirm: typeof import("naive-ui")["NPopconfirm"];
 		NPopover: typeof import("naive-ui")["NPopover"];
 		NPopselect: typeof import("naive-ui")["NPopselect"];
-		NRadio: typeof import("naive-ui")["NRadio"];
-		NRadioGroup: typeof import("naive-ui")["NRadioGroup"];
 		NResult: typeof import("naive-ui")["NResult"];
+		NScrollbar: typeof import("naive-ui")["NScrollbar"];
 		NSelect: typeof import("naive-ui")["NSelect"];
 		NSpace: typeof import("naive-ui")["NSpace"];
 		NSwitch: typeof import("naive-ui")["NSwitch"];

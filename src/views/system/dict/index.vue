@@ -124,7 +124,6 @@ const getTableData = () => {
 				tableData.value = res.result.map(item => {
 					return { ...item, hasChild: true };
 				});
-				console.log(tableData.value, "tableData.value");
 			}
 		})
 		.finally(() => {
