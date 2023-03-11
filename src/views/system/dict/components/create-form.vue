@@ -26,11 +26,11 @@
 				<n-form-item v-show="false" path="id">
 					<n-input v-model:value="formValue.id" placeholder="请输入ID" />
 				</n-form-item>
-				<n-form-item v-show="false" path="pid">
-					<n-input v-model:value="formValue.pid" placeholder="请输入PID" />
-				</n-form-item>
 				<n-form-item label="字典编码" path="code">
 					<n-input v-model:value="formValue.code" placeholder="请输入字典编码" />
+				</n-form-item>
+				<n-form-item v-show="false" path="pcode">
+					<n-input v-model:value="formValue.pcode" placeholder="请输入pcode" />
 				</n-form-item>
 				<n-form-item label="字典名称" path="name">
 					<n-input v-model:value="formValue.name" placeholder="请输入字典名称" />
@@ -70,7 +70,7 @@ const options = [
 
 const formValue = ref({
 	id: "",
-	pid: "",
+	pcode: "",
 	code: "",
 	name: "",
 	dictVal: "",
@@ -84,20 +84,19 @@ const rules = {
 	state: { type: "number", required: true, message: "请选择字典状态", trigger: ["blur", "change"] }
 };
 
-const add = pid => {
-	console.log(pid, "pid");
+const add = pcode => {
 	title.value = "新增字典";
 	visible.value = true;
-	formValue.value.pid = pid ? `${pid}` : "";
+	formValue.value.pcode = pcode ? `${pcode}` : "";
 };
 
 const edit = row => {
 	title.value = "编辑字典";
 	visible.value = true;
-	if (row.pid === 0) {
+	if (row.pcode === 0) {
 		formValue.value = {
 			id: `${row.id}`,
-			pid: "",
+			pcode: "",
 			code: row.code,
 			name: row.name,
 			dictVal: row.dictVal,
@@ -106,7 +105,7 @@ const edit = row => {
 	} else {
 		formValue.value = {
 			id: `${row.id}`,
-			pid: `${row.pid}`,
+			pcode: `${row.pcode}`,
 			code: row.code,
 			name: row.name,
 			dictVal: row.dictVal,
@@ -121,7 +120,7 @@ const handleClose = () => {
 	title.value = "";
 	formValue.value = {
 		id: "",
-		pid: "",
+		pcode: "",
 		code: "",
 		dictName: "",
 		dictValue: "",

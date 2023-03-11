@@ -42,8 +42,8 @@
 				:size="tableSize"
 				:tree-config="{
 					transform: true,
-					rowField: 'id',
-					parentField: 'pid',
+					rowField: 'code',
+					parentField: 'pcode',
 					lazy: true,
 					hasChild: 'hasChild',
 					loadMethod: loadChildrenMethod
@@ -55,8 +55,8 @@
 				show-header-overflow="title"
 				show-overflow
 			>
-				<vxe-column field="id" show-overflow="title" title="字典id" tree-node width="80px"></vxe-column>
-				<vxe-column field="pid" show-overflow="title" title="上级字典id" width="150px"></vxe-column>
+				<vxe-column field="id" show-overflow="title" title="字典ID" tree-node width="80px"></vxe-column>
+				<vxe-column field="pcode" show-overflow="title" title="上级字典编码" width="150px"></vxe-column>
 				<vxe-column field="code" min-width="100px" show-overflow="title" title="字典编码"></vxe-column>
 				<vxe-column field="name" min-width="100px" show-overflow="title" title="字典名称"></vxe-column>
 				<vxe-column field="dictVal" min-width="200px" show-overflow="title" title="字典值"></vxe-column>
@@ -67,7 +67,7 @@
 				</vxe-column>
 				<vxe-column title="操作" width="200px">
 					<template #default="{ row }">
-						<n-button v-if="row.pid === 0" quaternary size="small" type="info" @click="addDict(row.id)">添加下级 </n-button>
+						<n-button v-if="row.pcode === 0" quaternary size="small" type="info" @click="addDict(row.code)">添加下级 </n-button>
 						<n-button style="margin-right: 10px" text type="primary" @click="editParam(row)"> 编辑</n-button>
 						<n-popconfirm @positive-click="deleteDict(row)">
 							<template #trigger>
@@ -104,8 +104,8 @@ const tableData = ref([]);
 const tableLoading = ref(false);
 
 // 新增
-const addDict = pid => {
-	createFormRef.value.add(pid);
+const addDict = pcode => {
+	createFormRef.value.add(pcode);
 };
 
 // 编辑字典
@@ -118,7 +118,7 @@ const getTableData = () => {
 	tableLoading.value = true;
 	tableData.value = [];
 	// 加载顶级节点
-	getDictList({ pid: 0 })
+	getDictList({ pcode: 0 })
 		.then(res => {
 			if (res.success) {
 				tableData.value = res.result.map(item => {
@@ -134,7 +134,7 @@ const getTableData = () => {
 // 点击一级加载二级
 const loadChildrenMethod = ({ row }) => {
 	return new Promise(resolve => {
-		getDictList({ pid: row.id }).then(res => {
+		getDictList({ pcode: row.code }).then(res => {
 			if (res.success && res.result.length > 0) {
 				resolve(res.result);
 			} else {
