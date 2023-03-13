@@ -1,5 +1,5 @@
 <template>
-	<n-select label-field="name" value-field="code" v-model:value="modelValue" filterable :options="options" />
+	<n-select label-field="name" value-field="code" v-model:value="modelValue" filterable clearable :options="options" />
 </template>
 
 <script setup>

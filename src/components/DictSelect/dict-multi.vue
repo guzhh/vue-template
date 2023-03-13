@@ -1,5 +1,14 @@
 <template>
-	<n-select label-field="name" value-field="code" v-model:value="selectDict" multiple filterable :options="options" />
+	<n-select
+		multiple
+		clearable
+		filterable
+		label-field="name"
+		value-field="code"
+		:options="options"
+		max-tag-count="responsive"
+		v-model:value="selectDict"
+	/>
 </template>
 
 <script setup>

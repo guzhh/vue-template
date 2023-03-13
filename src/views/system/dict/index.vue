@@ -67,7 +67,9 @@
 				</vxe-column>
 				<vxe-column title="操作" width="200px">
 					<template #default="{ row }">
-						<n-button v-if="row.pcode === 0" quaternary size="small" type="info" @click="addDict(row.code)">添加下级 </n-button>
+						<n-button v-if="Number(row.pcode) === 0" quaternary size="small" type="info" @click="addDict(row.code)"
+							>添加下级
+						</n-button>
 						<n-button style="margin-right: 10px" text type="primary" @click="editParam(row)"> 编辑</n-button>
 						<n-popconfirm @positive-click="deleteDict(row)">
 							<template #trigger>
@@ -87,8 +89,7 @@
 import { ref } from "vue";
 import { useMessage } from "naive-ui";
 import { useWindowSize } from "@/hooks/useWindowSize";
-// eslint-disable-next-line no-unused-vars
-import { getDictList, getDictByPids, delDict } from "@/api/system/dictList";
+import { getDictList, delDict } from "@/api/system/dictList";
 import CreateForm from "@/views/system/dict/components/create-form.vue";
 import useTable from "@/hooks/useTable";
 import { disableEnableOption } from "@/constant/system/resource";
@@ -149,7 +150,7 @@ const loadChildrenMethod = ({ row }) => {
 
 // 删除字典
 const deleteDict = row => {
-	delDict({ id: row.id }).then(res => {
+	delDict({ code: row.code }).then(res => {
 		if (res.success) {
 			message.success("字典删除成功");
 			getTableData();

@@ -125,6 +125,31 @@ const options = ref([
 </script>
 ```
 
+### 字典单选、多选、回显公共组件
+
+#### 单选 `dict-select`
+
+```vue
+<!-- dict-code 父级字典编码-->
+<!--value 为字典编码字符串-->
+<dict-select dict-code="RULE_FIELD" v-model:value="data.dictValue" />
+```
+
+#### 多选 `dict-multi`
+
+```vue
+<!-- dict-code 父级字典编码-->
+<!--value 为一个以英文逗号分隔的字典编码字符串-->
+<dict-multi dict-code="RULE_FIELD" v-model:value="data.dictMulti" />
+```
+
+#### 字典回显 `dict-show`
+
+```vue
+<!--dict-code 单个字典编码或者 多个以逗号分隔的字典编码字符串-->
+<dict-show :dict-code="data.dictMulti" />
+```
+
 ## 项目部署
 
 > 一般我们的前端项目都使用 nginx 进行部署，部署时需要配置对 html 文件、JSON 文件不进行缓存

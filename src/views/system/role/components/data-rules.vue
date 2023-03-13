@@ -140,11 +140,12 @@ import { typeFlagOptions } from "@/constant/system/resource";
 import { delRoleResRule, getRoleAllRes, getRoleResRuleList, saveOrUptRoleResRule, uptRoleResRuleState } from "@/api/system/role";
 import validator from "@/validator";
 import { authRoleSchema } from "@/validator/system/role";
-import { getDictByPids } from "@/api/system/dictList";
+import { useSystemStore } from "@/store";
 
 defineOptions({ name: "dataRules" });
 
 const dialog = useDialog();
+const systemStore = useSystemStore();
 const authRoleTableRef = ref(null);
 const resourceTableRef = ref(null);
 const { height } = useWindowSize();
@@ -155,19 +156,16 @@ const resourceData = ref({}); // 当前选中的资源
 const resourceList = ref([]); // 角色拥有的资源列表
 const authRoleList = ref([]); // 角色资源规则列表
 
-const ruleFieldOptions = ref([]);
+const ruleFieldOptions = computed(() => {
+	return systemStore.getDictList("RULE_FIELD").map(item => {
+		return { label: item.dictVal, value: item.dictVal };
+	});
+});
 
-const ruleExpressOptions = ref([]);
-
-getDictByPids({ pids: "1,7" }).then(res => {
-	if (res.success) {
-		ruleFieldOptions.value = res.result[1].map(item => {
-			return { label: item.dictVal, value: item.dictVal };
-		});
-		ruleExpressOptions.value = res.result[7].map(item => {
-			return { label: item.dictVal, value: item.dictVal };
-		});
-	}
+const ruleExpressOptions = computed(() => {
+	return systemStore.getDictList("RULE_EXPRESS").map(item => {
+		return { label: item.dictVal, value: item.dictVal };
+	});
 });
 
 const ruleFieldSelect = (option, prefix, row, field) => {

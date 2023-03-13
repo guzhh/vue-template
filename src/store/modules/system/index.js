@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { getDicLevelByCode } from "@/api/system/dictList";
+import { getDict, getDictByPCodes } from "@/api/system/dictList";
 
 const useSystemStore = defineStore("system", {
 	state: () => ({
@@ -12,7 +12,7 @@ const useSystemStore = defineStore("system", {
 			return code => {
 				const dictList = state.dictCodeMap.get(code);
 				if (dictList) return dictList;
-				state.getDicLevelByCode(code);
+				state.getDictByPCodes(code);
 				return [];
 			};
 		},
@@ -27,15 +27,19 @@ const useSystemStore = defineStore("system", {
 		}
 	},
 	actions: {
-		async getDicLevelByCode(code) {
-			const result = await getDicLevelByCode({ code });
+		async getDictByPCodes(code) {
+			const result = await getDictByPCodes({ pcodes: code, state: 1 });
 			if (result.success) {
-				this.dictCodeMap.set(code, result.result);
+				this.dictCodeMap.set(code, result.result[code]);
 			}
 		},
 		async getDict(code) {
 			// const result = await
-			console.log("----------", code);
+			// console.log("----------", code);
+			const result = await getDict({ code, state: 1 });
+			if (result.success) {
+				this.dictMap.set(code, result.result);
+			}
 		}
 	}
 });

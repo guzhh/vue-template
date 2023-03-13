@@ -61,9 +61,21 @@ export function getDictByPids(params) {
  * @param params
  * @returns {Promise<*>}
  */
-export function getDicLevelByCode(params) {
+export function getDictByPCodes(params) {
 	return request.post({
-		url: "/p/auth/auth-dict/getDicLevelByCode",
+		url: "/p/auth/auth-dict/getDictByPcodes",
+		data: params
+	});
+}
+
+/**
+ * 根据code获取字典对象
+ * @param params
+ * @returns {Promise<*>}
+ */
+export function getDict(params) {
+	return request.post({
+		url: "/p/auth/auth-dict/getDictByCode",
 		data: params
 	});
 }
