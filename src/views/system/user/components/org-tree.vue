@@ -22,7 +22,7 @@
 <script setup>
 import { h, ref } from "vue";
 import { getOrgList, getOrgInfoByCode } from "@/api/system/orgAdmin";
-import useUserStore from "@/store/modules/user/index.js";
+import useUserStore from "@/store/modules/user";
 
 const treeData = ref([]);
 const defaultSelect = ref([]);

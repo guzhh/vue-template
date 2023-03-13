@@ -30,7 +30,7 @@ import { computed } from "vue";
 import { SettingOutlined } from "@vicons/antd";
 import { useClipboard } from "@vueuse/core";
 import { useMessage } from "naive-ui";
-import { useAppStore } from "@/store";
+import useAppStore from "@/store/modules/app";
 import Block from "./block.vue";
 import ThemeColor from "./theme-color.vue";
 import SidebarStyle from "./sidebar-style.vue";

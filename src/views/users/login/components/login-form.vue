@@ -38,7 +38,7 @@ import { reactive, ref } from "vue";
 import { useThemeVars } from "naive-ui";
 import { UserOutlined, LockOutlined } from "@vicons/antd";
 import { useRouter, useRoute } from "vue-router";
-import { useUserStore } from "@/store";
+import useUserStore from "@/store/modules/user";
 
 defineOptions({ name: "LoginForm" });
 

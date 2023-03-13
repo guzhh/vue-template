@@ -17,7 +17,8 @@
 <script setup>
 import { computed, onUnmounted } from "vue";
 import { useThemeVars } from "naive-ui";
-import { useAppStore, useTabBarStore } from "@/store";
+import useAppStore from "@/store/modules/app";
+import useTabBarStore from "@/store/modules/tab-bar";
 import { listenerRouteChange, removeRouteListener } from "@/utils/route-listener";
 import TabItem from "./tab-item.vue";
 

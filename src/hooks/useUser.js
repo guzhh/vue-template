@@ -1,6 +1,5 @@
 import { useRouter } from "vue-router";
-
-import { useUserStore } from "@/store";
+import useUserStore from "@/store/modules/user";
 
 export default function useUser() {
 	const router = useRouter();

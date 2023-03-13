@@ -21,7 +21,7 @@ import { NDialogProvider, NNotificationProvider, NMessageProvider, NLoadingBarPr
 import { MessageContent } from "@/components/MessageContent";
 import { DialogContent } from "@/components/DialogContent";
 import { Notification } from "@/components/Notification";
-import { useAppStore } from "@/store";
+import useAppStore from "@/store/modules/user";
 
 export default defineComponent({
 	// eslint-disable-next-line vue/multi-word-component-names

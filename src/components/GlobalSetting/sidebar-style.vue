@@ -18,7 +18,7 @@
 <script setup>
 import { computed, reactive } from "vue";
 import StyleExample from "@/components/StyleExample/index.vue";
-import { useAppStore } from "@/store";
+import useAppStore from "@/store/modules/app";
 
 const appStore = useAppStore();
 

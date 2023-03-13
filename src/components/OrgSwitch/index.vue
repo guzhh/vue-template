@@ -20,7 +20,7 @@
 <script setup>
 import { ref } from "vue";
 import { getOrgInfoByCode, getOrgList } from "@/api/system/orgAdmin";
-import { useUserStore } from "@/store";
+import useUserStore from "@/store/modules/user";
 
 const showModal = ref(false);
 const orgCode = ref(null);

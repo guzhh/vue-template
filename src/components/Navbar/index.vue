@@ -128,7 +128,8 @@ import { FullScreenMaximize24Regular, FullScreenMinimize24Regular } from "@vicon
 import { MenuFoldOutlined, SettingOutlined, UserOutlined, ExportOutlined } from "@vicons/antd";
 import OrgSwitch from "@/components/OrgSwitch/index.vue";
 import { getOrgInfoByCode } from "@/api/system/orgAdmin";
-import { useAppStore, useUserStore } from "@/store";
+import useUserStore from "@/store/modules/user";
+import useAppStore from "@/store/modules/app";
 import useHandleTheme from "@/hooks/useHandleTheme";
 import { renderIcon } from "@/utils/render";
 import useUser from "@/hooks/useUser";

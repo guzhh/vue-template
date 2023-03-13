@@ -49,7 +49,7 @@
 import { CheckOutlined } from "@vicons/antd";
 import { ref } from "vue";
 import { appThemeList } from "@/config/settings";
-import { useAppStore } from "@/store";
+import useAppStore from "@/store/modules/app";
 import colors from "@/config/color.json";
 
 const appStore = useAppStore();

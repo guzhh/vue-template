@@ -18,7 +18,7 @@
 import { computed, h } from "vue";
 import { useRoute, RouterLink } from "vue-router";
 import { Icons } from "@/plugins/icons";
-import { useAppStore } from "@/store";
+import useAppStore from "@/store/modules/app";
 import { renderIcon } from "@/utils/render";
 
 defineOptions({ name: "Menu" });

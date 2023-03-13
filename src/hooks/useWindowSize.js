@@ -1,6 +1,6 @@
 import { computed } from "vue";
 import { useWindowSize as windowSize } from "@vueuse/core";
-import { useAppStore } from "@/store";
+import useAppStore from "@/store/modules/app";
 
 export function useWindowSize() {
 	const { width, height: aHeight } = windowSize();

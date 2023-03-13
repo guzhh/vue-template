@@ -17,7 +17,7 @@
 <script setup>
 import { computed } from "vue";
 import { zhCN, dateZhCN, NThemeEditor, darkTheme } from "naive-ui";
-import { useAppStore } from "@/store";
+import useAppStore from "@/store/modules/app";
 import { lighten } from "@/utils";
 import GlobalSetting from "@/components/GlobalSetting/index.vue";
 

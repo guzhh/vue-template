@@ -1,5 +1,5 @@
 import NProgress from "nprogress";
-import { useUserStore } from "@/store";
+import useUserStore from "@/store/modules/user";
 import { isLogin } from "@/utils/auth";
 
 export default function setupUserLoginInfoGuard(router) {

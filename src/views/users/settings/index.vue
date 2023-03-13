@@ -63,7 +63,7 @@
 
 <script setup>
 import { ref } from "vue";
-import { useUserStore } from "@/store";
+import useUserStore from "@/store/modules/user";
 import { uptPasswd } from "@/api/users/user";
 
 const userStore = useUserStore();

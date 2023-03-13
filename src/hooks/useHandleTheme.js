@@ -1,6 +1,6 @@
 import { computed } from "vue";
 import { useDark, useToggle } from "@vueuse/core/index";
-import { useAppStore } from "@/store";
+import useAppStore from "@/store/modules/app";
 
 export default function useHandleTheme() {
 	const appStore = useAppStore();

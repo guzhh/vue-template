@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { useUserStore } from "@/store";
+import useUserStore from "@/store/modules/user";
 
 defineOptions({ name: "personal" });
 

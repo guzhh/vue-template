@@ -140,7 +140,7 @@ import { typeFlagOptions } from "@/constant/system/resource";
 import { delRoleResRule, getRoleAllRes, getRoleResRuleList, saveOrUptRoleResRule, uptRoleResRuleState } from "@/api/system/role";
 import validator from "@/validator";
 import { authRoleSchema } from "@/validator/system/role";
-import { useSystemStore } from "@/store";
+import useSystemStore from "@/store/modules/system";
 
 defineOptions({ name: "dataRules" });
 

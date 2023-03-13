@@ -1,0 +1,19 @@
+version: '3.8'
+services:  #服务列表，下一级的key为服务名称
+  vue-template:  #服务名称
+    container_name: vue-template # 启动的容器名称
+    restart: always # docker 重启后自动运行该容器
+    networks: # 加入网络
+      - "vue-template"
+    build:  # 指定包含构建上下文的路径, 或作为一个对象，该对象具有 context 和指定的 dockerfile 文件以及 args 参数值
+      context: ./  #dockerfile所在的目录
+      dockerfile: Dockerfile #dockerfile文件名称
+    image: vue-template:latest # 使用的镜像名称 如果同时指定了 image 和 build 两个标签，那么docker-compose 会构建镜像并且把镜像命名为 image 后面那个名字
+    ports:  #暴露的端口
+      - "8003:80" # 前一个是宿主机端口号 后一个是容器端口号
+    volumes: #映射的磁盘 前一个是宿主机 后一个是容器
+      - /etc/localtime:/etc/localtime
+      - ./logs:/var/log/nginx
+networks: # 网络
+  vue-template: # 网络名称
+    driver: bridge

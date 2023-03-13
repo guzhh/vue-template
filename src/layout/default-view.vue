@@ -49,7 +49,7 @@
 <script setup>
 import { computed, provide, ref } from "vue";
 import { useThemeVars } from "naive-ui";
-import { useAppStore } from "@/store";
+import useAppStore from "@/store/modules/app";
 import NavBar from "@/components/Navbar/index.vue";
 import Menu from "@/components/Menu/index.vue";
 import Footer from "@/components/footer/index.vue";

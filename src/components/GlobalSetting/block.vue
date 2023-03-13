@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { useAppStore } from "@/store";
+import useAppStore from "@/store/modules/app";
 import FormWrapper from "./form-wrapper.vue";
 
 defineProps({

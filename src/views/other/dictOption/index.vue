@@ -42,7 +42,6 @@ pre {
 	/* 以下样式是自动换行代码 */
 	white-space: pre-wrap; /* css-3 */
 	white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-	//white-space: -pre-wrap; /* Opera 4-6 */ white-space: -o-pre-wrap; /* Opera 7 */
 	background-color: #f5f5f5;
 	border: 1px solid #cccccc;
 	border-radius: 4px;

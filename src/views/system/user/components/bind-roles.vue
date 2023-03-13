@@ -21,7 +21,7 @@
 import { computed, ref } from "vue";
 import { useMessage } from "naive-ui";
 import { getRoleAllList, setUserRole, getUserRoleAll } from "@/api/system/user.js";
-import { useAppStore } from "@/store";
+import useAppStore from "@/store/modules/app";
 
 const active = ref(false);
 const roles = ref([]);

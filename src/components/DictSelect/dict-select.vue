@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { useSystemStore } from "@/store";
+import useSystemStore from "@/store/modules/system";
 
 defineOptions({ name: "DictSlect" });
 

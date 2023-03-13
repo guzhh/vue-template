@@ -2,7 +2,7 @@
  * 注册全局自定义指令
  * @param app
  */
-import { useUserStore } from "@/store";
+import useUserStore from "@/store/modules/user";
 
 export function setupDirectives(app) {
 	const userStore = useUserStore();

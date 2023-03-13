@@ -3,7 +3,7 @@ import { layer } from "@layui/layer-vue";
 import router from "@/router";
 import Request from "./axios";
 import { clearToken, getToken } from "@/utils/auth";
-import { useUserStore } from "@/store";
+import useUserStore from "@/store/modules/user";
 
 const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN_KEY;
 

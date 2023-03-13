@@ -4,7 +4,7 @@ import { NButton } from "naive-ui";
 export default function setupVersionGuard(router) {
 	router.afterEach(async () => {
 		if (import.meta.env.MODE === "development") return;
-		const response = await axios.get("version.json");
+		const response = await axios.get(`${import.meta.env.BASE_URL}version.json`);
 		// eslint-disable-next-line no-underscore-dangle,no-undef
 		if (__APP_VERSION__INFO__.version !== response.data.version) {
 			window.$notification.create({

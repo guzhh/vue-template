@@ -32,7 +32,8 @@ import { useRouter, useRoute } from "vue-router";
 import { useMessage, useThemeVars } from "naive-ui";
 import { ChromeTab } from "@soybeanjs/vue-admin-tab";
 import { renderIcon } from "@/utils/render";
-import { useAppStore, useTabBarStore } from "@/store";
+import useAppStore from "@/store/modules/app";
+import useTabBarStore from "@/store/modules/tab-bar";
 import { REDIRECT_ROUTE_NAME } from "@/router/constants";
 
 const props = defineProps({

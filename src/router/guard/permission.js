@@ -1,4 +1,5 @@
-import { useAppStore, useUserStore } from "@/store";
+import useUserStore from "@/store/modules/user";
+import useAppStore from "@/store/modules/app";
 import usePermission from "@/hooks/permission";
 import { generatorDynamicRouter, NOT_FOUND, WHITE_LIST } from "../constants";
 
