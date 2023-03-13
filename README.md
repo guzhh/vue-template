@@ -33,7 +33,7 @@
 │  .prettierrc.cjs prettierrc配置
 │  index.html   系统模板页面
 │  jsconfig.json  编辑器配置文件
-│  package.json
+│  page.js
 │  README.md
 ├─config  vite 配置文件
 │  ├─plugin  自定义vite插件目录

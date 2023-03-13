@@ -307,13 +307,11 @@ const { tableList, tableLoading, searchForm, page, onChange, onUpdatePageSize, r
 
 // 选中机构
 const selectOrg = data => {
-	console.log(data, "data");
 	DepTreeRef.value.getDep(data);
 	orgInfo.value = data;
 };
 // 选中科室
 const selectDep = data => {
-	console.log(data, "data");
 	depInfo.value = data;
 	searchForm.value.orgCode = orgInfo.value.orgCode;
 	searchForm.value.departCode = depInfo.value.depCode;

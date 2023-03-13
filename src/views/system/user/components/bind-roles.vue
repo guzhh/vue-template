@@ -65,7 +65,6 @@ const handleClose = () => {
 const getRoles = () => {
 	getRoleAllList().then(res => {
 		if (res.success) {
-			console.log(res.result);
 			allRoles.value = res.result;
 		}
 	});
