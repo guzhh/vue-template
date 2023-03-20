@@ -1,9 +1,10 @@
 import qs from "qs";
-import { layer } from "@layui/layer-vue";
+// import { layer } from "@layui/layer-vue";
 import router from "@/router";
 import Request from "./axios";
 import { clearToken, getToken } from "@/utils/auth";
 import useUserStore from "@/store/modules/user";
+import Loading from "@/components/Loading/index";
 
 const ACCESS_TOKEN = import.meta.env.VITE_ACCESS_TOKEN_KEY;
 
@@ -20,7 +21,8 @@ export default new Request({
 			const userStore = useUserStore();
 			// 打开全局请求loading
 			if (config.customs?.isLoading) {
-				config.customs.loadingInstance = layer.load(0);
+				// config.customs.loadingInstance = layer.load(0);
+				config.customs.loadingInstance = Loading.load(config.customs?.loadingText || "数据加载中...");
 			}
 			// 防止缓存，给get请求加上时间戳
 			if (config.method === "get" || config.method === "GET") {
@@ -40,7 +42,8 @@ export default new Request({
 		responseInterceptor: response => {
 			// 关闭打开全局请求loading
 			if (response.config.customs?.isLoading) {
-				layer.close(response.config?.customs?.loadingInstance);
+				// layer.close(response.config?.customs?.loadingInstance);
+				response.config?.customs?.loadingInstance.close();
 			}
 			if (response.data?.status === "60001") {
 				window.$notification.error({
@@ -84,7 +87,8 @@ export default new Request({
 		// 请求响应失败拦截器
 		responseInterceptorCatch: error => {
 			if (error.config.customs?.isLoading) {
-				layer.close(error.config?.customs?.loadingInstance);
+				// layer.close(error.config?.customs?.loadingInstance);
+				error.config?.customs?.loadingInstance.close();
 			}
 			window.$notification.error({
 				content: `网络请求错误：${error.config.url}`,

@@ -18,8 +18,7 @@ defineOptions({ name: "DictMulti" });
 
 const props = defineProps({
 	value: {
-		type: [String, null, undefined],
-		required: true
+		type: [String, null]
 	},
 	// 上级字典编码
 	dictCode: {

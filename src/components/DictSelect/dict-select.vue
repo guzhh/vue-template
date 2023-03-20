@@ -9,8 +9,7 @@ defineOptions({ name: "DictSlect" });
 
 const props = defineProps({
 	value: {
-		type: [String, Number, null, undefined],
-		required: true
+		type: [String, Number, null]
 	},
 	// 上级字典编码
 	dictCode: {

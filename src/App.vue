@@ -20,6 +20,17 @@ import { zhCN, dateZhCN, NThemeEditor, darkTheme } from "naive-ui";
 import useAppStore from "@/store/modules/app";
 import { lighten } from "@/utils";
 import GlobalSetting from "@/components/GlobalSetting/index.vue";
+// import Loading from "@/components/Loading/index";
+//
+// let $loading = null;
+// setTimeout(() => {
+// 	$loading = Loading.load("数据加载中");
+// 	console.log("---------", $loading);
+// }, 3000);
+//
+// setTimeout(() => {
+// 	$loading.close();
+// }, 6000);
 
 const appStore = useAppStore();
 const theme = computed(() => (appStore.theme === "dark" ? darkTheme : null));
@@ -31,14 +42,32 @@ const themeOverrides = computed(() => {
 	if (theme.value === null) {
 		return {
 			common: {
-				bodyColor: "rgb(242,243,245)",
+				bodyColor: "#EBEBEB",
 				primaryColor: appTheme,
 				primaryColorHover: lightenStr,
 				primaryColorPressed: lightenStr,
-				successColor: appTheme,
-				successColorHover: lightenStr,
-				successColorPressed: lightenStr,
-				primaryColorSuppl: appTheme
+				primaryColorSuppl: appTheme,
+				successColor: "#42CC81",
+				successColorHover: lighten("#42CC81", 6),
+				successColorPressed: lighten("#42CC81", 6),
+				successColorSuppl: lighten("#42CC81", 6),
+				warningColor: "#FFAD00",
+				warningColorHover: lighten("#FFAD00", 6),
+				warningColorPressed: lighten("#FFAD00", 6),
+				warningColorSuppl: lighten("#FFAD00", 6),
+				errorColor: "#FF5B5A",
+				errorColorHover: lighten("#FF5B5A", 6),
+				errorColorPressed: lighten("#FF5B5A", 6),
+				errorColorSuppl: lighten("#FF5B5A", 6),
+				textColor1: "#2b2b2e",
+				textColor2: "#616266",
+				textColor3: "#999999",
+				textColorDisabled: "#E0E0E0"
+			},
+			Menu: {
+				itemColorActive: appTheme,
+				itemTextColorActive: "#FFFFFF",
+				itemIconColorActive: "#FFFFFF"
 			}
 		};
 	}
