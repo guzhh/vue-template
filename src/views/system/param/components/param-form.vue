@@ -1,19 +1,5 @@
 <template>
-	<lay-layer
-		v-model="visible"
-		:btn="[
-			{ text: '确认', callback: handleOk },
-			{ text: '取消', callback: handleClose }
-		]"
-		:maxmin="true"
-		:resize="true"
-		:shadeClose="false"
-		:title="title"
-		:type="1"
-		:zIndex="100"
-		area="700px"
-		@close="handleClose"
-	>
+	<base-modal style="width: 700px" :title="title" v-model:show="visible" @ok="handleOk" @close="handleClose">
 		<div style="width: 100%; padding: 0 50px; margin-top: 20px">
 			<n-form
 				ref="formRef"
@@ -40,7 +26,7 @@
 				</n-form-item>
 			</n-form>
 		</div>
-	</lay-layer>
+	</base-modal>
 </template>
 
 <script setup>

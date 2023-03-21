@@ -124,7 +124,6 @@ import { useThemeVars } from "naive-ui";
 import { useFullscreen } from "@vueuse/core";
 import { inject, computed, watch, ref } from "vue";
 import { SunnyOutline, MoonSharp } from "@vicons/ionicons5";
-import { FullScreenMaximize24Regular, FullScreenMinimize24Regular } from "@vicons/fluent";
 import { MenuFoldOutlined, SettingOutlined, UserOutlined, ExportOutlined } from "@vicons/antd";
 import OrgSwitch from "@/components/OrgSwitch/index.vue";
 import { getOrgInfoByCode } from "@/api/system/orgAdmin";

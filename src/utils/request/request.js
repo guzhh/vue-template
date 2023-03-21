@@ -1,5 +1,4 @@
 import qs from "qs";
-// import { layer } from "@layui/layer-vue";
 import router from "@/router";
 import Request from "./axios";
 import { clearToken, getToken } from "@/utils/auth";
@@ -21,7 +20,6 @@ export default new Request({
 			const userStore = useUserStore();
 			// 打开全局请求loading
 			if (config.customs?.isLoading) {
-				// config.customs.loadingInstance = layer.load(0);
 				config.customs.loadingInstance = Loading.load(config.customs?.loadingText || "数据加载中...");
 			}
 			// 防止缓存，给get请求加上时间戳
@@ -87,7 +85,6 @@ export default new Request({
 		// 请求响应失败拦截器
 		responseInterceptorCatch: error => {
 			if (error.config.customs?.isLoading) {
-				// layer.close(error.config?.customs?.loadingInstance);
 				error.config?.customs?.loadingInstance.close();
 			}
 			window.$notification.error({

@@ -1,19 +1,5 @@
 <template>
-	<lay-layer
-		v-model="visible"
-		:resize="true"
-		:shadeClose="false"
-		:maxmin="true"
-		:type="1"
-		:zIndex="100"
-		area="600px"
-		:title="title"
-		@close="handleClose"
-		:btn="[
-			{ text: '确认', callback: handleOk },
-			{ text: '取消', callback: handleClose }
-		]"
-	>
+	<base-modal style="width: 600px" :title="title" v-model:show="visible" @ok="handleOk" @close="handleClose">
 		<n-form
 			ref="formRef"
 			:model="formValue"
@@ -36,7 +22,7 @@
 				<n-input v-model:value="formValue.descr" placeholder="请输入角色描述" />
 			</n-form-item>
 		</n-form>
-	</lay-layer>
+	</base-modal>
 </template>
 
 <script setup>

@@ -8,7 +8,7 @@
 	>
 		<chrome-tab
 			:dark-mode="theme === 'dark'"
-			:primary-color="themeVars.successColorPressed"
+			:primary-color="themeVars.primaryColor"
 			@contextmenu="handleContextMenu"
 			@click="goto(itemData)"
 			@close="tagClose(itemData, index)"

@@ -1,19 +1,5 @@
 <template>
-	<lay-layer
-		v-model="visible"
-		:btn="[
-			{ text: '确认', callback: handleOk },
-			{ text: '取消', callback: handleClose }
-		]"
-		:maxmin="true"
-		:resize="true"
-		:shadeClose="false"
-		:title="title"
-		:type="1"
-		:zIndex="100"
-		area="700px"
-		@close="handleClose"
-	>
+	<base-modal style="width: 700px" :title="title" v-model:show="visible" @ok="handleOk" @close="handleClose">
 		<div class="form" style="width: 100%; padding: 0 50px; margin-top: 20px">
 			<n-form
 				ref="formRef"
@@ -39,13 +25,13 @@
 					/>
 				</n-form-item>
 				<n-form-item label="是否内部系统:" path="ifInternal">
-					<n-radio-group v-model:value="formValue.ifInternal" name="radiogroup">
-						<n-space>
-							<n-radio v-for="item in options" :key="item.value" :value="item.value">
-								{{ item.label }}
-							</n-radio>
-						</n-space>
-					</n-radio-group>
+					<n-select
+						v-model:value="formValue.ifInternal"
+						:options="options"
+						clearable
+						placeholder="请选择是否内部系统"
+						style="width: 100%"
+					/>
 				</n-form-item>
 				<n-form-item label="系统首页地址:" path="sysIndexUrl">
 					<n-input v-model:value="formValue.sysIndexUrl" placeholder="请输入系统首页地址" />
@@ -68,7 +54,7 @@
 				</n-form-item>
 			</n-form>
 		</div>
-	</lay-layer>
+	</base-modal>
 </template>
 
 <script setup>
@@ -156,9 +142,7 @@ const handleClose = () => {
 	};
 };
 
-// eslint-disable-next-line no-unused-vars
 const handleOk = () => {
-	console.log(formValue.value);
 	formRef.value?.validate(errors => {
 		if (!errors) {
 			saveOrUptSystem({ ...formValue.value }).then(res => {

@@ -20,7 +20,9 @@ import {
 	Settings48Regular,
 	AutoFitHeight20Filled,
 	VoicemailArrowForward16Regular,
-	Delete16Regular
+	Delete16Regular,
+	FullScreenMaximize24Regular,
+	FullScreenMinimize24Regular
 } from "@vicons/fluent";
 
 export const Icons = {
@@ -53,7 +55,9 @@ export const Icons = {
 	HomeOutlined,
 	BarcodeOutline,
 	AlignLeftOutlined,
-	InsertRowBelowOutlined
+	InsertRowBelowOutlined,
+	FullScreenMaximize24Regular,
+	FullScreenMinimize24Regular
 };
 
 export function setupIcon(app) {

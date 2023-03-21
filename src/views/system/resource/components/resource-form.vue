@@ -1,19 +1,5 @@
 <template>
-	<lay-layer
-		v-model="visible"
-		:btn="[
-			{ text: '确认', callback: handleOk },
-			{ text: '取消', callback: handleClose }
-		]"
-		:maxmin="true"
-		:resize="true"
-		:shadeClose="false"
-		:title="title"
-		:type="1"
-		:zIndex="100"
-		area="1000px"
-		@close="handleClose"
-	>
+	<base-modal fullscreen style="width: 1000px" :title="title" v-model:show="visible" @ok="handleOk" @close="handleClose">
 		<n-form
 			ref="formRef"
 			:label-width="80"
@@ -103,9 +89,9 @@
 					</n-form-item>
 				</n-gi>
 			</n-grid>
-			<iframe src="https://xicons.org/#/" style="width: 100%; height: 500px"></iframe>
+			<iframe src="https://xicons.org/#/" style="width: 100%; height: 500px; border: 0"></iframe>
 		</n-form>
-	</lay-layer>
+	</base-modal>
 </template>
 
 <script setup>

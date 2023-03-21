@@ -4,7 +4,6 @@ import VXETable from "vxe-table";
 import { AppProvider } from "@/components/Application";
 import App from "@/App.vue";
 import router, { setupRouter } from "@/router";
-import { setupLayer } from "@/plugins/layer";
 import { setupStore } from "@/store";
 import { setupCustomComponents, setupDirectives, setupGlobalMethods } from "@/plugins";
 import { setupIcon } from "@/plugins/icons";
@@ -16,8 +15,6 @@ async function bootstrap() {
 	// 单独挂载一个vue实例方便在js中单独调用
 	const appProvider = createApp(AppProvider);
 	const app = createApp(App);
-	// 挂载 layer-vue
-	setupLayer(app);
 	// 挂载vxe-table
 	app.use(VXETable);
 	// 挂载状态管理
