@@ -35,6 +35,11 @@
 					<n-descriptions-item label="admin-work">
 						<a href="https://github.com/qingqingxuan/admin-work" target="_blank">https://github.com/qingqingxuan/admin-work</a>
 					</n-descriptions-item>
+					<n-descriptions-item label="soybean-admin">
+						<a href="https://github.com/honghuangdc/soybean-admin" target="_blank"
+							>https://github.com/honghuangdc/soybean-admin</a
+						>
+					</n-descriptions-item>
 				</n-descriptions>
 			</n-card>
 		</page-content>
