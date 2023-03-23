@@ -228,6 +228,10 @@ const selectAnInstitution = () => {
 	//padding-left: v-bind(navbarLeftPadding);
 }
 
+::v-deep(.n-breadcrumb) {
+	padding-top: 3px;
+}
+
 .navbar-org {
 	cursor: pointer;
 	display: inline-flex;
