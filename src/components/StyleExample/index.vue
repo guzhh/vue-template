@@ -1,6 +1,10 @@
 <template>
 	<div class="style-example-container" :class="{ 'circle-tip': checked }">
-		<div class="left" :style="{ background: leftBg, backgroundSize: 'cover' }"></div>
+		<div class="left">
+			<!--			<div :style="{ background: leftBg, backgroundSize: 'cover' }"></div>-->
+			<div class="left-top" :style="{ backgroundColor: leftTopBg }"></div>
+			<div class="left-bottom" :style="{ backgroundColor: leftBottomBg }"></div>
+		</div>
 		<div class="right">
 			<div class="right-top" :style="{ backgroundColor: rightTopBg }"></div>
 			<div class="right-bottom" :style="{ backgroundColor: rightBottomBg }"></div>
@@ -15,7 +19,11 @@ import { defineComponent } from "vue";
 export default defineComponent({
 	name: "StyleExample",
 	props: {
-		leftBg: {
+		leftTopBg: {
+			type: String,
+			default: "#000000"
+		},
+		leftBottomBg: {
 			type: String,
 			default: "#000000"
 		},
@@ -52,8 +60,15 @@ $border-radius: 4px;
 		display: inline-block;
 		width: 30%;
 		height: 100%;
-		border-top-left-radius: $border-radius;
-		border-bottom-left-radius: $border-radius;
+
+		.left-top {
+			height: 20%;
+			border-top-left-radius: $border-radius;
+		}
+		.left-bottom {
+			height: 80%;
+			border-bottom-left-radius: $border-radius;
+		}
 	}
 	.right {
 		display: inline-block;

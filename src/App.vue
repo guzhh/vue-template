@@ -65,9 +65,9 @@ const themeOverrides = computed(() => {
 				textColorDisabled: "#E0E0E0"
 			},
 			Menu: {
-				itemColorActive: appTheme,
-				itemTextColorActive: "#FFFFFF",
-				itemIconColorActive: "#FFFFFF"
+				// itemColorActive: appTheme,
+				// itemTextColorActive: "#FFFFFF",
+				// itemIconColorActive: "#FFFFFF"
 			}
 		};
 	}

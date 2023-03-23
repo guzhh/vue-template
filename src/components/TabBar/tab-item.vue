@@ -157,4 +157,8 @@ const handleSelect = async key => {
 const themeVars = useThemeVars();
 </script>
 
-<style scoped></style>
+<style scoped>
+::v-deep(.admin-tab__chrome-tab__divider) {
+	background-color: #bdbfc1;
+}
+</style>

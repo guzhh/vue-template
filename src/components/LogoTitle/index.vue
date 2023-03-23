@@ -1,12 +1,14 @@
 <template>
 	<div class="logo" @click="$router.push('/')">
-		<img src="~@/assets/images/pk-logo.png" alt="" :title="SYSTEM_NAME" :class="{ 'mr-2': !collapsed }" v-if="collapsed" />
-		<h2 class="title" v-else>{{ SYSTEM_NAME }}</h2>
+		<!--		<logo width="32" height="32" :title="SYSTEM_NAME" :class="{ 'mr-2': !collapsed }" v-if="collapsed"></logo>-->
+		<img :src="Logo" alt="" :title="SYSTEM_NAME" :class="{ 'mr-2': !collapsed }" />
+		<h2 class="title" v-if="!collapsed">{{ SYSTEM_NAME }}</h2>
 	</div>
 </template>
 
 <script setup>
-import { useThemeVars } from "naive-ui";
+// import { useThemeVars } from "naive-ui";
+import Logo from "@/assets/images/logo.svg?url";
 
 defineProps({
 	collapsed: {
@@ -14,7 +16,8 @@ defineProps({
 	}
 });
 
-const themeVars = useThemeVars(); // 全局公共CSS变量
+// eslint-disable-next-line no-unused-vars
+// const themeVars = useThemeVars(); // 全局公共CSS变量
 const SYSTEM_NAME = import.meta.env.VITE_SYSTEM_NAME; // 系统标题
 </script>
 
@@ -27,22 +30,21 @@ const SYSTEM_NAME = import.meta.env.VITE_SYSTEM_NAME; // 系统标题
 	line-height: 48px;
 	overflow: hidden;
 	white-space: nowrap;
-	border-bottom: 1px solid v-bind("themeVars.borderColor");
 	cursor: pointer;
-	//background-color: #515a6e;
 
 	img {
 		width: auto;
-		height: 32px;
+		height: 30px;
 	}
 
 	.title {
 		margin: 0;
 		padding: 0;
-		font-size: 25px;
+		font-size: 16px;
 		letter-spacing: 1px;
+		margin-left: 10px;
 		//font-family: blazed;
-		font-family: 楷体;
+		font-family: 思源雅黑;
 	}
 }
 </style>

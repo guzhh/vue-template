@@ -16,7 +16,6 @@
 			@update:collapsed="setCollapsed"
 		>
 			<div class="menu-wrapper">
-				<logo-title :collapsed="collapsed" />
 				<Menu />
 			</div>
 		</n-layout-sider>
@@ -33,29 +32,29 @@
 				<Menu />
 			</n-layout-sider>
 		</n-drawer>
-		<n-layout class="layout-content" :style="paddingStyle">
-			<div v-if="navbar" class="layout-navbar">
-				<NavBar />
+		<n-layout :style="paddingStyle">
+			<div class="layout-content">
+				<div v-if="navbar" class="layout-navbar">
+					<NavBar />
+				</div>
+				<tab-bar v-if="appStore.tabBar" />
+				<n-layout-content>
+					<slot></slot>
+				</n-layout-content>
+				<Footer v-if="footer" />
 			</div>
-			<tab-bar v-if="appStore.tabBar" />
-			<n-layout-content>
-				<slot></slot>
-			</n-layout-content>
-			<Footer v-if="footer" />
 		</n-layout>
 	</n-layout>
 </template>
 
 <script setup>
 import { computed, provide, ref } from "vue";
-import { useThemeVars } from "naive-ui";
 import useAppStore from "@/store/modules/app";
 import NavBar from "@/components/Navbar/index.vue";
 import Menu from "@/components/Menu/index.vue";
 import Footer from "@/components/footer/index.vue";
 import TabBar from "@/components/TabBar/index.vue";
 import useResponsive from "@/hooks/responsive";
-import LogoTitle from "@/components/LogoTitle/index.vue";
 
 defineOptions({ name: "DefaultView" });
 
@@ -69,7 +68,6 @@ const hideMenu = computed(() => appStore.hideMenu); // 是否隐藏左侧菜单�
 const collapsed = computed(() => appStore.menuCollapse); // 是否折叠菜单栏
 const footer = computed(() => appStore.footer); // 是否显示底部
 
-const themeVars = useThemeVars(); // 全局公共CSS变量
 const menuWidth = computed(() => {
 	return appStore.menuCollapse ? appStore.menuCollapsedWidth : appStore.menuWidth; // 菜单栏宽度
 });
@@ -80,6 +78,7 @@ const paddingStyle = computed(() => {
 	return { ...paddingLeft, ...paddingTop };
 });
 
+// 菜单折叠展开
 const setCollapsed = val => {
 	appStore.updateSettings({ menuCollapse: val });
 };
@@ -103,14 +102,24 @@ provide("toggleDrawerMenu", () => {
 	height: 100%;
 }
 
+.layout-content {
+	/* 设置父元素为flex布局 */
+	display: flex;
+	/* 设置子元素的排列方向 */
+	flex-direction: column;
+	/* 设置子元素在该方向上的对齐方式 */
+	justify-content: space-between;
+	min-height: calc(100vh - 50px);
+	min-width: 100%;
+}
+
 .layout-navbar {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 10;
+	z-index: 100;
 	width: 100%;
 	height: @nav-size-height;
-	background-color: v-bind("themeVars.baseColor");
 }
 
 .layout-sider {
@@ -120,6 +129,11 @@ provide("toggleDrawerMenu", () => {
 	z-index: 99;
 	height: 100%;
 	transition: all 0.2s cubic-bezier(0.34, 0.69, 0.1, 1);
+
+	.menu-wrapper {
+		padding-top: 45px;
+		box-sizing: border-box;
+	}
 
 	&::after {
 		position: absolute;

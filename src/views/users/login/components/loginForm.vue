@@ -1,32 +1,44 @@
 <template>
 	<div class="login-form-wrapper">
+		<div class="login-form-sub-title">
+			<img src="@/assets/images/login/logo.jpg" height="24" width="88" />
+			<span style="margin-left: 12px">河南盘古信息技术有限公司</span>
+		</div>
 		<div class="login-form-title">{{ title }}</div>
-		<!--		<div class="login-form-sub-title">登录 {{ title }}</div>-->
 		<div class="login-form-error-msg">{{ errorMessage }}</div>
 
 		<n-form ref="formRef" :model="userInfo" :rules="rules" label-placement="left" size="large">
 			<n-form-item path="account">
 				<n-input @keyup.enter="accountEnter" v-model:value="userInfo.account" placeholder="请输入账号">
 					<template #prefix>
-						<n-icon :component="UserOutlined" />
+						<user-icon width="22" height="22" viewBox="0 0 28 28"></user-icon>
 					</template>
 				</n-input>
 			</n-form-item>
+
 			<n-form-item path="passwd">
 				<n-input
 					ref="passwordRef"
 					@keyup.enter="handleValidateClick"
-					type="password"
-					show-password-on="mousedown"
 					v-model:value="userInfo.passwd"
 					placeholder="请输入密码"
+					type="password"
+					show-password-on="click"
 				>
+					<template #password-invisible-icon>
+						<pass-hide-icon width="22" height="22" viewBox="0 0 28 28"></pass-hide-icon>
+					</template>
+
+					<template #password-visible-icon>
+						<pass-show-icon width="22" height="22" viewBox="0 0 28 28"></pass-show-icon>
+					</template>
+
 					<template #prefix>
-						<n-icon :component="LockOutlined" />
+						<pass-icon width="22" height="22" viewBox="0 0 28 28"></pass-icon>
 					</template>
 				</n-input>
 			</n-form-item>
-			<n-form-item>
+			<n-form-item style="margin-top: 52px">
 				<n-button style="width: 100%" type="info" attr-type="button" @click="handleValidateClick">登录</n-button>
 			</n-form-item>
 		</n-form>
@@ -35,22 +47,23 @@
 
 <script setup>
 import { reactive, ref } from "vue";
-import { useThemeVars } from "naive-ui";
-import { UserOutlined, LockOutlined } from "@vicons/antd";
-import { useRouter, useRoute } from "vue-router";
+import { useRouter } from "vue-router";
 import useUserStore from "@/store/modules/user";
+
+import UserIcon from "@/assets/images/login/user_icon.svg";
+import PassIcon from "@/assets/images/login/pass_icon.svg";
+import PassShowIcon from "@/assets/images/login/pass_show_icon.svg";
+import PassHideIcon from "@/assets/images/login/pass_hide_icon.svg";
 
 defineOptions({ name: "LoginForm" });
 
-// eslint-disable-next-line no-unused-vars
-const route = useRoute();
 const router = useRouter();
 const userStore = useUserStore();
 const formRef = ref();
 const passwordRef = ref();
 
 // 全局公共变量
-const themeVars = useThemeVars();
+
 const title = import.meta.env.VITE_SYSTEM_NAME;
 const errorMessage = ref("");
 
@@ -79,7 +92,6 @@ const accountEnter = () => {
 const handleValidateClick = () => {
 	formRef.value?.validate(errors => {
 		if (!errors) {
-			// console.log("验证通过");
 			userStore.login({ ...userInfo }).then(() => {
 				router.push({ path: "/" });
 			});
@@ -91,44 +103,50 @@ const handleValidateClick = () => {
 </script>
 
 <style lang="less" scoped>
-.login-form-wrapper {
-	box-shadow: 0px 0px 30px 20px #f2f3f5;
-	//border: 1px solid #51a7ff;
-	padding: 24px 36px;
+.n-button,
+.n-input {
+	height: 48px !important;
+	line-height: 48px !important;
 }
-.login-form {
-	&-wrapper {
-		width: 420px;
-	}
 
+::v-deep(.n-input .n-input__prefix) {
+	margin-right: 10px !important;
+}
+
+.login-form {
+	font-family: "PingFang SC";
+	font-style: normal;
+	&-wrapper {
+		width: 100%;
+		padding: 0px 65px;
+	}
 	&-title {
-		color: v-bind("themeVars.textColor1");
-		font-weight: bold;
-		font-size: 36px;
-		line-height: 32px;
+		color: #2b2b2e;
+		font-size: 28px;
+		font-weight: 600;
+		line-height: 39px;
 		text-align: center;
+		margin-top: 20px;
+		margin-bottom: 40px;
 	}
 
 	&-sub-title {
-		color: v-bind("themeVars.textColor3");
-		font-size: 16px;
-		line-height: 24px;
+		color: #2b2b2e;
+		font-size: 14px;
+		font-weight: 500;
+		line-height: 20px;
+		height: 24px;
+		margin-top: 77px;
 		text-align: center;
+		img {
+			vertical-align: middle;
+		}
 	}
 
 	&-error-msg {
 		height: 32px;
-		color: v-bind("themeVars.errorColor");
+		color: darkred;
 		line-height: 32px;
-	}
-
-	&-password-actions {
-		display: flex;
-		justify-content: space-between;
-	}
-
-	&-register-btn {
-		color: v-bind("themeVars.textColor3") !important;
 	}
 }
 </style>

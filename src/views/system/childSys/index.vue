@@ -131,9 +131,7 @@
 </template>
 
 <script setup>
-// eslint-disable-next-line no-unused-vars
-import { ref } from "vue";
-import { useMessage } from "naive-ui";
+import { useMessage, useThemeVars } from "naive-ui";
 import useTableData from "@/hooks/useTableData.js";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { getAuthSystemList, delSystem, cancelDelSystem } from "@/api/system/childSys";
@@ -145,7 +143,7 @@ defineOptions({ name: "childSys" });
 
 const { tableSizeOptions, tableSize } = useTable();
 const createFormRef = ref();
-// eslint-disable-next-line no-unused-vars
+const themeVars = useThemeVars(); // 全局公共CSS变量
 const message = useMessage();
 const { height } = useWindowSize();
 const formData = { ifInternal: undefined, sysName: "", sysType: undefined };
@@ -225,7 +223,7 @@ const reset = () => {
 	}
 
 	::v-deep(svg) > path {
-		fill: #30cd98 !important;
+		fill: v-bind("themeVars.primaryColor") !important;
 		transition: 0.5s;
 	}
 }

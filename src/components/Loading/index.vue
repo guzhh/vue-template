@@ -47,11 +47,12 @@ defineProps({
 	border-radius: 30px;
 }
 .loading-wrp > span:nth-child(even) {
-	background-color: #eb0f0f;
+	background-color: #2878fc;
 	animation: growAnim 0.4s linear infinite alternate-reverse;
 }
+
 .loading-wrp > span:nth-child(odd) {
-	background-color: #18a058;
+	background-color: #0051d4;
 	animation: growAnimReverse 0.4s linear infinite alternate-reverse;
 }
 

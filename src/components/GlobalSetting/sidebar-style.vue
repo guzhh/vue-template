@@ -5,7 +5,8 @@
 			<n-grid-item v-for="(item, index) of sideExampleList" :key="index" :span="8" class="example-wrapper">
 				<StyleExample
 					:checked="sideTheme === item.themeId"
-					:left-bg="item.leftBg"
+					:left-top-bg="item.leftTopBg"
+					:left-bottom-bg="item.leftBottomBg"
 					:right-top-bg="item.rightTopBg"
 					:right-bottom-bg="item.rightBottomBg"
 					@click="exampleClick(item)"
@@ -26,14 +27,9 @@ const sideTheme = computed(() => appStore.sideTheme);
 
 const sideExampleList = reactive([
 	{
-		leftBg: "#000000",
-		rightTopBg: "#ffffff",
-		rightBottomBg: "#f5f5f5",
-		themeId: "dark"
-	},
-	{
-		leftBg: "#ffffff",
-		rightTopBg: "#ffffff",
+		leftTopBg: "#2878FC",
+		leftBottomBg: "#fff",
+		rightTopBg: "#2878FC",
 		rightBottomBg: "#f5f5f5",
 		themeId: "white"
 	}
