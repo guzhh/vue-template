@@ -17,20 +17,9 @@
 <script setup>
 import { computed } from "vue";
 import { zhCN, dateZhCN, NThemeEditor, darkTheme } from "naive-ui";
-import useAppStore from "@/store/modules/app";
 import { lighten } from "@/utils";
+import useAppStore from "@/store/modules/app";
 import GlobalSetting from "@/components/GlobalSetting/index.vue";
-// import Loading from "@/components/Loading/index";
-//
-// let $loading = null;
-// setTimeout(() => {
-// 	$loading = Loading.load("数据加载中");
-// 	console.log("---------", $loading);
-// }, 3000);
-//
-// setTimeout(() => {
-// 	$loading.close();
-// }, 6000);
 
 const appStore = useAppStore();
 const theme = computed(() => (appStore.theme === "dark" ? darkTheme : null));

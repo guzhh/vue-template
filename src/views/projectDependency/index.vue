@@ -40,6 +40,11 @@
 							>https://github.com/honghuangdc/soybean-admin</a
 						>
 					</n-descriptions-item>
+					<n-descriptions-item label="naiveui-form-generate">
+						<a href="https://gitee.com/sourcenet/naiveui-form-generate" target="_blank"
+							>https://gitee.com/sourcenet/naiveui-form-generate</a
+						>
+					</n-descriptions-item>
 				</n-descriptions>
 			</n-card>
 		</page-content>

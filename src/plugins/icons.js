@@ -12,9 +12,19 @@ import {
 	HomeOutlined,
 	AlignLeftOutlined
 } from "@vicons/antd";
-import { CubeOutline, Search, ChevronDown, ListOutline, AppsSharp, BarcodeOutline, LogoAppleAr } from "@vicons/ionicons5";
+import {
+	Search,
+	Copy,
+	CubeOutline,
+	ChevronDown,
+	ListOutline,
+	AppsSharp,
+	BarcodeOutline,
+	LogoAppleAr,
+	MoveOutline
+} from "@vicons/ionicons5";
 
-import { Refresh, FoldDown, Download, Upload, Edit, Plus } from "@vicons/tabler";
+import { Refresh, FoldDown, Download, Upload, Edit, Plus, Forms } from "@vicons/tabler";
 import {
 	ArrowBetweenDown24Filled,
 	Settings48Regular,
@@ -26,38 +36,41 @@ import {
 } from "@vicons/fluent";
 
 export const Icons = {
-	UsergroupAddOutlined,
-	AppstoreAddOutlined,
-	UserOutlined,
-	CubeOutline,
-	MenuOutlined,
-	OrderedListOutlined,
-	PicCenterOutlined,
+	Edit,
+	Plus,
+	Copy,
+	Forms,
+	Search,
+	Upload,
 	Refresh,
 	FoldDown,
-	EditOutlined,
-	FileMarkdownOutlined,
-	ArrowBetweenDown24Filled,
-	Settings48Regular,
-	AutoFitHeight20Filled,
-	Search,
 	Download,
-	Upload,
-	PhoneOutlined,
-	ChevronDown,
-	VoicemailArrowForward16Regular,
-	ListOutline,
-	Edit,
-	Delete16Regular,
-	Plus,
 	AppsSharp,
+	MoveOutline,
+	CubeOutline,
+	ListOutline,
+	ChevronDown,
 	LogoAppleAr,
+	UserOutlined,
+	MenuOutlined,
 	HomeOutlined,
+	EditOutlined,
+	PhoneOutlined,
 	BarcodeOutline,
+	Delete16Regular,
+	Settings48Regular,
+	PicCenterOutlined,
 	AlignLeftOutlined,
+	OrderedListOutlined,
+	AppstoreAddOutlined,
+	UsergroupAddOutlined,
+	FileMarkdownOutlined,
+	AutoFitHeight20Filled,
 	InsertRowBelowOutlined,
+	ArrowBetweenDown24Filled,
+	FullScreenMinimize24Regular,
 	FullScreenMaximize24Regular,
-	FullScreenMinimize24Regular
+	VoicemailArrowForward16Regular
 };
 
 export function setupIcon(app) {

@@ -21,7 +21,7 @@
 				</n-icon>
 			</n-space>
 		</div>
-		<ul class="right-side">
+		<div class="right-side">
 			<li>
 				<n-tooltip>
 					<span>点击可以切换机构</span>
@@ -98,15 +98,16 @@
 			</li>
 			<li>
 				<n-dropdown trigger="click" :options="userHandleOptions" @select="dropdownSelect">
-					<n-avatar
-						round
-						:size="32"
-						:style="{ marginRight: '8px', cursor: 'pointer' }"
-						src="http://aw.vueadminwork.com/assets/img_avatar.1d4c4a34.gif"
-					/>
+					<n-button :color="theme === 'dark' ? undefined : '#fff'" class="nav-btn" circle size="small">
+						<template #icon>
+							<n-icon>
+								<user-outlined :style="{ color: theme === 'dark' ? undefined : themeVars.primaryColor }" />
+							</n-icon>
+						</template>
+					</n-button>
 				</n-dropdown>
 			</li>
-		</ul>
+		</div>
 		<org-switch ref="orgSwitchRef"></org-switch>
 	</div>
 </template>
@@ -256,6 +257,8 @@ const selectAnInstitution = () => {
 	display: flex;
 	padding-right: 20px;
 	list-style: none;
+	align-items: center;
+	height: 100%;
 
 	:deep(.locale-select) {
 		border-radius: 20px;

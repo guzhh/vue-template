@@ -7,6 +7,9 @@
 // 路由进度条样式
 @import "nprogress/nprogress.css";
 
+// 自定义表单设计渲染器样式
+@import "./formGenerator.less";
+
 // table 样式
 @import "vxe-table/lib/style.css";
 @import "variable";
@@ -43,4 +46,8 @@ body {
 }
 ::-webkit-scrollbar-corner {
 	background-color: transparent;
+}
+
+.n-layout-sider-scroll-container,.widget-form-container{
+  scrollbar-width: thin;
 }

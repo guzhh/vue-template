@@ -34,6 +34,7 @@
 		"joi": "^17.7.0",
 		"mitt": "^3.0.0",
 		"naive-ui": "^2.34.3",
+		"nanoid": "^4.0.1",
 		"nprogress": "^0.2.0",
 		"pinia": "^2.0.30",
 		"pinia-plugin-persist": "^1.0.0",
@@ -42,6 +43,7 @@
 		"vfonts": "^0.0.3",
 		"vue": "^3.2.47",
 		"vue-router": "^4.1.6",
+		"vuedraggable": "^4.1.0",
 		"vxe-table": "^4.3.9",
 		"xe-utils": "^3.5.7"
 	},
