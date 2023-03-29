@@ -1,6 +1,7 @@
 import { constantRouterComponents } from "@/router/config";
 import NotPage from "@/views/exception/403.vue";
 import { BASE_MAIN, NOT_FOUND_ROUTE, REDIRECT_MAIN } from "@/router/routes/base";
+import useUserStore from "@/store/modules/user/index";
 
 export const REDIRECT_ROUTE_NAME = "Redirect";
 
@@ -33,10 +34,11 @@ export function formatTheRoute(data) {
  * @param routeList
  * @returns {Promise<unknown>}
  */
-export const generatorDynamicRouter = (routeList, router) => {
+export const generatorDynamicRouter = router => {
+	const userStore = useUserStore();
 	return new Promise(resolve => {
 		// 过滤 按钮 和 外部链接
-		const routerList = routeList.filter(item => item.meta.type !== 2 && item.meta.linkType !== 1);
+		const routerList = userStore.resourceList.filter(item => item.meta.type !== 2 && item.meta.linkType !== 1);
 		// 将线性路由格式化为树状路由
 		const routes = formatTheRoute(routerList);
 		const routeTreeList = [
@@ -50,7 +52,9 @@ export const generatorDynamicRouter = (routeList, router) => {
 			REDIRECT_MAIN,
 			NOT_FOUND_ROUTE
 		];
-		routeTreeList.forEach(item => router.addRoute(item));
+		routeTreeList.forEach(item => {
+			router.addRoute(item);
+		});
 		resolve(routes);
 	});
 };

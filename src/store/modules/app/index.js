@@ -4,13 +4,17 @@ import useUserStore from "@/store/modules/user/index";
 import { setTreeData } from "@/utils/tree";
 
 const useAppStore = defineStore("app", {
-	state: () => ({ ...defaultSettings, serverMenu: [] }),
+	state: () => ({ ...defaultSettings, serverMenu: [], serverRoutes: [] }),
 	getters: {
 		appCurrentSetting(state) {
 			return { ...state };
 		},
 		appDevice(state) {
 			return state.device;
+		},
+		// 路由表缓存
+		appAsyscRoutes(state) {
+			return state.serverRoutes;
 		},
 		appAsyncMenus(state) {
 			return state.serverMenu;
@@ -59,8 +63,14 @@ const useAppStore = defineStore("app", {
 
 		async fetchServerMenuConfig() {
 			const userStore = useUserStore();
-			const menus = userStore.resourceList.filter(item => item.meta.type === 1);
+			const menus = userStore.resourceList.filter(item => {
+				return item.meta.type === 1 && !item.meta.hideInMenu;
+			});
 			this.serverMenu = setTreeData(menus, "id", "pid");
+		},
+
+		async fetchServerRouteConfig(routes) {
+			this.serverRoutes = JSON.parse(JSON.stringify(routes));
 		}
 	},
 	persist: {
