@@ -69,8 +69,8 @@
 					</n-form-item>
 				</n-gi>
 				<n-gi v-if="formValue.type == 1">
-					<n-form-item label="是否隐藏菜单" path="hidden">
-						<n-select v-model:value="formValue.hidden" :options="ifcacheOptions" placeholder="请选择是否隐藏菜单" />
+					<n-form-item label="是否隐藏菜单" path="ifHidden">
+						<n-select v-model:value="formValue.ifHidden" :options="ifcacheOptions" placeholder="请选择是否隐藏菜单" />
 					</n-form-item>
 				</n-gi>
 				<n-gi v-if="formValue.linkType != 3">
@@ -127,7 +127,7 @@ const defaultForm = {
 	permissionFlag: "",
 	showNum: null,
 	ifcache: 0,
-	hidden: 0,
+	ifHidden: 0,
 	hideChildren: 0,
 	linkType: 3,
 	linkValue: "",
