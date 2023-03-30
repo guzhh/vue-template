@@ -44,6 +44,13 @@
 				<template #unchecked> 显示 </template>
 			</n-switch>
 		</n-form-item>
+		<n-form-item label="必填星号的位置" v-if="!data.hideRequiredMark">
+			<n-radio-group v-model:value="data.requireMarkPlacement" button-style="solid">
+				<n-radio-button value="left">左</n-radio-button>
+				<n-radio-button value="right">右</n-radio-button>
+				<n-radio-button value="right-hanging">右侧悬停</n-radio-button>
+			</n-radio-group>
+		</n-form-item>
 	</n-form>
 </template>
 

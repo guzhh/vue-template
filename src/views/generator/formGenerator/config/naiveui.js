@@ -24,7 +24,8 @@ export const widgetForm = {
 		labelAlign: "left", // 标签的文本对齐方式 'left' | 'right'
 		labelWidth: "auto", // 标签的宽度
 		labelPlacement: "top", // 标签显示的位置 'left' | 'top'
-		showLabel: true // 是否展示标签
+		showLabel: true, // 是否展示标签
+		requireMarkPlacement: "left" // 必填星号的位置
 	},
 	// getWidget:['list'].map(value => {
 	//   console.log('1111=',value)

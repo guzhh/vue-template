@@ -6,6 +6,7 @@
 			:label-placement="widgetForm.config.labelPlacement"
 			:labelWidth="widgetForm.config.labelWidth"
 			:show-require-mark="!widgetForm.config.hideRequiredMark"
+			:require-mark-placement="widgetForm.config.requireMarkPlacement"
 			:show-label="widgetForm.config.showLabel"
 		>
 			<Draggable
@@ -71,7 +72,7 @@
 									</div>
 
 									<div class="widget-view-drag widget-col-drag" v-if="widgetFormSelect?.key === element.key">
-										<n-icon size="20" className="drag-widget">
+										<n-icon size="20" class="drag-widget">
 											<MoveOutline color="#fff"></MoveOutline>
 										</n-icon>
 									</div>
@@ -235,6 +236,7 @@ const handleItemClick = row => {
 
 // eslint-disable-next-line consistent-return
 const handleColMoveAdd = (event, row, index) => {
+	console.log("---------", event, row);
 	const { newIndex, oldIndex, item } = event;
 	const list = JSON.parse(JSON.stringify(props.widgetForm.list));
 
@@ -344,6 +346,7 @@ const handleCopyClick = (index, list) => {
 .widget-col {
 	background-color: rgba(253, 246, 236, 0.3);
 	padding: 5px;
+	position: relative;
 	&:hover {
 		background: #fdf6ec;
 		outline-offset: 0px;
@@ -356,31 +359,31 @@ const handleCopyClick = (index, list) => {
 	}
 	.widget-view-action.widget-col-action {
 		background: #f0a020;
-		bottom: -2px;
-		height: 28px;
-		line-height: 28px;
+		bottom: 0px;
+		height: 24px;
+		line-height: 24px;
 		position: absolute;
-		right: -2px;
+		right: 0px;
 		z-index: 10;
-		.svg-icon {
+		::v-deep(.n-icon) {
 			color: #ffffff;
 			cursor: move;
 			font-size: 14px;
 			margin: 0 5px;
 		}
-		.svg-icon.delete {
+		::v-deep(.n-icon) {
 			cursor: pointer;
 		}
 	}
 	.widget-view-drag.widget-col-drag {
 		background: #f0a020;
 		height: 28px;
-		left: -2px;
+		left: 0px;
 		line-height: 28px;
 		position: absolute;
-		top: -2px;
+		top: 0px;
 		z-index: 10;
-		.svg-icon {
+		::v-deep(.n-icon) {
 			color: #fff;
 			cursor: move;
 			font-size: 14px;

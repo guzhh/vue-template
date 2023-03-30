@@ -30,12 +30,14 @@
 			</n-card>
 			<n-card
 				size="small"
-				content-style="padding: 0; overflow: auto;"
+				content-style="padding: 0;"
 				style="margin-left: 5px; width: 300px; flex-shrink: 0"
 				:style="{ height: `${height - 15}px` }"
 			>
-				<n-tabs type="line" :tabs-padding="20" pane-style="padding: 20px;">
-					<n-tab-pane name="widget" tab="字段属性"> 字段属性</n-tab-pane>
+				<n-tabs type="line" :tabs-padding="20" pane-style="padding: 20px;height: 100%; overflow: auto">
+					<n-tab-pane name="widget" tab="字段属性">
+						<!--						<DesignConfig v-model:select="state.widgetFormSelect" />-->
+					</n-tab-pane>
 					<n-tab-pane name="form" tab="表单属性">
 						<form-config v-model:config="widgetForm.config"></form-config>
 					</n-tab-pane>
@@ -51,6 +53,7 @@ import { naiveui } from "./config";
 import FormConfig from "./components/formConfig.vue";
 import DesignForm from "./components/design/designForm.vue";
 import ComponentGroup from "./components/componentGroup.vue";
+// import DesignConfig from "./components/design/designConfig.vue";
 
 defineOptions({ name: "formGenerator" });
 

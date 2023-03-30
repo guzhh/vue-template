@@ -10,13 +10,51 @@
 			:show-require-mark="!config.hideRequiredMark && (element.options.rules ? element.options.rules.required : false)"
 			:show-label="element.options.showLabel"
 		>
-			<n-input placeholder="输入姓名" />
+			<!--   文字输入框   -->
+			<template v-if="element.type === 'input'">
+				<n-input
+					:type="element.options.type"
+					:size="config.size"
+					v-model:value="value"
+					:style="{ width: element.options.width }"
+					:placeholder="element.options.placeholder"
+					:maxlength="parseInt(element.options.maxlength)"
+					:disabled="element.options.disabled"
+					:clearable="element.options.allowClear"
+					:round="element.options.round"
+					:show-count="element.options.showCount"
+					show-password-on="click"
+					@change="handleChange"
+				>
+					<template #prefix v-if="element.options.prefix">
+						{{ element.options.prefix }}
+					</template>
+					<template #suffix v-if="element.options.suffix">
+						{{ element.options.suffix }}
+					</template>
+					<template #count="{ value }">
+						{{ value.length }}{{ element.options.maxlength ? " / " + element.options.maxlength : "" }}
+					</template>
+				</n-input>
+			</template>
+			<!--   数字输入框   -->
+			<template v-if="element.type === 'number'">
+				<n-input-number
+					:clearable="element.options.allowClear"
+					v-model:value="data"
+					:size="config.size"
+					:style="{ width: element.options.width }"
+					:max="element.options.max"
+					:min="element.options.min"
+					:disabled="disabled || element.options.disabled"
+					:round="element.options.round"
+					@change="handleChange"
+				/>
+			</template>
 		</n-form-item>
 		<div class="widget-view-action" v-if="selectWidget?.key === element.key">
-			<!--			<SvgIcon iconClass="copy" @click.stop="$emit('copy')" />-->
-			<!--			<SvgIcon iconClass="delete" @click.stop="$emit('delete')" />-->
 			<n-icon size="20" @click.stop="$emit('copy')">
-				<Copy color="#ffffff">></Copy>
+				<Copy color="#ffffff"></Copy>
 			</n-icon>
 			<n-icon size="20" @click.stop="$emit('delete')">
 				<Delete16Regular color="#ffffff"></Delete16Regular>
@@ -32,30 +70,57 @@
 	</div>
 </template>
 
-<script setup>
+<script lang="ts">
+import { ref } from "vue";
 import { useThemeVars } from "naive-ui";
+import eventMixin from "@/views/generator/formGenerator/mixins/eventMixin";
 
-defineOptions({ name: "DesignFormItem" });
+export default {
+	name: "NaiveWidgetFormItem",
+	mixins: [eventMixin],
+	components: {},
+	props: {
+		config: {
+			type: Object,
+			required: true
+		},
+		element: {
+			type: Object,
+			required: true
+		},
+		selectWidget: {
+			type: Object
+		},
+		widgetForm: {
+			type: Object
+		}
+	},
+	emits: ["copy", "delete"],
+	data() {
+		return {};
+	},
+	computed: {
+		value: {
+			get() {
+				return this.element.options.defaultValue;
+			},
+			set(val) {
+				// eslint-disable-next-line vue/no-mutating-props
+				this.element.options.defaultValue = val;
+			}
+		}
+	},
+	setup() {
+		const themeVars = useThemeVars();
+		const handleFilterOption = (input, option) => option.label.toLowerCase().includes(input);
 
-defineEmits(["copy", "delete"]);
-defineProps({
-	config: {
-		type: Object,
-		required: true
-	},
-	element: {
-		type: Object,
-		required: true
-	},
-	selectWidget: {
-		type: Object
-	},
-	widgetForm: {
-		type: Object
+		return {
+			themeVars,
+			pattern: ref(""),
+			handleFilterOption
+		};
 	}
-});
-
-const themeVars = useThemeVars();
+};
 </script>
 
 <style scoped lang="less">
@@ -91,6 +156,7 @@ const themeVars = useThemeVars();
 			background: #eafaef;
 			outline-offset: 0;
 			outline: 1px solid v-bind("themeVars.primaryColor");
+
 			.widget-view-drag {
 				display: block;
 			}
@@ -110,14 +176,15 @@ const themeVars = useThemeVars();
 
 	.widget-view-action {
 		background: v-bind("themeVars.primaryColor");
-		bottom: 5px;
+		bottom: 0px;
 		height: 28px;
 		line-height: 28px;
 		position: absolute;
-		right: 10px;
+		right: 0px;
 		z-index: 10;
 		display: flex;
 		align-items: center;
+
 		::v-deep(.n-icon) {
 			cursor: pointer;
 			font-size: 14px;
@@ -128,13 +195,14 @@ const themeVars = useThemeVars();
 	.widget-view-drag {
 		background: v-bind("themeVars.primaryColor");
 		height: 28px;
-		left: 10px;
+		left: 0px;
 		line-height: 28px;
 		position: absolute;
-		top: 5px;
+		top: 0px;
 		z-index: 10;
 		display: flex;
 		align-items: center;
+
 		::v-deep(.n-icon) {
 			font-size: 14px;
 			margin: 0 5px;
