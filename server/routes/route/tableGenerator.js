@@ -1,4 +1,3 @@
-const os = require("os");
 const fs = require("fs");
 const path = require("path");
 const router = require("koa-router")();
@@ -7,7 +6,7 @@ const { toHump, isFileExisted } = require("../../utils/index");
 
 router.prefix("/generator");
 
-router.get("/", function (ctx) {
+router.get("/", ctx => {
 	ctx.body = "这是生成器响应!";
 });
 
@@ -52,8 +51,10 @@ router.post("/generateTable", async ctx => {
 		.join("\n\t\t\t\t\t");
 	isFileExisted("D:\\index.vue");
 	const vueText = fs.readFileSync(path.resolve(process.cwd(), "server/static/template.vue"), "utf-8");
-	fs.writeFileSync("D:\\index.vue", vueText.replace("&*****&", coums));
-	ctx.res.$success(vueText);
+
+	fs.writeFileSync(path.resolve(process.cwd(), "server/static/index.vue"), vueText.replace("&*****&", coums));
+	// const pathUrl = path.resolve(process.cwd(), "server/static/index.vue");
+	ctx.body = Buffer.from(vueText.replace("&*****&", coums), "utf-8"); // fs.readFileSync(pathUrl);
 });
 
 module.exports = router;

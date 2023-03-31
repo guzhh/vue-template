@@ -25,6 +25,7 @@ export function generateTable(params) {
 		data: params,
 		customs: {
 			isLoading: true
-		}
+		},
+		responseType: "blob"
 	});
 }

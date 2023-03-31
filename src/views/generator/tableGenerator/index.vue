@@ -143,11 +143,18 @@ const fileGeneration = () => {
 		message.warning("请首先读取数据表");
 	} else {
 		generateTable(tableList.value).then(res => {
-			if (res.success) {
-				message.success(`文件生成成功，文件位置 D:\\index.vue`);
-			} else {
-				message.error("文件生成失败");
-			}
+			const a = document.createElement("a");
+			const url = window.URL.createObjectURL(res);
+
+			a.href = url;
+			a.download = "index.vue";
+			a.click();
+			// window.URL.revokeObjectURL(url);
+			// if (res.success) {
+			// 	message.success(`文件生成成功，文件位置 D:\\index.vue`);
+			// } else {
+			// 	message.error("文件生成失败");
+			// }
 		});
 	}
 };
