@@ -34,8 +34,10 @@
 		<div style="width: 100%; height: 100%; overflow: auto">
 			<slot></slot>
 		</div>
-		<template #footer>
-			<slot name="footer"></slot>
+		<template #footer v-if="footer">
+			<div style="text-align: right; width: 100%">
+				<slot name="footer"></slot>
+			</div>
 			<div style="text-align: right; width: 100%" v-if="!slotFooter">
 				<n-button type="tertiary" @click="handleClose"> 取 消 </n-button>
 				<n-button type="primary" style="margin-left: 15px" @click="handleOk"> {{ subBtuText }} </n-button>
@@ -54,6 +56,13 @@ const emits = defineEmits(["close", "update:show", "ok", "after-enter", "after-l
 
 const props = defineProps({
 	show: {
+		type: Boolean,
+		required: true
+	},
+	/**
+	 * 是否显示底部按钮
+	 */
+	footer: {
 		type: Boolean,
 		required: true
 	},

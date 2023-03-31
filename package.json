@@ -29,6 +29,7 @@
 		"@vueuse/core": "^9.12.0",
 		"@wangeditor/editor": "^5.1.23",
 		"@wangeditor/editor-for-vue": "^5.1.12",
+		"ace-builds": "^1.16.0",
 		"axios": "^1.3.2",
 		"dayjs": "^1.11.7",
 		"joi": "^17.7.0",

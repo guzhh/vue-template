@@ -41,14 +41,13 @@
 			<template v-if="element.type === 'number'">
 				<n-input-number
 					:clearable="element.options.allowClear"
-					v-model:value="data"
+					v-model:value="value"
 					:size="config.size"
 					:style="{ width: element.options.width }"
 					:max="element.options.max"
 					:min="element.options.min"
-					:disabled="disabled || element.options.disabled"
+					:disabled="element.options.disabled"
 					:round="element.options.round"
-					@change="handleChange"
 				/>
 			</template>
 		</n-form-item>
