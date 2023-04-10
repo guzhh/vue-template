@@ -47,7 +47,7 @@
 			</n-card>
 		</div>
 		<generate-json ref="generateJsonRef" />
-		<form-preview ref="formPreview" />
+		<form-preview ref="formPreviewRef" />
 	</page-content>
 </template>
 
@@ -63,7 +63,8 @@ import FormPreview from "./modal/formPreview.vue";
 
 defineOptions({ name: "formGenerator" });
 
-const generateJsonRef = ref();
+const generateJsonRef = ref(); // 表单JSON
+const formPreviewRef = ref(); // 表单预览
 const { height } = useWindowSize();
 const basicFields = ["input", "number", "radio", "checkbox", "time", "date", "rate", "select", "switch", "slider", "color"];
 const layoutFields = ["grid"];
@@ -97,7 +98,9 @@ const exportJSON = () => {
 };
 
 // 预览表单
-const previewTheForm = () => {};
+const previewTheForm = () => {
+	formPreviewRef.value.open(JSON.parse(JSON.stringify(state.widgetForm)));
+};
 </script>
 
 <style scoped></style>

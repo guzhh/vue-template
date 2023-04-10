@@ -170,7 +170,8 @@ const ruleExpressOptions = computed(() => {
 
 const ruleFieldSelect = (option, prefix, row, field) => {
 	// eslint-disable-next-line no-eval
-	const reg = eval(`/${prefix}${option.value} /g`);
+	// const reg = eval(`/${prefix}${option.value} /g`);
+	const reg = new RegExp(`${prefix}${option.value} /g`);
 	row[field] = row[field].replace(reg, option.value);
 };
 

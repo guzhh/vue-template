@@ -1,3 +1,5 @@
+import print from "vue3-print-nb";
+
 /**
  * 注册全局自定义指令
  * @param app
@@ -6,6 +8,8 @@ import useUserStore from "@/store/modules/user";
 
 export function setupDirectives(app) {
 	const userStore = useUserStore();
+
+	app.use(print); // 挂载打印指令
 
 	/**
 	 * 判断当前用户是否拥有某项权限权限

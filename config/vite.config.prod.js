@@ -27,8 +27,8 @@ export default mergeConfig(
 			terserOptions: {
 				compress: {
 					// 生产环境去除 console debugger
-					drop_console: true,
-					drop_debugger: true
+					// drop_console: true,
+					// drop_debugger: true
 				}
 			},
 			rollupOptions: {

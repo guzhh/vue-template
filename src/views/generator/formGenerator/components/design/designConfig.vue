@@ -27,6 +27,7 @@
 <script setup>
 import Input from "../configs/Input.vue";
 import Number from "../configs/Number.vue";
+import Grid from "../configs/Grid.vue";
 import { checkComponent } from "@/views/generator/formGenerator/enums";
 
 const emits = defineEmits(["update:select"]);
@@ -37,7 +38,8 @@ const props = defineProps({
 
 const componentsMap = {
 	input: Input,
-	number: Number
+	number: Number,
+	grid: Grid
 };
 
 const data = ref(props.select);

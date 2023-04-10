@@ -10,7 +10,8 @@ import {
 	InsertRowBelowOutlined,
 	EditOutlined,
 	HomeOutlined,
-	AlignLeftOutlined
+	AlignLeftOutlined,
+	PrinterOutlined
 } from "@vicons/antd";
 import {
 	Search,
@@ -24,7 +25,7 @@ import {
 	MoveOutline
 } from "@vicons/ionicons5";
 
-import { Refresh, FoldDown, Download, Upload, Edit, Plus, Forms } from "@vicons/tabler";
+import { Refresh, FoldDown, Download, Upload, Edit, Plus, Forms, TemperatureCelsius } from "@vicons/tabler";
 import {
 	ArrowBetweenDown24Filled,
 	Settings48Regular,
@@ -58,9 +59,11 @@ export const Icons = {
 	PhoneOutlined,
 	BarcodeOutline,
 	Delete16Regular,
+	PrinterOutlined,
 	Settings48Regular,
 	PicCenterOutlined,
 	AlignLeftOutlined,
+	TemperatureCelsius,
 	OrderedListOutlined,
 	AppstoreAddOutlined,
 	UsergroupAddOutlined,

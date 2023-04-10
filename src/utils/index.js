@@ -35,3 +35,205 @@ export function colorReverse(oldColor) {
 	const str = `000000${(0xffffff - colors).toString(16)}`;
 	return `#${str.substring(str.length - 6, str.length)}`;
 }
+
+/**
+ * 数字转大写金额
+ * @param {*} number
+ * @returns {String} String
+ */
+export function numberToUppercase(num) {
+	let number = num;
+	if (typeof number !== "number") {
+		console.warn(`${number} 不是数字类型`);
+		return number;
+	}
+	if (number > 999999999999.999) {
+		console.warn(`${number} 超出数字范围`);
+		return number;
+	}
+	number = number.toString();
+	// 大写数字
+	const upper = ["零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"];
+	const small = ["角", "分", "厘"];
+	const digit = ["", "拾", "佰", "仟"];
+	const level = ["元", "万", "亿"];
+	// 是否为负数
+	const isMinus = number.includes("-");
+	if (isMinus) number = number.replace("-", "");
+	// 是否有小数
+	const hasDecimal = number.includes(".");
+	// 分离整数部分和小数部分
+	let integerPart;
+	let decimalPart;
+	if (hasDecimal) {
+		const [n, d] = Number(number).toFixed(3).split(".");
+		integerPart = n.split("").map(Number);
+		decimalPart = d.split("").map(Number);
+	} else {
+		integerPart = number.split("").map(Number);
+	}
+	/* 处理整数部分 */
+	const integer = integerPart.reduce((res, n, i) => {
+		const index = integerPart.length - i - 1;
+		const idx = Math.floor(index / 4);
+		// eslint-disable-next-line no-param-reassign
+		const current = res[idx] ? res[idx] : (res[idx] = []);
+		// upper[n] : // 转换对应的中文大写
+		// n > 0 数字大于0，则添加“拾,佰,仟”到数字后面
+		current.push(upper[n] + (n > 0 ? digit[index % digit.length] : ""));
+		return res;
+	}, []);
+	const integerValue = integer.reverse().reduce((pre, val, i) => {
+		const index = integer.length - i - 1;
+		// 替换连续的零，仅保留一个"零"
+		let cur = val.join("").replace(/零+/g, "零");
+		// 去除前末尾和当前第一位为零的"零"
+		if (pre[pre.length - 1] === "零" && cur.indexOf("零") === 0) {
+			cur = cur.substring(1, cur.length - 1);
+		}
+		// 去除最后一位"零"
+		if (cur.lastIndexOf("零") === cur.length - 1) {
+			cur = cur.substring(-1, cur.length - 1);
+		}
+		return pre + cur + level[index];
+	}, "");
+	/* 处理小数部分 */
+	let decimal;
+	if (decimalPart) {
+		decimal = decimalPart.reduce((res, n, i) => {
+			// 转换对应的中文大写
+			const value = upper[n];
+			// n > 0 数字大于0，则添加“角,分,厘”到数字后面
+			let current = value + (n > 0 ? small[i] : "");
+			// 小数最后一位为零，则去除
+			if (i === decimalPart.length - 1 && value === "零") {
+				current = "";
+			}
+			return res + current;
+		}, "");
+		// 替换连续的零，仅保留一个"零"
+		decimal = decimal.replace(/零+/g, "零");
+	}
+	// 合并数字
+	const result = !hasDecimal ? `${integerValue}整` : `${integerValue}${decimal}`;
+	// 为负数添加符号
+	return (isMinus ? "负" : "") + result;
+}
+
+/**
+ * @description 转换整数部分的函数
+ * @param {Number} num 需要转换的整数
+ * @return {String} 返回转换后的中文大写
+ */
+function intNumberToChinese(num) {
+	// 单个数字字符对应的中文大写
+	const cnNums = ["零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"];
+	// 数字位数对应的中文大写
+	const cnIntRadice = ["", "拾", "佰", "仟"];
+	// 整数部分额外的中文大写
+	const cnIntUnits = ["", "万", "亿", "兆"];
+
+	let cnStr = ""; // 中文大写字符串
+	let suffix = ""; // 整数部分额外的中文大写
+
+	let i = 0;
+	while (num > 0) {
+		// 依次处理个、十、百、千位
+		const n = num % 10;
+		if (i === 0 && n === 0) {
+			// 如果个位是 0，且当前是整数部分，则不添加零
+			suffix = "";
+		} else {
+			cnStr = cnNums[n] + cnIntRadice[i] + cnStr; // 拼接当前位的中文大写
+			suffix = "";
+		}
+
+		if (i === 3 && num >= 1000 && num % 10000 !== 0) {
+			// 已经处理到千位且还有整千以上的数，添加额外的中文大写
+			cnStr = cnIntUnits[1] + cnStr;
+		}
+		if (i === 7 && num >= 10000000 && num % 100000000 !== 0) {
+			// 已经处理到亿位且还有整亿以上的数，添加额外的中文大写
+			cnStr = cnIntUnits[2] + cnStr;
+		}
+		if (i === 11 && num >= 100000000000 && num % 1000000000000 !== 0) {
+			// 已经处理到兆位且还有整兆以上的数，添加额外的中文大写
+			cnStr = cnIntUnits[3] + cnStr;
+		}
+
+		// eslint-disable-next-line no-param-reassign
+		num = Math.floor(num / 10);
+		i++;
+	}
+
+	// 去掉末尾的零
+	cnStr = cnStr.replace(/零拾/g, "零"); // 去掉连续的零拾
+	cnStr = cnStr.replace(/零佰/g, "零"); // 去掉连续的零佰
+	cnStr = cnStr.replace(/零千/g, "零"); // 去掉连续的零千
+	cnStr = cnStr.replace(/零{2,}/g, "零"); // 去掉多余的零
+	cnStr = cnStr.replace(/^零+/, ""); // 去掉开头的零
+
+	return cnStr + suffix;
+}
+
+/**
+ * @description 转换小数部分的函数
+ * @param {Number} num 需要转换的小数
+ * @return {String} 返回转换后的中文大写
+ */
+function decimalNumberToChinese(num) {
+	// 单个数字字符对应的中文大写
+	const cnNums = ["零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"];
+
+	let cnStr = ""; // 中文大写字符串
+
+	for (let i = 0; i < num.toString().length; i++) {
+		const n = parseInt(num.toString()[i], 10);
+		cnStr += cnNums[n];
+	}
+
+	return cnStr;
+}
+
+/**
+ * @description 数字转中文大写的函数
+ * @param {Number} num 需要转换的数字
+ * @return {String} 返回转换后的中文大写
+ */
+export function numberToChinese(num) {
+	// 单个数字字符对应的中文大写
+	const cnNums = ["零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"];
+
+	let cnStr = ""; // 中文大写字符串
+
+	if (num === 0) {
+		// 特殊处理 0
+		return cnNums[0];
+	}
+
+	if (num < 0) {
+		// 处理负数
+		cnStr += "负";
+		// eslint-disable-next-line no-param-reassign
+		num = Math.abs(num);
+	}
+
+	if (num.toString().indexOf(".") !== -1) {
+		// 判断是否有小数部分
+		const parts = num.toString().split(".");
+		const integerPart = parseInt(parts[0], 10); // 整数部分
+		const decimalPart = parseInt(parts[1], 10); // 小数部分
+
+		cnStr += intNumberToChinese(integerPart); // 转换整数部分
+		if (decimalPart > 0) {
+			// 处理小数部分
+			cnStr += "点";
+			cnStr += decimalNumberToChinese(decimalPart);
+		}
+	} else {
+		// 只有整数部分
+		cnStr += intNumberToChinese(num);
+	}
+
+	return cnStr;
+}

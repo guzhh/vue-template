@@ -1,6 +1,6 @@
 export const ComponentType = {
 	Input: "input",
-	Number: "number"
+	Number: "number",
 	// Radio: "radio",
 	// Checkbox: "checkbox",
 	// Time: "time",
@@ -16,7 +16,7 @@ export const ComponentType = {
 	// Cascader: "cascader",
 	// Tree: "tree",
 	// Table: "table",
-	// Grid: "grid",
+	Grid: "grid"
 	// DynamicTable: "dynamicTable",
 	// SelectTree: "selectTree",
 	// Transfer: "transfer",

@@ -64,7 +64,7 @@ const props = defineProps({
 	 */
 	footer: {
 		type: Boolean,
-		required: true
+		default: true
 	},
 	title: {
 		title: String,
