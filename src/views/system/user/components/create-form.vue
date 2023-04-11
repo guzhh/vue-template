@@ -9,21 +9,6 @@
 			require-mark-placement="left"
 			style="padding: 15px 10px 0"
 		>
-			<n-form-item v-show="false" label="id" path="id">
-				<n-input v-model:value="formValue.id" />
-			</n-form-item>
-			<n-form-item v-show="false" label="机构编码" path="orgCode">
-				<n-input v-model:value="formValue.orgCode" placeholder="请输入机构编码" />
-			</n-form-item>
-			<n-form-item v-show="false" label="机构名称" path="orgName">
-				<n-input v-model:value="formValue.orgName" placeholder="请输入机构名称" />
-			</n-form-item>
-			<n-form-item v-show="false" label="科室编码" path="departCode">
-				<n-input v-model:value="formValue.departCode" placeholder="请输入科室编码" />
-			</n-form-item>
-			<n-form-item v-show="false" label="科室名称" path="departName">
-				<n-input v-model:value="formValue.departName" placeholder="请输入科室名称" />
-			</n-form-item>
 			<n-form-item label="用户名称" path="name">
 				<n-input v-model:value="formValue.name" placeholder="请输入用户名称" />
 			</n-form-item>
@@ -44,7 +29,7 @@
 </template>
 
 <script setup>
-import { ref, nextTick } from "vue";
+import { ref } from "vue";
 import { saveOrUpt } from "@/api/system/user";
 
 const emits = defineEmits(["ok"]);
@@ -80,12 +65,10 @@ const rules = {
 const addUser = data => {
 	visible.value = true;
 	title.value = "新增用户";
-	nextTick(() => {
-		formValue.value.orgCode = data.orgCode;
-		formValue.value.orgName = data.orgName;
-		formValue.value.departCode = data.depCode;
-		formValue.value.departName = data.depName;
-	});
+	formValue.value.orgCode = data.orgCode;
+	formValue.value.orgName = data.orgName;
+	formValue.value.departCode = data.depCode;
+	formValue.value.departName = data.depName;
 };
 
 const editUser = row => {

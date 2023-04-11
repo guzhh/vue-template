@@ -107,12 +107,12 @@ const rules = {
 };
 
 const add = () => {
-	title.value = "新增参数";
+	title.value = "新增子系统";
 	visible.value = true;
 };
 
 const edit = row => {
-	title.value = "编辑参数";
+	title.value = "编辑子系统";
 	visible.value = true;
 	formValue.value = {
 		id: `${row.id}`,
