@@ -23,6 +23,9 @@ export function saveOrUpt(params) {
 	return request.post({
 		url: "/p/user/saveOrUpt",
 		data: params,
+		headers: {
+			"Content-Type": "application/json;charset=UTF-8"
+		},
 		customs: {
 			isLoading: true,
 			loadingText: "用户信息保存中..."

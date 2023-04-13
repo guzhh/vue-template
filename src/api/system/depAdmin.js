@@ -16,6 +16,21 @@ export function getDeptList(params) {
 }
 
 /**
+ * 获取机构下所有科室信息
+ * @returns {Promise<*>}
+ */
+export function getDeptByOrgCode(params) {
+	return request.post({
+		url: "/p/auth/auth-depart/getDeptByOrgCode",
+		data: params,
+		customs: {
+			isLoading: true,
+			loadingText: "科室列表获取中..."
+		}
+	});
+}
+
+/**
  * 保存或新增科室信息
  * @returns {Promise<*>}
  */
@@ -58,6 +73,20 @@ export function cancelDelDept(params) {
 			isLoading: true,
 			loadingText: "撤销删除中...",
 			successTip: "科室删除撤销成功"
+		}
+	});
+}
+
+/**
+ * 获取用户所属的科室
+ * @returns {Promise<*>}
+ */
+export function getDepartsByUser(params) {
+	return request.post({
+		url: "/p/auth/auth-depart/getDepartsByUser",
+		data: params,
+		customs: {
+			isLoading: true
 		}
 	});
 }
