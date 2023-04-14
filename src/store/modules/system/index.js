@@ -36,6 +36,7 @@ const useSystemStore = defineStore("system", {
 		async getDict(code) {
 			// const result = await
 			// console.log("----------", code);
+			if (!code) return;
 			const result = await getDict({ code, state: 1 });
 			if (result.success) {
 				this.dictMap.set(code, result.result);

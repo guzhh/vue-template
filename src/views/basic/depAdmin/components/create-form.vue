@@ -18,6 +18,9 @@
 				<n-form-item label="科室名称" path="name">
 					<n-input v-model:value="formValue.name" placeholder="请输入科室名称" />
 				</n-form-item>
+				<n-form-item label="科室类型">
+					<n-select v-model:value="formValue.deptType" :options="deptTypeOption" placeholder="请选择科室类型" />
+				</n-form-item>
 				<n-form-item label="三方科室编码" path="outCode">
 					<n-input v-model:value="formValue.outCode" placeholder="请输入三方科室编码" />
 				</n-form-item>
@@ -33,6 +36,7 @@
 import { ref } from "vue";
 import { useMessage } from "naive-ui";
 import { saveOrUptDept } from "@/api/system/depAdmin";
+import { getDictByPCodes } from "@/api/system/dictList";
 
 const emits = defineEmits(["ok"]);
 const title = ref("");
@@ -48,8 +52,10 @@ const formValue = ref({
 	name: "",
 	descr: "",
 	orgCode: "",
-	outCode: ""
+	outCode: "",
+	deptType: undefined
 });
+const deptTypeOption = ref([]);
 
 const rules = {
 	name: { required: true, message: "请输入科室名称", trigger: "blur" },
@@ -59,13 +65,14 @@ const rules = {
 // eslint-disable-next-line no-unused-vars
 const add = ({ row, orgCode }) => {
 	title.value = "新增科室";
-	visible.value = true;
 	if (row.id) {
 		title.value = "新增下级科室";
 		formValue.value.pcode = row.code;
 		addRow.value = row;
 	}
 	formValue.value.orgCode = orgCode;
+	// eslint-disable-next-line no-use-before-define
+	getDeptType();
 };
 
 const edit = row => {
@@ -77,10 +84,12 @@ const edit = row => {
 		name: row.name,
 		descr: row.descr,
 		orgCode: row.orgCode,
-		outCode: row.outCode
+		outCode: row.outCode,
+		deptType: row.deptType
 	};
 	addRow.value = row;
-	visible.value = true;
+	// eslint-disable-next-line no-use-before-define
+	getDeptType();
 };
 
 const handleClose = () => {
@@ -94,7 +103,8 @@ const handleClose = () => {
 		name: "",
 		descr: "",
 		orgCode: "",
-		outCode: ""
+		outCode: "",
+		deptType: undefined
 	};
 	addRow.value = {};
 };
@@ -117,6 +127,21 @@ const handleOk = () => {
 			});
 		}
 	});
+};
+
+// 获取科室类型字典
+const getDeptType = () => {
+	getDictByPCodes({ pcodes: "DEPT_TYPE", state: 1 })
+		.then(res => {
+			if (res.success) {
+				deptTypeOption.value = res.result.DEPT_TYPE.map(item => {
+					return { label: item.name, value: item.code };
+				});
+			}
+		})
+		.finally(() => {
+			visible.value = true;
+		});
 };
 
 defineExpose({ add, edit });

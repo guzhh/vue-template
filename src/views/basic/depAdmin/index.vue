@@ -81,6 +81,9 @@
 					<vxe-column field="code" min-width="120px" show-overflow="title" title="科室编码"></vxe-column>
 					<vxe-column field="pcode" min-width="80px" show-overflow="title" title="上级科室编码"></vxe-column>
 					<vxe-column field="outCode" min-width="80px" show-overflow="title" title="三方科室编码"></vxe-column>
+					<vxe-column field="deptType" min-width="100px" show-overflow="title" title="科室类型">
+						<template #default="{ row }"> {{ systemStore.getDictName(row.deptType) }}</template>
+					</vxe-column>
 					<vxe-column field="descr" min-width="120px" show-overflow="title" title="科室介绍"></vxe-column>
 					<vxe-column field="ifDel" min-width="120px" show-overflow="title" title="是否删除">
 						<template #default="{ row }">
@@ -125,6 +128,7 @@ import { ifDeletedOption } from "@/constant/system/resource";
 import CreateForm from "@/views/basic/depAdmin/components/create-form.vue";
 import { getDeptList, delDept, cancelDelDept } from "@/api/system/depAdmin.js";
 import useUserStore from "@/store/modules/user";
+import useSystemStore from "@/store/modules/system";
 
 defineOptions({ name: "depAdmin" });
 
@@ -140,6 +144,7 @@ const treeData = ref([]);
 const defaultSelect = ref([]);
 const orgCode = ref("");
 const userStore = useUserStore();
+const systemStore = useSystemStore();
 
 const treeRenderLabel = ({ option }) => {
 	// display: block; overflow: hidden; white-space: nowrap; text-overflow:ellipsis;

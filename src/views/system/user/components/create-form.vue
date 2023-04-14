@@ -21,6 +21,9 @@
 			<n-form-item label="科室" path="deptCodeList">
 				<n-tree-select v-model:value="formValue.deptCodeList" :default-expand-all="true" :options="treeData" multiple />
 			</n-form-item>
+			<n-form-item label="用户类型">
+				<n-select v-model:value="formValue.userType" :options="userTypeOption" placeholder="请选择用户类型" />
+			</n-form-item>
 			<n-form-item label="手机号" path="phone">
 				<n-input v-model:value="formValue.phone" placeholder="请输入手机号" />
 			</n-form-item>
@@ -35,6 +38,7 @@
 import { ref } from "vue";
 import { saveOrUpt } from "@/api/system/user";
 import { getDeptByOrgCode, getDepartsByUser } from "@/api/system/depAdmin";
+import { getDictByPCodes } from "@/api/system/dictList";
 
 // eslint-disable-next-line no-unused-vars
 const emits = defineEmits(["ok"]);
@@ -53,8 +57,10 @@ const defaultForm = {
 	passwd: "",
 	phone: "",
 	email: "",
-	deptCodeList: []
+	deptCodeList: [],
+	userType: undefined
 };
+const userTypeOption = ref([]);
 
 const formValue = ref({ ...defaultForm });
 const reg = /^(13[0-9]|14[01456879]|15[0-35-9]|16[2567]|17[0-8]|18[0-9]|19[0-35-9])\d{8}$/;
@@ -96,7 +102,8 @@ const addUser = data => {
 	formValue.value.orgName = data.orgName;
 	// eslint-disable-next-line no-use-before-define
 	getDep(data);
-	visible.value = true;
+	// eslint-disable-next-line no-use-before-define
+	getUserType();
 };
 
 // 编辑用户
@@ -106,17 +113,15 @@ const editUser = row => {
 	getDep(row);
 	title.value = "编辑用户";
 	formValue.value = { ...row, deptCodeList: [] };
-	getDepartsByUser({ orgCode: row.orgCode, userId: `${row.id}` })
-		.then(res => {
-			if (res.success) {
-				res.result.forEach(item => {
-					formValue.value.deptCodeList.push(item.code);
-				});
-			}
-		})
-		.finally(() => {
-			visible.value = true;
-		});
+	getDepartsByUser({ orgCode: row.orgCode, userId: `${row.id}` }).then(res => {
+		if (res.success) {
+			res.result.forEach(item => {
+				formValue.value.deptCodeList.push(item.code);
+			});
+		}
+	});
+	// eslint-disable-next-line no-use-before-define
+	getUserType();
 };
 
 // 获取机构下所有的科室
@@ -159,6 +164,21 @@ const handleOk = () => {
 			});
 		}
 	});
+};
+
+// 获取用户类型字典
+const getUserType = () => {
+	getDictByPCodes({ pcodes: "USER_TYPE", state: 1 })
+		.then(res => {
+			if (res.success) {
+				userTypeOption.value = res.result.USER_TYPE.map(item => {
+					return { label: item.name, value: item.code };
+				});
+			}
+		})
+		.finally(() => {
+			visible.value = true;
+		});
 };
 
 defineExpose({ addUser, editUser });

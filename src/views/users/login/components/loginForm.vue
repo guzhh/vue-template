@@ -9,7 +9,7 @@
 
 		<n-form ref="formRef" :model="userInfo" :rules="rules" label-placement="left" size="large">
 			<n-form-item path="account">
-				<n-input @keyup.enter="accountEnter" v-model:value="userInfo.account" placeholder="请输入账号">
+				<n-input @keyup.enter="accountEnter" v-model:value="userInfo.account" placeholder="请输入账号" @blur="accountBlur">
 					<template #prefix>
 						<user-icon width="22" height="22" viewBox="0 0 28 28"></user-icon>
 					</template>
@@ -38,6 +38,14 @@
 					</template>
 				</n-input>
 			</n-form-item>
+			<n-form-item>
+				<n-tree-select
+					:options="deptOptions"
+					:default-expand-all="true"
+					placeholder="请选择科室"
+					v-model:value="userInfo.deptCode"
+				/>
+			</n-form-item>
 			<n-form-item style="margin-top: 52px">
 				<n-button style="width: 100%" type="info" attr-type="button" @click="handleValidateClick">登录</n-button>
 			</n-form-item>
@@ -49,6 +57,7 @@
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import useUserStore from "@/store/modules/user";
+import { getDeptByAccount } from "@/api/users/user";
 
 import UserIcon from "@/assets/images/login/user_icon.svg";
 import PassIcon from "@/assets/images/login/pass_icon.svg";
@@ -61,6 +70,7 @@ const router = useRouter();
 const userStore = useUserStore();
 const formRef = ref();
 const passwordRef = ref();
+const deptOptions = ref([]);
 
 // 全局公共变量
 
@@ -68,8 +78,9 @@ const title = import.meta.env.VITE_SYSTEM_NAME;
 const errorMessage = ref("");
 
 const userInfo = reactive({
-	account: "admin",
-	passwd: "111111"
+	account: "",
+	passwd: "",
+	deptCode: ""
 });
 
 const rules = {
@@ -97,6 +108,32 @@ const handleValidateClick = () => {
 			});
 		} else {
 			console.log(errors);
+		}
+	});
+};
+
+const accountBlur = () => {
+	deptOptions.value = [];
+	userInfo.deptCode = "";
+	getDeptByAccount({ account: userInfo.account }).then(res => {
+		if (res.success) {
+			console.log(res.result, "用户所属科室");
+			const optionData = res.result.map(item => {
+				return { code: item.code, pcode: item.pcode ? item.pcode : "", key: item.code, label: item.name };
+			});
+
+			// 转为树形数据
+			const cloneData = JSON.parse(JSON.stringify(optionData)); // 对源数据深度克隆,防止污染原始数据
+			deptOptions.value = cloneData.filter(father => {
+				const branchArr = cloneData.filter(child => father.code === child.pcode); // 返回每一项的子级数组
+				// eslint-disable-next-line no-unused-expressions,no-param-reassign
+				branchArr.length > 0 ? (father.children = branchArr) : ""; // 如果存在子级，则给父级添加一个children属性，并赋值
+				return father.pcode === ""; // 返回第一层
+			});
+			console.log(deptOptions.value, "deptOptions.value");
+			if (deptOptions.value.length > 0) {
+				userInfo.deptCode = deptOptions.value[0].code;
+			}
 		}
 	});
 };

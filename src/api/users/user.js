@@ -73,3 +73,17 @@ export function uptPasswd() {
 		}
 	});
 }
+
+/**
+ * 根据账号信息获取科室集合
+ * @returns {Promise<*>}
+ */
+export function getDeptByAccount(params) {
+	return request.post({
+		url: "/p/user/getDeptByAccount",
+		data: params,
+		customs: {
+			isLoading: true
+		}
+	});
+}

@@ -119,6 +119,9 @@
 						<vxe-column field="name" min-width="100px" show-overflow="title" title="用户名称"></vxe-column>
 						<vxe-column field="phone" min-width="100px" show-overflow="title" title="手机号"></vxe-column>
 						<vxe-column field="email" min-width="100px" show-overflow="title" title="邮箱"></vxe-column>
+						<vxe-column field="userType" min-width="100px" show-overflow="title" title="用户类型">
+							<template #default="{ row }"> {{ systemStore.getDictName(row.userType) }}</template>
+						</vxe-column>
 						<vxe-column field="state" min-width="80px" show-overflow="title" title="状态">
 							<template #default="{ row }">
 								<option-badge :options="stateJudgeOption" :val="row.state" />
@@ -225,6 +228,7 @@ import { ifOnLineOption, stateJudgeOption } from "@/constant/system/resource";
 import CreateForm from "@/views/system/user/components/create-form.vue";
 import DepTree from "@/views/system/user/components/dep-tree.vue";
 import OrgTree from "@/views/system/user/components/org-tree.vue";
+import useSystemStore from "@/store/modules/system";
 import {
 	getUserList,
 	restPasswd,
@@ -253,6 +257,7 @@ const { tableSizeOptions, tableSize } = useTable();
 const dateTimeRange = ref(null);
 const orgInfo = ref({}); // 机构信息
 const depInfo = ref({}); // 科室信息
+const systemStore = useSystemStore();
 const onLineOption = ref([
 	{
 		value: 0,
