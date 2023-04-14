@@ -5,7 +5,6 @@
 			<span style="margin-left: 12px">河南盘古信息技术有限公司</span>
 		</div>
 		<div class="login-form-title">{{ title }}</div>
-		<div class="login-form-error-msg">{{ errorMessage }}</div>
 
 		<n-form ref="formRef" :model="userInfo" :rules="rules" label-placement="left" size="large">
 			<n-form-item path="account">
@@ -38,15 +37,16 @@
 					</template>
 				</n-input>
 			</n-form-item>
-			<n-form-item>
-				<n-tree-select
-					:options="deptOptions"
-					:default-expand-all="true"
-					placeholder="请选择科室"
-					v-model:value="userInfo.deptCode"
-				/>
+			<n-form-item path="deptCode">
+				<n-select v-model:value="userInfo.deptCode" :options="deptOptions" placeholder="请选择科室" />
+				<!--				<n-tree-select-->
+				<!--					:options="deptOptions"-->
+				<!--					:default-expand-all="true"-->
+				<!--					placeholder="请选择科室"-->
+				<!--					v-model:value="userInfo.deptCode"-->
+				<!--				/>-->
 			</n-form-item>
-			<n-form-item style="margin-top: 52px">
+			<n-form-item style="margin-top: 20px">
 				<n-button style="width: 100%" type="info" attr-type="button" @click="handleValidateClick">登录</n-button>
 			</n-form-item>
 		</n-form>
@@ -75,12 +75,11 @@ const deptOptions = ref([]);
 // 全局公共变量
 
 const title = import.meta.env.VITE_SYSTEM_NAME;
-const errorMessage = ref("");
 
 const userInfo = reactive({
 	account: "",
 	passwd: "",
-	deptCode: ""
+	deptCode: null
 });
 
 const rules = {
@@ -92,6 +91,11 @@ const rules = {
 	passwd: {
 		required: true,
 		message: "请输入密码",
+		trigger: "blur"
+	},
+	deptCode: {
+		required: true,
+		message: "请选择科室",
 		trigger: "blur"
 	}
 };
@@ -114,23 +118,12 @@ const handleValidateClick = () => {
 
 const accountBlur = () => {
 	deptOptions.value = [];
-	userInfo.deptCode = "";
+	userInfo.deptCode = null;
 	getDeptByAccount({ account: userInfo.account }).then(res => {
 		if (res.success) {
-			console.log(res.result, "用户所属科室");
-			const optionData = res.result.map(item => {
-				return { code: item.code, pcode: item.pcode ? item.pcode : "", key: item.code, label: item.name };
+			deptOptions.value = res.result.map(item => {
+				return { ...item, value: item.code, label: item.name };
 			});
-
-			// 转为树形数据
-			const cloneData = JSON.parse(JSON.stringify(optionData)); // 对源数据深度克隆,防止污染原始数据
-			deptOptions.value = cloneData.filter(father => {
-				const branchArr = cloneData.filter(child => father.code === child.pcode); // 返回每一项的子级数组
-				// eslint-disable-next-line no-unused-expressions,no-param-reassign
-				branchArr.length > 0 ? (father.children = branchArr) : ""; // 如果存在子级，则给父级添加一个children属性，并赋值
-				return father.pcode === ""; // 返回第一层
-			});
-			console.log(deptOptions.value, "deptOptions.value");
 			if (deptOptions.value.length > 0) {
 				userInfo.deptCode = deptOptions.value[0].code;
 			}

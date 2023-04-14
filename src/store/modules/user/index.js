@@ -9,6 +9,7 @@ const useUserStore = defineStore("user", {
 		id: null,
 		orgCode: null,
 		departCode: null,
+		departName: null,
 		account: null,
 		name: null,
 		errCount: null,

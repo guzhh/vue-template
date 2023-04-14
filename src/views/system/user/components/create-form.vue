@@ -19,7 +19,13 @@
 				<n-input v-model:value="formValue.passwd" placeholder="请输入密码" type="password" />
 			</n-form-item>
 			<n-form-item label="科室" path="deptCodeList">
-				<n-tree-select v-model:value="formValue.deptCodeList" :default-expand-all="true" :options="treeData" multiple />
+				<n-tree-select
+					filterable
+					:default-expand-all="true"
+					:options="treeData"
+					multiple
+					v-model:value="formValue.deptCodeList"
+				/>
 			</n-form-item>
 			<n-form-item label="用户类型">
 				<n-select v-model:value="formValue.userType" :options="userTypeOption" placeholder="请选择用户类型" />

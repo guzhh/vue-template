@@ -33,6 +33,9 @@
 				</n-tooltip>
 			</li>
 			<li>
+				<span>{{ userStore.userInfo.departName }}</span>
+			</li>
+			<li>
 				<n-tooltip>
 					<span>{{ theme === "light" ? "点击切换为暗黑模式" : "点击切换为亮色模式" }}</span>
 					<template #trigger>
