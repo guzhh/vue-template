@@ -1,5 +1,5 @@
 import NProgress from "nprogress";
-import { setRouteEmitter } from "@/utils/route-listener";
+import { setRouteEmitter } from "@/utils/listener/route-listener";
 import setupUserLoginInfoGuard from "./userLoginInfo";
 import setupPermissionGuard from "./permission";
 import setupVersionGuard from "./version";

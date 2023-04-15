@@ -87,3 +87,20 @@ export function getDeptByAccount(params) {
 		}
 	});
 }
+
+/**
+ * 当前所在科室切换中
+ * @param params
+ * @returns {Promise<*>}
+ */
+export function changeDept(params) {
+	return request.post({
+		url: "/p/user/changeDept",
+		data: params,
+		customs: {
+			isLoading: true,
+			loadingText: "当前所在科室切换中...",
+			successTip: "当前所在科室切换成功"
+		}
+	});
+}

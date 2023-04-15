@@ -19,7 +19,7 @@ import { computed, onUnmounted } from "vue";
 import { useThemeVars } from "naive-ui";
 import useAppStore from "@/store/modules/app";
 import useTabBarStore from "@/store/modules/tab-bar";
-import { listenerRouteChange, removeRouteListener } from "@/utils/route-listener";
+import { listenerRouteChange, removeRouteListener } from "@/utils/listener/route-listener";
 import TabItem from "./tab-item.vue";
 
 const appStore = useAppStore();

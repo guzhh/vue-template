@@ -2,7 +2,8 @@ import { defineStore } from "pinia";
 import { login as userLogin, logout as userLogout, getUserInfo } from "@/api/users/user";
 import { clearToken, setToken } from "@/utils/auth";
 import { formatTheResource } from "@/router/constants";
-import { setOrgEmitter } from "@/utils/org-listener";
+import { setOrgEmitter } from "@/utils/listener/org-listener";
+import { setDeptEmitter } from "@/utils/listener/dept-listener";
 
 const useUserStore = defineStore("user", {
 	state: () => ({
@@ -42,6 +43,13 @@ const useUserStore = defineStore("user", {
 		// 重置用户信息
 		resetInfo() {
 			this.$reset();
+		},
+
+		// 设置当前所在科室
+		setDepart({ departCode, departName }) {
+			this.departCode = departCode;
+			this.departName = departName;
+			setDeptEmitter(departCode);
 		},
 
 		// 设置当前默认选中的机构

@@ -24,7 +24,7 @@
 		<div class="right-side">
 			<li>
 				<n-tooltip>
-					<span>点击可以切换机构</span>
+					<span>点击可以切换机构【数据查看范围】</span>
 					<template #trigger>
 						<span class="navbar-org" @click="selectAnInstitution">
 							{{ orgData.code ? orgData.name : "未知机构" }} <n-icon size="15" style="margin-left: 5px"> <ChevronDown /> </n-icon
@@ -32,8 +32,15 @@
 					</template>
 				</n-tooltip>
 			</li>
-			<li>
-				<span>{{ userStore.userInfo.departName }}</span>
+			<li class="right-side">
+				<n-tooltip>
+					<span>点击可以切换科室【当前所在科室】</span>
+					<template #trigger>
+						<span class="navbar-org" @click="selectADepartment"
+							>{{ userStore.userInfo.departName }} <n-icon size="15" style="margin-left: 5px"> <ChevronDown /> </n-icon
+						></span>
+					</template>
+				</n-tooltip>
 			</li>
 			<li>
 				<n-tooltip>
@@ -112,6 +119,7 @@
 			</li>
 		</div>
 		<org-switch ref="orgSwitchRef"></org-switch>
+		<dept-switch ref="deptSwitchRef" />
 	</div>
 </template>
 
@@ -124,6 +132,7 @@ import { MoonSharp } from "@vicons/ionicons5";
 import { FullScreenMaximize24Regular, FullScreenMinimize24Regular } from "@vicons/fluent";
 import { MenuFoldOutlined, SettingOutlined, UserOutlined, ExportOutlined } from "@vicons/antd";
 import OrgSwitch from "@/components/OrgSwitch/index.vue";
+import DeptSwitch from "@/components/OrgSwitch/deptSwitch.vue";
 import { getOrgInfoByCode } from "@/api/system/orgAdmin";
 import useUserStore from "@/store/modules/user";
 import useAppStore from "@/store/modules/app";
@@ -137,6 +146,7 @@ defineOptions({ name: "Navbar" });
 
 const router = useRouter();
 const orgSwitchRef = ref();
+const deptSwitchRef = ref();
 const appStore = useAppStore();
 const userStore = useUserStore();
 const { logout } = useUser();
@@ -217,6 +227,10 @@ const dropdownSelect = key => {
 
 const selectAnInstitution = () => {
 	orgSwitchRef.value.handleOrg();
+};
+
+const selectADepartment = () => {
+	deptSwitchRef.value.handleDept();
 };
 </script>
 <!--borderColor-->
