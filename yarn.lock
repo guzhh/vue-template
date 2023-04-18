@@ -7820,6 +7820,11 @@ svg-tags@^1.0.0:
   resolved "https://registry.npmjs.org/svg-tags/-/svg-tags-1.0.0.tgz#58f71cee3bd519b59d4b2a843b6c7de64ac04764"
   integrity sha512-ovssysQTa+luh7A5Weu3Rta6FJlFBBbInjOh722LIt6klpU2/HtdUbszju/G4devcvk8PGt7FCLv5wftu3THUA==
 
+svgo-config@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.npmmirror.com/svgo-config/-/svgo-config-0.5.0.tgz#f5c7b26d7d615a46c507a9190eec8e774d24862f"
+  integrity sha512-40sXPthpxCArGGkFSGucu68RYqTrs4NT1IVt9xcLv+DY0TRv3oItZ0AnGQTOT7LAVV8YJ26hxF/q9B294jsQgA==
+
 svgo@^2.1.0:
   version "2.8.0"
   resolved "https://registry.npmjs.org/svgo/-/svgo-2.8.0.tgz#4ff80cce6710dc2795f0c7c74101e6764cfccd24"
@@ -7835,7 +7840,7 @@ svgo@^2.1.0:
 
 svgo@^3.0.2:
   version "3.0.2"
-  resolved "https://registry.npmjs.org/svgo/-/svgo-3.0.2.tgz#5e99eeea42c68ee0dc46aa16da093838c262fe0a"
+  resolved "https://registry.npmmirror.com/svgo/-/svgo-3.0.2.tgz#5e99eeea42c68ee0dc46aa16da093838c262fe0a"
   integrity sha512-Z706C1U2pb1+JGP48fbazf3KxHrWOsLme6Rv7imFBn5EnuanDW1GPaA/P1/dvObE670JDePC3mnj0k0B7P0jjQ==
   dependencies:
     "@trysound/sax" "0.2.0"

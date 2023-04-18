@@ -119,22 +119,34 @@ const handleValidateClick = () => {
 const accountBlur = () => {
 	deptOptions.value = [];
 	userInfo.deptCode = null;
-	getDeptByAccount({ account: userInfo.account }).then(res => {
-		if (res.success) {
-			deptOptions.value = res.result.map(item => {
-				return { ...item, value: item.code, label: item.name };
-			});
-			if (deptOptions.value.length > 0) {
-				userInfo.deptCode = deptOptions.value[0].code;
+	if (userInfo.account) {
+		getDeptByAccount({ account: userInfo.account }).then(res => {
+			if (res.success) {
+				deptOptions.value = res.result.map(item => {
+					return { ...item, value: item.code, label: item.name };
+				});
+				if (deptOptions.value.length > 0) {
+					userInfo.deptCode = deptOptions.value[0].code;
+				}
 			}
-		}
-	});
+		});
+	}
 };
 </script>
 
 <style lang="less" scoped>
 .n-button,
 .n-input {
+	height: 48px !important;
+	line-height: 48px !important;
+}
+
+::v-deep(.n-base-selection) {
+	height: 48px !important;
+	line-height: 48px !important;
+}
+
+::v-deep(.n-base-selection-label) {
 	height: 48px !important;
 	line-height: 48px !important;
 }

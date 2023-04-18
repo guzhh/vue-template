@@ -43,6 +43,13 @@ const selectDict = computed({
 		emits("update:value", val.join(","));
 	}
 });
+
+// 刷新字典下拉选择
+const flushedDict = () => {
+	systemStore.removeDictByPCode(props.dictCode);
+};
+
+defineExpose({ flushedDict });
 </script>
 
 <style scoped></style>

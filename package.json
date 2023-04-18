@@ -3,15 +3,16 @@
 	"private": true,
 	"version": "0.0.0",
 	"scripts": {
-		"dev": "set DEBUG=vite:deps && vite --config ./config/vite.config.dev.js --mode development",
+		"dev": "set DEBUG=vite:deps && npm run svgo && vite --config ./config/vite.config.dev.js --mode development",
 		"build": "vite build --config ./config/vite.config.prod.js --mode production",
 		"report": "cross-env REPORT=true npm run build",
 		"preview": "vite preview --config ./config/vite.config.prod.js --mode production",
 		"lint": "eslint --ext .vue,.js ./",
-		"lint:fix": "eslint --fix --ext .vue,.js ./",
 		"lint:lint-staged": "lint-staged",
+		"lint:fix": "eslint --fix --ext .vue,.js ./",
 		"lint:stylelint": "stylelint --cache --fix \"**/*.{vue,less,postcss,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/",
 		"prepare": "husky install",
+		"svgo": "node ./src/assets/images/svgo.js",
 		"commit": "git pull && git add -A && git-cz && git push"
 	},
 	"config": {
@@ -94,6 +95,8 @@
 		"stylelint-config-recommended-vue": "^1.4.0",
 		"stylelint-config-standard": "^30.0.1",
 		"stylelint-config-standard-scss": "^7.0.1",
+		"svgo": "^3.0.2",
+		"svgo-config": "^0.5.0",
 		"unplugin-auto-import": "^0.13.0",
 		"unplugin-vue-components": "^0.23.0",
 		"unplugin-vue-define-options": "^1.2.0",
