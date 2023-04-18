@@ -12,6 +12,18 @@
 			>
 				<n-grid cols="13" item-responsive>
 					<n-grid-item span="6 600:4 1000:2 1200:2 ">
+						<n-form-item label="数据库类型" path="dbType">
+							<n-select
+								@update:value="dbTypeChange"
+								v-model:value="dataBaseConfig.dbType"
+								:options="[
+									{ label: 'mysql', value: 'mysql' },
+									{ label: 'oracle', value: 'oracle' }
+								]"
+							/>
+						</n-form-item>
+					</n-grid-item>
+					<n-grid-item span="6 600:4 1000:2 1200:2 ">
 						<n-form-item label="数据库IP" path="host">
 							<n-input v-model:value="dataBaseConfig.host" placeholder="请输入数据库IP" />
 						</n-form-item>
@@ -23,7 +35,7 @@
 					</n-grid-item>
 					<n-grid-item span="6 600:4 1000:2 1200:2 ">
 						<n-form-item label="用户名" path="user">
-							<n-input v-model:value="dataBaseConfig.port" placeholder="请输入数据库用户名" />
+							<n-input v-model:value="dataBaseConfig.user" placeholder="请输入数据库用户名" />
 						</n-form-item>
 					</n-grid-item>
 					<n-grid-item span="6 600:4 1000:2 1200:2 ">
@@ -31,7 +43,7 @@
 							<n-input v-model:value="dataBaseConfig.password" placeholder="请输入数据库密码" />
 						</n-form-item>
 					</n-grid-item>
-					<n-grid-item span="6 600:4 1000:2 1200:2 ">
+					<n-grid-item span="6 600:4 1000:2 1200:2 " v-if="dataBaseConfig.dbType === 'mysql'">
 						<n-form-item label="数据库名" path="database">
 							<n-input v-model:value="dataBaseConfig.database" placeholder="请输入数据库名" />
 						</n-form-item>
@@ -65,27 +77,27 @@
 				show-header-overflow="title"
 				show-overflow
 			>
-				<vxe-column field="columnName" show-overflow="title" title="字段名" min-width="100px"></vxe-column>
-				<vxe-column field="humpName" show-overflow="title" title="字段驼峰名" min-width="100px">
+				<vxe-column field="columnname" show-overflow="title" title="字段名" min-width="100px"></vxe-column>
+				<vxe-column field="humpname" show-overflow="title" title="字段驼峰名" min-width="100px">
 					<template #default="{ row }">
-						<n-input v-model:value="row.humpName" placeholder="请输入字段驼峰名" />
+						<n-input v-model:value="row.humpname" placeholder="请输入字段驼峰名" />
 					</template>
 				</vxe-column>
-				<vxe-column field="columnType" min-width="100px" show-overflow="title" title="字段类型"></vxe-column>
-				<vxe-column field="columnComment" min-width="100px" show-overflow="title" title="字段备注"></vxe-column>
-				<vxe-column field="columnTitle" min-width="100px" show-overflow="title" title="列标题">
+				<vxe-column field="columntype" min-width="100px" show-overflow="title" title="字段类型"></vxe-column>
+				<vxe-column field="columncomment" min-width="100px" show-overflow="title" title="字段备注"></vxe-column>
+				<vxe-column field="columntitle" min-width="100px" show-overflow="title" title="列标题">
 					<template #default="{ row }">
-						<n-input v-model:value="row.columnTitle" placeholder="请输入表格列标题" />
+						<n-input v-model:value="row.columntitle" placeholder="请输入表格列标题" />
 					</template>
 				</vxe-column>
-				<vxe-column field="columnWidth" min-width="100px" show-overflow="title" title="列宽度">
+				<vxe-column field="columnwidth" min-width="100px" show-overflow="title" title="列宽度">
 					<template #default="{ row }">
-						<n-input-number v-model:value="row.columnWidth" placeholder="请输入表格列宽度" />
+						<n-input-number v-model:value="row.columnwidth" placeholder="请输入表格列宽度" />
 					</template>
 				</vxe-column>
-				<vxe-column field="isShow" min-width="100px" show-overflow="title" title="是否展示">
+				<vxe-column field="isshow" min-width="100px" show-overflow="title" title="是否展示">
 					<template #default="{ row }">
-						<n-switch v-model:value="row.isShow" :checked-value="1" :unchecked-value="0">
+						<n-switch v-model:value="row.isshow" :checked-value="1" :unchecked-value="0">
 							<template #checked> 展示</template>
 							<template #unchecked> 不展示</template>
 						</n-switch>
@@ -111,7 +123,8 @@ const dataBaseConfig = ref({
 	user: "root",
 	password: "pankujava",
 	database: "panku-sso",
-	datasheet: "t_auth_param"
+	datasheet: "t_auth_param",
+	dbType: "mysql"
 });
 
 const rules = {
@@ -121,6 +134,16 @@ const rules = {
 	password: { required: true, message: "请输入数据库密码", trigger: ["input", "blur"] },
 	database: { required: true, message: "请输入数据库名", trigger: ["input", "blur"] },
 	datasheet: { required: true, message: "请输入数据表名", trigger: ["input", "blur"] }
+};
+
+const dbTypeChange = val => {
+	console.log(val);
+	if (val === "mysql") {
+		dataBaseConfig.value.port = "1521";
+		dataBaseConfig.value.user = "root";
+	} else {
+		dataBaseConfig.value.port = "3306";
+	}
 };
 
 const tableList = ref([]);

@@ -1,7 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 const router = require("koa-router")();
-const { query } = require("../../dbhelper/db");
+// eslint-disable-next-line camelcase
+const { query_mysql, query_oracle } = require("../../dbhelper/db");
 const { toHump, isFileExisted } = require("../../utils/index");
 
 router.prefix("/generator");
@@ -11,31 +12,59 @@ router.get("/", ctx => {
 });
 
 router.get("/getDataSheet", async ctx => {
-	const result = await query(
-		{
-			host: ctx.query.host,
-			port: ctx.query.port,
-			user: ctx.query.user,
-			password: ctx.query.password,
-			database: ctx.query.database
-		},
-		`SELECT
-          COLUMN_NAME columnName,
-          column_comment columnComment,
-          column_type columnType,
-          column_key columnKey
+	if (ctx.query.dbType === "mysql") {
+		const result = await query_mysql(
+			{
+				host: ctx.query.host,
+				port: ctx.query.port,
+				user: ctx.query.user,
+				password: ctx.query.password,
+				database: ctx.query.database
+			},
+			`SELECT
+          COLUMN_NAME columnname,
+          column_comment columncomment,
+          column_type columntype,
+          column_key columnkey
         FROM
           information_schema.COLUMNS
         WHERE
           table_schema = '${ctx.query.database}' and
           table_name = '${ctx.query.datasheet}'`
-	);
+		);
 
-	ctx.res.$success(
-		result.map(item => {
-			return { ...item, humpName: toHump(item.columnName), columnTitle: item.columnComment, columnWidth: 100, isShow: 1 };
-		})
-	);
+		console.log("-------", result);
+
+		ctx.res.$success(
+			result.map(item => {
+				return { ...item, humpname: toHump(item.columnname), columntitle: item.columncomment, columnwidth: 100, isshow: 1 };
+			})
+		);
+	} else {
+		const result = await query_oracle(
+			{
+				user: ctx.query.user,
+				password: ctx.query.password,
+				connectString: `${ctx.query.host}:${ctx.query.port}/orcl` // 数据库地址：{IP:PORT/数据库名称}
+			},
+			`SELECT b.column_name columnname
+            ,a.comments columncomment
+            ,b.data_type columntype
+            FROM all_col_comments a
+            ,all_tab_columns b
+            WHERE a.table_name = b.table_name and a.OWNER = b.OWNER and a.Column_name = b.Column_name and
+            a.table_name = '${ctx.query.datasheet.toUpperCase()}'
+            `
+		);
+
+		console.log("--------", result);
+
+		ctx.res.$success(
+			result.map(item => {
+				return { ...item, humpname: toHump(item.columnname), columntitle: item.columncomment, columnwidth: 100, isshow: 1 };
+			})
+		);
+	}
 });
 
 /**
@@ -44,9 +73,9 @@ router.get("/getDataSheet", async ctx => {
 router.post("/generateTable", async ctx => {
 	const tableList = ctx.request.body;
 	const coums = tableList
-		.filter(item => item.isShow === 1)
+		.filter(item => item.isshow === 1)
 		.map(item => {
-			return `<vxe-column field="${item.humpName}" min-width="${item.columnWidth}px" show-overflow="title" title="${item.columnTitle}"></vxe-column>`;
+			return `<vxe-column field="${item.humpname}" min-width="${item.columnwidth}px" show-overflow="title" title="${item.columntitle}"></vxe-column>`;
 		})
 		.join("\n\t\t\t\t\t");
 	isFileExisted("D:\\index.vue");

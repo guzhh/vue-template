@@ -6247,6 +6247,11 @@ ora@^5.4.1:
     strip-ansi "^6.0.0"
     wcwidth "^1.0.1"
 
+oracledb@^5.5.0:
+  version "5.5.0"
+  resolved "https://registry.npmmirror.com/oracledb/-/oracledb-5.5.0.tgz#0cf9af5d0c0815f74849ae9ed56aee823514d71b"
+  integrity sha512-i5cPvMENpZP8nnqptB6l0pjiOyySj1IISkbM4Hr3yZEDdANo2eezarwZb9NQ8fTh5pRjmgpZdSyIbnn9N3AENw==
+
 os-filter-obj@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/os-filter-obj/-/os-filter-obj-2.0.0.tgz#1c0b62d5f3a2442749a2d139e6dddee6e81d8d16"
