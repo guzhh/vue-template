@@ -345,7 +345,7 @@ const changeTime = (value, formattedValue) => {
 
 // 新增用户
 const handleAddUser = () => {
-	if (orgInfo.value.ifExist && depInfo.value.ifExist) {
+	if (orgInfo.value.ifExist && depInfo.value.ifExist && depInfo.value.depCode) {
 		userCreateFormRef.value.addUser({ ...orgInfo.value, ...depInfo.value });
 	} else {
 		message.warning("请先选择科室");

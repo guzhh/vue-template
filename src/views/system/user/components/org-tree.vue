@@ -8,7 +8,7 @@
 		}"
 	>
 		<n-tree
-			:cancelable="false"
+			:cancelable="true"
 			:data="treeData"
 			:default-selected-keys="defaultSelect"
 			:on-load="handleLoad"
@@ -39,6 +39,7 @@ const getOrg = () => {
 		if (res.success) {
 			if (res.result?.id) {
 				treeData.value = [{ ...res.result, key: res.result.code, label: res.result.name, isLeaf: false }];
+				defaultSelect.value.splice(0, defaultSelect.value.length);
 				defaultSelect.value.push(treeData.value[0]?.key);
 				emits("selectOrg", { orgCode: treeData.value[0].code, orgName: treeData.value[0].name, ifExist: true });
 			} else {
@@ -74,8 +75,11 @@ const handleLoad = node => {
 // 选中机构
 // eslint-disable-next-line no-unused-vars
 const select = (keys, option) => {
+	console.log("--------", keys);
 	if (keys.length > 0) {
 		emits("selectOrg", { orgCode: option[0].code, orgName: option[0].name, ifExist: true });
+	} else {
+		emits("selectOrg", { orgCode: "", orgName: "", ifExist: false });
 	}
 };
 </script>

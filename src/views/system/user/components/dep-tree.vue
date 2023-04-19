@@ -9,7 +9,7 @@
 	>
 		<n-tree
 			v-if="reLoad"
-			:cancelable="false"
+			:cancelable="true"
 			:data="treeData"
 			:default-selected-keys="defaultSelect"
 			:on-load="handleLoad"
@@ -52,6 +52,7 @@ const getDep = data => {
 					return { ...item, key: item.code, label: item.name, isLeaf: false };
 				});
 				if (res.result.length > 0) {
+					defaultSelect.value.splice(0, defaultSelect.value.length);
 					defaultSelect.value.push(treeData.value[0]?.key);
 					emits("selectDep", { depCode: treeData.value[0].code, depName: treeData.value[0].name, ifExist: true });
 				} else {
@@ -60,6 +61,8 @@ const getDep = data => {
 			}
 		});
 	} else {
+		treeData.value = [];
+		orgCode.value = null;
 		emits("selectDep", { depCode: "", depName: "", ifExist: false });
 	}
 };
@@ -91,6 +94,8 @@ const handleLoad = node => {
 const select = (keys, option) => {
 	if (keys.length > 0) {
 		emits("selectDep", { depCode: option[0].code, depName: option[0].name, ifExist: true });
+	} else {
+		emits("selectDep", { depCode: null, depName: null, ifExist: true });
 	}
 };
 

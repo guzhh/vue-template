@@ -26,8 +26,9 @@ export default new Request({
 			if (config.method === "get" || config.method === "GET") {
 				config.params = { orgCode: userStore.currentOrgCode, ...config.params, t: new Date().getTime() };
 			} else if (config.method === "post" || config.method === "POST") {
+				config.data = { orgCode: userStore.currentOrgCode, ...config.data };
 				if (config.headers["Content-Type"] === "application/x-www-form-urlencoded;charset=UTF-8") {
-					config.data = qs.stringify({ orgCode: userStore.currentOrgCode, ...config.data });
+					config.data = qs.stringify(config.data);
 				}
 			}
 			const token = getToken(); // storage.get(ACCESS_TOKEN);
