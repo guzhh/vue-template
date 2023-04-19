@@ -1,4 +1,4 @@
-import { reactive, ref } from "vue";
+import { reactive, ref, getCurrentInstance } from "vue";
 import { useMessage } from "naive-ui";
 
 /**
@@ -15,7 +15,7 @@ export default function ({
 	requestMethod,
 	formData = {},
 	LoadData = true,
-	defaultPageSize = 20,
+	defaultPageSize = getCurrentInstance().proxy.$config.pageSize,
 	processTheData,
 	initDataCallBack = () => {}
 }) {
