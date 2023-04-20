@@ -11,7 +11,8 @@ export default new Request({
 	baseURL: import.meta.env.VITE_API_BASE_URL,
 	timeout: 1000 * 60 * 2,
 	headers: {
-		"Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"
+		"Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+		"device-flag": "PC"
 	},
 	// 实例级拦截器
 	interceptors: {

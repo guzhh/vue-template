@@ -14,3 +14,9 @@ export const getOptionFind = (options, val) => {
 		option.label
 	]);
 };
+
+/**
+ * 主要用于select组件动态查看分页
+ * @type {number}
+ */
+export const page = { pageSize: 10, pageNo: 1 };
