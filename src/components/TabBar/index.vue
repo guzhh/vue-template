@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { computed, onUnmounted } from "vue";
+import { computed } from "vue";
 import { useThemeVars } from "naive-ui";
 import useAppStore from "@/store/modules/app";
 import useTabBarStore from "@/store/modules/tab-bar";
@@ -40,12 +40,12 @@ const tabWidth = computed(() => (renderMenu.value && !hideMenu.value ? `calc(100
 
 // 监听路由变化
 listenerRouteChange(route => {
-	if (!route.meta.noAffix && !tagList.value.some(tag => tag.fullPath === route.fullPath)) {
+	if (!route.meta.noAffix) {
 		tabBarStore.updateTabList(route);
 	}
 }, true);
 
-onUnmounted(() => {
+onBeforeUnmount(() => {
 	removeRouteListener();
 });
 

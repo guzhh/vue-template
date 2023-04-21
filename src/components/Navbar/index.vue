@@ -188,8 +188,10 @@ watch(
 	newValue => {
 		if (newValue) {
 			getOrgInfoByCode({ orgCode: newValue }).then(res => {
-				if (res.success) {
+				if (res.success && res.result) {
 					orgData.value = res.result;
+				} else {
+					orgData.value = {};
 				}
 			});
 		}

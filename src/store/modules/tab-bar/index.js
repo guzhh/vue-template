@@ -29,8 +29,21 @@ const useTabBarStore = defineStore("tabBar", {
 	},
 	actions: {
 		updateTabList(route) {
+			// 判断进入的路由是否在白名单中
 			if (BAN_LIST.includes(route.name)) return;
-			this.tagList.push(formatTag(route));
+			// 格式化路由
+			const formatRoute = formatTag(route);
+			// 判断传递过来的路由之前有没有存储过
+			if (this.tagList.some(tag => tag.fullPath === formatRoute.fullPath)) {
+				// 如果存储过则进行替换
+				this.tagList = this.tagList.map(tag => {
+					if (tag.fullPath === formatRoute.fullPath) return formatRoute;
+					return tag;
+				});
+			} else {
+				// 否则直接放入
+				this.tagList.push(formatTag(route));
+			}
 			if (!route.meta.ignoreCache) {
 				this.cacheTabList.add(route.name);
 			}
