@@ -17,7 +17,9 @@
 							row-id="id"
 							@current-change="currentChangeEvent"
 						>
-							<vxe-column field="name" min-width="150px" show-overflow="title" title="资源名称" tree-node></vxe-column>
+							<vxe-column width="60" show-overflow="title" tree-node title="节点"></vxe-column>
+							<vxe-column field="id" min-width="60" show-overflow="title" title="ID"></vxe-column>
+							<vxe-column field="name" min-width="150px" show-overflow="title" title="资源名称"></vxe-column>
 							<vxe-column field="permissionFlag" min-width="120px" show-overflow="title" title="权限标识"></vxe-column>
 							<vxe-column field="type" min-width="80px" show-overflow="title" title="资源类型">
 								<template #default="{ row }">

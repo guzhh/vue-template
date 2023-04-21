@@ -35,6 +35,7 @@
 			</template>
 
 			<vxe-table
+				border
 				ref="tableRef"
 				:data="tableData"
 				:height="height - 90"
@@ -46,7 +47,9 @@
 				row-id="id"
 				style="margin-top: 10px"
 			>
-				<vxe-column field="name" min-width="150px" show-overflow="title" title="资源名称" tree-node></vxe-column>
+				<vxe-column width="60" show-overflow="title" tree-node title="节点"></vxe-column>
+				<vxe-column field="id" min-width="60" show-overflow="title" title="ID"></vxe-column>
+				<vxe-column field="name" min-width="150px" show-overflow="title" title="资源名称"></vxe-column>
 				<vxe-column field="url" min-width="120px" show-overflow="title" title="资源地址"></vxe-column>
 				<vxe-column field="compName" min-width="120px" show-overflow="title" title="组件名称"></vxe-column>
 				<vxe-column field="showNum" min-width="80px" show-overflow="title" title="资源序号"></vxe-column>
