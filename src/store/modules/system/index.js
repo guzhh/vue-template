@@ -1,11 +1,13 @@
 import { defineStore } from "pinia";
 import { getDict, getDictByPCodes } from "@/api/system/dictList";
+import { getAllParam } from "@/api/system/param";
 
 const useSystemStore = defineStore("system", {
 	state: () => ({
-		dictCodeMap: new Map(),
-		dictMap: new Map(),
-		dictAjaxTimer: {}
+		dictCodeMap: new Map(), // 根据父级字典存储字典map
+		dictMap: new Map(), // 每个字典map
+		dictAjaxTimer: {}, // 定义三秒内只发送一次获取同一个字典map
+		paramMap: new Map() // 存储参数
 	}),
 	getters: {
 		// 根据字典编码获取下级字典
@@ -25,6 +27,14 @@ const useSystemStore = defineStore("system", {
 				state.getDict(code);
 				return "";
 			};
+		},
+		// 根据参数编码获取参数值
+		getParamVal(state) {
+			return code => {
+				const param = state.paramMap.get(code);
+				if (param) return param.paramValue;
+				return undefined;
+			};
 		}
 	},
 	actions: {
@@ -39,7 +49,7 @@ const useSystemStore = defineStore("system", {
 				}, 3 * 1000);
 				// 发送请求
 				const result = await getDictByPCodes({ pcodes: code, state: 1 });
-				if (result.success) {
+				if (result.success && result.result) {
 					this.dictCodeMap.set(code, result.result[code]);
 				}
 			}
@@ -55,10 +65,32 @@ const useSystemStore = defineStore("system", {
 					this.dictAjaxTimer = { ...this.dictAjaxTimer, [code]: null };
 				}, 3 * 1000);
 				const result = await getDict({ code, state: 1 });
-				if (result.success) {
+				if (result.success && result.result) {
 					this.dictMap.set(code, result.result);
+				} else {
+					this.dictMap.set(code, {
+						id: new Date().getTime(),
+						code,
+						name: "未知字典",
+						dictVal: null,
+						state: null
+					});
 				}
 			}
+		},
+
+		/**
+		 * 获取全部系统参数
+		 * @returns {Promise<void>}
+		 */
+		async getAllParam() {
+			getAllParam().then(res => {
+				if (res.success) {
+					res.result.forEach(param => {
+						this.paramMap.set(param.paramCode, param);
+					});
+				}
+			});
 		}
 	}
 });

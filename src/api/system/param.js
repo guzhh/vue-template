@@ -44,3 +44,26 @@ export function delParam(params) {
 		}
 	});
 }
+
+/**
+ * 根据参数 code 获取参数对象
+ * @param params
+ * @returns {Promise<*>}
+ */
+export function getParam(params) {
+	return request.get({
+		url: "/p/auth/auth-param/getParamCache",
+		data: params
+	});
+}
+
+/**
+ * 获取全部参数信息
+ * @returns {Promise<*>}
+ */
+export function getAllParam(params) {
+	return request.post({
+		url: "/p/auth/auth-param/getAllParam",
+		data: params
+	});
+}

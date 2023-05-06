@@ -7,8 +7,7 @@ import useSystemStore from "@/store/modules/system";
 
 const props = defineProps({
 	dictCode: {
-		type: [String, null, undefined],
-		required: true
+		type: [String, null]
 	}
 });
 

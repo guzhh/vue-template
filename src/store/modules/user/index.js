@@ -19,6 +19,7 @@ const useUserStore = defineStore("user", {
 		email: null,
 		createType: null,
 		createTime: null,
+		dataScope: null, // 数据范围
 		currentOrgCode: null, // 当前选中的机构
 		ifOnline: null, // 是否在线
 		roleList: [], // 角色列表

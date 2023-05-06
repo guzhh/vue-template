@@ -4,6 +4,9 @@ overrides:
   bin-wrapper: npm:bin-wrapper-china
 
 dependencies:
+  '@guzhh/panku-form-render':
+    specifier: 0.0.0-alpha
+    version: 0.0.0-alpha
   '@soybeanjs/vue-admin-tab':
     specifier: ^1.0.5
     version: 1.0.5(vue@3.2.47)
@@ -1035,6 +1038,13 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@guzhh/panku-form-render@0.0.0-alpha:
+    resolution: {integrity: sha512-Ffn55PwW+79edFCvvxFZP/eHNXNLTAHfG8vNHXBF9rKA5z41Y0D7krBeskj02xouCdfRsIpLYJCSrj4sjMTIpA==}
+    dependencies:
+      naive-ui: 2.34.3(vue@3.2.47)
+      vue: 3.2.47
+    dev: false
 
   /@hapi/hoek@9.3.0:
     resolution: {integrity: sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ==}
