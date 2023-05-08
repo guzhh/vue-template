@@ -32,11 +32,12 @@ const modelValue = computed({
 });
 
 // 刷新字典下拉选择
-const flushedDict = () => {
+// 刷新字典下拉选择
+const resetDict = () => {
 	systemStore.removeDictByPCode(props.dictCode);
 };
 
-defineExpose({ flushedDict });
+defineExpose({ resetDict });
 </script>
 
 <style scoped></style>

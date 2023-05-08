@@ -91,6 +91,11 @@ const useSystemStore = defineStore("system", {
 					});
 				}
 			});
+		},
+
+		// 删除缓存中的字典
+		removeDictByPCode(pcode) {
+			this.dictCodeMap.delete(pcode);
 		}
 	}
 });

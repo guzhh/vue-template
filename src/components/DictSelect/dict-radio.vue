@@ -32,6 +32,13 @@ const modelValue = computed({
 		emits("update:value", val);
 	}
 });
+
+// 刷新字典下拉选择
+const resetDict = () => {
+	systemStore.removeDictByPCode(props.dictCode);
+};
+
+defineExpose({ resetDict });
 </script>
 
 <style scoped></style>
