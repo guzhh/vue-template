@@ -52,7 +52,7 @@ export function delParam(params) {
  */
 export function getParam(params) {
 	return request.get({
-		url: "/p/auth/auth-param/getParamCache",
+		url: "/p/auth/auth-param/getParamByCode",
 		data: params
 	});
 }
