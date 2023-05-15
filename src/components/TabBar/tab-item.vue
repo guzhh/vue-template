@@ -134,7 +134,7 @@ const handleSelect = async key => {
 		copyTagList.splice(0, props.index);
 		tabBarStore.freshTabList(copyTagList);
 		if (currentRouteIdx < index) {
-			router.push({ name: itemData.name });
+			router.push({ name: itemData.name, query: { ...itemData.query }, params: { ...itemData.params } });
 		}
 	} else if (key === "right") {
 		const currentRouteIdx = findCurrentRouteIndex();
@@ -142,14 +142,14 @@ const handleSelect = async key => {
 
 		tabBarStore.freshTabList(copyTagList);
 		if (currentRouteIdx > index) {
-			router.push({ name: itemData.name });
+			router.push({ name: itemData.name, query: { ...itemData.query }, params: { ...itemData.params } });
 		}
 	} else if (key === "others") {
 		const filterList = tagList.value.filter((el, idx) => {
 			return idx === props.index;
 		});
 		tabBarStore.freshTabList(filterList);
-		router.push({ name: itemData.name });
+		router.push({ name: itemData.name, query: { ...itemData.query }, params: { ...itemData.params } });
 	}
 };
 

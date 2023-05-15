@@ -27,7 +27,10 @@ export default new Request({
 			if (config.method === "get" || config.method === "GET") {
 				config.params = { orgCode: userStore.currentOrgCode, ...config.params, t: new Date().getTime() };
 			} else if (config.method === "post" || config.method === "POST") {
-				config.data = { orgCode: userStore.currentOrgCode, ...config.data };
+				if (config?.data?.constructor === Object) {
+					config.data = { orgCode: userStore.currentOrgCode, ...config.data };
+				}
+
 				if (config.headers["Content-Type"] === "application/x-www-form-urlencoded;charset=UTF-8") {
 					config.data = qs.stringify(config.data);
 				}
