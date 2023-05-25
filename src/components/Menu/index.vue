@@ -5,10 +5,10 @@
 		:render-icon="renderMenuIcon"
 		:collapsed="collapsed"
 		:collapsed-width="menuCollapsedWidth"
-		key-field="name"
+		key-field="id"
 		:indent="20"
 		:inverted="inverted"
-		:value="route.name"
+		:value="route.meta.id"
 		:collapsed-icon-size="22"
 		:options="menuTree"
 	/>

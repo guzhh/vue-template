@@ -34,7 +34,7 @@
 					<n-tooltip>
 						<span>刷新</span>
 						<template #trigger>
-							<n-icon size="17" @click="getOrg">
+							<n-icon size="17" @click="getDepartList">
 								<Refresh />
 							</n-icon>
 						</template>
