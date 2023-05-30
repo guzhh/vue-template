@@ -63,9 +63,10 @@ export function getUserInfo() {
  * 用户自行修改密码
  * @returns {Promise<*>}
  */
-export function uptPasswd() {
+export function uptPasswd(data) {
 	return request.post({
 		url: "/p/user/uptPasswd",
+		data,
 		customs: {
 			isLoading: true,
 			loadingText: "用户密码修改中...",
