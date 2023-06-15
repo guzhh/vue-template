@@ -21,8 +21,8 @@
 		}
 	},
 	"dependencies": {
-		"@guzhh/custom-form": "0.0.1-alpha.7",
-		"@soybeanjs/vue-admin-tab": "^1.0.5",
+		"@guzhh/custom-form": "0.0.1-alpha.17",
+		"@soybeanjs/vue-admin-tab": "^1.0.8",
 		"@vicons/antd": "^0.12.0",
 		"@vicons/fa": "^0.12.0",
 		"@vicons/fluent": "^0.12.0",
