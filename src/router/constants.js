@@ -5,7 +5,9 @@ import useUserStore from "@/store/modules/user/index";
 
 export const REDIRECT_ROUTE_NAME = "Redirect";
 
-export const WHITE_LIST = [{ name: "login", children: [] }, BASE_MAIN, NOT_FOUND_ROUTE, REDIRECT_MAIN];
+const BASE_ROUTES = [BASE_MAIN, NOT_FOUND_ROUTE, REDIRECT_MAIN];
+
+export const WHITE_LIST = [{ name: "login", children: [] }, ...BASE_ROUTES];
 
 export const NOT_FOUND = {
 	path: "notFound"
@@ -48,9 +50,7 @@ export const generatorDynamicRouter = router => {
 				redirect: routes.length > 0 ? { name: routes[0].name } : { name: "login" }, // routes.length > 0 ? routes[0].path : "login",
 				children: routes
 			},
-			BASE_MAIN,
-			REDIRECT_MAIN,
-			NOT_FOUND_ROUTE
+			...BASE_ROUTES
 		];
 		routeTreeList.forEach(item => {
 			router.addRoute(item);

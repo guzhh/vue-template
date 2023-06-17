@@ -237,3 +237,62 @@ export function numberToChinese(num) {
 
 	return cnStr;
 }
+
+/**
+ * 获取两日期之间日期列表函数
+ * 返回两个时间之间所有的日期
+ * 参数示例 （'2021-05-31','2021-06-30'）
+ * * */
+export const getTimeTwo = (start, end) => {
+	// 初始化日期列表，数组
+	const diffdate = [];
+	let i = 0;
+	// 开始日期小于等于结束日期,并循环
+	while (start <= end) {
+		diffdate[i] = start;
+		// 获取开始日期时间戳
+		const stimeTs = new Date(start).getTime();
+		// 增加一天时间戳后的日期
+		const nextDate = stimeTs + 24 * 60 * 60 * 1000;
+		// 拼接年月日，这里的月份会返回（0-11），所以要+1
+		const nextDatesY = `${new Date(nextDate).getFullYear()}-`;
+		const nextDatesM =
+			new Date(nextDate).getMonth() + 1 < 10 ? `0${new Date(nextDate).getMonth() + 1}-` : `${new Date(nextDate).getMonth() + 1}-`;
+		const nextDatesD = new Date(nextDate).getDate() < 10 ? `0${new Date(nextDate).getDate()}` : new Date(nextDate).getDate();
+		// eslint-disable-next-line no-param-reassign
+		start = nextDatesY + nextDatesM + nextDatesD;
+		// 增加数组key
+		i++;
+	}
+	return diffdate;
+};
+
+/**
+ * 获取特定格式化的日期
+ * 返回格式化后的日期
+ * 参数示例 （'YYYY-mm-dd',new Date()）
+ * * */
+
+// eslint-disable-next-line import/prefer-default-export
+export function dateFormat(fmt, date) {
+	let ret;
+	const opt = {
+		"Y+": date.getFullYear().toString(), // 年
+		"m+": (date.getMonth() + 1).toString(), // 月
+		"d+": date.getDate().toString(), // 日
+		"H+": date.getHours().toString(), // 时
+		"M+": date.getMinutes().toString(), // 分
+		"S+": date.getSeconds().toString() // 秒
+		// 有其他格式化字符需求可以继续添加，必须转化成字符串
+	};
+
+	// eslint-disable-next-line no-restricted-syntax,guard-for-in
+	for (const k in opt) {
+		ret = new RegExp(`(${k})`).exec(fmt);
+		if (ret) {
+			// eslint-disable-next-line no-param-reassign
+			fmt = fmt.replace(ret[1], ret[1].length === 1 ? opt[k] : opt[k].padStart(ret[1].length, "0"));
+		}
+	}
+	return fmt;
+}

@@ -1,18 +1,3 @@
-<template>
-	<div></div>
-</template>
-
-<script setup>
-import { useRouter, useRoute } from "vue-router";
-
-defineOptions({ name: "Redirect" });
-
-const router = useRouter();
-const route = useRoute();
-
-const gotoPath = route.params.path;
-
-router.replace({ path: gotoPath });
-</script>
-
-<style scoped lang="less"></style>
+export const getOptionFind = (options, val) => { let option = options.find(item => item.value === val); if (!option) { option = {
+label: "未知", type: "info" }; } return option; }; /** * 主要用于select组件动态查看分页 * @type {number} */ export const page = {
+pageSize: 10, pageNo: 1 };
