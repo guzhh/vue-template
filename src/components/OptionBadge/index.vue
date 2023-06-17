@@ -1,8 +1,9 @@
 <template>
-	<div style="display: inline-flex; align-items: center">
+	<div style="display: inline-flex; align-items: center" v-if="!isText">
 		<n-badge :type="option.type" :color="option.color" dot></n-badge>
 		<span style="margin-left: 5px">{{ option.label }}</span>
 	</div>
+	<span v-else>{{ option.label }}</span>
 </template>
 
 <script setup>
@@ -20,6 +21,11 @@ const props = defineProps({
 		type: [String, Number],
 		required: true,
 		default: "请输入"
+	},
+	isText: {
+		type: Boolean,
+		required: false,
+		default: false
 	}
 });
 

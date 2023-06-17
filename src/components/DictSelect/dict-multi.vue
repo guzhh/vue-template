@@ -8,6 +8,7 @@
 		:options="options"
 		max-tag-count="responsive"
 		v-model:value="selectDict"
+		@update:value="handleChange"
 	/>
 </template>
 
@@ -27,7 +28,7 @@ const props = defineProps({
 	}
 });
 const systemStore = useSystemStore();
-const emits = defineEmits(["update:value"]);
+const emits = defineEmits(["update:value", "change"]);
 const options = computed(() => {
 	return systemStore.getDictList(props.dictCode);
 });
@@ -47,6 +48,10 @@ const selectDict = computed({
 // 刷新字典下拉选择
 const flushedDict = () => {
 	systemStore.removeDictByPCode(props.dictCode);
+};
+
+const handleChange = () => {
+	emits("change", selectDict.value.join(","));
 };
 
 defineExpose({ flushedDict });

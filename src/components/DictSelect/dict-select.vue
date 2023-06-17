@@ -1,5 +1,13 @@
 <template>
-	<n-select label-field="name" value-field="code" v-model:value="modelValue" filterable clearable :options="options" />
+	<n-select
+		label-field="name"
+		value-field="code"
+		v-model:value="modelValue"
+		filterable
+		clearable
+		:options="options"
+		@update:value="handleChange"
+	/>
 </template>
 
 <script setup>
@@ -17,7 +25,7 @@ const props = defineProps({
 		required: true
 	}
 });
-const emits = defineEmits(["update:value"]);
+const emits = defineEmits(["update:value", "change"]);
 const systemStore = useSystemStore();
 const options = computed(() => {
 	return systemStore.getDictList(props.dictCode);
@@ -30,6 +38,10 @@ const modelValue = computed({
 		emits("update:value", val);
 	}
 });
+
+const handleChange = () => {
+	emits("change", modelValue.value);
+};
 
 // 刷新字典下拉选择
 // 刷新字典下拉选择
