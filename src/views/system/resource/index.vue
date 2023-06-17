@@ -47,8 +47,8 @@
 				row-id="id"
 				style="margin-top: 10px"
 			>
-				<vxe-column width="60" show-overflow="title" tree-node title="节点"></vxe-column>
-				<vxe-column field="id" min-width="60" show-overflow="title" title="ID"></vxe-column>
+				<!--				<vxe-column width="100" show-overflow="title" tree-node title="节点"></vxe-column>-->
+				<vxe-column field="id" tree-node min-width="110" show-overflow="title" title="ID"></vxe-column>
 				<vxe-column field="name" min-width="150px" show-overflow="title" title="资源名称"></vxe-column>
 				<vxe-column field="url" min-width="120px" show-overflow="title" title="资源地址"></vxe-column>
 				<vxe-column field="compName" min-width="120px" show-overflow="title" title="组件名称"></vxe-column>

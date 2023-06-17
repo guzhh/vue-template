@@ -32,7 +32,7 @@ const useSystemStore = defineStore("system", {
 		getParamVal(state) {
 			return code => {
 				const param = state.paramMap.get(code);
-				if (param) return param.paramValue;
+				if (param) return param.paramVal;
 				return undefined;
 			};
 		}

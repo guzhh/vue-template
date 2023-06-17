@@ -8,7 +8,7 @@
 		}"
 	>
 		<n-tree
-			:cancelable="true"
+			cancelable
 			:data="treeData"
 			:default-selected-keys="defaultSelect"
 			:on-load="handleLoad"
