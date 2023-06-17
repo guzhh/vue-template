@@ -19,9 +19,9 @@ export function setupCustomComponents(app) {
 		DictMulti,
 		DictSelect,
 		DictShow,
+		DictRadio,
 		BaseModal,
-		CodeEditor,
-		DictRadio
+		CodeEditor
 	};
 	Object.keys(comp).forEach(key => {
 		app.component(key, comp[key]);
