@@ -15,7 +15,7 @@
 			:is-active="itemData.fullPath === $route.fullPath"
 		>
 			<div style="display: flex; align-items: center">
-				<component :is="itemData.icon" style="width: 16px; height: 16px" />
+				<component :is="itemData.icon" style="width: 16px; height: 16px" v-if="itemData.icon" />
 				<div style="padding-top: 3px">
 					<span style="margin-left: 8px">{{ itemData.title }}</span>
 				</div>
