@@ -1,0 +1,45 @@
+tempDir: D:\temp\java-project # 项目升级过程中临时存储文件的位置
+projectPath: F:\panku\2023\盘古移动护理系统\src\mobile-care-ui # 要升级的项目所在目录
+# git 项目根路径
+gitUrl: https://gitee.com/hnpanku_1/vue-template.git # 项目模板的git地址
+# 要升级的文件夹, 如果不想升级某个文件夹就把它注释掉
+folder:
+  - /config
+  - /public
+  - /src/api
+  - /src/components
+  - /src/config
+  - /src/constant
+  - /src/hooks
+  - /src/layout
+  - /src/mock
+  - /src/plugins
+  - /src/router
+  - /src/store
+  - /src/utils
+  - /src/validator
+  - /src/views/basic
+  - /src/views/exception
+  - /src/views/system
+  - /src/views/users/personal
+  - /src/views/users/settings
+# 要升级的文件, 如果不想升级某个文件就把它注释掉
+file:
+  - /.editorconfig
+  - /index.html
+  - /jsconfig.json
+  - /.eslintignore
+  - /.eslintrc.cjs
+  - /.gitignore
+  - /.prettierrc.cjs
+  - /commitlint.config.cjs
+  - /lint-staged.config.cjs
+  - /stylelint.config.cjs
+  - /src/views/App.vue
+  - /src/main.js
+# 排除不需要处理文件，也就是用户可以自定义的文件
+excludeFile:
+  - /src/router/routes/custom.js
+  - /src/plugins/icons.js
+  - /public/vite.svg
+  - /config/vite.config.dev.js

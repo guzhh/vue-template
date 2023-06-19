@@ -11,6 +11,7 @@
 		@after-enter="afterEnter"
 		@after-leave="afterLeave"
 		@close="handleClose"
+		@esc="handleClose"
 		:segmented="{ content: 'soft', footer: 'soft' }"
 		:content-style="{ minHeight: 0 }"
 		:style="ifFullscreen ? { width: '100vw', height: '100vh' } : style"
