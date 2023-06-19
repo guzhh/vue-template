@@ -6,7 +6,7 @@ import { CUSTOM_ROUTES } from "@/router/routes/custom";
 
 export const REDIRECT_ROUTE_NAME = "Redirect";
 
-const BASE_ROUTES = [BASE_MAIN, NOT_FOUND_ROUTE, REDIRECT_MAIN, CUSTOM_ROUTES];
+const BASE_ROUTES = [BASE_MAIN, NOT_FOUND_ROUTE, REDIRECT_MAIN, ...CUSTOM_ROUTES];
 
 export const WHITE_LIST = [{ name: "login", children: [] }, ...BASE_ROUTES];
 
