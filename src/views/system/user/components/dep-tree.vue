@@ -46,7 +46,7 @@ const getDep = data => {
 	handleReLoad();
 	if (data.ifExist) {
 		orgCode.value = data.orgCode;
-		getDeptList({ pcode: "", orgCode: data.orgCode }).then(res => {
+		getDeptList({ pcode: "", orgCode: data.orgCode, ifDel: 0 }).then(res => {
 			if (res.success) {
 				treeData.value = res.result.map(item => {
 					return { ...item, key: item.code, label: item.name, isLeaf: false };
@@ -69,7 +69,7 @@ const getDep = data => {
 
 const handleLoad = node => {
 	return new Promise(resolve => {
-		getDeptList({ pcode: node.code, orgCode: orgCode.value })
+		getDeptList({ pcode: node.code, orgCode: orgCode.value, ifDel: 0 })
 			.then(res => {
 				if (res.success) {
 					if (res.result.length <= 0) {

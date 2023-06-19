@@ -22,7 +22,8 @@ import {
 	AppsSharp,
 	BarcodeOutline,
 	LogoAppleAr,
-	MoveOutline
+	MoveOutline,
+	LogoStackoverflow
 } from "@vicons/ionicons5";
 
 import { Refresh, FoldDown, Download, Upload, Edit, Plus, Forms, TemperatureCelsius } from "@vicons/tabler";
@@ -73,7 +74,8 @@ export const Icons = {
 	ArrowBetweenDown24Filled,
 	FullScreenMinimize24Regular,
 	FullScreenMaximize24Regular,
-	VoicemailArrowForward16Regular
+	VoicemailArrowForward16Regular,
+	LogoStackoverflow
 };
 
 export function setupIcon(app) {
