@@ -44,7 +44,6 @@ const handleChange = () => {
 };
 
 // 刷新字典下拉选择
-// 刷新字典下拉选择
 const resetDict = () => {
 	systemStore.removeDictByPCode(props.dictCode);
 };
