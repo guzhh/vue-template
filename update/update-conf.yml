@@ -35,8 +35,8 @@ file:
   - /commitlint.config.cjs
   - /lint-staged.config.cjs
   - /stylelint.config.cjs
-  - /src/views/App.vue
-  - /src/main.js
+  - /src/App.vue
+#  - /src/main.js
 # 排除不需要处理文件，也就是用户可以自定义的文件
 excludeFile:
   - /src/router/routes/custom.js
