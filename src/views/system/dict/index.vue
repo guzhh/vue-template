@@ -40,22 +40,14 @@
 				:height="height - 80"
 				:loading="tableLoading"
 				:size="tableSize"
-				:tree-config="{
-					transform: true,
-					rowField: 'code',
-					parentField: 'pcode',
-					lazy: true,
-					hasChild: 'hasChild',
-					loadMethod: loadChildrenMethod
-				}"
 				align="center"
-				border="inner"
+				border
 				resizable
 				row-id="code"
 				show-header-overflow="title"
 				show-overflow
 			>
-				<vxe-column field="id" show-overflow="title" title="字典ID" tree-node width="80px"></vxe-column>
+				<vxe-column field="id" show-overflow="title" title="字典ID" width="80px"></vxe-column>
 				<vxe-column field="pcode" show-overflow="title" title="上级字典编码" width="150px"></vxe-column>
 				<vxe-column field="code" min-width="100px" show-overflow="title" title="字典编码"></vxe-column>
 				<vxe-column field="name" min-width="100px" show-overflow="title" title="字典名称"></vxe-column>
@@ -67,10 +59,8 @@
 				</vxe-column>
 				<vxe-column title="操作" width="200px">
 					<template #default="{ row }">
-						<n-button v-if="Number(row.pcode) === 0" quaternary size="small" type="info" @click="addDict(row.code)"
-							>添加下级
-						</n-button>
-						<n-button style="margin-right: 10px" text type="primary" @click="editParam(row)"> 编辑</n-button>
+						<n-button text type="primary" @click="editParam(row)"> 编辑</n-button>
+						<n-button quaternary size="small" type="info" @click="dictModal(row)">字典 </n-button>
 						<n-popconfirm @positive-click="deleteDict(row)">
 							<template #trigger>
 								<n-button text type="error"> 删除</n-button>
@@ -82,6 +72,7 @@
 			</vxe-table>
 		</n-card>
 		<create-form ref="createFormRef" @ok="getTableData"></create-form>
+		<DictModal ref="dictModalRef"></DictModal>
 	</page-content>
 </template>
 
@@ -91,6 +82,7 @@ import { useMessage } from "naive-ui";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { getDictList, delDict } from "@/api/system/dictList";
 import CreateForm from "@/views/system/dict/components/create-form.vue";
+import DictModal from "@/views/system/dict/components/dictModal.vue";
 import useTable from "@/hooks/useTable";
 import { disableEnableOption } from "@/constant/system/resource";
 
@@ -100,13 +92,19 @@ const tableRef = ref();
 const { tableSizeOptions, tableSize } = useTable();
 const message = useMessage();
 const createFormRef = ref();
+const dictModalRef = ref();
 const { height } = useWindowSize();
 const tableData = ref([]);
 const tableLoading = ref(false);
 
-// 新增
+// 新增顶级字典
 const addDict = pcode => {
 	createFormRef.value.add(pcode);
+};
+
+// 下级字典管理
+const dictModal = data => {
+	dictModalRef.value.open(data);
 };
 
 // 编辑字典
@@ -130,22 +128,6 @@ const getTableData = () => {
 		.finally(() => {
 			tableLoading.value = false;
 		});
-};
-
-// 点击一级加载二级
-const loadChildrenMethod = ({ row }) => {
-	return new Promise(resolve => {
-		getDictList({ pcode: row.code }).then(res => {
-			if (res.success && res.result.length > 0) {
-				resolve(res.result);
-			} else {
-				// eslint-disable-next-line no-param-reassign
-				row.hasChild = false;
-				message.warning("当前字典没有下级字典");
-				resolve([]);
-			}
-		});
-	});
 };
 
 // 删除字典

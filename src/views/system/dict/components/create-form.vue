@@ -1,5 +1,5 @@
 <template>
-	<base-modal style="width: 700px" :title="title" v-model:show="visible" @ok="handleOk" @close="handleClose">
+	<base-modal style="width: 700px" :title="title" v-model:show="visible" @close="handleClose">
 		<div style="width: 100%; padding: 0 50px; margin-top: 20px">
 			<n-form
 				ref="formRef"
@@ -9,14 +9,8 @@
 				label-width="auto"
 				require-mark-placement="left"
 			>
-				<n-form-item v-show="false" path="id">
-					<n-input v-model:value="formValue.id" placeholder="请输入ID" />
-				</n-form-item>
 				<n-form-item label="字典编码" path="code">
 					<n-input v-model:value="formValue.code" placeholder="请输入字典编码" />
-				</n-form-item>
-				<n-form-item v-show="false" path="pcode">
-					<n-input v-model:value="formValue.pcode" placeholder="请输入pcode" />
 				</n-form-item>
 				<n-form-item label="字典名称" path="name">
 					<n-input v-model:value="formValue.name" placeholder="请输入字典名称" />
@@ -36,6 +30,13 @@
 				</n-form-item>
 			</n-form>
 		</div>
+		<template v-slot:footer>
+			<n-space justify="end">
+				<n-button type="error" size="small" @click="handleClose">取消</n-button>
+				<n-button type="primary" size="small" @click="submitAndAdd" v-if="!ifEdit">提交并新增</n-button>
+				<n-button type="primary" size="small" @click="handleOk">提交</n-button>
+			</n-space>
+		</template>
 	</base-modal>
 </template>
 
@@ -49,6 +50,8 @@ const title = ref("");
 const visible = ref(false);
 const formRef = ref();
 const message = useMessage();
+const pcodes = ref("");
+const ifEdit = ref(false);
 const options = [
 	{ label: "启用", value: 1 },
 	{ label: "禁用", value: 0 }
@@ -73,31 +76,24 @@ const rules = {
 const add = pcode => {
 	title.value = "新增字典";
 	visible.value = true;
+	pcodes.value = pcode ? `${pcode}` : "";
 	formValue.value.pcode = pcode ? `${pcode}` : "";
+	ifEdit.value = false;
 };
 
 const edit = row => {
+	ifEdit.value = true;
 	title.value = "编辑字典";
 	visible.value = true;
-	if (row.pcode === 0) {
-		formValue.value = {
-			id: `${row.id}`,
-			pcode: "",
-			code: row.code,
-			name: row.name,
-			dictVal: row.dictVal,
-			state: row.state
-		};
-	} else {
-		formValue.value = {
-			id: `${row.id}`,
-			pcode: `${row.pcode}`,
-			code: row.code,
-			name: row.name,
-			dictVal: row.dictVal,
-			state: row.state
-		};
-	}
+	pcodes.value = row.pcode === 0 ? "" : `${row.pcode}`;
+	formValue.value = {
+		id: `${row.id}`,
+		pcode: pcodes.value,
+		code: row.code,
+		name: row.name,
+		dictVal: row.dictVal,
+		state: row.state
+	};
 };
 
 const handleClose = () => {
@@ -108,8 +104,8 @@ const handleClose = () => {
 		id: "",
 		pcode: "",
 		code: "",
-		dictName: "",
-		dictValue: "",
+		name: "",
+		dictVal: "",
 		state: 1
 	};
 };
@@ -123,6 +119,28 @@ const handleOk = () => {
 					message.success("字典提交成功");
 					emits("ok");
 					handleClose();
+				}
+			});
+		}
+	});
+};
+
+// 提交并新增
+const submitAndAdd = () => {
+	formRef.value?.validate(errors => {
+		if (!errors) {
+			saveOrUptDict({ ...formValue.value }).then(res => {
+				if (res.success) {
+					message.success("字典提交成功");
+					emits("ok");
+					formValue.value = {
+						id: "",
+						pcode: pcodes.value,
+						code: "",
+						name: "",
+						dictVal: "",
+						state: 1
+					};
 				}
 			});
 		}
