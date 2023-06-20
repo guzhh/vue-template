@@ -25,12 +25,16 @@ export default new Request({
 			}
 			// 防止缓存，给get请求加上时间戳
 			if (config.method === "get" || config.method === "GET") {
-				config.params = { orgCode: userStore.currentOrgCode, ...config.params, t: new Date().getTime() };
+				config.params = {
+					orgCode: userStore.currentOrgCode,
+					orgName: userStore.currentOrgName,
+					...config.params,
+					t: new Date().getTime()
+				};
 			} else if (config.method === "post" || config.method === "POST") {
 				if (config?.data?.constructor === Object) {
-					config.data = { orgCode: userStore.currentOrgCode, ...config.data };
+					config.data = { orgCode: userStore.currentOrgCode, orgName: userStore.currentOrgName, ...config.data };
 				}
-
 				if (config.headers["Content-Type"] === "application/x-www-form-urlencoded;charset=UTF-8") {
 					config.data = qs.stringify(config.data);
 				}

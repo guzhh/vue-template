@@ -59,9 +59,20 @@
 					</n-form-item>
 				</n-gi>
 				<n-gi v-if="formValue.type != 2 && formValue.linkType != 1">
-					<n-form-item label="组件名称" path="compName">
-						<n-input v-model:value="formValue.compName" placeholder="请输入组件名称" />
-					</n-form-item>
+					<n-tooltip trigger="hover">
+						<template #trigger>
+							<n-form-item label="组件名称" path="compName">
+								<!--						<n-input v-model:value="formValue.compName" placeholder="请输入组件名称" />-->
+								<n-mention
+									@select="compNameSelect"
+									:options="compNameOption"
+									v-model:value="formValue.compName"
+									placeholder="请输入选择组件名称"
+								/>
+							</n-form-item>
+						</template>
+						属于 @ 会有意想不到的发现吆
+					</n-tooltip>
 				</n-gi>
 				<n-gi v-if="formValue.type != 2 && formValue.linkType != 1">
 					<n-form-item label="是否缓存" path="ifcache">
@@ -116,6 +127,13 @@ const title = ref("");
 const visible = ref(false);
 const systemList = ref([]);
 
+// 默认组件
+const compNameOption = [
+	{ value: "DEFAULT_LAYOUT", label: "DEFAULT_LAYOUT【默认的页面承载组件】" },
+	{ value: "LINK_LAYOUT", label: "LINK_LAYOUT【如果这个外连接是一级菜单使用这个组件】" },
+	{ value: "LINK_VIEW", label: "LINK_VIEW【如果这个外连接不是一级菜单使用这个组件】" }
+];
+
 const defaultForm = {
 	pid: null,
 	name: "",
@@ -152,6 +170,13 @@ getSystemList({ ifInternal: 1 }).then(res => {
 		});
 	}
 });
+
+const compNameSelect = (option, prefix) => {
+	// eslint-disable-next-line no-eval
+	const reg = eval(`/${prefix}${option.value} /g`);
+	// const reg = new RegExp(`${prefix}${option.value} /g`);
+	formValue.value.compName = formValue.value.compName.replace(reg, option.value);
+};
 
 // 新增资源
 const openModal = () => {

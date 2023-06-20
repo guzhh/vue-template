@@ -40,7 +40,8 @@ const tabWidth = computed(() => (renderMenu.value && !hideMenu.value ? `calc(100
 
 // 监听路由变化
 listenerRouteChange(route => {
-	if (!route.meta.noAffix) {
+	// 判断是否显示标签栏
+	if (!route.meta.noAffix && !tagList.value.some(tag => tag.fullPath === route.fullPath)) {
 		tabBarStore.updateTabList(route);
 	}
 }, true);

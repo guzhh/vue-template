@@ -21,6 +21,7 @@
 import { ref } from "vue";
 import { getOrgInfoByCode, getOrgList } from "@/api/system/orgAdmin";
 import useUserStore from "@/store/modules/user";
+import { resolveTree } from "@/utils/tree";
 
 const showModal = ref(false);
 const orgCode = ref(null);
@@ -56,7 +57,11 @@ const handleLoad = option => {
 };
 
 const confirmOrg = () => {
-	userStore.toggleCurrentOrgCode(orgCode.value);
+	// console.log("orgOptions", orgOptions.value, orgCode.value);
+	// 将树形数据解构为线性数据
+	const list = resolveTree(orgOptions.value, "children");
+	const org = list.find(item => orgCode.value === item.code);
+	userStore.toggleCurrentOrgCode(org);
 	showModal.value = false;
 };
 

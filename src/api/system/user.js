@@ -194,3 +194,33 @@ export function getUserRoleAll(params) {
 		}
 	});
 }
+
+/**
+ * 获取用户列表
+ * @returns {Promise<*>}
+ */
+export function getAllUserList(params) {
+	return request.post({
+		url: "/p/user/getAllUserList",
+		data: params,
+		customs: {
+			isLoading: true,
+			loadingText: "用户列表获取中..."
+		}
+	});
+}
+
+/**
+ * 根据用户类型获取用户信息
+ * @param params
+ * @returns {Promise<*>}
+ */
+export function getUserInfoByUserType(params) {
+	return request.post({
+		url: "/p/user/getUserInfoByUserType",
+		data: params,
+		customs: {
+			isLoading: true
+		}
+	});
+}

@@ -51,7 +51,7 @@ export function delParam(params) {
  * @returns {Promise<*>}
  */
 export function getParam(params) {
-	return request.get({
+	return request.post({
 		url: "/p/auth/auth-param/getParamByCode",
 		data: params
 	});

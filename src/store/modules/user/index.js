@@ -21,10 +21,12 @@ const useUserStore = defineStore("user", {
 		createTime: null,
 		dataScope: null, // 数据范围
 		currentOrgCode: null, // 当前选中的机构
+		currentOrgName: null, // 当前选中机构名称
 		ifOnline: null, // 是否在线
 		roleList: [], // 角色列表
 		resourceList: [], // 资源列表
-		permissionList: [] // 权限标识
+		permissionList: [], // 权限标识
+		userType: null // 用户类型
 	}),
 
 	getters: {
@@ -37,10 +39,11 @@ const useUserStore = defineStore("user", {
 		setInfo(partial) {
 			this.$patch(partial);
 		},
-		// 设置当前选中的机构编码
-		setCurrentOrgCode(orgCode) {
-			this.currentOrgCode = orgCode;
-		},
+		// // 设置当前选中的机构编码
+		// setCurrentOrg(org) {
+		// 	this.currentOrgCode = org.code;
+		// 	this.currentOrgName = org.name;
+		// },
 		// 重置用户信息
 		resetInfo() {
 			this.$reset();
@@ -54,10 +57,12 @@ const useUserStore = defineStore("user", {
 		},
 
 		// 设置当前默认选中的机构
-		toggleCurrentOrgCode(val) {
-			this.currentOrgCode = val;
+		toggleCurrentOrgCode(org) {
+			this.currentOrgCode = org.code;
+			this.currentOrgName = org.name;
+			// this.currentOrgCode = val;
 			// 发布默认机构发生变化
-			setOrgEmitter(val);
+			setOrgEmitter(org.code);
 		},
 
 		// 登录
@@ -89,7 +94,7 @@ const useUserStore = defineStore("user", {
 			const res = await getUserInfo();
 			const permissionList = res.result.resourceList.map(item => item.permissionFlag);
 			res.result.resourceList = formatTheResource(res.result.resourceList); // 处理资源为符合前端要求的资源
-			this.setInfo({ ...res.result, permissionList, currentOrgCode: res.result.orgCode });
+			this.setInfo({ ...res.result, permissionList, currentOrgCode: res.result.orgCode, currentOrgName: res.result.orgName });
 		}
 	}
 });

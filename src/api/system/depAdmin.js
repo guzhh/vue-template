@@ -90,3 +90,18 @@ export function getDepartsByUser(params) {
 		}
 	});
 }
+
+/**
+ * 根据科室类型获取科室信息
+ * @param params
+ * @returns {Promise<*>}
+ */
+export function getDepartByDeptType(params) {
+	return request.post({
+		url: "/p/auth/auth-depart/getDepartByDeptType",
+		data: params,
+		customs: {
+			isLoading: true
+		}
+	});
+}
