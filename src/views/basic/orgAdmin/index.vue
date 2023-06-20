@@ -1,6 +1,21 @@
 <template>
 	<page-content>
 		<n-card size="small" title="机构列表">
+			<template #header>
+				<n-select
+					v-model:value="ifDel"
+					clearable
+					size="small"
+					style="width: 150px"
+					placeholder="是否删除"
+					:options="[
+						{ value: 0, label: '未删除' },
+						{ value: 1, label: '已删除' }
+					]"
+					@update:value="getOrg"
+				>
+				</n-select>
+			</template>
 			<template #header-extra>
 				<n-button v-action:addOrgButton size="small" type="primary" @click="addNewOrg({})">新增机构</n-button>
 				<n-tooltip>
@@ -113,16 +128,17 @@ const { height } = useWindowSize();
 const { tableSizeOptions, tableSize } = useTable();
 const tableLoading = ref();
 const tableData = ref([]);
+const ifDel = ref(null);
 
 // 获取机构列表
 const getOrg = () => {
 	tableLoading.value = true;
-	getOrgInfoByCode({ orgCode: userStore.orgCode })
+	getOrgInfoByCode({ orgCode: userStore.orgCode, ifDel: ifDel.value })
 		.then(res => {
 			if (res.success) {
-				if (res.result?.id) {
-					tableData.value = [{ ...res.result, hasChild: true }];
-				}
+				tableData.value = res.result.map(item => {
+					return { ...item, hasChild: true };
+				});
 			}
 		})
 		.finally(() => {
@@ -185,7 +201,7 @@ const recoverOrg = row => {
 // 点击一级加载二级
 const loadChildrenMethod = ({ row }) => {
 	return new Promise(resolve => {
-		getOrgList({ pcode: row.code }).then(res => {
+		getOrgList({ pcode: row.code, ifDel: ifDel.value }).then(res => {
 			if (res.success && res.result.length > 0) {
 				// eslint-disable-next-line no-param-reassign
 				res.result = res.result.map(item => {

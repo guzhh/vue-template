@@ -21,7 +21,7 @@
 
 <script setup>
 import { h, ref } from "vue";
-import { getOrgList, getOrgInfoByCode } from "@/api/system/orgAdmin";
+import { getOrgList, getOrgInfo } from "@/api/system/orgAdmin";
 import useUserStore from "@/store/modules/user";
 
 const treeData = ref([]);
@@ -35,11 +35,13 @@ const treeRenderLabel = ({ option }) => {
 
 // 获取机构列表
 const getOrg = () => {
-	getOrgInfoByCode({ orgCode: userStore.orgCode }).then(res => {
+	getOrgInfo({ orgCode: userStore.orgCode }).then(res => {
 		if (res.success) {
-			if (res.result?.id) {
-				treeData.value = [{ ...res.result, key: res.result.code, label: res.result.name, isLeaf: false }];
-				defaultSelect.value.splice(0, defaultSelect.value.length);
+			treeData.value = res.result.map(item => {
+				return { ...item, key: item.code, label: item.name, isLeaf: false };
+			});
+			if (treeData.value.length > 0) {
+				// defaultSelect.value.splice(0, defaultSelect.value.length);
 				defaultSelect.value.push(treeData.value[0]?.key);
 				emits("selectOrg", { orgCode: treeData.value[0].code, orgName: treeData.value[0].name, ifExist: true });
 			} else {

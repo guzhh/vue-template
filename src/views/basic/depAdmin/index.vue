@@ -19,7 +19,28 @@
 					@update-selected-keys="select"
 				/>
 			</n-card>
-			<n-card size="small" style="margin-left: 5px" title="科室列表">
+			<n-card size="small" style="margin-left: 5px">
+				<template #header>
+					<n-space>
+						<n-select
+							v-model:value="ifDel"
+							clearable
+							size="small"
+							style="width: 150px"
+							placeholder="是否已删除"
+							:options="[
+								{ value: 0, label: '未删除' },
+								{ value: 1, label: '已删除' }
+							]"
+							@update:value="getDepartList"
+						>
+						</n-select>
+						<n-input placeholder="科室名称" size="small" v-model:value="deptName" @keydown.enter="getDepartList" clearable>
+						</n-input>
+						<n-button size="small" type="primary" @click="getDepartList">查询</n-button>
+						<n-button size="small" @click="resetQuery">重置</n-button>
+					</n-space>
+				</template>
 				<template #header-extra>
 					<n-button v-action:addDeptButton size="small" type="primary" @click="addNewDep({})">新增科室</n-button>
 					<n-tooltip>
@@ -125,7 +146,7 @@ import { h, ref } from "vue";
 import { useMessage } from "naive-ui";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import useTable from "@/hooks/useTable";
-import { getOrgList, getOrgInfoByCode } from "@/api/system/orgAdmin.js";
+import { getOrgList, getOrgInfo } from "@/api/system/orgAdmin.js";
 import { ifDeletedOption } from "@/constant/system/resource";
 import CreateForm from "@/views/basic/depAdmin/components/create-form.vue";
 import { getDeptList, delDept, cancelDelDept } from "@/api/system/depAdmin.js";
@@ -145,6 +166,8 @@ const treeData = ref([]);
 const defaultSelect = ref([]);
 const orgCode = ref("");
 const userStore = useUserStore();
+const ifDel = ref(null); // 是否删除
+const deptName = ref(""); // 科室名称
 
 const treeRenderLabel = ({ option }) => {
 	// display: block; overflow: hidden; white-space: nowrap; text-overflow:ellipsis;
@@ -166,7 +189,7 @@ const treeRenderLabel = ({ option }) => {
 // 获取科室列表
 const getDepartList = () => {
 	tableLoading.value = true;
-	getDeptList({ pcode: "", orgCode: orgCode.value })
+	getDeptList({ pcode: "", orgCode: orgCode.value, ifDel: ifDel.value, deptName: deptName.value })
 		.then(res => {
 			if (res.success) {
 				tableData.value = res.result.map(item => {
@@ -183,10 +206,12 @@ const getDepartList = () => {
 
 // 获取机构列表
 const getOrg = () => {
-	getOrgInfoByCode({ orgCode: userStore.orgCode }).then(res => {
+	getOrgInfo({ orgCode: userStore.orgCode }).then(res => {
 		if (res.success) {
-			if (res.result?.id) {
-				treeData.value = [{ ...res.result, key: res.result.code, label: res.result.name, isLeaf: false }];
+			treeData.value = res.result.map(item => {
+				return { ...item, key: item.code, label: item.name, isLeaf: false };
+			});
+			if (treeData.value.length > 0) {
 				defaultSelect.value.push(treeData.value[0]?.key);
 				orgCode.value = treeData.value[0]?.key;
 				getDepartList();
@@ -241,7 +266,7 @@ const recoverDep = row => {
 // 点击一级加载二级
 const loadChildrenMethod = ({ row }) => {
 	return new Promise(resolve => {
-		getDeptList({ pcode: row.code, orgCode: orgCode.value }).then(res => {
+		getDeptList({ pcode: row.code, orgCode: orgCode.value, ifDel: ifDel.value }).then(res => {
 			if (res.success && res.result.length > 0) {
 				// eslint-disable-next-line no-param-reassign
 				res.result = res.result.map(item => {
@@ -310,6 +335,13 @@ const select = (keys, option) => {
 		orgCode.value = keys[0];
 		getDepartList();
 	}
+};
+
+// 重置查询条件
+const resetQuery = () => {
+	ifDel.value = null;
+	deptName.value = "";
+	getDepartList();
 };
 </script>
 

@@ -8,6 +8,26 @@
 				<dep-tree ref="DepTreeRef" @selectDep="selectDep"></dep-tree>
 
 				<n-card size="small" style="margin-left: 5px" title="用户列表">
+					<template #header>
+						<n-space>
+							<n-input
+								v-model:value="searchForm.name"
+								placeholder="请输入用户姓名"
+								@keydown.enter="resetTableList"
+								clearable
+								size="small"
+							/>
+							<n-input
+								v-model:value="searchForm.account"
+								placeholder="请输入账号"
+								@keydown.enter="resetTableList"
+								clearable
+								size="small"
+							/>
+							<n-button size="small" type="primary" @click="resetTableList">查询</n-button>
+							<n-button size="small" @click="resetQuery">重置</n-button>
+						</n-space>
+					</template>
 					<template #header-extra>
 						<n-button size="small" type="primary" @click="handleAddUser">新增用户</n-button>
 						<n-divider vertical />

@@ -2,6 +2,33 @@
 	<page-content>
 		<div id="sysSearchBox" style="position: relative">
 			<n-card size="small" title="系统列表">
+				<template #header>
+					<n-space>
+						<n-select
+							v-model:value="searchForm.ifDel"
+							clearable
+							size="small"
+							style="width: 150px"
+							placeholder="是否删除"
+							:options="[
+								{ value: 0, label: '未删除' },
+								{ value: 1, label: '已删除' }
+							]"
+							@update:value="resetTableList"
+						>
+						</n-select>
+						<n-input
+							placeholder="系统名称"
+							size="small"
+							v-model:value="searchForm.sysName"
+							@keydown.enter="resetTableList"
+							clearable
+						>
+						</n-input>
+						<n-button size="small" type="primary" @click="resetTableList">查询</n-button>
+						<n-button size="small" @click="reset">重置</n-button>
+					</n-space>
+				</template>
 				<template #header-extra>
 					<n-button size="small" type="primary" @click="add"> 新增系统</n-button>
 					<n-divider vertical />
@@ -31,6 +58,21 @@
 									style="width: 200px"
 									@update:value="resetTableList"
 								/>
+							</n-form-item>
+							<n-form-item label="是否删除:" path="ifDel">
+								<n-select
+									v-model:value="searchForm.ifDel"
+									clearable
+									size="small"
+									style="width: 150px"
+									placeholder="是否删除"
+									:options="[
+										{ value: 0, label: '未删除' },
+										{ value: 1, label: '已删除' }
+									]"
+									@update:value="resetTableList"
+								>
+								</n-select>
 							</n-form-item>
 						</n-form>
 					</search-box>
@@ -146,7 +188,7 @@ const createFormRef = ref();
 const themeVars = useThemeVars(); // 全局公共CSS变量
 const message = useMessage();
 const { height } = useWindowSize();
-const formData = { ifInternal: undefined, sysName: "", sysType: undefined };
+const formData = { ifInternal: undefined, sysName: "", sysType: undefined, ifDel: undefined };
 // eslint-disable-next-line no-unused-vars
 const { tableList, tableLoading, searchForm, page, onChange, onUpdatePageSize, resetTableList, getTableData } = useTableData({
 	requestMethod: getAuthSystemList,
@@ -205,6 +247,7 @@ const reset = () => {
 	searchForm.value.sysName = "";
 	searchForm.value.ifInternal = null;
 	searchForm.value.sysType = null;
+	searchForm.value.ifDel = null;
 	resetTableList();
 };
 </script>

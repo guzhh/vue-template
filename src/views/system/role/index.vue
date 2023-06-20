@@ -2,25 +2,31 @@
 	<page-content>
 		<div id="roleSearchBox" style="position: relative">
 			<n-card size="small" title="角色列表">
+				<template #header>
+					<n-space>
+						<n-select
+							v-model:value="searchForm.sysId"
+							:options="systemList"
+							filterable
+							placeholder="请选择所属系统"
+							style="width: 180px"
+							@update:value="resetTableList"
+							clearable
+							size="small"
+						/>
+						<n-input
+							v-model:value="searchForm.name"
+							placeholder="请输入角色名称"
+							@keydown.enter="resetTableList"
+							clearable
+							size="small"
+						/>
+						<n-button type="primary" size="small" @click="resetTableList">查询 </n-button>
+						<n-button size="small" @click="reset">重置 </n-button>
+					</n-space>
+				</template>
 				<template #header-extra>
 					<n-button size="small" type="primary" @click="addRole">新增角色</n-button>
-					<n-divider vertical />
-					<search-box :placement="'top'" :to="'#roleSearchBox'" @reset="reset" @search="resetTableList">
-						<n-form ref="formRef" :label-width="80" :model="searchForm" class="search-card" inline label-placement="left">
-							<n-form-item label="所属系统" path="sysId">
-								<n-select
-									v-model:value="searchForm.sysId"
-									:options="systemList"
-									filterable
-									placeholder="请选择所属系统"
-									style="width: 180px"
-								/>
-							</n-form-item>
-							<n-form-item label="角色名称" path="name">
-								<n-input v-model:value="searchForm.name" placeholder="请输入角色名称" />
-							</n-form-item>
-						</n-form>
-					</search-box>
 					<n-divider vertical />
 					<n-tooltip>
 						<span>刷新</span>

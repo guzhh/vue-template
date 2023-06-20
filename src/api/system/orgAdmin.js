@@ -74,3 +74,18 @@ export function getOrgInfoByCode(params) {
 		}
 	});
 }
+
+/**
+ * 根据机构编码获取当前顶级机构信息
+ * @param params
+ * @returns {Promise<*>}
+ */
+export function getOrgInfo(params) {
+	return request.post({
+		url: "/p/auth/auth-org/getOrgInfo",
+		data: params,
+		customs: {
+			isLoading: false
+		}
+	});
+}
