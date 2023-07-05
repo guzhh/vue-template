@@ -28,6 +28,28 @@ const useSystemStore = defineStore("system", {
 				return "";
 			};
 		},
+		// 根据字典值和父级编码获取当前字典
+		getDictNameByValue(state) {
+			return (pcode, dictValue) => {
+				// 根据字典编码获取下级字典
+				const list = (() => {
+					const dictList = state.dictCodeMap.get(pcode);
+					if (dictList) return dictList;
+					state.getDictByPCodes(pcode);
+					return [];
+				})();
+				// 根据字典值查找字典
+				const currentDict = list.find(item => {
+					return dictValue === item.dictVal;
+				});
+				if (currentDict) {
+					const dict = state.dictMap.get(currentDict.code);
+					if (dict) return dict.name;
+					state.getDict(currentDict.code);
+				}
+				return "未知字典";
+			};
+		},
 		// 根据参数编码获取参数值
 		getParamVal(state) {
 			return code => {
