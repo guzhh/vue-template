@@ -71,7 +71,7 @@
 								/>
 							</n-form-item>
 						</template>
-						属于 @ 会有意想不到的发现吆
+						输入 @ 会有意想不到的发现吆
 					</n-tooltip>
 				</n-gi>
 				<n-gi v-if="formValue.type != 2 && formValue.linkType != 1">
