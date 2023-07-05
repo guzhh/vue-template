@@ -296,3 +296,20 @@ export function dateFormat(fmt, date) {
 	}
 	return fmt;
 }
+
+/**
+ * 只取对象中想要的属性
+ * 返回赋值后想要的对象
+ * 参数示例 （{id:1,code:'123'},{code:''}）
+ * * */
+
+export function extractionFun(data, formFields) {
+	const obj = Object.keys(formFields).reduce((object, item) => {
+		if (item in data) {
+			// eslint-disable-next-line no-param-reassign
+			object[item] = data[item];
+		}
+		return object;
+	}, {});
+	return obj;
+}
