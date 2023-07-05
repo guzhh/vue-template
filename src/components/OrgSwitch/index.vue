@@ -8,8 +8,6 @@
 					v-model:value="orgCode"
 					:options="orgOptions"
 					placeholder="请选择当前默认机构"
-					:allow-checking-not-loaded="true"
-					:on-load="handleLoad"
 				/>
 				<n-button type="primary" @click="confirmOrg"> 确定 </n-button>
 			</n-input-group>
@@ -19,9 +17,9 @@
 
 <script setup>
 import { ref } from "vue";
-import { getOrgInfoByCode, getOrgList } from "@/api/system/orgAdmin";
+import { getOrgInfoByCode } from "@/api/system/orgAdmin";
 import useUserStore from "@/store/modules/user";
-import { resolveTree } from "@/utils/tree";
+import { convertToTreeArray, resolveTree } from "@/utils/tree";
 
 const showModal = ref(false);
 const orgCode = ref(null);
@@ -33,28 +31,28 @@ const handleOrg = () => {
 	showModal.value = true;
 };
 
-getOrgInfoByCode({ orgCode: userStore.orgCode }).then(res => {
+getOrgInfoByCode({}).then(res => {
 	if (res.success) {
-		orgOptions.value = [{ ...res.result, isLeaf: false }];
+		orgOptions.value = convertToTreeArray(res.result, "code", "pcode");
 	}
 });
 
-const handleLoad = option => {
-	return new Promise(resolve => {
-		getOrgList({ pcode: option.code })
-			.then(res => {
-				if (res.success) {
-					// eslint-disable-next-line no-param-reassign
-					option.children = res.result.map(item => {
-						return { ...item, isLeaf: false };
-					});
-				}
-			})
-			.finally(() => {
-				resolve();
-			});
-	});
-};
+// const handleLoad = option => {
+// 	return new Promise(resolve => {
+// 		getOrgList({ pcode: option.code })
+// 			.then(res => {
+// 				if (res.success) {
+// 					// eslint-disable-next-line no-param-reassign
+// 					option.children = res.result.map(item => {
+// 						return { ...item, isLeaf: false };
+// 					});
+// 				}
+// 			})
+// 			.finally(() => {
+// 				resolve();
+// 			});
+// 	});
+// };
 
 const confirmOrg = () => {
 	// console.log("orgOptions", orgOptions.value, orgCode.value);

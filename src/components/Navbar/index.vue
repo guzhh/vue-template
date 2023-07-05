@@ -133,7 +133,7 @@ import { FullScreenMaximize24Regular, FullScreenMinimize24Regular } from "@vicon
 import { MenuFoldOutlined, SettingOutlined, UserOutlined, ExportOutlined } from "@vicons/antd";
 import OrgSwitch from "@/components/OrgSwitch/index.vue";
 import DeptSwitch from "@/components/OrgSwitch/deptSwitch.vue";
-import { getOrgInfoByCode } from "@/api/system/orgAdmin";
+import { getCurrOrgInfo } from "@/api/system/orgAdmin";
 import useUserStore from "@/store/modules/user";
 import useAppStore from "@/store/modules/app";
 import useHandleTheme from "@/hooks/useHandleTheme";
@@ -187,7 +187,7 @@ watch(
 	() => userStore.currentOrgCode,
 	newValue => {
 		if (newValue) {
-			getOrgInfoByCode({ orgCode: newValue }).then(res => {
+			getCurrOrgInfo({ orgCode: newValue }).then(res => {
 				if (res.success && res.result) {
 					orgData.value = res.result;
 				} else {

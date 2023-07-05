@@ -61,13 +61,28 @@ export function cancelDelOrg(params) {
 }
 
 /**
- * 根据机构编码获取当前机构信息
+ * 获取到当前用户所有可见的机构
  * @param params
  * @returns {Promise<*>}
  */
 export function getOrgInfoByCode(params) {
 	return request.post({
 		url: "/p/auth/auth-org/getOrgInfoByCode",
+		data: params,
+		customs: {
+			isLoading: false
+		}
+	});
+}
+
+/**
+ * 根据机构编号获取当前机构信息
+ * @param params
+ * @returns {Promise<*>}
+ */
+export function getCurrOrgInfo(params) {
+	return request.post({
+		url: "/p/auth/auth-org/getCurrOrgInfo",
 		data: params,
 		customs: {
 			isLoading: false

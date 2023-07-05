@@ -40,3 +40,39 @@ export function resolveTree(arr, chaildName) {
 	})(data);
 	return dataList; // 返回处理好的数据
 }
+
+/**
+ * 将线行数据转成树形数据
+ * @param arr 要转换的数据
+ * @param code 父字段名
+ * @param pcode 子字段名
+ * @returns {*[]}
+ */
+export function convertToTreeArray(arr, code = "code", pcode = "pcode", childrenName = "children") {
+	const treeArray = [];
+	const map = {};
+
+	// 先构建节点映射，方便后续查找节点
+	for (let i = 0; i < arr.length; i++) {
+		const { [code]: id, ...rest } = arr[i];
+		map[id] = { [code]: id, ...rest };
+	}
+
+	// 根据父子关系组织节点到树中
+	for (let i = 0; i < arr.length; i++) {
+		const { [code]: id, [pcode]: parentId } = arr[i];
+		const node = map[id];
+		const parent = map[parentId];
+		if (parent) {
+			if (parent[childrenName] && parent[childrenName].length > 0) {
+				parent[childrenName].push(node);
+			} else {
+				parent[childrenName] = [node];
+			}
+		} else {
+			treeArray.push(node);
+		}
+	}
+
+	return treeArray;
+}
