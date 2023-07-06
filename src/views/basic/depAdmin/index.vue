@@ -146,11 +146,11 @@ import { h, ref } from "vue";
 import { useMessage } from "naive-ui";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import useTable from "@/hooks/useTable";
-import { getOrgList, getOrgInfo } from "@/api/system/orgAdmin.js";
+import { getOrgList, getOrgInfoByCode } from "@/api/system/orgAdmin.js";
 import { ifDeletedOption } from "@/constant/system/resource";
 import CreateForm from "@/views/basic/depAdmin/components/create-form.vue";
 import { getDeptList, delDept, cancelDelDept } from "@/api/system/depAdmin.js";
-import useUserStore from "@/store/modules/user";
+import { convertToTreeArray } from "@/utils/tree";
 
 defineOptions({ name: "depAdmin" });
 
@@ -165,7 +165,6 @@ const tableData = ref([]);
 const treeData = ref([]);
 const defaultSelect = ref([]);
 const orgCode = ref("");
-const userStore = useUserStore();
 const ifDel = ref(null); // 是否删除
 const deptName = ref(""); // 科室名称
 
@@ -206,11 +205,12 @@ const getDepartList = () => {
 
 // 获取机构列表
 const getOrg = () => {
-	getOrgInfo({ orgCode: userStore.orgCode }).then(res => {
+	getOrgInfoByCode({ orgCode: null, ifDel: 0 }).then(res => {
 		if (res.success) {
 			treeData.value = res.result.map(item => {
-				return { ...item, key: item.code, label: item.name, isLeaf: false };
+				return { ...item, key: item.code, label: item.name };
 			});
+			treeData.value = convertToTreeArray(treeData.value);
 			if (treeData.value.length > 0) {
 				defaultSelect.value.push(treeData.value[0]?.key);
 				orgCode.value = treeData.value[0]?.key;

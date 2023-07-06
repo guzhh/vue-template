@@ -111,15 +111,13 @@ import { ref } from "vue";
 import { useMessage } from "naive-ui";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import useTable from "@/hooks/useTable";
-// eslint-disable-next-line no-unused-vars
+
 import { getOrgList, delOrg, cancelDelOrg, getOrgInfoByCode } from "@/api/system/orgAdmin.js";
 import { ifDeletedOption } from "@/constant/system/resource";
 import CreateForm from "@/views/basic/orgAdmin/components/create-form.vue";
-import useUserStore from "@/store/modules/user";
 
 defineOptions({ name: "orgAdmin" });
 
-const userStore = useUserStore();
 const tableRef = ref();
 const orgCreateFormRef = ref();
 // eslint-disable-next-line no-unused-vars
@@ -133,7 +131,7 @@ const ifDel = ref(null);
 // 获取机构列表
 const getOrg = () => {
 	tableLoading.value = true;
-	getOrgInfoByCode({ orgCode: userStore.orgCode, ifDel: ifDel.value })
+	getOrgInfoByCode({ orgCode: null, ifDel: ifDel.value })
 		.then(res => {
 			if (res.success) {
 				tableData.value = res.result.map(item => {

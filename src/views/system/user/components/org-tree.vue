@@ -8,7 +8,7 @@
 		}"
 	>
 		<n-tree
-			cancelable
+			:cancelable="false"
 			:data="treeData"
 			:default-selected-keys="defaultSelect"
 			:on-load="handleLoad"
@@ -21,13 +21,13 @@
 
 <script setup>
 import { h, ref } from "vue";
-import { getOrgList, getOrgInfo } from "@/api/system/orgAdmin";
-import useUserStore from "@/store/modules/user";
+import { getOrgList, getOrgInfoByCode } from "@/api/system/orgAdmin";
+
+import { convertToTreeArray } from "@/utils/tree";
 
 const treeData = ref([]);
 const defaultSelect = ref([]);
 const emits = defineEmits(["selectOrg"]);
-const userStore = useUserStore();
 
 const treeRenderLabel = ({ option }) => {
 	return h("span", { style: "display: block; overflow: hidden; white-space: nowrap; text-overflow:ellipsis;" }, option.label);
@@ -35,11 +35,12 @@ const treeRenderLabel = ({ option }) => {
 
 // 获取机构列表
 const getOrg = () => {
-	getOrgInfo({ orgCode: userStore.orgCode }).then(res => {
+	getOrgInfoByCode({ orgCode: null, ifDel: 0 }).then(res => {
 		if (res.success) {
 			treeData.value = res.result.map(item => {
-				return { ...item, key: item.code, label: item.name, isLeaf: false };
+				return { ...item, key: item.code, label: item.name };
 			});
+			treeData.value = convertToTreeArray(treeData.value);
 			if (treeData.value.length > 0) {
 				// defaultSelect.value.splice(0, defaultSelect.value.length);
 				defaultSelect.value.push(treeData.value[0]?.key);
