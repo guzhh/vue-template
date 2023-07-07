@@ -31,7 +31,7 @@ const handleOrg = () => {
 	showModal.value = true;
 };
 
-getOrgInfoByCode({}).then(res => {
+getOrgInfoByCode({ orgCode: null, ifDel: 0 }).then(res => {
 	if (res.success) {
 		orgOptions.value = convertToTreeArray(res.result, "code", "pcode");
 	}
