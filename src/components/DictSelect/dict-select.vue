@@ -22,13 +22,16 @@ const props = defineProps({
 	name: {
 		type: [String, Number, null]
 	},
+	val: {
+		type: [String, Number, null]
+	},
 	// 上级字典编码
 	dictCode: {
 		type: String,
 		required: true
 	}
 });
-const emits = defineEmits(["update:value", "update:name", "change"]);
+const emits = defineEmits(["update:value", "update:name", "update:val", "change"]);
 const systemStore = useSystemStore();
 const options = computed(() => {
 	return systemStore.getDictList(props.dictCode);
@@ -41,6 +44,7 @@ const modelValue = computed({
 		const dict = options.value.find(item => item.code === val);
 		emits("update:value", dict?.code);
 		emits("update:name", dict?.name);
+		emits("update:val", dict?.dictVal);
 	}
 });
 
