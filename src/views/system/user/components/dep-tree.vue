@@ -6,6 +6,7 @@
 		:segmented="{
 			content: true
 		}"
+		:content-style="{ overflow: 'auto' }"
 	>
 		<n-tree
 			v-if="reLoad"

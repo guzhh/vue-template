@@ -1,7 +1,7 @@
 <template>
-	<page-content>
-		<div id="userSearchBox" style="position: relative">
-			<div style="display: flex; justify-content: space-between">
+	<page-content :style="{ height: height + 'px' }">
+		<div id="userSearchBox" style="position: relative; height: 100%">
+			<div style="display: flex; justify-content: space-between; height: 100%">
 				<!--   机构树-->
 				<org-tree style="margin-right: 5px" @selectOrg="selectOrg"></org-tree>
 				<!--   科室树-->
