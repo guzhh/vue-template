@@ -1,6 +1,6 @@
 <template>
-	<page-content>
-		<div style="display: flex; justify-content: space-between">
+	<page-content :style="{ height: height + 'px' }">
+		<div style="display: flex; justify-content: space-between; height: 100%">
 			<n-card
 				size="small"
 				style="width: 200px"
@@ -8,6 +8,7 @@
 				:segmented="{
 					content: true
 				}"
+				:content-style="{ overflow: 'auto' }"
 			>
 				<n-tree
 					:cancelable="false"
