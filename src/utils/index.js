@@ -313,3 +313,46 @@ export function extractionFun(data, formFields) {
 	}, {});
 	return obj;
 }
+
+/**
+ * 根据身份证号计算年龄、性别
+ * @param IDCard
+ * @returns {{}}
+ */
+export function analyzeIDCard(IDCard) {
+	const cardInfo = {};
+	// 获取用户身份证号码
+	const userCard = IDCard;
+	// 如果用户身份证号码为undefined则返回空
+	if (!userCard || !/^\d{6}(18|19|20)?\d{2}(0[1-9]|1[012])(0[1-9]|[12]\d|3[01])\d{3}(\d|X)$/i.test(userCard)) {
+		return null;
+	}
+
+	// 获取性别
+	if (parseInt(userCard.substr(16, 1), 10) % 2 === 1) {
+		cardInfo.sex = "男";
+	} else {
+		cardInfo.sex = "女";
+	}
+
+	// 获取出生日期
+	cardInfo.birth = `${userCard.substring(6, 10)}-${userCard.substring(10, 12)}-${userCard.substring(12, 14)}`;
+
+	// 获取当前年月日并计算年龄
+	const nowDate = new Date().getTime(); // 当前时间时间戳
+	const birthDate = new Date(cardInfo.birth).getTime(); // 出生日期时间戳
+
+	const time = (nowDate - birthDate) / 1000; // 获取时间差(秒)
+	if (time < 30 * 24 * 60 * 60) {
+		cardInfo.age = parseInt(`${time / (24 * 60 * 60)}`, 10);
+		cardInfo.ageUnit = "天";
+	} else if (time < 12 * 30 * 24 * 60 * 60) {
+		cardInfo.age = parseInt(`${time / (30 * 24 * 60 * 60)}`, 10);
+		cardInfo.ageUnit = "月";
+	} else {
+		cardInfo.age = parseInt(`${time / (12 * 30 * 24 * 60 * 60)}`, 10);
+		cardInfo.ageUnit = "岁";
+	}
+	// 返回数据
+	return cardInfo;
+}
