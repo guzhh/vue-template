@@ -42,6 +42,9 @@
 					</template>
 				</n-tooltip>
 			</li>
+			<li class="right-side">
+				<span style="margin-left: 5px">{{ userStore.userInfo.name }}</span>
+			</li>
 			<li>
 				<n-tooltip>
 					<span>{{ theme === "light" ? "点击切换为暗黑模式" : "点击切换为亮色模式" }}</span>

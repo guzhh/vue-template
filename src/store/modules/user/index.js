@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { login as userLogin, logout as userLogout, getUserInfo } from "@/api/users/user";
-import { clearToken, setToken } from "@/utils/auth";
+import { clearToken, getStorageOrg, setStorageOrg, setToken } from "@/utils/auth";
 import { formatTheResource } from "@/router/constants";
 import { setOrgEmitter } from "@/utils/listener/org-listener";
 import { setDeptEmitter } from "@/utils/listener/dept-listener";
@@ -63,6 +63,7 @@ const useUserStore = defineStore("user", {
 			// this.currentOrgCode = val;
 			// 发布默认机构发生变化
 			setOrgEmitter(org.code);
+			setStorageOrg(this.id, { orgName: org.name, orgCode: org.code });
 		},
 
 		// 登录
@@ -94,7 +95,12 @@ const useUserStore = defineStore("user", {
 			const res = await getUserInfo();
 			const permissionList = res.result.resourceList.map(item => item.permissionFlag);
 			res.result.resourceList = formatTheResource(res.result.resourceList); // 处理资源为符合前端要求的资源
-			this.setInfo({ ...res.result, permissionList, currentOrgCode: res.result.orgCode, currentOrgName: res.result.orgName });
+			const storageOrg = getStorageOrg(res.result.id);
+			if (storageOrg) {
+				this.setInfo({ ...res.result, permissionList, currentOrgCode: storageOrg.orgCode, currentOrgName: storageOrg.orgName });
+			} else {
+				this.setInfo({ ...res.result, permissionList, currentOrgCode: res.result.orgCode, currentOrgName: res.result.orgName });
+			}
 		}
 	}
 });
