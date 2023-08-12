@@ -45,6 +45,7 @@
 		"store": "^2.0.12",
 		"vfonts": "^0.0.3",
 		"vue": "^3.2.47",
+		"vue-dragscroll": "^4.0.5",
 		"vue-qr": "^4.0.9",
 		"vue-router": "^4.1.6",
 		"vue3-print-nb": "^0.1.4",

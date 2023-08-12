@@ -3,10 +3,8 @@
 		<div class="tab-bar-container">
 			<div class="tab-bar-box">
 				<div class="tab-bar-scroll">
-					<div class="tags-wrap">
-						<n-scrollbar x-scrollable>
-							<tab-item v-for="(tag, index) in tagList" :key="tag.fullPath" :index="index" :item-data="tag" />
-						</n-scrollbar>
+					<div class="tags-wrap" v-dragscroll>
+						<tab-item v-for="(tag, index) in tagList" :key="tag.fullPath" :index="index" :item-data="tag" />
 					</div>
 				</div>
 			</div>

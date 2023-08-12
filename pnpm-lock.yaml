@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 overrides:
   bin-wrapper: npm:bin-wrapper-china
 
@@ -76,6 +80,9 @@ dependencies:
   vue:
     specifier: ^3.2.47
     version: 3.2.47
+  vue-dragscroll:
+    specifier: ^4.0.5
+    version: 4.0.5
   vue-qr:
     specifier: ^4.0.9
     version: 4.0.9
@@ -7303,6 +7310,7 @@ packages:
 
   /prr@1.0.1:
     resolution: {integrity: sha512-yPw4Sng1gWghHQWj0B3ZggWUm4qVbPwPFcRG8KyxiU7J2OHFSoEHKS+EZ3fv5l1t9CyCiop6l/ZYeWbrgoQejw==}
+    requiresBuild: true
     dev: true
 
   /pseudomap@1.0.2:
@@ -7670,6 +7678,7 @@ packages:
 
   /sax@1.2.4:
     resolution: {integrity: sha512-NqVDv9TpANUjFm0N8uM5GxL36UgKi9/atZw+x7YFnQ8ckwFGKrl4xX4yWtrey3UJm5nP1kUbnYgLopqWNSRhWw==}
+    requiresBuild: true
     dev: true
     optional: true
 
@@ -9220,6 +9229,12 @@ packages:
         optional: true
     dependencies:
       vue: 3.2.47
+
+  /vue-dragscroll@4.0.5:
+    resolution: {integrity: sha512-1V4/2rUlNTM8vYC6/y2yfjKjOynuCfp1VRpj+IOGCcj8FWl4/3FMs9GBUJShd5mLoD4BvhY1xveezeuD+9i/mw==}
+    dependencies:
+      vue: 3.2.47
+    dev: false
 
   /vue-eslint-parser@9.1.1(eslint@8.2.0):
     resolution: {integrity: sha512-C2aI/r85Q6tYcz4dpgvrs4wH/MqVrRAVIdpYedrxnATDHHkb+TroeRcDpKWGZCx/OcECMWfz7tVwQ8e+Opy6rA==}
