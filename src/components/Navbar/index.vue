@@ -5,8 +5,8 @@
 			<n-breadcrumb style="margin-left: 40px">
 				<n-breadcrumb-item v-for="item in router.currentRoute.value.matched" :key="item.path">
 					<router-link :to="item.path">
-						<span v-if="item.path === '/'" style="color: #fff">首页</span>
-						<span v-else style="color: #fff">{{ item.meta.title }}</span>
+						<span v-if="item.path === '/'" :style="{ color: handleTextColor }">首页</span>
+						<span v-else :style="{ color: handleTextColor }">{{ item.meta.title }}</span>
 					</router-link>
 				</n-breadcrumb-item>
 			</n-breadcrumb>
@@ -26,7 +26,7 @@
 				<n-tooltip>
 					<span>点击可以切换机构【数据查看范围】</span>
 					<template #trigger>
-						<span class="navbar-org" @click="selectAnInstitution">
+						<span class="navbar-org" @click="selectAnInstitution" :style="{ color: handleTextColor }">
 							{{ orgData.code ? orgData.name : "未知机构" }} <n-icon size="15" style="margin-left: 5px"> <ChevronDown /> </n-icon
 						></span>
 					</template>
@@ -36,14 +36,14 @@
 				<n-tooltip>
 					<span>点击可以切换科室【当前所在科室】</span>
 					<template #trigger>
-						<span class="navbar-org" @click="selectADepartment"
+						<span class="navbar-org" :style="{ color: handleTextColor }" @click="selectADepartment"
 							>{{ userStore.userInfo.departName }} <n-icon size="15" style="margin-left: 5px"> <ChevronDown /> </n-icon
 						></span>
 					</template>
 				</n-tooltip>
 			</li>
 			<li class="right-side">
-				<span style="margin-left: 5px">{{ userStore.userInfo.name }}</span>
+				<span style="margin-left: 5px" :style="{ color: handleTextColor }">{{ userStore.userInfo.name }}</span>
 			</li>
 			<li>
 				<n-tooltip>
@@ -159,10 +159,17 @@ const { theme, handleToggleTheme } = useHandleTheme(); // 主题调整
 const { isFullscreen, toggle: toggleFullScreen } = useFullscreen(); // 全屏
 
 const headerColor = computed(() => {
-	if (appStore.theme === "dark") {
-		return themeVars.value.bodyColor;
+	if (appStore.theme === "dark" || appStore.sideTheme === "dark") {
+		return themeVars.value.baseColor;
 	}
 	return themeVars.value.primaryColor;
+});
+
+const handleTextColor = computed(() => {
+	if (appStore.theme !== "dark" && appStore.sideTheme === "dark") {
+		return themeVars.value.textColor2;
+	}
+	return "#fff";
 });
 
 // const title = import.meta.env.VITE_SYSTEM_NAME; // 系统标题
@@ -265,7 +272,7 @@ const selectADepartment = () => {
 .left-side {
 	display: flex;
 	align-items: center;
-	padding-left: 20px;
+	//padding-left: 20px;
 
 	img {
 		//width: 25px;

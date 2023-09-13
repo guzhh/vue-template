@@ -16,6 +16,10 @@
 			@update:collapsed="setCollapsed"
 		>
 			<div class="menu-wrapper">
+				<div v-if="!inverted" style="height: 45px"></div>
+				<div v-else style="width: 100%">
+					<dark-logo />
+				</div>
 				<Menu />
 			</div>
 		</n-layout-sider>
@@ -55,6 +59,7 @@ import Menu from "@/components/Menu/index.vue";
 import Footer from "@/components/footer/index.vue";
 import TabBar from "@/components/TabBar/index.vue";
 import useResponsive from "@/hooks/responsive";
+import DarkLogo from "@/components/LogoTitle/darkLogo.vue";
 
 defineOptions({ name: "DefaultView" });
 
@@ -70,6 +75,11 @@ const footer = computed(() => appStore.footer); // 是否显示底部
 
 const menuWidth = computed(() => {
 	return appStore.menuCollapse ? appStore.menuCollapsedWidth : appStore.menuWidth; // 菜单栏宽度
+});
+
+const menuIndex = computed(() => {
+	if (appStore.sideTheme === "dark") return 100;
+	return 98;
 });
 
 const paddingStyle = computed(() => {
@@ -117,7 +127,7 @@ provide("toggleDrawerMenu", () => {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 100;
+	z-index: 98;
 	width: 100%;
 	height: @nav-size-height;
 }
@@ -126,12 +136,12 @@ provide("toggleDrawerMenu", () => {
 	position: fixed;
 	top: 0;
 	left: 0;
-	z-index: 99;
+	z-index: v-bind(menuIndex);
 	height: 100%;
 	transition: all 0.2s cubic-bezier(0.34, 0.69, 0.1, 1);
 
 	.menu-wrapper {
-		padding-top: 45px;
+		//padding-top: 45px;
 		box-sizing: border-box;
 	}
 

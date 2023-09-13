@@ -1,6 +1,6 @@
 // 应用主题预设颜色
 export const appThemeList = [
-	"#384CE3 ",
+	"#465CFF",
 	"#18a058",
 	"#409eff",
 	"#F5222D",

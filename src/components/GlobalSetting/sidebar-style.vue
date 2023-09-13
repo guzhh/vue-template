@@ -32,6 +32,12 @@ const sideExampleList = reactive([
 		rightTopBg: "#2878FC",
 		rightBottomBg: "#f5f5f5",
 		themeId: "white"
+	},
+	{
+		leftBg: "#000000",
+		rightTopBg: "#ffffff",
+		rightBottomBg: "#f5f5f5",
+		themeId: "dark"
 	}
 ]);
 

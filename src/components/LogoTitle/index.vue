@@ -1,5 +1,5 @@
 <template>
-	<div class="logo" @click="$router.push('/')">
+	<div class="logo" @click="$router.push('/')" :style="{ width: `${menuWidth}px` }">
 		<!--		<logo width="32" height="32" :title="SYSTEM_NAME" :class="{ 'mr-2': !collapsed }" v-if="collapsed"></logo>-->
 		<img :src="Logo" alt="" :title="SYSTEM_NAME" :class="{ 'mr-2': !collapsed }" />
 		<h2 class="title" v-if="!collapsed">{{ SYSTEM_NAME }}</h2>
@@ -8,7 +8,9 @@
 
 <script setup>
 // import { useThemeVars } from "naive-ui";
+import { computed } from "vue";
 import Logo from "@/assets/images/logo.svg?url";
+import useAppStore from "@/store/modules/app";
 
 defineProps({
 	collapsed: {
@@ -16,9 +18,15 @@ defineProps({
 	}
 });
 
-// eslint-disable-next-line no-unused-vars
-// const themeVars = useThemeVars(); // 全局公共CSS变量
+const appStore = useAppStore();
 const SYSTEM_NAME = import.meta.env.VITE_SYSTEM_NAME; // 系统标题
+
+const menuWidth = computed(() => {
+	if (appStore.sideTheme === "dark") {
+		return appStore.menuCollapse ? appStore.menuCollapsedWidth : appStore.menuWidth; // 菜单栏宽度
+	}
+	return appStore.menuWidth;
+});
 </script>
 
 <style lang="less" scoped>
@@ -38,7 +46,6 @@ const SYSTEM_NAME = import.meta.env.VITE_SYSTEM_NAME; // 系统标题
 	}
 
 	.title {
-		margin: 0;
 		padding: 0;
 		font-size: 16px;
 		letter-spacing: 1px;
