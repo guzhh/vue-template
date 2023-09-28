@@ -26,7 +26,7 @@ const theme = computed(() => (appStore.theme === "dark" ? darkTheme : null));
 
 const themeOverrides = computed(() => {
 	const appTheme = appStore.themeColor;
-	const lightenStr = lighten(appStore.themeColor, 6);
+	const lightenStr = lighten(appStore.themeColor, 15);
 	const darkStr = lighten(appStore.themeColor, 30);
 	if (theme.value === null) {
 		return {
@@ -51,12 +51,55 @@ const themeOverrides = computed(() => {
 				textColor1: "#2b2b2e",
 				textColor2: "#616266",
 				textColor3: "#999999",
-				textColorDisabled: "#E0E0E0"
+				invertedColor: appTheme,
+				inputColorDisabled: null,
+				textColorDisabled: "#2b2b2e"
 			},
 			Menu: {
-				// itemColorActive: appTheme,
-				// itemTextColorActive: "#FFFFFF",
-				// itemIconColorActive: "#FFFFFF"
+				itemTextColorActive: lightenStr,
+				itemTextColorActiveHover: lightenStr,
+				itemTextColorChildActive: lightenStr,
+				itemTextColorChildActiveHover: lightenStr,
+				itemTextColorActiveHorizontal: lightenStr,
+				itemTextColorActiveHoverHorizontal: lightenStr,
+				itemTextColorChildActiveHorizontal: lightenStr,
+				itemTextColorChildActiveHoverHorizontal: lightenStr,
+				itemIconColorActive: lightenStr,
+				itemIconColorActiveHover: lightenStr,
+				itemIconColorChildActive: lightenStr,
+				itemIconColorChildActiveHover: lightenStr,
+				itemIconColorActiveHorizontal: lightenStr,
+				itemIconColorActiveHoverHorizontal: lightenStr,
+				itemIconColorChildActiveHorizontal: lightenStr,
+				itemIconColorChildActiveHoverHorizontal: lightenStr,
+				arrowColorActive: lightenStr,
+				arrowColorActiveHover: lightenStr,
+				arrowColorChildActive: lightenStr,
+				arrowColorChildActiveHover: lightenStr,
+				itemColorActiveInverted: lightenStr,
+				itemColorActiveHoverInverted: lightenStr,
+				itemColorActiveCollapsedInverted: lightenStr,
+				groupTextColorInverted: "#fff",
+				itemTextColorInverted: "#fff",
+				itemIconColorInverted: "#fff",
+				itemIconColorCollapsedInverted: "#fff",
+				itemTextColorHorizontalInverted: "#fff",
+				itemIconColorHorizontalInverted: "#fff",
+				arrowColorInverted: "#fff"
+			},
+			Layout: {
+				siderColorInverted: appTheme // "#384CE3",
+			},
+			Card: {
+				borderRadius: "6px",
+				paddingSmall: "15px 15px 15px"
+			},
+			Radio: {
+				dotColorDisabled: appTheme,
+				textColorDisabled: "#2b2b2e"
+			},
+			Input: {
+				colorDisabled: null
 			}
 		};
 	}

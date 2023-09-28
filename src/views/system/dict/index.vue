@@ -1,6 +1,38 @@
 <template>
 	<page-content>
 		<n-card size="small" title="字典列表">
+			<template #header>
+				<n-form inline label-placement="left" :model="searchForm" label-width="auto" :show-feedback="false" size="small">
+					<n-space>
+						<n-form-item label="顶级节点" path="pcode" v-if="false">
+							<n-input
+								v-model:value="searchForm.pcode"
+								placeholder="顶级节点,默认为0"
+								@keydown.stop.enter="resetTableList"
+							></n-input>
+						</n-form-item>
+						<n-form-item label="字典名称/编码" path="query">
+							<n-input
+								v-model:value="searchForm.query"
+								placeholder="字典名称/编码"
+								@keydown.stop.enter="resetTableList"
+							></n-input>
+						</n-form-item>
+						<n-form-item label="字典状态" path="state">
+							<n-select
+								placeholder="请选择字典状态"
+								clearable
+								style="width: 150px"
+								v-model:value="searchForm.state"
+								:options="disableEnableOption"
+								@update:value="resetTableList"
+							/>
+						</n-form-item>
+						<n-button size="small" type="primary" @click="resetTableList">查询</n-button>
+						<n-button size="small" @click="resetQuery">重置</n-button>
+					</n-space>
+				</n-form>
+			</template>
 			<template #header-extra>
 				<n-button size="small" type="primary" @click="addDict('')"> 新增字典</n-button>
 				<n-tooltip>
@@ -36,8 +68,8 @@
 
 			<vxe-table
 				ref="tableRef"
-				:data="tableData"
-				:height="height - 80"
+				:data="tableList"
+				:height="height - 125"
 				:loading="tableLoading"
 				:size="tableSize"
 				align="center"
@@ -52,6 +84,7 @@
 				<vxe-column field="code" min-width="100px" show-overflow="title" title="字典编码"></vxe-column>
 				<vxe-column field="name" min-width="100px" show-overflow="title" title="字典名称"></vxe-column>
 				<vxe-column field="dictVal" min-width="200px" show-overflow="title" title="字典值"></vxe-column>
+				<vxe-column field="sortNum" min-width="100px" show-overflow="title" title="排序值"></vxe-column>
 				<vxe-column field="state" min-width="100px" show-overflow="title" title="字典状态">
 					<template #default="{ row }">
 						<option-badge :options="disableEnableOption" :val="row.state" />
@@ -59,8 +92,8 @@
 				</vxe-column>
 				<vxe-column title="操作" width="200px">
 					<template #default="{ row }">
-						<n-button text type="primary" @click="editParam(row)"> 编辑</n-button>
-						<n-button quaternary size="small" type="info" @click="dictModal(row)">字典 </n-button>
+						<n-button text type="primary" @click="editParam(row)" style="margin-right: 5px"> 编辑</n-button>
+						<n-button quaternary size="small" type="info" @click="dictModal(row)" v-if="row.pcode === '0'">字典 </n-button>
 						<n-popconfirm @positive-click="deleteDict(row)">
 							<template #trigger>
 								<n-button text type="error"> 删除</n-button>
@@ -70,6 +103,19 @@
 					</template>
 				</vxe-column>
 			</vxe-table>
+			<n-pagination
+				v-model:page="page.currentPage"
+				v-model:page-size="page.pageSize"
+				:item-count="page.totalResult"
+				:page-sizes="page.pageSizes"
+				show-quick-jumper
+				show-size-picker
+				style="display: flex; justify-content: right; margin-top: 5px"
+				@update:page="onChange"
+				@update:page-size="onUpdatePageSize"
+			>
+				<template #suffix> 共 {{ page.totalResult }} 条数据</template>
+			</n-pagination>
 		</n-card>
 		<create-form ref="createFormRef" @ok="getTableData"></create-form>
 		<DictModal ref="dictModalRef"></DictModal>
@@ -80,11 +126,12 @@
 import { ref } from "vue";
 import { useMessage } from "naive-ui";
 import { useWindowSize } from "@/hooks/useWindowSize";
-import { getDictList, delDict } from "@/api/system/dictList";
+import { getDictList, delDictById } from "@/api/system/dictList";
 import CreateForm from "@/views/system/dict/components/create-form.vue";
 import DictModal from "@/views/system/dict/components/dictModal.vue";
 import useTable from "@/hooks/useTable";
 import { disableEnableOption } from "@/constant/system/resource";
+import useTableData from "@/hooks/useTableData";
 
 defineOptions({ name: "dict" });
 
@@ -94,8 +141,13 @@ const message = useMessage();
 const createFormRef = ref();
 const dictModalRef = ref();
 const { height } = useWindowSize();
-const tableData = ref([]);
-const tableLoading = ref(false);
+
+// 查询条件
+const defaultVal = { state: 1, query: "", pcode: "0" };
+const { tableList, tableLoading, searchForm, page, onChange, onUpdatePageSize, resetTableList, getTableData } = useTableData({
+	requestMethod: getDictList,
+	formData: defaultVal
+});
 
 // 新增顶级字典
 const addDict = pcode => {
@@ -112,34 +164,20 @@ const editParam = row => {
 	createFormRef.value.edit(row);
 };
 
-// 查询
-const getTableData = () => {
-	tableLoading.value = true;
-	tableData.value = [];
-	// 加载顶级节点
-	getDictList({ pcode: 0 })
-		.then(res => {
-			if (res.success) {
-				tableData.value = res.result.map(item => {
-					return { ...item, hasChild: true };
-				});
-			}
-		})
-		.finally(() => {
-			tableLoading.value = false;
-		});
-};
-
 // 删除字典
 const deleteDict = row => {
-	delDict({ code: row.code }).then(res => {
+	delDictById({ id: row.id }).then(res => {
 		if (res.success) {
 			message.success("字典删除成功");
-			getTableData();
+			resetTableList();
 		}
 	});
 };
-getTableData();
+// 重置查询条件
+const resetQuery = () => {
+	searchForm.value = { ...defaultVal };
+	resetTableList();
+};
 </script>
 
 <style scoped></style>

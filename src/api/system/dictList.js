@@ -46,6 +46,21 @@ export function delDict(params) {
 }
 
 /**
+ * 根据字典id删除字典信息
+ * @returns {Promise<*>}
+ */
+export function delDictById(params) {
+	return request.post({
+		url: "/p/auth/auth-dict/delById",
+		data: params,
+		customs: {
+			isLoading: true,
+			loadingText: "字典删除中..."
+		}
+	});
+}
+
+/**
  * 根据父ids获取下级字典集合
  * @returns {Promise<*>}
  */

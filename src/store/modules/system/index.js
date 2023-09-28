@@ -28,6 +28,14 @@ const useSystemStore = defineStore("system", {
 				return "";
 			};
 		},
+		getDictNameByCode(state) {
+			return (code, pcode) => {
+				const dict = state.dictMap.get(`${pcode}#${code}`);
+				if (dict) return dict.name;
+				state.getDictBycode(code, pcode);
+				return "";
+			};
+		},
 		// 根据字典值和父级编码获取当前字典
 		getDictNameByValue(state) {
 			return (pcode, dictValue) => {
@@ -93,6 +101,29 @@ const useSystemStore = defineStore("system", {
 					this.dictMap.set(code, {
 						id: new Date().getTime(),
 						code,
+						name: "未知字典",
+						dictVal: null,
+						state: null
+					});
+				}
+			}
+		},
+		async getDictBycode(code, pcode) {
+			if (!code) return;
+			if (!this.dictAjaxTimer[`${pcode}#${code}`]) {
+				// 记录本次请求
+				this.dictAjaxTimer = { ...this.dictAjaxTimer, [`${pcode}#${code}`]: new Date().getTime() };
+				// 三秒后清空请求缓存记录，让其可以再次调用
+				setTimeout(() => {
+					this.dictAjaxTimer = { ...this.dictAjaxTimer, [`${pcode}#${code}`]: null };
+				}, 3 * 1000);
+				const result = await getDict({ code, state: 1, pcode });
+				if (result.success && result.result) {
+					this.dictMap.set(`${pcode}#${code}`, result.result);
+				} else {
+					this.dictMap.set(`${pcode}#${code}`, {
+						id: new Date().getTime(),
+						code: `${pcode}#${code}`,
 						name: "未知字典",
 						dictVal: null,
 						state: null

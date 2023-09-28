@@ -105,7 +105,7 @@
 					<vxe-column field="outCode" min-width="80px" show-overflow="title" title="三方科室编码"></vxe-column>
 					<vxe-column field="deptType" min-width="100px" show-overflow="title" title="科室类型">
 						<template #default="{ row }">
-							<dict-show :dict-code="row.deptType"></dict-show>
+							<dict-code-show pcode="DEPT_TYPE" :dict-code="row.deptType"></dict-code-show>
 						</template>
 					</vxe-column>
 					<vxe-column field="descr" min-width="120px" show-overflow="title" title="科室介绍"></vxe-column>

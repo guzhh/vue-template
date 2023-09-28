@@ -14,7 +14,7 @@
 			@close="tagClose(itemData, index)"
 			:is-active="itemData.fullPath === $route.fullPath"
 		>
-			<div style="display: flex; align-items: center">
+			<div style="display: flex; align-items: center" ref="chromeTabRef">
 				<component :is="itemData.icon" style="width: 16px; height: 16px" v-if="itemData.icon" />
 				<div style="padding-top: 3px">
 					<span style="margin-left: 8px">{{ itemData.title }}</span>
@@ -60,6 +60,7 @@ const router = useRouter();
 const route = useRoute();
 const tabBarStore = useTabBarStore();
 const showDropdown = ref(false);
+const chromeTabRef = ref(null);
 const options = ref([
 	{
 		label: "重载当前标签页",
@@ -75,6 +76,24 @@ const options = ref([
 const tagList = computed(() => {
 	return tabBarStore.getTabList;
 });
+
+watch(
+	() => route.fullPath,
+	() => {
+		if (props.itemData.fullPath === route.fullPath) {
+			nextTick(() => {
+				setTimeout(() => {
+					chromeTabRef.value.scrollIntoView({
+						block: "end",
+						behavior: "smooth",
+						inline: "center"
+					});
+				}, 200);
+			});
+		}
+	},
+	{ immediate: true, deep: true }
+);
 
 // 打开下拉菜单
 const handleContextMenu = e => {

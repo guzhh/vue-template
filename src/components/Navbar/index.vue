@@ -2,7 +2,7 @@
 	<div class="navbar" :style="{ backgroundColor: headerColor }">
 		<div class="left-side">
 			<logo-title />
-			<n-breadcrumb style="margin-left: 40px">
+			<n-breadcrumb style="margin-left: 20px">
 				<n-breadcrumb-item v-for="item in router.currentRoute.value.matched" :key="item.path">
 					<router-link :to="item.path">
 						<span v-if="item.path === '/'" :style="{ color: handleTextColor }">首页</span>

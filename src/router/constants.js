@@ -77,9 +77,9 @@ export const formatTheResource = routeList => {
 				linkValue: item?.linkValue, // 链接值
 				icon: item.icon || "", // 图标显示在侧边菜单中
 				title: item.name, // 区域设置名称显示在侧边菜单和痕迹导航中
-				hideInMenu: item.hidden === 1 || item.type !== 1, // 如果为 true，则不会显示在侧边菜单中
+				hideInMenu: item.ifHidden === 1 || item.type !== 1, // 如果为 true，则不会显示在侧边菜单中
 				hideChildrenInMenu: item.hideChildren === 1, // 如果设置为 true，则子项不会显示在侧边菜单中
-				noAffix: !(item.linkType !== 1 || item.hidden === 1 || item.typeFlag !== 1), // 如果设置为 true，则标签将不会贴在选项卡栏中  (item.hidden !== 1 && item.typeFlag === 1)
+				noAffix: !(item.linkType !== 1 || item.ifHidden === 1 || item.typeFlag !== 1), // 如果设置为 true，则标签将不会贴在选项卡栏中  (item.hidden !== 1 && item.typeFlag === 1)
 				ignoreCache: item.ifcache === 0 // 如果设置为 true，则不会缓存该页面
 			}
 		};

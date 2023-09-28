@@ -18,6 +18,17 @@
 				<n-form-item label="字典值" path="dictVal">
 					<n-input v-model:value="formValue.dictVal" placeholder="请输入字典值" />
 				</n-form-item>
+				<n-form-item label="字典排序" path="sortNum">
+					<!--					<n-input v-model:value="formValue.sortNum" placeholder="请输入字典值" />-->
+					<n-input-number
+						style="width: 100%"
+						v-model:value="formValue.sortNum"
+						clearable
+						:min="0"
+						:precision="0"
+						placeholder="请输入字典排序"
+					/>
+				</n-form-item>
 				<n-form-item label="状态" path="state">
 					<!--					<n-select v-model:value="formValue.state" :options="options" placeholder="请选择字典状态" />-->
 					<n-radio-group v-model:value="formValue.state" name="radiogroup">
@@ -63,6 +74,7 @@ const formValue = ref({
 	code: "",
 	name: "",
 	dictVal: "",
+	sortNum: 1,
 	state: 1
 });
 
@@ -70,6 +82,7 @@ const rules = {
 	code: { required: true, message: "请输入字典编码", trigger: "blur" },
 	name: { required: true, message: "请输入字典名称", trigger: "blur" },
 	dictVal: { required: true, message: "请输入字典值", trigger: "blur" },
+	sortNum: { required: true, type: "number", message: "请输入字典排序", trigger: "blur" },
 	state: { type: "number", required: true, message: "请选择字典状态", trigger: ["blur", "change"] }
 };
 
@@ -92,6 +105,7 @@ const edit = row => {
 		code: row.code,
 		name: row.name,
 		dictVal: row.dictVal,
+		sortNum: row.sortNum,
 		state: row.state
 	};
 };
@@ -106,6 +120,7 @@ const handleClose = () => {
 		code: "",
 		name: "",
 		dictVal: "",
+		sortNum: 1,
 		state: 1
 	};
 };
@@ -139,6 +154,7 @@ const submitAndAdd = () => {
 						code: "",
 						name: "",
 						dictVal: "",
+						sortNum: 1,
 						state: 1
 					};
 				}

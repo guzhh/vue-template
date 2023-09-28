@@ -32,6 +32,7 @@
 				size="mini"
 				align="center"
 				border
+				:max-height="500"
 				resizable
 				row-id="code"
 				show-header-overflow="title"
@@ -42,6 +43,7 @@
 				<vxe-column field="code" min-width="100px" show-overflow="title" title="字典编码"></vxe-column>
 				<vxe-column field="name" min-width="100px" show-overflow="title" title="字典名称"></vxe-column>
 				<vxe-column field="dictVal" min-width="200px" show-overflow="title" title="字典值"></vxe-column>
+				<vxe-column field="sortNum" min-width="100px" show-overflow="title" title="排序值"></vxe-column>
 				<vxe-column field="state" min-width="100px" show-overflow="title" title="字典状态">
 					<template #default="{ row }">
 						<option-badge :options="disableEnableOption" :val="row.state" />
@@ -68,7 +70,7 @@
 
 <script setup>
 import { useMessage } from "naive-ui";
-import { delDict, getDictByPCodes } from "@/api/system/dictList";
+import { delDictById, getDictByPCodes } from "@/api/system/dictList";
 import { disableEnableOption } from "@/constant/system/resource";
 import CreateForm from "./create-form.vue";
 
@@ -114,7 +116,7 @@ const editParam = row => {
 
 // 删除字典
 const deleteDict = row => {
-	delDict({ code: row.code }).then(res => {
+	delDictById({ id: row.id }).then(res => {
 		if (res.success) {
 			message.success("字典删除成功");
 			getDictList();

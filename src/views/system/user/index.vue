@@ -141,7 +141,7 @@
 						<vxe-column field="email" min-width="100px" show-overflow="title" title="邮箱"></vxe-column>
 						<vxe-column field="userType" min-width="100px" show-overflow="title" title="用户类型">
 							<template #default="{ row }">
-								<dict-show :dictCode="row.userType"></dict-show>
+								<dict-code-show pcode="USER_TYPE" :dict-code="row.userType"></dict-code-show>
 							</template>
 						</vxe-column>
 						<vxe-column field="state" min-width="80px" show-overflow="title" title="状态">

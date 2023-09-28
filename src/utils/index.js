@@ -26,6 +26,43 @@ export function lighten(color, amount) {
 }
 
 /**
+ * 颜色转透明度
+ * @param str 颜色#xxxx
+ * @param tmd 透明度0~1
+ * @returns {string}
+ */
+export function stringToRgba(str, tmd) {
+	const template = str.toLowerCase();
+	let result = "";
+	if (template.indexOf("rgb(") === 0) {
+		result = template;
+	} else if (template.indexOf("rgba(") === 0) {
+		const colors = template
+			.replace(/rgba\(/g, "")
+			.replace(/\)/g, "")
+			.split(",");
+		const r = colors[0];
+		const g = colors[1];
+		const b = colors[2];
+		result = `rgb(${r},${g},${b})`;
+	} else if (template.indexOf("#") === 0) {
+		let colors = template.replace(/#/g, "");
+		const resultArr = [];
+		if (colors.length === 3) {
+			// eslint-disable-next-line no-shadow
+			colors = colors.replace(/[0-9a-f]/g, str => {
+				return str + str;
+			});
+		}
+		for (let i = 0; i < colors.length; i += 2) {
+			resultArr.push(parseInt(colors[i] + colors[i + 1], 16));
+		}
+		result = `rgb(${resultArr.join(",")},${tmd})`;
+	}
+	return result;
+}
+
+/**
  * 16进制色值获取反色设置方法
  * @param  {String} oldColor 为16进制色值的字符串（例：'#000000'）
  * @return {String} 返回反色的色值（例：'#ffffff'）

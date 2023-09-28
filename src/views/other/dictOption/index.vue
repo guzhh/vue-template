@@ -3,12 +3,12 @@
 		<n-card size="small" title="字典单选">
 			<dict-select dict-code="RULE_FIELD" v-model:value="data.dictValue" />
 			<div style="height: 10px"></div>
-			<dict-show :dict-code="data.dictValue" />
+			<dict-code-show pcode="RULE_FIELD" :dict-code="data.dictValue"></dict-code-show>
 		</n-card>
 		<n-card size="small" title="字典多选" style="margin-top: 10px">
 			<dict-multi dict-code="RULE_FIELD" v-model:value="data.dictMulti" />
 			<div style="height: 10px"></div>
-			<dict-show :dict-code="data.dictMulti" />
+			<dict-code-show pcode="RULE_FIELD" :dict-code="data.dictMulti"></dict-code-show>
 		</n-card>
 		<n-card size="small" title="选中的值" style="margin-top: 10px">
 			<pre>{{ JSON.stringify(data, null, 4) }}</pre>

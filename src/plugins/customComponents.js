@@ -5,7 +5,7 @@ import WangEditor from "@/components/WangEditor/index.vue"; // 富文本
 import BaseModal from "@/components/BaseModal/index.vue"; // 弹窗组件
 import CodeEditor from "@/components/CodeEditor/index.vue"; // 代码编辑器组件
 import CardHeader from "@/components/cardHeader/index.vue";
-import { DictMulti, DictSelect, DictShow, DictRadio, DictValueShow } from "@/components/DictSelect/index";
+import { DictSelect, DictMulti, DictShow, DictRadio, DictValueShow, DictCodeShow } from "@/components/DictSelect/index";
 
 /**
  * 全局注册自定义组件 待完善
@@ -21,6 +21,7 @@ export function setupCustomComponents(app) {
 		DictSelect,
 		DictShow,
 		DictRadio,
+		DictCodeShow,
 		BaseModal,
 		CodeEditor,
 		DictValueShow,
