@@ -16,6 +16,7 @@
 		>
 			<div style="display: flex; align-items: center" ref="chromeTabRef">
 				<component :is="itemData.icon" style="width: 16px; height: 16px" v-if="itemData.icon" />
+				<component :is="MenuOutlined" style="width: 16px; height: 16px" v-else />
 				<div style="padding-top: 3px">
 					<span style="margin-left: 8px">{{ itemData.title }}</span>
 				</div>
@@ -27,7 +28,7 @@
 <script setup>
 import { ref, computed } from "vue";
 import { Refresh, CloseOutline } from "@vicons/ionicons5";
-import { ArrowRightOutlined, ArrowLeftOutlined, SwapOutlined } from "@vicons/antd";
+import { ArrowRightOutlined, ArrowLeftOutlined, SwapOutlined, MenuOutlined } from "@vicons/antd";
 import { useRouter, useRoute } from "vue-router";
 import { useMessage, useThemeVars } from "naive-ui";
 import { ChromeTab } from "@soybeanjs/vue-admin-tab";

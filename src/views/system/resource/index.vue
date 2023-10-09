@@ -38,7 +38,7 @@
 				border
 				ref="tableRef"
 				:data="tableData"
-				:height="height - 90"
+				:height="height - 100"
 				:loading="tableLoading"
 				:size="tableSize"
 				:tree-config="{ children: 'children', expandAll: true, reserve: true }"

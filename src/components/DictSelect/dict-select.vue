@@ -1,6 +1,6 @@
 <template>
 	<n-select
-		label-field="name"
+		:label-field="labelField"
 		:value-field="valueField"
 		v-model:value="modelValue"
 		filterable
@@ -34,9 +34,12 @@ const props = defineProps({
 		required: true
 	},
 	valueField: {
-		//
 		type: String,
 		default: "code"
+	},
+	labelField: {
+		type: String,
+		default: "name"
 	},
 	ifTip: {
 		type: Boolean, // Tooltip提示

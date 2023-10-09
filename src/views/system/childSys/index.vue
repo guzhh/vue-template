@@ -100,7 +100,7 @@
 
 				<vxe-table
 					:data="tableList"
-					:height="height - 110"
+					:height="height - 120"
 					:loading="tableLoading"
 					:size="tableSize"
 					align="center"

@@ -1,6 +1,7 @@
 import { createApp } from "vue";
 import "@/assets/style/global.less";
 import VXETable from "vxe-table";
+import TinyLayer from "tinylayer";
 import { AppProvider } from "@/components/Application";
 import App from "@/App.vue";
 import router, { setupRouter } from "@/router";
@@ -9,14 +10,14 @@ import { setupCustomComponents, setupDirectives, setupGlobalMethods } from "@/pl
 import { setupIcon } from "@/plugins/icons";
 import "xe-utils"; // 全局导入方式，所有版本通用
 
-// createApp(App).mount("#app");
-
 async function bootstrap() {
 	// 单独挂载一个vue实例方便在js中单独调用
 	const appProvider = createApp(AppProvider);
 	const app = createApp(App);
 	// 挂载vxe-table
 	app.use(VXETable);
+	// 导入弹窗组件
+	app.use(TinyLayer);
 	// 挂载状态管理
 	setupStore(app);
 	// 注册全局图标

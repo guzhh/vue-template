@@ -20,7 +20,7 @@ export const BASE_MAIN = {
 			component: () => import("@/views/users/personal/index.vue"),
 			meta: {
 				title: "个人中心",
-				noAffix: false, // 是否显示标签页
+				noAffix: false, // 是否不显示显示标签页
 				ignoreCache: false // 是否缓存
 			}
 		},
@@ -30,7 +30,17 @@ export const BASE_MAIN = {
 			component: () => import("@/views/users/settings/index.vue"),
 			meta: {
 				title: "个人设置",
-				noAffix: false, // 是否显示标签页
+				noAffix: false, // 是否不显示显示标签页
+				ignoreCache: false // 是否缓存
+			}
+		},
+		{
+			path: "version",
+			name: "version",
+			component: () => import("@/views/users/version/index.vue"),
+			meta: {
+				title: "版本记录",
+				noAffix: false, // 是否不显示显示标签页
 				ignoreCache: false // 是否缓存
 			}
 		}

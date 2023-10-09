@@ -3,9 +3,9 @@
 		multiple
 		clearable
 		filterable
-		label-field="name"
-		value-field="code"
 		:options="options"
+		:label-field="labelField"
+		:value-field="valueField"
 		max-tag-count="responsive"
 		v-model:value="selectDict"
 		@update:value="handleChange"
@@ -25,6 +25,14 @@ const props = defineProps({
 	dictCode: {
 		type: String,
 		required: true
+	},
+	valueField: {
+		type: String,
+		default: "code"
+	},
+	labelField: {
+		type: String,
+		default: "name"
 	}
 });
 const systemStore = useSystemStore();

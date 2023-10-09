@@ -1,6 +1,6 @@
 <template>
 	<n-radio-group v-model:value="modelValue">
-		<n-radio :value="item.code" v-for="(item, key) in options" :key="key"> {{ item.name }} </n-radio>
+		<n-radio :value="item[valueField]" v-for="(item, key) in options" :key="key"> {{ item[labelField] }} </n-radio>
 	</n-radio-group>
 </template>
 
@@ -17,6 +17,14 @@ const props = defineProps({
 	dictCode: {
 		type: String,
 		required: true
+	},
+	valueField: {
+		type: String,
+		default: "code"
+	},
+	labelField: {
+		type: String,
+		default: "name"
 	}
 });
 const emits = defineEmits(["update:value"]);
