@@ -11,7 +11,8 @@ import {
 	EditOutlined,
 	HomeOutlined,
 	AlignLeftOutlined,
-	PrinterOutlined
+	PrinterOutlined,
+	FieldNumberOutlined
 } from "@vicons/antd";
 import {
 	Search,
@@ -65,6 +66,7 @@ export const Icons = {
 	PicCenterOutlined,
 	AlignLeftOutlined,
 	TemperatureCelsius,
+	FieldNumberOutlined,
 	OrderedListOutlined,
 	AppstoreAddOutlined,
 	UsergroupAddOutlined,
