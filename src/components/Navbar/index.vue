@@ -70,6 +70,43 @@
 			</li>
 			<li>
 				<n-tooltip>
+					<span>版本发布记录</span>
+					<template #trigger>
+						<n-button :color="theme === 'dark' ? undefined : '#fff'" class="nav-btn" circle size="small" @click="handleVersion">
+							<template #icon>
+								<svg
+									t="1699493505167"
+									class="icon"
+									viewBox="0 0 1024 1024"
+									version="1.1"
+									xmlns="http://www.w3.org/2000/svg"
+									p-id="6317"
+									width="200"
+									height="200"
+								>
+									<path
+										d="M987.9 512L828.6 352.7l-36.1 36.2 159.2 159.3-159.2 159.3 36.1 36.1 159.3-159.2 36.2-36.2zM231.8 387.5l-36.2-36.2L36.3 510.6 0.1 546.8l195.5 195.4 36.2-36.2L72.5 546.8z"
+										fill="#2868F0"
+										p-id="6318"
+									></path>
+									<path
+										d="M430.2 296.5c0-45.2 36.7-81.9 81.9-81.9s81.9 36.7 81.9 81.9l-41 331.4c0 22.6-18.3 41-41 41s-41-18.3-41-41l-40.8-331.4z"
+										fill="#FFB400"
+										p-id="6319"
+									></path>
+									<path
+										d="M512.1 758.4m-51.2 0a51.2 51.2 0 1 0 102.4 0 51.2 51.2 0 1 0-102.4 0Z"
+										fill="#FFB400"
+										p-id="6320"
+									></path>
+								</svg>
+							</template>
+						</n-button>
+					</template>
+				</n-tooltip>
+			</li>
+			<li>
+				<n-tooltip>
 					<span>{{ isFullscreen ? "点击退出全屏模式" : "点击切换全屏模式" }}</span>
 					<template #trigger>
 						<n-button
@@ -164,6 +201,10 @@ const headerColor = computed(() => {
 	}
 	return themeVars.value.primaryColor;
 });
+
+const handleVersion = () => {
+	router.push({ name: "systemVersion" });
+};
 
 const handleTextColor = computed(() => {
 	if (appStore.theme !== "dark" && appStore.sideTheme === "dark") {

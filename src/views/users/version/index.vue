@@ -13,7 +13,7 @@
 			}"
 		>
 			<template #header-extra>
-				<n-button type="primary" size="small" quaternary @click="newVersion">新增版本记录</n-button>
+				<n-button type="primary" size="small" quaternary @click="newVersion" v-action:versionEdit>新增版本记录</n-button>
 			</template>
 			<n-scrollbar :style="{ maxHeight: `${height - 140}px`, minHeight: `${height - 140}px` }" trigger="none">
 				<n-timeline>
@@ -21,7 +21,7 @@
 						<template #header>
 							<div style="width: 100%; display: flex; justify-content: space-between">
 								<h2>{{ item.versionCode }}</h2>
-								<div style="padding-right: 30px">
+								<div style="padding-right: 30px" v-action:versionEdit>
 									<n-button strong secondary circle type="warning" size="small" title="编辑" @click="handleEdit(item)">
 										<template #icon>
 											<n-icon size="small"><edit-outlined /></n-icon>

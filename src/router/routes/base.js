@@ -35,8 +35,8 @@ export const BASE_MAIN = {
 			}
 		},
 		{
-			path: "version",
-			name: "version",
+			path: "systemVersion",
+			name: "systemVersion",
 			component: () => import("@/views/users/version/index.vue"),
 			meta: {
 				title: "版本记录",
