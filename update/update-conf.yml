@@ -23,6 +23,7 @@ folder:
   - /src/views/system
   - /src/views/users/personal
   - /src/views/users/settings
+  - /src/views/users/version
 # 要升级的文件, 如果不想升级某个文件就把它注释掉
 file:
   - /.editorconfig
