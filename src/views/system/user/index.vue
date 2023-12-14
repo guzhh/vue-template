@@ -24,6 +24,8 @@
 								clearable
 								size="small"
 							/>
+
+							<n-select v-model:value="searchForm.state" :options="stateOption" style="width: 100px" size="small" />
 							<n-button size="small" type="primary" @click="resetTableList">查询</n-button>
 							<n-button size="small" @click="resetQuery">重置</n-button>
 						</n-space>
@@ -141,7 +143,7 @@
 						<vxe-column field="email" min-width="100px" show-overflow="title" title="邮箱"></vxe-column>
 						<vxe-column field="userType" min-width="100px" show-overflow="title" title="用户类型">
 							<template #default="{ row }">
-								<dict-code-show pcode="USER_TYPE" :dict-code="row.userType"></dict-code-show>
+								<dict-show :dictCode="row.userType"></dict-show>
 							</template>
 						</vxe-column>
 						<vxe-column field="state" min-width="80px" show-overflow="title" title="状态">
@@ -320,7 +322,7 @@ const formData = {
 	phone: "",
 	account: "",
 	ifOnline: undefined,
-	state: undefined,
+	state: 1,
 	createTimeScope: ""
 };
 // eslint-disable-next-line no-unused-vars
@@ -350,7 +352,7 @@ const resetQuery = () => {
 	searchForm.value.account = "";
 	searchForm.value.createTimeScope = "";
 	searchForm.value.ifOnline = undefined;
-	searchForm.value.state = undefined;
+	searchForm.value.state = 1;
 	resetTableList();
 };
 

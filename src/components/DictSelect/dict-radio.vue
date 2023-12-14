@@ -1,6 +1,8 @@
 <template>
 	<n-radio-group v-model:value="modelValue">
-		<n-radio :value="item[valueField]" v-for="(item, key) in options" :key="key"> {{ item[labelField] }} </n-radio>
+		<n-space :vertical="vertical">
+			<n-radio :value="item[valueField]" v-for="(item, key) in options" :key="key"> {{ item[labelField] }} </n-radio>
+		</n-space>
 	</n-radio-group>
 </template>
 
@@ -11,6 +13,9 @@ defineOptions({ name: "DictSlect" });
 
 const props = defineProps({
 	value: {
+		type: [String, Number, null]
+	},
+	name: {
 		type: [String, Number, null]
 	},
 	// 上级字典编码
@@ -25,9 +30,14 @@ const props = defineProps({
 	labelField: {
 		type: String,
 		default: "name"
+	},
+	vertical: {
+		// 是否垂直
+		type: Boolean,
+		default: false
 	}
 });
-const emits = defineEmits(["update:value"]);
+const emits = defineEmits(["update:value", "update:name"]);
 const systemStore = useSystemStore();
 const options = computed(() => {
 	return systemStore.getDictList(props.dictCode);
@@ -37,7 +47,10 @@ const modelValue = computed({
 		return props.value;
 	},
 	set(val) {
+		const dict = options.value.find(item => item[props.valueField] === val);
+		// console.log("dict=======", dict);
 		emits("update:value", val);
+		emits("update:name", dict?.name);
 	}
 });
 

@@ -4,5 +4,6 @@ import DictShow from "./dict-show.vue";
 import DictRadio from "./dict-radio.vue";
 import DictValueShow from "./dict-value-show.vue";
 import DictCodeShow from "./dict-code-show.vue";
+import DictCheckbox from "./dict-checkbox.vue";
 
-export { DictSelect, DictMulti, DictShow, DictRadio, DictValueShow, DictCodeShow };
+export { DictSelect, DictMulti, DictShow, DictRadio, DictValueShow, DictCodeShow, DictCheckbox };
