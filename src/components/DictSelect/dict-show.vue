@@ -5,11 +5,11 @@
 <script setup>
 import useSystemStore from "@/store/modules/system";
 
-const props = {
+const props = defineProps({
 	dictCode: {
 		type: [String, null]
 	}
-};
+});
 
 const systemStore = useSystemStore();
 
