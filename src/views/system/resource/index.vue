@@ -35,12 +35,15 @@
 			</template>
 
 			<vxe-table
-				border
+				stripe
+				border="none"
 				ref="tableRef"
 				:data="tableData"
 				:height="height - 100"
 				:loading="tableLoading"
 				:size="tableSize"
+				:column-config="{ resizable: false }"
+				:row-config="{ isHover: true, isCurrent: true }"
 				:tree-config="{ children: 'children', expandAll: true, reserve: true }"
 				align="center"
 				resizable
@@ -48,7 +51,7 @@
 				style="margin-top: 10px"
 			>
 				<!--				<vxe-column width="100" show-overflow="title" tree-node title="节点"></vxe-column>-->
-				<vxe-column field="id" tree-node min-width="110" show-overflow="title" title="ID"></vxe-column>
+				<vxe-column field="id" tree-node min-width="200" show-overflow="title" title="ID"></vxe-column>
 				<vxe-column field="name" min-width="150px" show-overflow="title" title="资源名称"></vxe-column>
 				<vxe-column field="url" min-width="120px" show-overflow="title" title="资源地址"></vxe-column>
 				<vxe-column field="compName" min-width="120px" show-overflow="title" title="组件名称"></vxe-column>
@@ -56,7 +59,7 @@
 				<vxe-column field="icon" min-width="80px" show-overflow="title" title="资源图标">
 					<template #default="{ row }">
 						<div style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%">
-							<component :is="row.icon" style="width: 18px" />
+							<component :is="row.icon" style="width: 18px" v-if="row.icon" />
 						</div>
 					</template>
 				</vxe-column>
