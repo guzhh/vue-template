@@ -2,10 +2,11 @@ import { createApp } from "vue";
 import "@/assets/style/global.less";
 import VXETable from "vxe-table";
 import TinyLayer from "tinylayer";
-import { AppProvider } from "@/components/Application";
+import VXETablePluginExportXLSX from "vxe-table-plugin-export-xlsx";
 import App from "@/App.vue";
-import router, { setupRouter } from "@/router";
 import { setupStore } from "@/store";
+import router, { setupRouter } from "@/router";
+import { AppProvider } from "@/components/Application";
 import { setupCustomComponents, setupDirectives, setupGlobalMethods } from "@/plugins";
 import { setupIcon } from "@/plugins/icons";
 import "xe-utils"; // 全局导入方式，所有版本通用
@@ -14,6 +15,8 @@ async function bootstrap() {
 	// 单独挂载一个vue实例方便在js中单独调用
 	const appProvider = createApp(AppProvider);
 	const app = createApp(App);
+	// 挂载vxe-table
+	VXETable.use(VXETablePluginExportXLSX);
 	// 挂载vxe-table
 	app.use(VXETable);
 	// 导入弹窗组件

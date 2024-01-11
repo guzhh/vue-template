@@ -34,6 +34,7 @@
 		"ace-builds": "^1.32.3",
 		"axios": "^1.6.5",
 		"dayjs": "^1.11.10",
+		"exceljs": "^4.3.0",
 		"joi": "^17.11.0",
 		"mitt": "^3.0.1",
 		"naive-ui": "^2.37.3",
@@ -52,6 +53,7 @@
 		"vue3-print-nb": "^0.1.4",
 		"vuedraggable": "^4.1.0",
 		"vxe-table": "^4.5.17",
+		"vxe-table-plugin-export-xlsx": "^3.1.0",
 		"xe-utils": "^3.5.15"
 	},
 	"devDependencies": {
