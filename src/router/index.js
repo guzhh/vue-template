@@ -14,6 +14,16 @@ const router = createRouter({
 				noAffix: true, // 是否在标签页中显示 true 不显示
 				ignoreCache: false // 是否缓存
 			}
+		},
+		{
+			path: "/openInventory",
+			name: "openInventory",
+			component: () => import("@/views/custom/openInventory/index.vue"),
+			meta: {
+				title: "打开清单",
+				noAffix: false, // 是否在标签页中显示 true 不显示
+				ignoreCache: false // 是否缓存
+			}
 		}
 	],
 	// strict: true, // 不允许路由末尾为/ 斜杠

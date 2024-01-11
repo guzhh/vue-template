@@ -1,7 +1,9 @@
 import NProgress from "nprogress";
 import useUserStore from "@/store/modules/user";
 import { isLogin } from "@/utils/auth";
+import { ROUTE_WHITELIST } from "@/router/routes/custom";
 
+const WHITE_LIST = ["login", ...ROUTE_WHITELIST];
 export default function setupUserLoginInfoGuard(router) {
 	router.beforeEach(async (to, from, next) => {
 		NProgress.start();
@@ -23,7 +25,7 @@ export default function setupUserLoginInfoGuard(router) {
 				}
 			}
 		} else {
-			if (to.name === "login") {
+			if (WHITE_LIST.includes(to.name)) {
 				next();
 				return;
 			}
