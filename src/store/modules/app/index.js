@@ -77,7 +77,7 @@ const useAppStore = defineStore("app", {
 		enabled: true, // 开启store持久化
 		strategies: [
 			{
-				key: "panku_app_state",
+				key: `${import.meta.env.BASE_URL}_panku_app_state`,
 				storage: localStorage,
 				paths: Object.keys(defaultSettings)
 			}

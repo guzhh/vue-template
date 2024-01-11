@@ -14,6 +14,12 @@
 		:fullscreen="fullscreen"
 		:fullscreen-icon-visible="!fullscreen"
 	>
+		<!--		<template #header>-->
+		<!--			<div class="w-full cursor-move" id="basic-modal-bar">-->
+		<!--				{{ title }}-->
+		<!--				<slot name="header"></slot>-->
+		<!--			</div>-->
+		<!--		</template>-->
 		<div style="overflow: auto; width: 100%" :style="style.height ? { height: style.height } : {}">
 			<slot></slot>
 		</div>
@@ -27,6 +33,52 @@
 			</div>
 		</template>
 	</TinyLayer>
+	<!--	<n-modal-->
+	<!--		v-model:show="visible"-->
+	<!--		class="custom-card"-->
+	<!--		preset="card"-->
+	<!--		size="small"-->
+	<!--		:mask-closable="false"-->
+	<!--		:bordered="false"-->
+	<!--		closable-->
+	<!--		id="basic-modal"-->
+	<!--		@after-enter="afterEnter"-->
+	<!--		@after-leave="afterLeave"-->
+	<!--		@close="handleClose"-->
+	<!--		@esc="handleClose"-->
+	<!--		:segmented="{ content: 'soft', footer: 'soft' }"-->
+	<!--		:content-style="{ minHeight: 0 }"-->
+	<!--		:style="ifFullscreen ? { width: '100vw', height: '100vh' } : style"-->
+	<!--	>-->
+	<!--		<template #header>-->
+	<!--			<div class="w-full cursor-move" id="basic-modal-bar">-->
+	<!--				{{ title }}-->
+	<!--				<slot name="header"></slot>-->
+	<!--			</div>-->
+	<!--		</template>-->
+	<!--		<template #header-extra v-if="!fullscreen">-->
+	<!--			<n-button text @click="toggleFullScreen" style="margin-right: 20px">-->
+	<!--				<template #icon>-->
+	<!--					<n-icon>-->
+	<!--						<full-screen-minimize24-regular v-if="ifFullscreen" />-->
+	<!--						<full-screen-maximize24-regular v-else />-->
+	<!--					</n-icon>-->
+	<!--				</template>-->
+	<!--			</n-button>-->
+	<!--		</template>-->
+	<!--		<div style="width: 100%; height: 100%; overflow: auto">-->
+	<!--			<slot></slot>-->
+	<!--		</div>-->
+	<!--		<template #footer v-if="footer">-->
+	<!--			<div style="width: 100%; text-align: right">-->
+	<!--				<slot name="footer"></slot>-->
+	<!--			</div>-->
+	<!--			<div style="width: 100%; text-align: right" v-if="!slotFooter">-->
+	<!--				<n-button type="tertiary" @click="handleClose"> 取 消 </n-button>-->
+	<!--				<n-button type="primary" style="margin-left: 15px" @click="handleOk"> {{ subBtuText }} </n-button>-->
+	<!--			</div>-->
+	<!--		</template>-->
+	<!--	</n-modal>-->
 </template>
 
 <script setup>

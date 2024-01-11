@@ -1,4 +1,4 @@
-const TOKEN_KEY = import.meta.env.VITE_ACCESS_TOKEN_KEY;
+const TOKEN_KEY = `${import.meta.env.BASE_URL}_${import.meta.env.VITE_ACCESS_TOKEN_KEY}`;
 
 const isLogin = () => {
 	return !!localStorage.getItem(TOKEN_KEY);
@@ -20,7 +20,7 @@ const clearToken = () => {
  * 设置缓存中存储的当前选中用户的所在机构
  */
 const setStorageOrg = (userId, org) => {
-	localStorage.setItem(`panku_org_user_${userId}`, btoa(encodeURI(JSON.stringify(org))));
+	localStorage.setItem(`${import.meta.env.BASE_URL}_panku_org_user_${userId}`, btoa(encodeURI(JSON.stringify(org))));
 };
 
 /**
@@ -29,8 +29,8 @@ const setStorageOrg = (userId, org) => {
  * @returns {any}
  */
 const getStorageOrg = userId => {
-	if (localStorage.getItem(`panku_org_user_${userId}`)) {
-		return JSON.parse(decodeURI(atob(localStorage.getItem(`panku_org_user_${userId}`))));
+	if (localStorage.getItem(`${import.meta.env.BASE_URL}_panku_org_user_${userId}`)) {
+		return JSON.parse(decodeURI(atob(localStorage.getItem(`${import.meta.env.BASE_URL}_panku_org_user_${userId}`))));
 	}
 	return false;
 };

@@ -43,7 +43,7 @@
 		"pinia-plugin-persist": "^1.0.0",
 		"qs": "^6.11.2",
 		"store": "^2.0.12",
-		"tinylayer": "^2.2.2",
+		"tinylayer": "2.2.1",
 		"vfonts": "^0.0.3",
 		"vue": "^3.4.8",
 		"vue-dragscroll": "^4.0.5",

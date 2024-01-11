@@ -36,10 +36,10 @@
 			<slot></slot>
 		</div>
 		<template #footer v-if="footer">
-			<div style="text-align: right; width: 100%">
+			<div style="width: 100%; text-align: right">
 				<slot name="footer"></slot>
 			</div>
-			<div style="text-align: right; width: 100%" v-if="!slotFooter">
+			<div style="width: 100%; text-align: right" v-if="!slotFooter">
 				<n-button type="tertiary" @click="handleClose"> 取 消 </n-button>
 				<n-button type="primary" style="margin-left: 15px" @click="handleOk"> {{ subBtuText }} </n-button>
 			</div>
