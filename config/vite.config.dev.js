@@ -4,12 +4,10 @@ import eslint from "vite-plugin-eslint";
 import { viteMockServe } from "vite-plugin-mock";
 import baseConfig from "./vite.config.base";
 import { getEnv } from "./utils/index.js";
-import { devServerPlugin } from "./plugin/devServerPlugin.js";
 
 export default mergeConfig(
 	{
 		plugins: [
-			devServerPlugin(),
 			eslint({
 				cache: false,
 				include: ["src/**/*.js", "src/**/*.jsx", "src/**/*.vue"],
