@@ -77,6 +77,12 @@ export default new Request({
 					keepAliveOnHover: true,
 					duration: 3000
 				});
+			} else if (response.data?.status === "10000") {
+				// 根据状态码判断当前许可证是否失效
+				console.log("--------", window.$globleTip);
+				if (window.$globleTip) {
+					window.$globleTip.open(response.data.message);
+				}
 			} else if (response.data?.success === false) {
 				window.$notification.error({
 					content: import.meta.env.MODE === "development" ? `接口返回失败：${response.config.url}` : "操作失败",

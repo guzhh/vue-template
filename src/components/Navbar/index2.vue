@@ -42,13 +42,13 @@
 					<span>点击可以切换科室【当前所在科室】</span>
 					<template #trigger>
 						<span class="navbar-org" :style="{ color: handleTextColor }" @click="selectADepartment"
-							>{{ userInfo.departName }} <n-icon size="15" style="margin-left: 5px"> <ChevronDown /> </n-icon
+							>{{ userStore.userInfo.departName }} <n-icon size="15" style="margin-left: 5px"> <ChevronDown /> </n-icon
 						></span>
 					</template>
 				</n-tooltip>
 			</li>
 			<li class="right-side">
-				<span style="margin-left: 5px" :style="{ color: handleTextColor }">{{ userInfo.name }}</span>
+				<span style="margin-left: 5px" :style="{ color: handleTextColor }">{{ userStore.userInfo.name }}</span>
 			</li>
 			<li>
 				<n-tooltip>
@@ -158,9 +158,6 @@ const orgSwitchRef = ref();
 const deptSwitchRef = ref();
 const appStore = useAppStore();
 const userStore = useUserStore();
-const userInfo = computed(() => {
-	return userStore.userInfo;
-});
 const { logout } = useUser();
 // 全局公共CSS变量
 const themeVars = useThemeVars();

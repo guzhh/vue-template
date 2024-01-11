@@ -5,6 +5,7 @@
 			<n-notification-provider>
 				<n-message-provider>
 					<n-dialog-provider>
+						<globle-tip></globle-tip>
 						<router-view></router-view>
 						<global-setting />
 					</n-dialog-provider>
@@ -20,6 +21,7 @@ import { zhCN, dateZhCN, NThemeEditor, darkTheme } from "naive-ui";
 import { lighten } from "@/utils";
 import useAppStore from "@/store/modules/app";
 import GlobalSetting from "@/components/GlobalSetting/index.vue";
+import GlobleTip from "@/components/GlobleTip/index.vue";
 
 const appStore = useAppStore();
 const theme = computed(() => (appStore.theme === "dark" ? darkTheme : null));
