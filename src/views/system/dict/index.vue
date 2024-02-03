@@ -67,13 +67,14 @@
 			</template>
 
 			<vxe-table
+				stripe
 				ref="tableRef"
 				:data="tableList"
-				:height="height - 125"
+				:height="height - 120"
 				:loading="tableLoading"
 				:size="tableSize"
 				align="center"
-				border
+				border="none"
 				resizable
 				row-id="code"
 				show-header-overflow="title"

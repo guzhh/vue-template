@@ -24,6 +24,9 @@
 				<n-form-item label="三方科室编码" path="outCode">
 					<n-input v-model:value="formValue.outCode" placeholder="请输入三方科室编码" />
 				</n-form-item>
+				<n-form-item label="排序号" path="sortNum">
+					<n-input-number clearable :precision="0" v-model:value="formValue.sortNum" placeholder="请排序号" style="width: 100%" />
+				</n-form-item>
 				<n-form-item label="科室介绍" path="descr">
 					<n-input v-model:value="formValue.descr" :resizable="false" placeholder="请输入科室介绍" type="textarea" />
 				</n-form-item>
@@ -47,13 +50,14 @@ const addRow = ref({});
 
 const formValue = ref({
 	id: null,
-	pcode: "",
-	code: "",
-	name: "",
-	descr: "",
-	orgCode: "",
-	outCode: "",
-	deptType: undefined
+	pcode: null,
+	code: null,
+	name: null,
+	descr: null,
+	orgCode: null,
+	outCode: null,
+	deptType: null,
+	sortNum: null
 });
 const deptTypeOption = ref([]);
 
@@ -82,6 +86,7 @@ const edit = row => {
 		pcode: row.pcode,
 		code: row.code,
 		name: row.name,
+		sortNum: row.sortNum,
 		descr: row.descr,
 		orgCode: row.orgCode,
 		outCode: row.outCode,
@@ -98,13 +103,14 @@ const handleClose = () => {
 	title.value = "";
 	formValue.value = {
 		id: null,
-		pcode: "",
-		code: "",
-		name: "",
-		descr: "",
-		orgCode: "",
-		outCode: "",
-		deptType: undefined
+		pcode: null,
+		code: null,
+		name: null,
+		descr: null,
+		orgCode: null,
+		outCode: null,
+		deptType: null,
+		sortNum: null
 	};
 	addRow.value = {};
 };

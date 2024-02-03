@@ -44,13 +44,14 @@
 					<n-divider vertical />
 				</template>
 				<vxe-table
+					stripe
 					ref="tableRef"
 					:data="tableList"
-					:height="height - 120"
+					:height="height - 130"
 					:loading="tableLoading"
 					:size="tableSize"
 					align="center"
-					border
+					border="none"
 					resizable
 					show-header-overflow="title"
 					show-overflow

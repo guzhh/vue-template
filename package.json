@@ -52,9 +52,9 @@
 		"vue-router": "^4.2.5",
 		"vue3-print-nb": "^0.1.4",
 		"vuedraggable": "^4.1.0",
-		"vxe-table": "^4.5.17",
-		"vxe-table-plugin-export-xlsx": "^3.1.0",
-		"xe-utils": "^3.5.15"
+		"vxe-table": "^4.5.18",
+		"vxe-table-plugin-export-xlsx": "^4.0.1",
+		"xe-utils": "^3.5.19"
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^17.8.1",

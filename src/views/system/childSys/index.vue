@@ -99,17 +99,18 @@
 				</template>
 
 				<vxe-table
+					stripe
 					:data="tableList"
 					:height="height - 120"
 					:loading="tableLoading"
 					:size="tableSize"
 					align="center"
-					border
+					border="none"
 					resizable
 					show-header-overflow="title"
 					show-overflow
 				>
-					<vxe-column field="id" show-overflow="title" title="id" width="50px"></vxe-column>
+					<vxe-column field="id" show-overflow="title" title="ID" width="50px"></vxe-column>
 					<vxe-column field="sysName" min-width="100px" show-overflow="title" title="系统名称"></vxe-column>
 					<vxe-column field="sysDescr" min-width="100px" show-overflow="title" title="系统描述"></vxe-column>
 					<vxe-column field="sysIndexUrl" min-width="200px" show-overflow="title" title="系统首页地址"></vxe-column>
@@ -124,7 +125,7 @@
 							<span v-else-if="row.sysType === 2">C/S架构</span>
 						</template>
 					</vxe-column>
-					<vxe-column field="sysLogo" min-width="100px" show-overflow="title" title="系统logo">
+					<vxe-column field="sysLogo" min-width="100px" show-overflow="title" title="系统LOGO">
 						<template #default="{ row }">
 							<div class="svg" style="width: 40px; height: 40px; margin: 0 auto" v-html="row.sysLogo"></div>
 						</template>

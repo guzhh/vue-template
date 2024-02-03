@@ -102,14 +102,14 @@ dependencies:
     specifier: ^4.1.0
     version: 4.1.0(vue@3.4.8)
   vxe-table:
-    specifier: ^4.5.17
-    version: 4.5.17(vue@3.4.8)(xe-utils@3.5.15)
+    specifier: ^4.5.18
+    version: 4.5.18(vue@3.4.8)(xe-utils@3.5.19)
   vxe-table-plugin-export-xlsx:
-    specifier: ^3.1.0
-    version: 3.1.0(vxe-table@4.5.17)
+    specifier: ^4.0.1
+    version: 4.0.1(vxe-table@4.5.18)
   xe-utils:
-    specifier: ^3.5.15
-    version: 3.5.15
+    specifier: ^3.5.19
+    version: 3.5.19
 
 devDependencies:
   '@commitlint/cli':
@@ -9303,23 +9303,23 @@ packages:
       vue: 3.4.8(typescript@5.3.3)
     dev: false
 
-  /vxe-table-plugin-export-xlsx@3.1.0(vxe-table@4.5.17):
-    resolution: {integrity: sha512-ieEsN6h+QaKHgwQ6k1MtjvW17T+FCS9Bw2Xhg67HKIbuLMS+SprcF+EBrMtHIOfzQ2i41KAoLsCvXRbd5uChAA==}
+  /vxe-table-plugin-export-xlsx@4.0.1(vxe-table@4.5.18):
+    resolution: {integrity: sha512-puUOUfptu5ciEiFqTlVni3twLICSbkl87uXOsjZzrEyXJHJS9dYu7ZTD7/DRMqyuWyU3Idg7AekfcdcslP4Y/A==}
     peerDependencies:
       vxe-table: ^4.5.0
     dependencies:
-      vxe-table: 4.5.17(vue@3.4.8)(xe-utils@3.5.15)
+      vxe-table: 4.5.18(vue@3.4.8)(xe-utils@3.5.19)
     dev: false
 
-  /vxe-table@4.5.17(vue@3.4.8)(xe-utils@3.5.15):
-    resolution: {integrity: sha512-HcXxI0kMiW90NikPeB/pqkAsm/pQi7OKKBaINojE1pSWWT2MPcs472zVBCEzIqh4aprhhC62lfH6hYzM6c5QWw==}
+  /vxe-table@4.5.18(vue@3.4.8)(xe-utils@3.5.19):
+    resolution: {integrity: sha512-YQJhYjLsB7OqHFQJ0X6jO8uMuerqgGCzvh+wYk14dUqGMv96tBwv5LhHDW7odW7OnUkVrp3mZIRmvq33r/0djQ==}
     peerDependencies:
       vue: ^3.2.28
       xe-utils: ^3.5.0
     dependencies:
       dom-zindex: 1.0.1
       vue: 3.4.8(typescript@5.3.3)
-      xe-utils: 3.5.15
+      xe-utils: 3.5.19
     dev: false
 
   /wcwidth@1.0.1:
@@ -9419,8 +9419,8 @@ packages:
       signal-exit: 4.1.0
     dev: true
 
-  /xe-utils@3.5.15:
-    resolution: {integrity: sha512-Jh3HH6M4Vate/VnZIiyvoGAo88kFhmknAnY+8ERN25Lk6QE/sGbCBrYuKEiaRvXmSmDGutLCTrDDEfaUhsd5QA==}
+  /xe-utils@3.5.19:
+    resolution: {integrity: sha512-O/FzI6iaT6M3BPq/G2O4HKu8cENPzWoTu0WxcfNfUrnD6HQF9pj0++e7ZmwyZS2nh0nlzDuP1/ZMTFP/Hq6BhQ==}
     dev: false
 
   /xml-name-validator@4.0.0:

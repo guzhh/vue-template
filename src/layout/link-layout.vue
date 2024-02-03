@@ -10,7 +10,7 @@
 import DefaultView from "./default-view.vue";
 import LinkView from "@/layout/link-view.vue";
 
-defineOptions({ name: "LinkLayout" });
+defineOptions({ name: "linkLayout" });
 </script>
 
 <style scoped></style>

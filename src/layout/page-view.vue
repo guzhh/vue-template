@@ -1,12 +1,14 @@
 <template>
-	<router-view v-slot="{ Component, route }">
-		<transition name="fade" mode="out-in" appear>
-			<component :is="Component" v-if="route.meta.ignoreCache" :key="route.fullPath" />
-			<keep-alive v-else :include="cacheList">
-				<component :is="Component" :key="route.fullPath" />
-			</keep-alive>
-		</transition>
-	</router-view>
+	<div style="width: 100%">
+		<router-view v-slot="{ Component, route }">
+			<transition name="fade" mode="out-in" appear>
+				<component :is="Component" v-if="route.meta.ignoreCache" :key="route.fullPath" />
+				<keep-alive v-else :include="cacheList">
+					<component :is="Component" :key="route.fullPath" />
+				</keep-alive>
+			</transition>
+		</router-view>
+	</div>
 </template>
 
 <script setup>
@@ -26,6 +28,7 @@ const cacheList = computed(() => tabBarStore.getCacheList);
 .fade-leave-active {
 	transition: opacity 0.3s;
 }
+
 .fade-enter-from,
 .fade-leave-to {
 	opacity: 0;

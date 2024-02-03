@@ -105,3 +105,40 @@ export function getDepartByDeptType(params) {
 		}
 	});
 }
+
+/**
+ * 导入科室
+ * @param params
+ * @returns {Promise<*>}
+ */
+export function uploaDeptInfo(params) {
+	return request.post({
+		url: "/p/auth/auth-depart/uploaDeptInfo",
+		data: params,
+		headers: {
+			"Content-Type": "multipart/form-data"
+		},
+		customs: {
+			isLoading: true
+		}
+	});
+}
+
+/**
+ * 科室信息模板下载
+ * @param params
+ * @returns {Promise<*>}
+ */
+export function downLoadTemplate(params) {
+	return request.get({
+		url: "/p/auth/auth-depart/downLoadTemplate",
+		responseType: "blob",
+		params,
+		timeout: 1000 * 60 * 10,
+		// 自定义配置
+		customs: {
+			isLoading: true,
+			loadingText: "模板下载中..."
+		}
+	});
+}

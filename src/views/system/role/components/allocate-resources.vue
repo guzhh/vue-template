@@ -7,21 +7,28 @@
 			</template>
 			<vxe-table
 				resizable
-				border
+				border="inner"
+				stripe
 				row-id="id"
-				align="center"
 				ref="tableRef"
 				:size="tableSize"
 				:height="height - 60"
 				:loading="tableLoading"
 				style="margin-top: 10px"
-				:row-config="{ keyField: 'id', useKey: true }"
+				:row-config="{ isHover: true, isCurrent: true }"
 				:checkbox-config="{ checkRowKeys: curCheckedRowIds, checkStrictly: true }"
-				:tree-config="{ children: 'children', expandAll: true, reserve: true }"
+				:tree-config="{
+					children: 'children',
+					expandAll: true,
+					line: true,
+					reserve: true,
+					iconOpen: 'vxe-icon-square-minus',
+					iconClose: 'vxe-icon-square-plus'
+				}"
 				:data="tableData"
 			>
-				<vxe-column type="checkbox" tree-node width="100px"></vxe-column>
-				<vxe-column field="name" title="资源名称" min-width="150px" show-overflow="title"></vxe-column>
+				<vxe-column align="center" type="checkbox" width="60"></vxe-column>
+				<vxe-column tree-node field="name" title="资源名称" min-width="150px" show-overflow="title"></vxe-column>
 				<vxe-column field="permissionFlag" title="权限标识" min-width="120px" show-overflow="title"></vxe-column>
 				<vxe-column field="type" title="资源类型" min-width="80px" show-overflow="title">
 					<template #default="{ row }">

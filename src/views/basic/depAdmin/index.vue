@@ -3,7 +3,7 @@
 		<div style="display: flex; justify-content: space-between; height: 100%">
 			<n-card
 				size="small"
-				style="width: 200px"
+				style="width: 200px; flex-shrink: 0"
 				title="机构列表"
 				:segmented="{
 					content: true
@@ -11,6 +11,7 @@
 				:content-style="{ overflow: 'auto' }"
 			>
 				<n-tree
+					show-line
 					:cancelable="false"
 					:data="treeData"
 					:default-selected-keys="defaultSelect"
@@ -36,18 +37,39 @@
 							@update:value="getDepartList"
 						>
 						</n-select>
-						<n-input placeholder="科室名称" size="small" v-model:value="deptName" @keydown.enter="getDepartList" clearable>
+						<n-input placeholder="科室名称\拼音码" size="small" v-model:value="deptName" @keydown.enter="getDepartList" clearable>
 						</n-input>
 						<n-button size="small" type="primary" @click="getDepartList">查询</n-button>
 						<n-button size="small" @click="resetQuery">重置</n-button>
 					</n-space>
 				</template>
 				<template #header-extra>
-					<n-button v-action:addDeptButton size="small" type="primary" @click="addNewDep({})">新增科室</n-button>
+					<n-button style="margin-right: 15px" v-action:addDeptButton size="small" type="primary" @click="addNewDep({})"
+						>新增科室</n-button
+					>
+
+					<n-tooltip>
+						<span>上传科室excel文件</span>
+						<template #trigger>
+							<n-icon size="17" @click="importDataEvent">
+								<Upload />
+							</n-icon>
+						</template>
+					</n-tooltip>
+					<n-divider vertical />
+					<n-tooltip>
+						<span>科室信息模板下载</span>
+						<template #trigger>
+							<n-icon size="17" @click="exportDataEvent">
+								<Download />
+							</n-icon>
+						</template>
+					</n-tooltip>
+					<n-divider vertical />
 					<n-tooltip>
 						<span>折叠</span>
 						<template #trigger>
-							<n-icon size="17" style="margin-left: 15px" @click="$refs.tableRef.clearTreeExpand()">
+							<n-icon size="17" @click="$refs.tableRef.clearTreeExpand()">
 								<ArrowBetweenDown24Filled />
 							</n-icon>
 						</template>
@@ -76,9 +98,10 @@
 				</template>
 
 				<vxe-table
+					stripe
 					ref="tableRef"
 					:data="tableData"
-					:height="height - 80"
+					:height="height - 90"
 					:loading="tableLoading"
 					:row-config="{
 						keyField: 'code'
@@ -86,20 +109,24 @@
 					:size="tableSize"
 					:tree-config="{
 						transform: true,
+						line: true,
 						rowField: 'code',
 						parentField: 'pcode',
 						lazy: true,
 						hasChild: 'hasChild',
-						loadMethod: loadChildrenMethod
+						loadMethod: loadChildrenMethod,
+						iconOpen: 'vxe-icon-square-minus',
+						iconClose: 'vxe-icon-square-plus'
 					}"
 					align="center"
-					border="inner"
+					border="none"
 					resizable
 					row-id="code"
 					show-header-overflow="title"
 					show-overflow
 				>
-					<vxe-column field="name" min-width="150px" show-overflow="title" title="科室名称" tree-node></vxe-column>
+					<vxe-column field="name" align="left" min-width="150px" show-overflow="title" title="科室名称" tree-node></vxe-column>
+					<vxe-column field="piny" min-width="100px" show-overflow="title" title="拼音码"></vxe-column>
 					<vxe-column field="code" min-width="120px" show-overflow="title" title="科室编码"></vxe-column>
 					<vxe-column field="pcode" min-width="80px" show-overflow="title" title="上级科室编码"></vxe-column>
 					<vxe-column field="outCode" min-width="80px" show-overflow="title" title="三方科室编码"></vxe-column>
@@ -109,11 +136,20 @@
 						</template>
 					</vxe-column>
 					<vxe-column field="descr" min-width="120px" show-overflow="title" title="科室介绍"></vxe-column>
+					<vxe-column field="deptmentPeoples" min-width="80px" show-overflow="title" title="用户数">
+						<template #default="{ row }">
+							<n-tag size="small" type="primary" @click="viewUsers(row)">
+								<n-icon :component="UserOutlined" />
+								<span style="font-size: 16px; margin-left: 5px">{{ row.deptmentPeoples }}</span>
+							</n-tag>
+						</template>
+					</vxe-column>
 					<vxe-column field="ifDel" min-width="120px" show-overflow="title" title="是否删除">
 						<template #default="{ row }">
 							<option-badge :options="ifDeletedOption" :val="row.ifDel" />
 						</template>
 					</vxe-column>
+					<vxe-column field="sortNum" min-width="80px" show-overflow="title" title="排序号"></vxe-column>
 					<vxe-column fixed="right" title="操作" width="240px">
 						<template #default="{ row }">
 							<n-button v-action:addDeptSub quaternary size="small" type="primary" @click="addNewDep(row)">添加下级 </n-button>
@@ -137,6 +173,7 @@
 					</template>
 				</vxe-table>
 				<create-form ref="depCreateFormRef" @ok="saveSuccess"></create-form>
+				<dept-users ref="deptUsersRef" />
 			</n-card>
 		</div>
 	</page-content>
@@ -145,16 +182,20 @@
 <script setup>
 import { h, ref } from "vue";
 import { useMessage } from "naive-ui";
+import { UserOutlined } from "@vicons/antd";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import useTable from "@/hooks/useTable";
 import { getOrgList, getOrgInfoByCode } from "@/api/system/orgAdmin.js";
 import { ifDeletedOption } from "@/constant/system/resource";
 import CreateForm from "@/views/basic/depAdmin/components/create-form.vue";
-import { getDeptList, delDept, cancelDelDept } from "@/api/system/depAdmin.js";
+import { getDeptList, delDept, cancelDelDept, downLoadTemplate, uploaDeptInfo } from "@/api/system/depAdmin.js";
 import { convertToTreeArray } from "@/utils/tree";
+import deptUsers from "./components/deptUsers.vue";
+import file from "@/utils/file";
 
 defineOptions({ name: "depAdmin" });
 
+const deptUsersRef = ref();
 const tableRef = ref();
 const depCreateFormRef = ref();
 // eslint-disable-next-line no-unused-vars
@@ -168,6 +209,27 @@ const defaultSelect = ref([]);
 const orgCode = ref("");
 const ifDel = ref(null); // 是否删除
 const deptName = ref(""); // 科室名称
+
+const exportDataEvent = () => {
+	// 导出科室模板
+	downLoadTemplate().then(data => {
+		// 截取文件名，这里是后端返回了文件名+后缀，如果没有可以自己拼接
+		const fileName = decodeURI("科室导入模板.xlsx");
+		// 将`blob`对象转化成一个可访问的`url`
+		const url = window.URL.createObjectURL(new Blob([data]));
+		const link = document.createElement("a");
+		link.style.display = "none";
+		link.href = url;
+		link.setAttribute("download", fileName);
+		document.body.appendChild(link);
+		link.click();
+		document.body.removeChild(link);
+	});
+};
+
+const viewUsers = row => {
+	deptUsersRef.value.open(row);
+};
 
 const treeRenderLabel = ({ option }) => {
 	// display: block; overflow: hidden; white-space: nowrap; text-overflow:ellipsis;
@@ -245,6 +307,18 @@ const deleteDep = row => {
 				getDepartList();
 			}
 		}
+	});
+};
+
+const importDataEvent = () => {
+	// 导入科室
+	file({ accept: ".xlsx,.xls", number: 1 }).then(files => {
+		uploaDeptInfo({ file: files[0] }).then(res => {
+			console.log("导入结果：{}", res.result);
+			if (res.success) {
+				getDepartList();
+			}
+		});
 	});
 };
 

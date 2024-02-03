@@ -28,13 +28,16 @@
 				/>
 			</n-form-item>
 			<n-form-item label="用户类型">
-				<n-select v-model:value="formValue.userType" :options="userTypeOption" placeholder="请选择用户类型" />
+				<n-select multiple v-model:value="formValue.userType" :options="userTypeOption" placeholder="请选择用户类型" />
 			</n-form-item>
 			<n-form-item label="手机号" path="phone">
 				<n-input v-model:value="formValue.phone" placeholder="请输入手机号" />
 			</n-form-item>
 			<n-form-item label="邮箱" path="email">
 				<n-input v-model:value="formValue.email" placeholder="请输入邮箱" />
+			</n-form-item>
+			<n-form-item label="排序号" path="sortNum">
+				<n-input-number clearable :precision="0" v-model:value="formValue.sortNum" placeholder="请排序号" style="width: 100%" />
 			</n-form-item>
 		</n-form>
 	</base-modal>
@@ -56,15 +59,15 @@ const treeData = ref([]);
 
 const defaultForm = {
 	id: null,
-	orgCode: "",
-	orgName: "",
-	name: "",
-	account: "",
-	passwd: "",
-	phone: "",
-	email: "",
+	orgCode: null,
+	orgName: null,
+	name: null,
+	account: null,
+	passwd: null,
+	phone: null,
+	email: null,
 	deptCodeList: [],
-	userType: undefined
+	userType: null
 };
 const userTypeOption = ref([]);
 
@@ -118,7 +121,7 @@ const editUser = row => {
 	// eslint-disable-next-line no-use-before-define
 	getDep(row);
 	title.value = "编辑用户";
-	formValue.value = { ...row, deptCodeList: [] };
+	formValue.value = { ...row, deptCodeList: [], userType: row.userType ? row.userType.split(",") : null };
 	getDepartsByUser({ orgCode: row.orgCode, userId: `${row.id}` }).then(res => {
 		if (res.success) {
 			res.result.forEach(item => {
@@ -162,7 +165,10 @@ const handleOk = () => {
 	console.log(formValue.value, "formValue.value");
 	formRef.value?.validate(errors => {
 		if (!errors) {
-			saveOrUpt({ ...formValue.value }).then(res => {
+			saveOrUpt({
+				...formValue.value,
+				userType: formValue.value.userType ? formValue.value.userType.join() : null
+			}).then(res => {
 				if (res.success) {
 					emits("ok");
 					handleClose();

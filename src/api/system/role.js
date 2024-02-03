@@ -16,6 +16,21 @@ export function getRoleList(params) {
 }
 
 /**
+ * 获取角色下的用户列表
+ * @returns {Promise<*>}
+ */
+export function getUserByRole(params) {
+	return request.post({
+		url: "/p/auth/auth-role/getUserByRole",
+		data: params,
+		customs: {
+			isLoading: true,
+			loadingText: "角色列表获取中..."
+		}
+	});
+}
+
+/**
  * 删除角色信息
  * @param params
  * @returns {Promise<*>}

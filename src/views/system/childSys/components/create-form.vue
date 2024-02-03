@@ -49,7 +49,7 @@
 						style="width: 100%"
 					/>
 				</n-form-item>
-				<n-form-item label="系统logo:" path="sysLogo">
+				<n-form-item label="系统LOGO" path="sysLogo">
 					<n-input v-model:value="formValue.sysLogo" placeholder="请输入系统logo" />
 				</n-form-item>
 			</n-form>

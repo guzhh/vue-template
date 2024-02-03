@@ -1,7 +1,7 @@
 <template>
 	<n-card
 		size="small"
-		style="width: 200px"
+		style="width: 200px; flex-shrink: 0"
 		title="机构列表"
 		:segmented="{
 			content: true
@@ -9,6 +9,7 @@
 		:content-style="{ overflow: 'auto' }"
 	>
 		<n-tree
+			show-line
 			:cancelable="false"
 			:data="treeData"
 			:default-selected-keys="defaultSelect"

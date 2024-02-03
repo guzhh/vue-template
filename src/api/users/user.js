@@ -107,6 +107,39 @@ export function changeDept(params) {
 }
 
 /**
+ * 获取用户信息及用户科室信息
+ * @param params
+ * @returns {Promise<*>}
+ */
+export function getUserAndDeptByUserType(params) {
+	return request.post({
+		url: "/p/user/getUserAndDeptByUserType",
+		data: params,
+		customs: {
+			isLoading: true,
+			loadingText: "数据获取中..."
+		}
+	});
+}
+
+/**
+ * 科室解绑用户
+ * @param params
+ * @returns {Promise<*>}
+ */
+export function unbindDeptUser(params) {
+	return request.post({
+		url: "/p/user/unbindDeptUser",
+		data: params,
+		customs: {
+			isLoading: true,
+			loadingText: "数据解绑中...",
+			successTip: "解绑成功"
+		}
+	});
+}
+
+/**
  * 获取证书信息
  * @returns {Promise<*>}
  */

@@ -36,12 +36,13 @@
 				<n-divider vertical />
 			</template>
 			<vxe-table
+				stripe
 				:data="tableList"
 				:height="height - 120"
 				:loading="tableLoading"
 				:size="tableSize"
 				align="center"
-				border
+				border="none"
 				resizable
 				row-id="id"
 				show-header-overflow="title"

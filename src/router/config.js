@@ -5,6 +5,7 @@ const constantRouterComponents = {
 	DEFAULT_LAYOUT: () => import("@/layout/default-layout.vue"),
 	LINK_LAYOUT: () => import("@/layout/link-layout.vue"),
 	PAGE_VIEW: () => import("@/layout/page-view.vue"),
+	LAYOUT_VIEW: () => import("@/layout/layout-view.vue"),
 	LINK_VIEW: () => import("@/layout/link-view.vue")
 };
 // eslint-disable-next-line guard-for-in,no-restricted-syntax

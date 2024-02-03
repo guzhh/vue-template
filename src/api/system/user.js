@@ -14,6 +14,20 @@ export function getUserList(params) {
 		}
 	});
 }
+/**
+ * 获取用户列表
+ * @returns {Promise<*>}
+ */
+export function getUserListNew(params) {
+	return request.post({
+		url: "/p/user/newList",
+		data: params,
+		customs: {
+			isLoading: true,
+			loadingText: "用户列表获取中..."
+		}
+	});
+}
 
 /**
  * 保存或修改用户

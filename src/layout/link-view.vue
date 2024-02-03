@@ -7,19 +7,37 @@
 <script setup>
 import { nextTick, onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
+import useUserStore from "@/store/modules/user";
+import { useWindowSize } from "@/hooks/useWindowSize";
 
+const { height } = useWindowSize();
 defineOptions({
 	name: "LinkView"
 });
 
+const iframeHeight = computed(() => {
+	return `${height.value - 10}px`;
+});
+
 const route = useRoute();
+const userStore = useUserStore();
 
 const spinning = ref();
-const linkValue = ref(route.meta.linkValue);
+const linkValue = ref("");
+
+const getLinkValue = value => {
+	const linkUrl = decodeURIComponent(value);
+	linkValue.value = linkUrl
+		.replace(/\${account}/, userStore.userInfo.account)
+		.replace(/\${name}/, userStore.userInfo.name)
+		.replace(/\${departCode}/, userStore.userInfo.departCode)
+		.replace(/\${departName}/, userStore.userInfo.departName);
+};
+getLinkValue(route.meta.linkValue);
 
 watch(route, value => {
 	spinning.value = true;
-	linkValue.value = value.meta.linkValue;
+	getLinkValue(value.meta.linkValue);
 });
 
 onMounted(() => {
@@ -41,7 +59,7 @@ onMounted(() => {
 <style scoped>
 .reportIframe {
 	width: 100%;
-	height: calc(100vh - 50px);
+	height: v-bind(iframeHeight);
 	background-color: #ffffff;
 }
 </style>

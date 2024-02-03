@@ -50,12 +50,13 @@
 					<n-divider vertical />
 				</template>
 				<vxe-table
+					stripe
 					:data="tableList"
-					:height="height - 110"
+					:height="height - 120"
 					:loading="tableLoading"
 					:size="tableSize"
 					align="center"
-					border
+					border="none"
 					resizable
 					show-header-overflow="title"
 					show-overflow
@@ -69,6 +70,14 @@
 						</template>
 					</vxe-column>
 					<vxe-column field="descr" min-width="200" show-overflow="title" title="角色描述"></vxe-column>
+					<!--					<vxe-column field="descr1" min-width="80" show-overflow="title" title="权限">-->
+					<!--						<template #default>-->
+					<!--							<n-tag size="small" type="primary">-->
+					<!--								<n-icon :component="UserOutlined" />-->
+					<!--								<span style="font-size: 16px; margin-left: 5px">1</span>-->
+					<!--							</n-tag>-->
+					<!--						</template>-->
+					<!--					</vxe-column>-->
 					<vxe-column field="createTime" show-overflow="title" title="创建时间" width="200"></vxe-column>
 					<vxe-column fixed="right" title="操作" width="200px">
 						<template #default="{ row }">
@@ -106,6 +115,7 @@
 			<role-form ref="roleFormRef" :system-list="systemList" @ok="getTableData"></role-form>
 			<allocate-resources ref="allocateResourcesRef" @ok="getTableData"></allocate-resources>
 			<data-rules ref="dataRulesRef"></data-rules>
+			<role-user ref="roleUserRef"></role-user>
 		</div>
 	</page-content>
 </template>
@@ -121,13 +131,16 @@ import RoleForm from "@/views/system/role/components/role-form.vue";
 import AllocateResources from "@/views/system/role/components/allocate-resources.vue";
 import DataRules from "@/views/system/role/components/data-rules.vue";
 import { dataScopeOptions } from "@/constant/system/role";
+import RoleUser from "./components/role-user.vue";
 
 defineOptions({ name: "role" });
 
 const moreOptions = [
 	{ label: "分配资源", key: "distribution" },
-	{ label: "数据规则", key: "dataRules" }
+	{ label: "数据规则", key: "dataRules" },
+	{ label: "查看用户", key: "userInfo" }
 ];
+const roleUserRef = ref();
 const roleFormRef = ref();
 const dataRulesRef = ref();
 const allocateResourcesRef = ref();
@@ -145,6 +158,7 @@ const { tableList, tableLoading, searchForm, page, onChange, onUpdatePageSize, g
 const moreHandleSelect = (key, row) => {
 	if (key === "distribution") allocateResourcesRef.value.open(row);
 	if (key === "dataRules") dataRulesRef.value.open(row);
+	if (key === "userInfo") roleUserRef.value.open(row);
 };
 
 // 获取系统列表

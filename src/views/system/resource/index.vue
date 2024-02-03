@@ -44,15 +44,22 @@
 				:size="tableSize"
 				:column-config="{ resizable: false }"
 				:row-config="{ isHover: true, isCurrent: true }"
-				:tree-config="{ children: 'children', expandAll: true, reserve: true }"
+				:tree-config="{
+					children: 'children',
+					expandAll: true,
+					line: true,
+					reserve: true,
+					iconOpen: 'vxe-icon-square-minus',
+					iconClose: 'vxe-icon-square-plus'
+				}"
 				align="center"
 				resizable
 				row-id="id"
 				style="margin-top: 10px"
 			>
 				<!--				<vxe-column width="100" show-overflow="title" tree-node title="节点"></vxe-column>-->
-				<vxe-column field="id" tree-node min-width="200" show-overflow="title" title="ID"></vxe-column>
-				<vxe-column field="name" min-width="150px" show-overflow="title" title="资源名称"></vxe-column>
+				<vxe-column field="name" tree-node min-width="200px" align="left" show-overflow="title" title="资源名称"></vxe-column>
+				<vxe-column field="id" min-width="60" show-overflow="title" title="ID"></vxe-column>
 				<vxe-column field="url" min-width="120px" show-overflow="title" title="资源地址"></vxe-column>
 				<vxe-column field="compName" min-width="120px" show-overflow="title" title="组件名称"></vxe-column>
 				<vxe-column field="showNum" min-width="80px" show-overflow="title" title="资源序号"></vxe-column>

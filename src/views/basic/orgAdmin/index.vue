@@ -50,6 +50,7 @@
 			</template>
 
 			<vxe-table
+				stripe
 				ref="tableRef"
 				:data="tableData"
 				:height="height - 90"
@@ -60,20 +61,23 @@
 				:size="tableSize"
 				:tree-config="{
 					transform: true,
+					line: true,
 					rowField: 'code',
 					parentField: 'pcode',
 					lazy: true,
 					hasChild: 'hasChild',
-					loadMethod: loadChildrenMethod
+					loadMethod: loadChildrenMethod,
+					iconOpen: 'vxe-icon-square-minus',
+					iconClose: 'vxe-icon-square-plus'
 				}"
 				align="center"
-				border="inner"
+				border="none"
 				resizable
 				row-id="code"
 				show-header-overflow="title"
 				show-overflow
 			>
-				<vxe-column field="name" min-width="150px" show-overflow="title" title="机构名称" tree-node></vxe-column>
+				<vxe-column align="left" field="name" min-width="150px" show-overflow="title" title="机构名称" tree-node></vxe-column>
 				<vxe-column field="code" min-width="120px" show-overflow="title" title="机构编码"></vxe-column>
 				<vxe-column field="pcode" min-width="80px" show-overflow="title" title="上级机构编码"></vxe-column>
 				<vxe-column field="descr" min-width="120px" show-overflow="title" title="机构描述"></vxe-column>

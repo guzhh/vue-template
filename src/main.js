@@ -3,6 +3,7 @@ import "@/assets/style/global.less";
 import VXETable from "vxe-table";
 import TinyLayer from "tinylayer";
 import VXETablePluginExportXLSX from "vxe-table-plugin-export-xlsx";
+import ExcelJS from "exceljs";
 import App from "@/App.vue";
 import { setupStore } from "@/store";
 import router, { setupRouter } from "@/router";
@@ -16,7 +17,9 @@ async function bootstrap() {
 	const appProvider = createApp(AppProvider);
 	const app = createApp(App);
 	// 挂载vxe-table
-	VXETable.use(VXETablePluginExportXLSX);
+	VXETable.use(VXETablePluginExportXLSX, {
+		ExcelJS
+	});
 	// 挂载vxe-table
 	app.use(VXETable);
 	// 导入弹窗组件
