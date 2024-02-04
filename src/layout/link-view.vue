@@ -31,7 +31,9 @@ const getLinkValue = value => {
 		.replace(/\${account}/, userStore.userInfo.account)
 		.replace(/\${name}/, userStore.userInfo.name)
 		.replace(/\${departCode}/, userStore.userInfo.departCode)
-		.replace(/\${departName}/, userStore.userInfo.departName);
+		.replace(/\${departName}/, userStore.userInfo.departName)
+		.replace(/\${orgCode}/, userStore.userInfo.currentOrgCode)
+		.replace(/\${orgName}/, userStore.userInfo.currentOrgName);
 };
 getLinkValue(route.meta.linkValue);
 
