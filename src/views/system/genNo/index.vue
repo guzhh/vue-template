@@ -55,6 +55,7 @@
 					resizable
 					show-header-overflow="title"
 					show-overflow
+					:row-config="{ isHover: true, isCurrent: true }"
 				>
 					<vxe-column field="typeCode" show-overflow="title" title="类型编码" min-width="150"></vxe-column>
 					<vxe-column field="typeName" show-overflow="title" title="类型名称" min-width="150"></vxe-column>

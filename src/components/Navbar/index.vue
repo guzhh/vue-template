@@ -171,9 +171,15 @@ const orgSwitchRef = ref();
 const deptSwitchRef = ref();
 const appStore = useAppStore();
 const userStore = useUserStore();
-const userInfo = computed(() => {
-	return userStore.userInfo;
-});
+const userInfo = ref(userStore.userInfo);
+
+watch(
+	() => userStore.userInfo,
+	newValue => {
+		userInfo.value = newValue;
+	},
+	{ deep: true, immediate: true }
+);
 const { logout } = useUser();
 // 全局公共CSS变量
 const themeVars = useThemeVars();

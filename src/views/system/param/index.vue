@@ -13,7 +13,8 @@
 				<n-button size="small" type="default" @click="reset" style="margin-left: 10px"> 重置</n-button>
 			</template>
 			<template #header-extra>
-				<n-button size="small" style="margin-right: 20px" type="primary" @click="addParam">新增参数</n-button>
+				<n-button size="small" style="margin-right: 10px" type="primary" @click="addParam">新增参数</n-button>
+				<n-button size="small" style="margin-right: 20px" @click="clearAndRebuild">清除重建</n-button>
 				<n-tooltip>
 					<span>刷新</span>
 					<template #trigger>
@@ -47,6 +48,7 @@
 				row-id="id"
 				show-header-overflow="title"
 				show-overflow
+				:row-config="{ isHover: true, isCurrent: true }"
 			>
 				<vxe-column field="id" show-overflow="title" title="id" width="50px"></vxe-column>
 				<vxe-column field="paramCode" min-width="100px" show-overflow="title" title="参数编码"></vxe-column>
@@ -87,7 +89,7 @@
 <script setup>
 import { ref } from "vue";
 import { useMessage } from "naive-ui";
-import { getParamList, delParam } from "@/api/system/param";
+import { getParamList, delParam, clsParamCache } from "@/api/system/param";
 import useTableData from "@/hooks/useTableData.js";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import ParamForm from "@/views/system/param/components/param-form.vue";
@@ -114,6 +116,10 @@ const reset = () => {
 // 新增参数
 const addParam = () => {
 	paramFormRef.value.add();
+};
+
+const clearAndRebuild = () => {
+	clsParamCache({});
 };
 
 // 编辑参数

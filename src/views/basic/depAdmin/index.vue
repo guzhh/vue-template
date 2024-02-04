@@ -104,7 +104,9 @@
 					:height="height - 90"
 					:loading="tableLoading"
 					:row-config="{
-						keyField: 'code'
+						keyField: 'code',
+						isHover: true,
+						isCurrent: true
 					}"
 					:size="tableSize"
 					:tree-config="{

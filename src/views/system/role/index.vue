@@ -60,6 +60,7 @@
 					resizable
 					show-header-overflow="title"
 					show-overflow
+					:row-config="{ isHover: true, isCurrent: true }"
 				>
 					<vxe-column field="id" show-overflow="title" title="ID" width="50"></vxe-column>
 					<vxe-column field="sysId" show-overflow="title" title="所属系统ID" width="100"></vxe-column>

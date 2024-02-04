@@ -1,5 +1,6 @@
 import { createApp } from "vue";
 import "@/assets/style/global.less";
+import "@/assets/style/vxev-ariable.scss";
 import VXETable from "vxe-table";
 import TinyLayer from "tinylayer";
 import VXETablePluginExportXLSX from "vxe-table-plugin-export-xlsx";

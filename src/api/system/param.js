@@ -16,6 +16,22 @@ export function getParamList(params) {
 }
 
 /**
+ * 清除参数缓存
+ * @returns {Promise<*>}
+ */
+export function clsParamCache(params) {
+	return request.post({
+		url: "/p/auth/auth-param/clsParamCache",
+		data: params,
+		customs: {
+			isLoading: true,
+			loadingText: "操作执行中...",
+			successTip: "缓存清楚成功"
+		}
+	});
+}
+
+/**
  * 保存或新增参数信息
  * @returns {Promise<*>}
  */

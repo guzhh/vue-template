@@ -35,6 +35,7 @@
 			</template>
 			<template #header-extra>
 				<n-button size="small" type="primary" @click="addDict('')"> 新增字典</n-button>
+				<n-button size="small" @click="rebuildTheCache('')" style="margin-left: 10px">清除缓存</n-button>
 				<n-tooltip>
 					<span>折叠</span>
 					<template #trigger>
@@ -79,6 +80,7 @@
 				row-id="code"
 				show-header-overflow="title"
 				show-overflow
+				:row-config="{ isHover: true, isCurrent: true }"
 			>
 				<vxe-column field="id" show-overflow="title" title="字典ID" width="80px"></vxe-column>
 				<vxe-column field="pcode" show-overflow="title" title="上级字典编码" width="150px"></vxe-column>
@@ -127,7 +129,7 @@
 import { ref } from "vue";
 import { useMessage } from "naive-ui";
 import { useWindowSize } from "@/hooks/useWindowSize";
-import { getDictList, delDictById } from "@/api/system/dictList";
+import { getDictList, delDictById, clsDictCache } from "@/api/system/dictList";
 import CreateForm from "@/views/system/dict/components/create-form.vue";
 import DictModal from "@/views/system/dict/components/dictModal.vue";
 import useTable from "@/hooks/useTable";
@@ -153,6 +155,10 @@ const { tableList, tableLoading, searchForm, page, onChange, onUpdatePageSize, r
 // 新增顶级字典
 const addDict = pcode => {
 	createFormRef.value.add(pcode);
+};
+
+const rebuildTheCache = () => {
+	clsDictCache({});
 };
 
 // 下级字典管理

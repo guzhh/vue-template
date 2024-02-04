@@ -14,6 +14,21 @@ export function getDictList(params) {
 		}
 	});
 }
+/**
+ * 清除字典缓存
+ * @returns {Promise<*>}
+ */
+export function clsDictCache(params) {
+	return request.post({
+		url: "/p/auth/auth-dict/clsDictCache",
+		data: params,
+		customs: {
+			isLoading: true,
+			loadingText: "操作执行中...",
+			successTip: "缓存清楚成功"
+		}
+	});
+}
 
 /**
  * 保存或新增字典信息

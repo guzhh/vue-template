@@ -26,17 +26,19 @@
 		</n-card>
 		<n-card size="small" style="margin-top: 15px">
 			<vxe-table
+				stripe
 				ref="tableRef"
 				:data="tableData"
 				:loading="tableLoading"
 				size="mini"
 				align="center"
-				border
+				border="none"
 				:max-height="500"
 				resizable
 				row-id="code"
 				show-header-overflow="title"
 				show-overflow
+				:row-config="{ isHover: true, isCurrent: true }"
 			>
 				<vxe-column field="id" show-overflow="title" title="字典ID" width="80px"></vxe-column>
 				<vxe-column field="pcode" show-overflow="title" title="上级字典编码" width="150px"></vxe-column>
