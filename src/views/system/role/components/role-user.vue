@@ -61,6 +61,7 @@ const visible = ref(false);
 
 const { tableList, tableLoading, searchForm, page, onChange, onUpdatePageSize, resetTableList } = useTableData({
 	requestMethod: getUserByRole,
+	LoadData: false,
 	formData: { roleId: null }
 });
 

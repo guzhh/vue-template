@@ -29,7 +29,14 @@
 								/>
 
 								<n-select v-model:value="searchForm.state" :options="stateOption" style="width: 100px" size="small" />
-								<n-select clearable v-model:value="searchForm.roleId" :options="roleList" style="width: 150px" size="small" />
+								<n-select
+									clearable
+									placeholder="请选择用户角色"
+									v-model:value="searchForm.roleId"
+									:options="roleList"
+									style="width: 150px"
+									size="small"
+								/>
 								<n-button size="small" type="primary" @click="resetTableList">查询</n-button>
 								<n-button size="small" @click="resetQuery">重置</n-button>
 							</n-space>
