@@ -8,10 +8,10 @@
 export function setTreeData(data, id, pid) {
 	const cloneData = JSON.parse(JSON.stringify(data)); // 对源数据深度克隆,防止污染原始数据
 	return cloneData.filter(father => {
-		const branchArr = cloneData.filter(child => parseInt(father[id], 10) === parseInt(child[pid], 10)); // 返回每一项的子级数组
+		const branchArr = cloneData.filter(child => `${father[id]}` === `${child[pid]}`); // 返回每一项的子级数组
 		// eslint-disable-next-line no-unused-expressions,no-param-reassign
 		branchArr.length > 0 ? (father.children = branchArr) : ""; // 如果存在子级，则给父级添加一个children属性，并赋值
-		return parseInt(father[pid], 10) === 0; // 返回第一层
+		return `${father[pid]}` === `0`; // 返回第一层
 	});
 }
 

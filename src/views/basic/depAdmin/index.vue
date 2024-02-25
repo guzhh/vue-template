@@ -104,6 +104,7 @@
 					:height="height - 90"
 					:loading="tableLoading"
 					:row-config="{
+						useKey: true,
 						keyField: 'code',
 						isHover: true,
 						isCurrent: true
@@ -111,7 +112,7 @@
 					:size="tableSize"
 					:tree-config="{
 						transform: true,
-						line: true,
+						showLine: true,
 						rowField: 'code',
 						parentField: 'pcode',
 						lazy: true,

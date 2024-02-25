@@ -56,6 +56,7 @@
 				:height="height - 90"
 				:loading="tableLoading"
 				:row-config="{
+					useKey: true,
 					keyField: 'code',
 					isHover: true,
 					isCurrent: true
@@ -63,7 +64,7 @@
 				:size="tableSize"
 				:tree-config="{
 					transform: true,
-					line: true,
+					showLine: true,
 					rowField: 'code',
 					parentField: 'pcode',
 					lazy: true,
@@ -88,7 +89,7 @@
 						<option-badge :options="ifDeletedOption" :val="row.ifDel" />
 					</template>
 				</vxe-column>
-				<vxe-column fixed="right" title="操作" width="240px">
+				<vxe-column fixed="right" title="操作" width="300px">
 					<template #default="{ row }">
 						<n-button v-action:addOrgSub quaternary size="small" type="primary" @click="addNewOrg(row)">添加下级 </n-button>
 						<n-button v-action:editOrgButton quaternary size="small" type="primary" @click="editOrg(row)">编辑 </n-button>
@@ -104,6 +105,7 @@
 							</template>
 							是否确定撤销删除?
 						</n-popconfirm>
+						<n-button quaternary size="small" type="warning" @click="editParam(row)">配置参数 </n-button>
 					</template>
 				</vxe-column>
 			</vxe-table>
@@ -155,21 +157,18 @@ getOrg();
 
 // 新增机构
 const addNewOrg = row => {
-	console.log("新增机构");
 	orgCreateFormRef.value.add(row);
 };
 
 // 编辑机构信息
 // eslint-disable-next-line no-unused-vars
 const editOrg = row => {
-	console.log(row, "编辑机构信息");
 	orgCreateFormRef.value.edit(row);
 };
 
 // 删除机构
 // eslint-disable-next-line no-unused-vars
 const deleteOrg = row => {
-	console.log(row, "删除机构");
 	delOrg({ id: row.id }).then(res => {
 		if (res.success) {
 			message.success("删除成功");
@@ -187,7 +186,6 @@ const deleteOrg = row => {
 // 撤销删除
 // eslint-disable-next-line no-unused-vars
 const recoverOrg = row => {
-	console.log(row, "撤销删除");
 	cancelDelOrg({ id: row.id }).then(res => {
 		if (res.success) {
 			message.success("撤销成功");
@@ -242,6 +240,10 @@ const saveSuccess = (data, isEdit) => {
 		const $table = tableRef.value;
 		$table.reloadTreeExpand(data);
 	}
+};
+
+const editParam = row => {
+	console.log(row);
 };
 </script>
 

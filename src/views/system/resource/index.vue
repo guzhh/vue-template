@@ -38,16 +38,17 @@
 				stripe
 				border="none"
 				ref="tableRef"
+				show-overflow
 				:data="tableData"
 				:height="height - 100"
 				:loading="tableLoading"
 				:size="tableSize"
 				:column-config="{ resizable: false }"
-				:row-config="{ isHover: true, isCurrent: true }"
+				:row-config="{ isHover: true, isCurrent: true, useKey: true }"
 				:tree-config="{
-					children: 'children',
+					childrenField: 'children',
 					expandAll: true,
-					line: true,
+					showLine: true,
 					reserve: true,
 					iconOpen: 'vxe-icon-square-minus',
 					iconClose: 'vxe-icon-square-plus'

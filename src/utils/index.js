@@ -393,3 +393,17 @@ export function analyzeIDCard(IDCard) {
 	// 返回数据
 	return cardInfo;
 }
+
+/**
+ * 判断一个字符串是否是JSON字符串
+ * @param str
+ * @returns {boolean}
+ */
+export function isJSONString(str) {
+	try {
+		JSON.parse(str);
+		return true;
+	} catch (e) {
+		return false;
+	}
+}
