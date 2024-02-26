@@ -1,3 +1,5 @@
+import { cloneDeep } from "lodash";
+
 /**
  * 将线行数据转成树形数据
  * @param data 要转换的数据
@@ -6,7 +8,7 @@
  * @returns {*}
  */
 export function setTreeData(data, id, pid) {
-	const cloneData = JSON.parse(JSON.stringify(data)); // 对源数据深度克隆,防止污染原始数据
+	const cloneData = cloneDeep(data); // 对源数据深度克隆,防止污染原始数据
 	return cloneData.filter(father => {
 		const branchArr = cloneData.filter(child => `${father[id]}` === `${child[pid]}`); // 返回每一项的子级数组
 		// eslint-disable-next-line no-unused-expressions,no-param-reassign
