@@ -63,9 +63,9 @@
 						<n-input v-model:value="row.placeholder" placeholder="字段说明" size="small" />
 					</template>
 				</vxe-column>
-				<vxe-column field="options" min-width="150px" show-overflow="title" title="可选值">
+				<vxe-column field="options" min-width="200px" show-overflow="title" title="可选值">
 					<template #default="{ row }">
-						<n-input v-model:value="row.options" placeholder="字段可选值" size="small" />
+						<n-input v-model:value="row.options" placeholder="字段可选值，多个逗号隔开" size="small" />
 					</template>
 				</vxe-column>
 				<vxe-column field="defalutVal" min-width="150px" show-overflow="title" title="默认值">
