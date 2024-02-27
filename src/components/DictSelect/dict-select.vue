@@ -4,7 +4,7 @@
 		:value-field="valueField"
 		v-model:value="modelValue"
 		filterable
-		clearable
+		:clearable="clearable"
 		:options="options"
 		@update:value="handleChange"
 		:render-option="ifTip ? dictRenderOption : undefined"
@@ -44,6 +44,10 @@ const props = defineProps({
 	ifTip: {
 		type: Boolean, // Tooltip提示
 		default: false // 默认不提示
+	},
+	clearable: {
+		type: Boolean,
+		default: true
 	}
 });
 const emits = defineEmits(["update:value", "update:name", "update:val", "change"]);
