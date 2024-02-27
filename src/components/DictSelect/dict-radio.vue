@@ -2,6 +2,7 @@
 	<n-radio-group v-model:value="modelValue">
 		<n-space :vertical="vertical">
 			<n-radio :value="item[valueField]" v-for="(item, key) in options" :key="key"> {{ item[labelField] }} </n-radio>
+			<span @click="modelValue = null" style="color: #cfcaca; cursor: pointer">清除</span>
 		</n-space>
 	</n-radio-group>
 </template>
