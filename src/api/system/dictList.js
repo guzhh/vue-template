@@ -25,7 +25,7 @@ export function clsDictCache(params) {
 		customs: {
 			isLoading: true,
 			loadingText: "操作执行中...",
-			successTip: "缓存清楚成功"
+			successTip: "缓存清除成功"
 		}
 	});
 }

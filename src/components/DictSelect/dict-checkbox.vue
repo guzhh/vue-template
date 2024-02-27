@@ -21,7 +21,7 @@ const props = defineProps({
 		required: true
 	}
 });
-const emits = defineEmits(["update:value", "change"]);
+const emits = defineEmits(["update:value", "change", "update:name"]);
 const systemStore = useSystemStore();
 const options = computed(() => {
 	return systemStore.getDictList(props.dictCode);
@@ -35,6 +35,7 @@ const modelValue = computed({
 	},
 	set(val) {
 		emits("update:value", val.join(","));
+		emits("update:name", val.map(code => systemStore.getDictNameByValue(props.dictCode, code)).join(","));
 	}
 });
 
