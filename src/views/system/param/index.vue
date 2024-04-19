@@ -1,12 +1,41 @@
 <template>
-	<page-content>
-		<n-card size="small" title="参数列表">
+	<page-content style="display: flex; justify-content: space-between">
+		<n-card size="small" title="参数列表" style="width: 290px">
+			<template #header>参数分类</template>
+			<template #header-extra>
+				<n-button size="small" type="primary" @click="dictModalRef.open({ code: 'PARAM_CLASS' })">新增分类</n-button>
+			</template>
+			<vxe-table
+				stripe
+				resizable
+				row-id="id"
+				border="none"
+				show-overflow
+				align="center"
+				:data="dictList"
+				:size="tableSize"
+				ref="xTableRef"
+				:height="height - 120"
+				show-header-overflow="title"
+				@radio-change="radioChangeEvent"
+				:row-config="{ isHover: true, isCurrent: true }"
+			>
+				<vxe-column type="radio" width="60">
+					<template #header>
+						<vxe-button type="text" @click="clearRadioRowEevnt" :disabled="!selectRow">取消</vxe-button>
+					</template>
+				</vxe-column>
+				<vxe-column field="name" min-width="100px" show-overflow="title" title="参数分类"></vxe-column>
+			</vxe-table>
+			<DictModal ref="dictModalRef"></DictModal>
+		</n-card>
+		<n-card size="small" title="参数列表" style="width: calc(100% - 300px)">
 			<template #header>
 				<n-input
 					size="small"
-					style="width: 200px"
+					style="width: 300px"
 					v-model:value="searchForm.query"
-					placeholder="参数编码/参数名称"
+					placeholder="参数编码/参数名称/参数值/参数描述"
 					@keydown.enter.prevent="resetTableList"
 				/>
 				<n-button size="small" type="primary" @click="resetTableList" style="margin-left: 10px"> 查询</n-button>
@@ -50,7 +79,8 @@
 				show-overflow
 				:row-config="{ isHover: true, isCurrent: true }"
 			>
-				<vxe-column field="id" show-overflow="title" title="id" width="50px"></vxe-column>
+				<vxe-column field="id" show-overflow="title" title="ID" width="50px"></vxe-column>
+				<vxe-column field="paramClassName" min-width="100px" show-overflow="title" title="参数分类"></vxe-column>
 				<vxe-column field="paramCode" min-width="100px" show-overflow="title" title="参数编码"></vxe-column>
 				<vxe-column field="paramName" min-width="100px" show-overflow="title" title="参数名称"></vxe-column>
 				<vxe-column field="paramDescr" min-width="200px" show-overflow="title" title="参数描述"></vxe-column>
@@ -94,24 +124,52 @@ import useTableData from "@/hooks/useTableData.js";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import ParamForm from "@/views/system/param/components/param-form.vue";
 import useTable from "@/hooks/useTable";
+import { getDictByPCodes } from "@/api/system/dictList";
+import DictModal from "@/views/system/dict/components/dictModal.vue";
 
 defineOptions({ name: "paramList" });
 
+const xTableRef = ref();
+const dictModalRef = ref();
+const selectRow = ref(null);
+const dictList = ref([]);
 const { tableSizeOptions, tableSize } = useTable();
 const message = useMessage();
 const paramFormRef = ref();
 const { height } = useWindowSize();
-const formData = { query: "" };
-// eslint-disable-next-line no-unused-vars
-const { tableList, tableLoading, searchForm, page, onChange, onUpdatePageSize, resetTableList, getTableData } = useTableData({
+const { tableList, tableLoading, searchForm, page, onChange, onUpdatePageSize, resetTableList } = useTableData({
 	requestMethod: getParamList,
-	formData
+	formData: { query: null, paramClassCode: null }
 });
 
 const reset = () => {
-	searchForm.value.query = "";
+	searchForm.value.query = null;
 	resetTableList();
 };
+
+// 单选取消选择
+const clearRadioRowEevnt = () => {
+	const $table = xTableRef.value;
+	if ($table) {
+		selectRow.value = null;
+		$table.clearRadioRow();
+		searchForm.value.paramClassCode = null;
+		resetTableList();
+	}
+};
+
+const radioChangeEvent = ({ row }) => {
+	selectRow.value = row;
+	searchForm.value.paramClassCode = row.code;
+	resetTableList();
+};
+
+const getDictList = () => {
+	getDictByPCodes({ pcodes: "PARAM_CLASS" }).then(res => {
+		dictList.value = res.result.PARAM_CLASS;
+	});
+};
+getDictList();
 
 // 新增参数
 const addParam = () => {

@@ -47,6 +47,7 @@ const useTabBarStore = defineStore("tabBar", {
 			if (!route.meta.ignoreCache) {
 				this.cacheTabList.add(route.name);
 			}
+			this.tagList = this.tagList.filter(item => !item.ignoreCache);
 		},
 		deleteTag(idx, tag) {
 			this.tagList.splice(idx, 1);

@@ -45,8 +45,8 @@
 				</template>
 				<template #header-extra>
 					<n-button style="margin-right: 15px" v-action:addDeptButton size="small" type="primary" @click="addNewDep({})"
-						>新增科室</n-button
-					>
+						>新增科室
+					</n-button>
 
 					<n-tooltip>
 						<span>上传科室excel文件</span>
@@ -210,7 +210,7 @@ const tableData = ref([]);
 const treeData = ref([]);
 const defaultSelect = ref([]);
 const orgCode = ref("");
-const ifDel = ref(null); // 是否删除
+const ifDel = ref(0); // 是否删除
 const deptName = ref(""); // 科室名称
 
 const exportDataEvent = () => {
@@ -417,7 +417,7 @@ const select = (keys, option) => {
 
 // 重置查询条件
 const resetQuery = () => {
-	ifDel.value = null;
+	ifDel.value = 0;
 	deptName.value = "";
 	getDepartList();
 };

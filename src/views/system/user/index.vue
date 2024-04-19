@@ -326,7 +326,8 @@ const onLineOption = ref([
 const stateOption = ref([
 	{ value: 1, label: "启用" },
 	{ value: 2, label: "禁用" },
-	{ value: 3, label: "删除" }
+	{ value: 3, label: "删除" },
+	{ value: 4, label: "锁定" }
 ]);
 
 // eslint-disable-next-line no-unused-vars
