@@ -28,7 +28,7 @@
 									size="small"
 								/>
 
-								<n-select v-model:value="searchForm.state" :options="stateOption" style="width: 100px" size="small" />
+								<n-select v-model:value="searchForm.state" :options="stateJudgeOption" style="width: 100px" size="small" />
 								<n-select
 									clearable
 									placeholder="请选择用户角色"
@@ -76,7 +76,7 @@
 										</n-grid-item>
 										<n-grid-item>
 											<n-form-item label="状态:" path="state">
-												<n-select v-model:value="searchForm.state" :options="stateOption" style="width: 100%" />
+												<n-select v-model:value="searchForm.state" :options="stateJudgeOption" style="width: 100%" />
 											</n-form-item>
 										</n-grid-item>
 										<n-grid-item>
@@ -323,22 +323,6 @@ const onLineOption = ref([
 	{ value: 0, label: "离线" },
 	{ value: 1, label: "在线" }
 ]);
-const stateOption = ref([
-	{ value: 1, label: "启用" },
-	{ value: 2, label: "禁用" },
-	{ value: 3, label: "删除" },
-	{ value: 4, label: "锁定" }
-]);
-
-// eslint-disable-next-line no-unused-vars
-const moreOptions = [
-	{ label: "禁用", key: "disabled" },
-	{ label: "删除", key: "delete" },
-	{ label: "解锁", key: "unlock" },
-	{ label: "恢复状态", key: "recoverState" },
-	{ label: "重置密码", key: "resetPassword" },
-	{ label: "强制离线", key: "forcedOffline" }
-];
 
 const formData = {
 	orgCode: null,

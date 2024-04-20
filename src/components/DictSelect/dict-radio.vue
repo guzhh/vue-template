@@ -2,7 +2,7 @@
 	<n-radio-group v-model:value="modelValue">
 		<n-space :vertical="vertical">
 			<n-radio :value="item[valueField]" v-for="(item, key) in options" :key="key"> {{ item[labelField] }} </n-radio>
-			<span @click="modelValue = null" style="color: #cfcaca; cursor: pointer">清除</span>
+			<span @click="modelValue = null" style="color: #cfcaca; cursor: pointer" v-if="ifClear">清除</span>
 		</n-space>
 	</n-radio-group>
 </template>
@@ -36,6 +36,11 @@ const props = defineProps({
 		// 是否垂直
 		type: Boolean,
 		default: false
+	},
+	ifClear: {
+		// 是否显示清除按钮默认显示
+		type: Boolean,
+		default: true
 	}
 });
 const emits = defineEmits(["update:value", "update:name"]);
