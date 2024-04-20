@@ -19,6 +19,7 @@
 				show-header-overflow="title"
 				@radio-change="radioChangeEvent"
 				:row-config="{ isHover: true, isCurrent: true }"
+				:radio-config="{ trigger: 'row' }"
 			>
 				<vxe-column type="radio" width="60">
 					<template #header>
