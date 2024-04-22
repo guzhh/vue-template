@@ -3,7 +3,9 @@
 		<n-card size="small" title="参数列表" style="width: 290px">
 			<template #header>参数分类</template>
 			<template #header-extra>
-				<n-button size="small" type="primary" @click="dictModalRef.open({ code: 'PARAM_CLASS' })">新增分类</n-button>
+				<n-button size="small" style="margin-left: 10px" type="primary" @click="dictModalRef.open({ code: 'PARAM_CLASS' })"
+					>新增分类</n-button
+				>
 			</template>
 			<vxe-table
 				stripe
@@ -18,6 +20,7 @@
 				:height="height - 120"
 				show-header-overflow="title"
 				@radio-change="radioChangeEvent"
+				:filter-config="{ showIcon: false }"
 				:row-config="{ isHover: true, isCurrent: true }"
 				:radio-config="{ trigger: 'row' }"
 			>
@@ -26,7 +29,21 @@
 						<vxe-button type="text" @click="clearRadioRowEevnt" :disabled="!selectRow">取消</vxe-button>
 					</template>
 				</vxe-column>
-				<vxe-column field="name" min-width="100px" show-overflow="title" title="参数分类"></vxe-column>
+				<!--				<vxe-column field="name" min-width="100px" show-overflow="title" title="参数分类"></vxe-column>-->
+				<vxe-colgroup title="参数分类">
+					<vxe-column field="name" :filters="nameOptions" :filter-method="nameFilterMethod">
+						<template #header="{ column }">
+							<n-input
+								:key="index"
+								size="small"
+								v-model:value="option.data"
+								v-for="(option, index) in column.filters"
+								@keyup.enter="confirmFilterEvent(option)"
+								placeholder="按回车筛选"
+							/>
+						</template>
+					</vxe-column>
+				</vxe-colgroup>
 			</vxe-table>
 			<DictModal ref="dictModalRef"></DictModal>
 		</n-card>
@@ -119,6 +136,7 @@
 
 <script setup>
 import { ref } from "vue";
+import XEUtils from "xe-utils";
 import { useMessage } from "naive-ui";
 import { getParamList, delParam, clsParamCache } from "@/api/system/param";
 import useTableData from "@/hooks/useTableData.js";
@@ -143,6 +161,8 @@ const { tableList, tableLoading, searchForm, page, onChange, onUpdatePageSize, r
 	formData: { query: null, paramClassCode: null }
 });
 
+const nameOptions = ref([{ data: "" }]);
+
 const reset = () => {
 	searchForm.value.query = null;
 	resetTableList();
@@ -166,7 +186,7 @@ const radioChangeEvent = ({ row }) => {
 };
 
 const getDictList = () => {
-	getDictByPCodes({ pcodes: "PARAM_CLASS" }).then(res => {
+	return getDictByPCodes({ pcodes: "PARAM_CLASS" }).then(res => {
 		dictList.value = res.result.PARAM_CLASS;
 	});
 };
@@ -194,6 +214,27 @@ const deleteParam = row => {
 			resetTableList();
 		}
 	});
+};
+
+// eslint-disable-next-line no-unused-vars
+const nameFilterMethod = ({ option, row, column }) => {
+	if (option.data) {
+		return XEUtils.toValueString(row[column.field]).toLowerCase().indexOf(option.data) > -1;
+	}
+	return true;
+};
+const confirmFilterEvent = async option => {
+	const $table = xTableRef.value;
+	if ($table) {
+		await getDictList();
+		nextTick(() => {
+			// 设置为选中状态
+			// eslint-disable-next-line no-param-reassign
+			option.checked = true;
+			// 修改条件之后，需要手动调用 updateData 处理表格数据
+			$table.updateData();
+		});
+	}
 };
 </script>
 
