@@ -80,16 +80,18 @@
 				show-header-overflow="title"
 				show-overflow
 			>
-				<vxe-column align="left" field="name" min-width="150px" show-overflow="title" title="机构名称" tree-node></vxe-column>
-				<vxe-column field="code" min-width="120px" show-overflow="title" title="机构编码"></vxe-column>
-				<vxe-column field="pcode" min-width="80px" show-overflow="title" title="上级机构编码"></vxe-column>
-				<vxe-column field="descr" min-width="120px" show-overflow="title" title="机构描述"></vxe-column>
-				<vxe-column field="ifDel" min-width="120px" show-overflow="title" title="是否删除">
+				<vxe-column align="left" field="name" min-width="150" show-overflow="title" title="机构名称" tree-node></vxe-column>
+				<vxe-column field="code" min-width="120" show-overflow="title" title="机构编码"></vxe-column>
+				<vxe-column field="pcode" min-width="80" show-overflow="title" title="上级机构编码"></vxe-column>
+				<vxe-column field="nmsOrgCode" min-width="100" show-overflow="title" title="医保编码"></vxe-column>
+				<vxe-column field="nmsOrgName" min-width="120" show-overflow="title" title="医保名称"></vxe-column>
+				<vxe-column field="descr" min-width="120" show-overflow="title" title="机构描述"></vxe-column>
+				<vxe-column field="ifDel" min-width="120" show-overflow="title" title="是否删除">
 					<template #default="{ row }">
 						<option-badge :options="ifDeletedOption" :val="row.ifDel" />
 					</template>
 				</vxe-column>
-				<vxe-column fixed="right" title="操作" width="300px">
+				<vxe-column fixed="right" title="操作" width="220px">
 					<template #default="{ row }">
 						<n-button v-action:addOrgSub quaternary size="small" type="primary" @click="addNewOrg(row)">添加下级 </n-button>
 						<n-button v-action:editOrgButton quaternary size="small" type="primary" @click="editOrg(row)">编辑 </n-button>
@@ -105,7 +107,6 @@
 							</template>
 							是否确定撤销删除?
 						</n-popconfirm>
-						<n-button quaternary size="small" type="warning" @click="editParam(row)">配置参数 </n-button>
 					</template>
 				</vxe-column>
 			</vxe-table>
@@ -134,7 +135,7 @@ const { height } = useWindowSize();
 const { tableSizeOptions, tableSize } = useTable();
 const tableLoading = ref();
 const tableData = ref([]);
-const ifDel = ref(null);
+const ifDel = ref(0);
 
 // 获取机构列表
 const getOrg = () => {
@@ -240,10 +241,6 @@ const saveSuccess = (data, isEdit) => {
 		const $table = tableRef.value;
 		$table.reloadTreeExpand(data);
 	}
-};
-
-const editParam = row => {
-	console.log(row);
 };
 </script>
 

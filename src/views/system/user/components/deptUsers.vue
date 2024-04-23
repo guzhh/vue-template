@@ -4,7 +4,7 @@
   创建人：gzh
 -->
 <template>
-	<base-modal style="width: 780px" title="用户所在科室" v-model:show="visible" @close="handleClose" :footer="null">
+	<base-modal style="width: 980px" title="用户所在科室" v-model:show="visible" @close="handleClose" :footer="null">
 		<vxe-table
 			:data="deptList"
 			max-height="900"
@@ -22,6 +22,8 @@
 			<vxe-column field="code" min-width="120px" show-overflow="title" title="科室编码"></vxe-column>
 			<vxe-column field="pcode" min-width="100px" show-overflow="title" title="上级科室编码"></vxe-column>
 			<vxe-column field="outCode" min-width="100px" show-overflow="title" title="三方科室编码"></vxe-column>
+			<vxe-column field="nmsDeptCode" min-width="100" show-overflow="title" title="医保编码"></vxe-column>
+			<vxe-column field="nmsDeptName" min-width="120" show-overflow="title" title="医保名称"></vxe-column>
 			<vxe-column field="deptType" min-width="100px" show-overflow="title" title="科室类型">
 				<template #default="{ row }">
 					<dict-code-show pcode="DEPT_TYPE" :dict-code="row.deptType"></dict-code-show>

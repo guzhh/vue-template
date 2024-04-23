@@ -21,7 +21,7 @@
 					@update-selected-keys="select"
 				/>
 			</n-card>
-			<n-card size="small" style="margin-left: 5px">
+			<n-card size="small" style="margin-left: 5px; width: calc(100% - 210px)">
 				<template #header>
 					<n-space>
 						<n-select
@@ -129,17 +129,19 @@
 					show-overflow
 				>
 					<vxe-column field="name" align="left" min-width="150px" show-overflow="title" title="科室名称" tree-node></vxe-column>
-					<vxe-column field="piny" min-width="100px" show-overflow="title" title="拼音码"></vxe-column>
-					<vxe-column field="code" min-width="120px" show-overflow="title" title="科室编码"></vxe-column>
-					<vxe-column field="pcode" min-width="80px" show-overflow="title" title="上级科室编码"></vxe-column>
-					<vxe-column field="outCode" min-width="80px" show-overflow="title" title="三方科室编码"></vxe-column>
-					<vxe-column field="deptType" min-width="100px" show-overflow="title" title="科室类型">
+					<vxe-column field="piny" min-width="100" show-overflow="title" title="拼音码"></vxe-column>
+					<vxe-column field="code" min-width="120" show-overflow="title" title="科室编码"></vxe-column>
+					<vxe-column field="pcode" min-width="120" show-overflow="title" title="上级科室编码"></vxe-column>
+					<vxe-column field="outCode" min-width="120" show-overflow="title" title="三方科室编码"></vxe-column>
+					<vxe-column field="nmsDeptCode" min-width="100" show-overflow="title" title="医保编码"></vxe-column>
+					<vxe-column field="nmsDeptName" min-width="120" show-overflow="title" title="医保名称"></vxe-column>
+					<vxe-column field="deptType" min-width="100" show-overflow="title" title="科室类型">
 						<template #default="{ row }">
 							<dict-code-show pcode="DEPT_TYPE" :dict-code="row.deptType"></dict-code-show>
 						</template>
 					</vxe-column>
-					<vxe-column field="descr" min-width="120px" show-overflow="title" title="科室介绍"></vxe-column>
-					<vxe-column field="deptmentPeoples" min-width="80px" show-overflow="title" title="用户数">
+					<vxe-column field="descr" min-width="120" show-overflow="title" title="科室介绍"></vxe-column>
+					<vxe-column field="deptmentPeoples" min-width="80" show-overflow="title" title="用户数">
 						<template #default="{ row }">
 							<n-tag size="small" type="primary" @click="viewUsers(row)">
 								<n-icon :component="UserOutlined" />

@@ -33,6 +33,12 @@
 			<n-form-item label="手机号" path="phone">
 				<n-input v-model:value="formValue.phone" placeholder="请输入手机号" />
 			</n-form-item>
+			<n-form-item label="医保编码" path="nmsUserCode">
+				<n-input v-model:value="formValue.nmsUserCode" placeholder="请输入医保编码" />
+			</n-form-item>
+			<n-form-item label="医保名称" path="nmsUserName">
+				<n-input v-model:value="formValue.nmsUserName" placeholder="请输入医保名称" />
+			</n-form-item>
 			<n-form-item label="邮箱" path="email">
 				<n-input v-model:value="formValue.email" placeholder="请输入邮箱" />
 			</n-form-item>
@@ -67,7 +73,9 @@ const defaultForm = {
 	phone: null,
 	email: null,
 	deptCodeList: [],
-	userType: null
+	userType: null,
+	nmsUserName: null,
+	nmsUserCode: null
 };
 const userTypeOption = ref([]);
 

@@ -153,6 +153,8 @@
 							<vxe-column field="account" min-width="100px" show-overflow="title" title="账号"></vxe-column>
 							<vxe-column field="name" min-width="100px" show-overflow="title" title="用户名称"></vxe-column>
 							<vxe-column field="piny" min-width="100px" show-overflow="title" title="拼音码"></vxe-column>
+							<vxe-column field="nmsUserCode" min-width="100" show-overflow="title" title="医保编码"></vxe-column>
+							<vxe-column field="nmsUserName" min-width="120" show-overflow="title" title="医保名称"></vxe-column>
 							<vxe-column field="deptList" min-width="100" show-overflow="title" title="所处科室数">
 								<template #default="{ row }">
 									<n-tag size="small" type="primary" @click="viewDepartments(row)">

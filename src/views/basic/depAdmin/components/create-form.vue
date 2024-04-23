@@ -9,12 +9,6 @@
 				label-width="auto"
 				require-mark-placement="left"
 			>
-				<n-form-item v-show="false" path="id">
-					<n-input v-model:value="formValue.id" placeholder="请输入ID" />
-				</n-form-item>
-				<n-form-item v-show="false" path="pcode">
-					<n-input v-model:value="formValue.pcode" placeholder="请输入pcode" />
-				</n-form-item>
 				<n-form-item label="科室名称" path="name">
 					<n-input v-model:value="formValue.name" placeholder="请输入科室名称" />
 				</n-form-item>
@@ -23,6 +17,12 @@
 				</n-form-item>
 				<n-form-item label="三方科室编码" path="outCode">
 					<n-input v-model:value="formValue.outCode" placeholder="请输入三方科室编码" />
+				</n-form-item>
+				<n-form-item label="医保编码" path="nmsDeptCode">
+					<n-input v-model:value="formValue.nmsDeptCode" placeholder="请输入医保科室编码" />
+				</n-form-item>
+				<n-form-item label="医保名称" path="nmsDeptName">
+					<n-input v-model:value="formValue.nmsDeptName" placeholder="请输入医保科室名称" />
 				</n-form-item>
 				<n-form-item label="排序号" path="sortNum">
 					<n-input-number clearable :precision="0" v-model:value="formValue.sortNum" placeholder="请排序号" style="width: 100%" />
@@ -47,8 +47,7 @@ const visible = ref(false);
 const formRef = ref();
 const message = useMessage();
 const addRow = ref({});
-
-const formValue = ref({
+const defaultValue = {
 	id: null,
 	pcode: null,
 	code: null,
@@ -57,8 +56,12 @@ const formValue = ref({
 	orgCode: null,
 	outCode: null,
 	deptType: null,
-	sortNum: null
-});
+	sortNum: null,
+	nmsDeptCode: null,
+	nmsDeptName: null
+};
+
+const formValue = ref({ ...defaultValue });
 const deptTypeOption = ref([]);
 
 const rules = {
@@ -90,7 +93,9 @@ const edit = row => {
 		descr: row.descr,
 		orgCode: row.orgCode,
 		outCode: row.outCode,
-		deptType: row.deptType
+		deptType: row.deptType,
+		nmsDeptCode: row.nmsDeptCode,
+		nmsDeptName: row.nmsDeptName
 	};
 	addRow.value = row;
 	// eslint-disable-next-line no-use-before-define
@@ -101,17 +106,7 @@ const handleClose = () => {
 	formRef.value?.restoreValidation();
 	visible.value = false;
 	title.value = "";
-	formValue.value = {
-		id: null,
-		pcode: null,
-		code: null,
-		name: null,
-		descr: null,
-		orgCode: null,
-		outCode: null,
-		deptType: null,
-		sortNum: null
-	};
+	formValue.value = { ...defaultValue };
 	addRow.value = {};
 };
 

@@ -9,18 +9,15 @@
 				label-width="auto"
 				require-mark-placement="left"
 			>
-				<n-form-item v-show="false" path="id">
-					<n-input v-model:value="formValue.id" placeholder="请输入ID" />
-				</n-form-item>
-				<n-form-item v-show="false" path="pcode">
-					<n-input v-model:value="formValue.pcode" placeholder="请输入pcode" />
-				</n-form-item>
 				<n-form-item label="机构名称" path="name">
 					<n-input v-model:value="formValue.name" placeholder="请输入机构名称" />
 				</n-form-item>
-				<!--				<n-form-item label="机构编码" path="code">-->
-				<!--					<n-input v-model:value="formValue.code" placeholder="请输入机构编码" />-->
-				<!--				</n-form-item>-->
+				<n-form-item label="医保编码" path="nmsOrgCode">
+					<n-input v-model:value="formValue.nmsOrgCode" placeholder="请输入医保编码" />
+				</n-form-item>
+				<n-form-item label="医保名称" path="nmsOrgName">
+					<n-input v-model:value="formValue.nmsOrgName" placeholder="请输入医保名称" />
+				</n-form-item>
 				<n-form-item label="机构描述" path="descr">
 					<n-input v-model:value="formValue.descr" placeholder="请输入机构描述" />
 				</n-form-item>
@@ -40,14 +37,17 @@ const visible = ref(false);
 const formRef = ref();
 const message = useMessage();
 const addRow = ref({});
-
-const formValue = ref({
+const defaultValue = {
 	id: null,
-	pcode: "",
-	code: "",
-	name: "",
-	descr: ""
-});
+	pcode: null,
+	code: null,
+	name: null,
+	descr: null,
+	nmsOrgCode: null,
+	nmsOrgName: null
+};
+
+const formValue = ref({ ...defaultValue });
 
 const rules = {
 	name: { required: true, message: "请输入机构名称", trigger: "blur" }
@@ -70,7 +70,9 @@ const edit = row => {
 		pcode: row.pcode,
 		code: row.code,
 		name: row.name,
-		descr: row.descr
+		descr: row.descr,
+		nmsOrgCode: row.nmsOrgCode,
+		nmsOrgName: row.nmsOrgName
 	};
 	addRow.value = row;
 	visible.value = true;
@@ -80,13 +82,7 @@ const handleClose = () => {
 	formRef.value?.restoreValidation();
 	visible.value = false;
 	title.value = "";
-	formValue.value = {
-		id: null,
-		pcode: "",
-		code: "",
-		name: "",
-		descr: ""
-	};
+	formValue.value = { ...defaultValue };
 	addRow.value = {};
 };
 
