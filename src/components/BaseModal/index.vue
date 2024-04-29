@@ -15,6 +15,7 @@
 		:segmented="{ content: 'soft', footer: 'soft' }"
 		:content-style="{ minHeight: 0 }"
 		:style="ifFullscreen ? { width: '100vw', height: '100vh' } : style"
+		:zIndex="zIndex"
 	>
 		<template #header>
 			<div class="w-full cursor-move" id="basic-modal-bar">
@@ -32,7 +33,7 @@
 				</template>
 			</n-button>
 		</template>
-		<div style="width: 100%; height: 100%; overflow: auto">
+		<div style="width: 100%; height: 100%; overflow: auto" class="modalContentMark">
 			<slot></slot>
 		</div>
 		<template #footer v-if="footer">
@@ -40,8 +41,8 @@
 				<slot name="footer"></slot>
 			</div>
 			<div style="width: 100%; text-align: right" v-if="!slotFooter">
-				<n-button type="tertiary" @click="handleClose"> 取 消 </n-button>
-				<n-button type="primary" style="margin-left: 15px" @click="handleOk"> {{ subBtuText }} </n-button>
+				<n-button type="tertiary" @click="handleClose"> 取 消</n-button>
+				<n-button type="primary" style="margin-left: 15px" @click="handleOk"> {{ subBtuText }}</n-button>
 			</div>
 		</template>
 	</n-modal>
@@ -83,6 +84,12 @@ const props = defineProps({
 		type: Object,
 		default: () => {
 			return { width: "600px", height: "400px" };
+		}
+	},
+	zIndex: {
+		type: Number,
+		default() {
+			return 999;
 		}
 	}
 });

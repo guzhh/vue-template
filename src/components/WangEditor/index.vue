@@ -1,6 +1,12 @@
 <template>
-	<div style="border: 1px solid #cccccc">
-		<Toolbar style="border-bottom: 1px solid #cccccc" :editor="editorRef" :defaultConfig="toolbarConfig" mode="default" />
+	<div :style="{ border: showBorder ? '1px solid #cccccc' : 'none' }">
+		<Toolbar
+			v-if="showToolbar"
+			style="border-bottom: 1px solid #cccccc"
+			:editor="editorRef"
+			:defaultConfig="toolbarConfig"
+			mode="default"
+		/>
 		<Editor
 			mode="default"
 			v-model="valueHtml"
@@ -21,6 +27,14 @@ defineOptions({ name: "WangEditor" });
 
 const emits = defineEmits(["update:value"]);
 const props = defineProps({
+	showToolbar: {
+		type: Boolean,
+		default: true
+	},
+	showBorder: {
+		type: Boolean,
+		default: true
+	},
 	height: {
 		type: Number,
 		default: 300
@@ -30,7 +44,7 @@ const props = defineProps({
 		default: "请输入内容..."
 	},
 	value: {
-		type: String,
+		type: [String, null],
 		required: true
 	}
 });

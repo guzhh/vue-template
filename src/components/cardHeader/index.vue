@@ -15,7 +15,6 @@
 	align-items: center;
 	font-size: 14px;
 	font-weight: bold;
-	color: #202532;
 
 	i {
 		display: inline-block;

@@ -2,7 +2,12 @@
 	<div>
 		<n-modal v-model:show="showModal" :mask-closable="false" to="#app">
 			<n-card
-				style="width: 480px; box-sizing: border-box; background: linear-gradient(180deg, #ffffff 30%, #dce1ff 100%)"
+				style="
+					width: 480px;
+					min-height: 320px;
+					box-sizing: border-box;
+					background: linear-gradient(180deg, #ffffff 30%, #dce1ff 100%);
+				"
 				title="许可证"
 				:bordered="false"
 				size="small"

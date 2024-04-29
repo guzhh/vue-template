@@ -40,12 +40,16 @@ const menuCollapsedWidth = computed(() => appStore.menuCollapsedWidth);
 
 const renderMenuLabel = option => {
 	if (option?.children && option?.children.length > 0) {
-		return h("span", {}, option?.meta?.title);
+		return h("span", { title: option?.meta?.title }, option?.meta?.title);
 	}
 	if (option?.meta.linkType === 1) {
-		return h("a", { href: option?.meta?.linkValue, target: "_blank" }, option?.meta?.title);
+		return h("a", { href: option?.meta?.linkValue, target: "_blank", title: option?.meta?.title }, option?.meta?.title);
 	}
-	return h(RouterLink, { to: { name: option.name, query: {} } }, { default: () => option?.meta?.title });
+	return h(
+		RouterLink,
+		{ to: { name: option.name, query: {} }, title: option?.meta?.title },
+		{ default: () => option?.meta?.title }
+	);
 };
 
 const renderMenuIcon = option => {

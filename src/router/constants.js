@@ -72,6 +72,7 @@ export const formatTheResource = routeList => {
 			// meta: 页面标题, 菜单图标
 			meta: {
 				id: item.id,
+				extend: item.extend, // 扩展字段
 				type: item.type, // 资源类型 1 菜单 2按钮 3扩展页面
 				linkType: item?.linkType, // 1外部全链接 2内部全连接 3内部相对链接
 				linkValue: item?.linkValue, // 链接值

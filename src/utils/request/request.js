@@ -59,8 +59,9 @@ export default new Request({
 					keepAliveOnHover: true,
 					duration: 3000
 				});
-				router.push({ name: "login" });
 				clearToken();
+				const url = router.resolve({ name: "login" });
+				window.location.replace(url.href);
 			} else if (response.data?.status === "60002") {
 				window.$notification.error({
 					content: "登录失效",
@@ -68,8 +69,9 @@ export default new Request({
 					keepAliveOnHover: true,
 					duration: 3000
 				});
-				router.push({ name: "login" });
 				clearToken();
+				const url = router.resolve({ name: "login" });
+				window.location.replace(url.href);
 			} else if (response.data?.status === "403") {
 				window.$notification.error({
 					content: "无权访问",

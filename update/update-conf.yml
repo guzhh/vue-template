@@ -44,3 +44,4 @@ excludeFile:
   - /src/plugins/icons.js
   - /public/vite.svg
   - /config/vite.config.dev.js
+  - /src/router/routes/custom.js
