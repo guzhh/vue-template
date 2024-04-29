@@ -9,8 +9,8 @@ overrides:
 
 dependencies:
   '@guzhh/custom-form':
-    specifier: 0.0.1-alpha.23
-    version: 0.0.1-alpha.23(debug@4.3.4)(typescript@5.3.3)
+    specifier: 0.0.1-alpha.24
+    version: 0.0.1-alpha.24(debug@4.3.4)(typescript@5.3.3)
   '@soybeanjs/vue-admin-tab':
     specifier: ^1.0.9
     version: 1.0.9(vue@3.4.8)
@@ -1115,8 +1115,8 @@ packages:
       lodash.uniq: 4.5.0
     dev: false
 
-  /@guzhh/custom-form@0.0.1-alpha.23(debug@4.3.4)(typescript@5.3.3):
-    resolution: {integrity: sha512-VyGqC46zpYHqGeuNn+ew7xWbFiBa7og/wSvE17r5yDEvD9F86EvW9FGZiQ85BeyaH2jDMD5x2vxUmgbwECAE3w==}
+  /@guzhh/custom-form@0.0.1-alpha.24(debug@4.3.4)(typescript@5.3.3):
+    resolution: {integrity: sha512-5KAvTf0GNQL9rieJ/jQBp+4373V+/hHdbfoV1kVNZEtHM2wm3Bcjay+hiHFd3t7Eq/c2wpJmc0ze6KNzy6YUtQ==}
     dependencies:
       ace-builds: 1.32.3
       axios: 1.6.5(debug@4.3.4)
@@ -5734,6 +5734,7 @@ packages:
 
   /json-schema-traverse@1.0.0:
     resolution: {integrity: sha512-NM8/P9n3XjXhIZn1lLhkFaACTOURQXjWhV4BA/RnOv8xvgqtqpAX9IO4mRQxSx1Rlo4tqzeqb0sOlruaOy3dug==}
+    requiresBuild: true
     dev: true
 
   /json-stable-stringify-without-jsonify@1.0.1:
@@ -7449,6 +7450,7 @@ packages:
   /require-from-string@2.0.2:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
     engines: {node: '>=0.10.0'}
+    requiresBuild: true
     dev: true
 
   /resolve-dir@1.0.1:

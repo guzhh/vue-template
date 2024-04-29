@@ -138,17 +138,3 @@ export function unbindDeptUser(params) {
 		}
 	});
 }
-
-/**
- * 获取证书信息
- * @returns {Promise<*>}
- */
-export function info(params) {
-	return request.get({
-		url: "/p/license/info",
-		params,
-		customs: {
-			isLoading: false
-		}
-	});
-}

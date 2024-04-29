@@ -47,7 +47,7 @@
 				<!--				/>-->
 			</n-form-item>
 			<n-form-item style="margin-top: 20px">
-				<n-button style="width: 100%" type="info" attr-type="button" @click="handleValidateClick">登录</n-button>
+				<n-button style="width: 100%" type="primary" attr-type="button" @click="handleValidateClick">登录</n-button>
 			</n-form-item>
 		</n-form>
 	</div>

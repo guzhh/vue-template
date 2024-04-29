@@ -180,7 +180,7 @@ watch(
 	},
 	{ deep: true, immediate: true }
 );
-const { logout } = useUser();
+const { logout: handleLogout } = useUser();
 // 全局公共CSS变量
 const themeVars = useThemeVars();
 const { theme, handleToggleTheme } = useHandleTheme(); // 主题调整
@@ -253,18 +253,16 @@ const setVisible = () => {
 // 打开菜单选择器
 const toggleDrawerMenu = inject("toggleDrawerMenu");
 
-// 退出登录
-const handleLogout = () => {
-	logout();
-};
-
 const handleOptionsFun = {
 	userCenter: () => {
+		// 前往用户中心
 		router.push({ name: "personal" });
-	}, // 前往用户中心
+	},
 	userSettings: () => {
+		// 用户设置
 		router.push({ name: "settings" });
-	}, // 用户设置
+	},
+	// 退出登录
 	logout: handleLogout,
 	license: () => {
 		window.$globleTip.open();
