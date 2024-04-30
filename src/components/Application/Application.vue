@@ -1,8 +1,9 @@
 <template>
-	<n-config-provider :theme="theme">
+	<n-config-provider :theme="theme" style="height: 100%">
 		<n-loading-bar-provider>
 			<n-dialog-provider>
 				<DialogContent />
+				<LoadingContent></LoadingContent>
 				<n-notification-provider>
 					<Notification />
 					<n-message-provider>
@@ -22,6 +23,7 @@ import { MessageContent } from "@/components/MessageContent";
 import { DialogContent } from "@/components/DialogContent";
 import { Notification } from "@/components/Notification";
 import useAppStore from "@/store/modules/user";
+import { LoadingContent } from "@/components/loadingContent/index.js";
 
 export default defineComponent({
 	// eslint-disable-next-line vue/multi-word-component-names
@@ -33,7 +35,8 @@ export default defineComponent({
 		NLoadingBarProvider,
 		MessageContent,
 		DialogContent,
-		Notification
+		Notification,
+		LoadingContent
 	},
 	setup() {
 		console.log(
@@ -49,3 +52,8 @@ export default defineComponent({
 	}
 });
 </script>
+<style lang="less">
+.n-config-provider {
+	height: 100% !important;
+}
+</style>

@@ -85,6 +85,7 @@
 			</template>
 			<vxe-table
 				stripe
+				ref="paramTableRef"
 				:data="tableList"
 				:height="height - 120"
 				:loading="tableLoading"
@@ -96,15 +97,62 @@
 				show-header-overflow="title"
 				show-overflow
 				:row-config="{ isHover: true, isCurrent: true }"
+				keep-source
+				:valid-config="{ msgMode: 'full' }"
+				:edit-rules="validRules"
+				:edit-config="{
+					trigger: 'dblclick',
+					mode: 'row',
+					showStatus: true
+				}"
 			>
 				<vxe-column field="id" show-overflow="title" title="ID" width="50px"></vxe-column>
-				<vxe-column field="paramClassName" min-width="100px" show-overflow="title" title="参数分类"></vxe-column>
-				<vxe-column field="paramCode" min-width="100px" show-overflow="title" title="参数编码"></vxe-column>
-				<vxe-column field="paramName" min-width="100px" show-overflow="title" title="参数名称"></vxe-column>
-				<vxe-column field="paramDescr" min-width="200px" show-overflow="title" title="参数描述"></vxe-column>
-				<vxe-column field="paramVal" min-width="100px" show-overflow="title" title="参数值"></vxe-column>
-				<vxe-column title="操作" width="150px">
+				<vxe-column
+					field="paramClassName"
+					min-width="100px"
+					show-overflow="title"
+					title="参数分类"
+					:edit-render="{ autofocus: '.vxe-input--inner', defaultValue: '' }"
+				>
+					<template #edit="{ row }">
+						<!--						<vxe-input v-model="row.paramClassName" type="text" size="large" placeholder="参数分类" />-->
+						<dict-select
+							dictCode="PARAM_CLASS"
+							placeholder="参数分类"
+							v-model:value="row.paramClassCode"
+							v-model:name="row.paramClassName"
+						></dict-select>
+					</template>
+				</vxe-column>
+				<vxe-column
+					field="paramCode"
+					min-width="100px"
+					show-overflow="title"
+					title="参数编码"
+					:edit-render="{ name: 'VxeInput' }"
+				>
+					<template #edit="{ row }">
+						<vxe-input v-model="row.paramCode" type="text" size="large" placeholder="参数编码" :clearable="true" />
+					</template>
+				</vxe-column>
+				<vxe-column field="paramName" min-width="100px" show-overflow="title" title="参数名称" :edit-render="{}">
+					<template #edit="{ row }">
+						<vxe-input v-model="row.paramName" type="text" size="large" placeholder="参数名称" :clearable="true" />
+					</template>
+				</vxe-column>
+				<vxe-column field="paramDescr" min-width="200px" show-overflow="title" title="参数描述" :edit-render="{}">
+					<template #edit="{ row }">
+						<vxe-input v-model="row.paramDescr" type="text" size="large" placeholder="参数描述" :clearable="true" />
+					</template>
+				</vxe-column>
+				<vxe-column field="paramVal" min-width="100px" show-overflow="title" title="参数值" :edit-render="{}">
+					<template #edit="{ row }">
+						<vxe-input v-model="row.paramVal" type="text" size="large" placeholder="参数值" :clearable="true" />
+					</template>
+				</vxe-column>
+				<vxe-column title="操作" width="200px">
 					<template #default="{ row }">
+						<n-button style="margin-right: 10px" text type="primary" @click="saveParam(row)"> 保存</n-button>
 						<n-button style="margin-right: 10px" text type="primary" @click="editParam(row)"> 编辑</n-button>
 						<n-popconfirm @positive-click="deleteParam(row)">
 							<template #trigger>
@@ -138,7 +186,7 @@
 import { ref } from "vue";
 import XEUtils from "xe-utils";
 import { useMessage } from "naive-ui";
-import { getParamList, delParam, clsParamCache } from "@/api/system/param";
+import { getParamList, delParam, clsParamCache, saveOrUptParam } from "@/api/system/param";
 import useTableData from "@/hooks/useTableData.js";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import ParamForm from "@/views/system/param/components/param-form.vue";
@@ -149,6 +197,7 @@ import DictModal from "@/views/system/dict/components/dictModal.vue";
 defineOptions({ name: "paramList" });
 
 const xTableRef = ref();
+const paramTableRef = ref(); // 参数列表
 const dictModalRef = ref();
 const selectRow = ref(null);
 const dictList = ref([]);
@@ -162,6 +211,13 @@ const { tableList, tableLoading, searchForm, page, onChange, onUpdatePageSize, r
 });
 
 const nameOptions = ref([{ data: "" }]);
+const validRules = ref({
+	paramClassName: [{ required: true, message: "请输入参数分类", trigger: ["blur", "change"] }],
+	paramCode: [{ required: true, message: "请输入参数编码", trigger: ["blur", "change"] }],
+	paramName: [{ required: true, message: "请输入参数名称", trigger: ["blur", "change"] }],
+	paramDescr: [{ required: true, message: "请输入参数描述", trigger: ["blur", "change"] }],
+	paramVal: [{ required: true, message: "请输入参数值", trigger: ["blur", "change"] }]
+});
 
 const reset = () => {
 	searchForm.value.query = null;
@@ -193,7 +249,7 @@ const getDictList = () => {
 getDictList();
 
 // 新增参数
-const addParam = () => {
+const addParam = async () => {
 	paramFormRef.value.add();
 };
 
@@ -236,12 +292,23 @@ const confirmFilterEvent = async option => {
 		});
 	}
 };
+
+// 行内保存参数
+const saveParam = async row => {
+	const $table = paramTableRef.value;
+	const errMap = await $table.fullValidate({ ...row });
+	console.log("errMap", errMap);
+
+	if (errMap) {
+		window.$message.warning("请先补充信息~");
+		return;
+	}
+	saveOrUptParam({ ...row }).then(res => {
+		if (res.success) {
+			message.success("参数提交成功");
+		}
+	});
+};
 </script>
 
-<style lang="less" scoped>
-.search-card {
-	::v-deep(.n-form-item-feedback-wrapper) {
-		display: none;
-	}
-}
-</style>
+<style lang="less" scoped></style>
