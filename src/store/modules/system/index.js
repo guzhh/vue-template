@@ -139,9 +139,11 @@ const useSystemStore = defineStore("system", {
 		async getAllParam() {
 			getAllParam().then(res => {
 				if (res.success) {
+					const paramMap = new Map();
 					res.result.forEach(param => {
-						this.paramMap.set(param.paramCode, param);
+						paramMap.set(param.paramCode, param);
 					});
+					this.paramMap = paramMap;
 				}
 			});
 		},

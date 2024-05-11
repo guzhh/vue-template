@@ -11,3 +11,8 @@ export const getOptionFind = (options, val) => {
  * @type {number}
  */
 export const page = { pageSize: 10, pageNo: 1 };
+
+export const ifUse = [
+	{ label: "启用", value: 1, color: "#2878fc" },
+	{ label: "禁用", value: 0, color: "#ff5b5a" }
+];

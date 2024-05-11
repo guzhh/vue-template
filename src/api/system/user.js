@@ -238,3 +238,21 @@ export function getUserInfoByUserType(params) {
 		}
 	});
 }
+
+/**
+ * 批量新增用户信息
+ * @returns {Promise<*>}
+ */
+export function bacthSaveOrUptUser(params) {
+	return request.post({
+		url: "/p/user/bacthSaveOrUptUser",
+		data: params,
+		customs: {
+			isLoading: true,
+			loadingText: "数据获取中..."
+		},
+		headers: {
+			"Content-Type": "application/json;charset=UTF-8"
+		}
+	});
+}
