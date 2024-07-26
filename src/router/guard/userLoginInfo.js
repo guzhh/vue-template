@@ -25,7 +25,7 @@ export default function setupUserLoginInfoGuard(router) {
 				}
 			}
 		} else {
-			if (WHITE_LIST.includes(to.path)) {
+			if (WHITE_LIST.includes(to.path) || to.meta.requiresAuth) {
 				next();
 				return;
 			}

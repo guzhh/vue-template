@@ -6,7 +6,8 @@ import WangEditor from "@/components/WangEditor/index.vue"; // 富文本
 import BaseModal from "@/components/BaseModal/TinyModal.vue"; // 弹窗组件
 import BaseViceModal from "@/components/BaseModal/index.vue"; // 弹窗组件
 import CodeEditor from "@/components/CodeEditor/index.vue"; // 代码编辑器组件
-import CardHeader from "@/components/cardHeader/index.vue";
+import CardHeader from "@/components/cardHeader/index.vue"; // 卡片头部组件
+import DateTimeRange from "@/components/DateTimeRange/index.vue"; // 日期时间范围组件
 import {
 	DictSelect,
 	DictMulti,
@@ -38,7 +39,8 @@ export function setupCustomComponents(app) {
 		BaseViceModal,
 		CodeEditor,
 		DictValueShow,
-		CardHeader
+		CardHeader,
+		DateTimeRange
 	};
 	Object.keys(comp).forEach(key => {
 		app.component(key, comp[key]);

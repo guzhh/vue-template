@@ -22,13 +22,17 @@ export default function setupPermissionGuard(router) {
 
 			// 循环判断当前访问的资源是否在路由表中
 			let exist = false;
-			while (serverMenuConfig.length && !exist) {
-				const element = serverMenuConfig.shift();
-				if (element?.name === to.name) exist = true;
+			if (!to.meta.requiresAuth) {
+				while (serverMenuConfig.length && !exist) {
+					const element = serverMenuConfig.shift();
+					if (element?.name === to.name) exist = true;
 
-				if (element?.children) {
-					serverMenuConfig.push(...element.children);
+					if (element?.children) {
+						serverMenuConfig.push(...element.children);
+					}
 				}
+			} else {
+				exist = true;
 			}
 			if (exist && permissionsAllow) {
 				next();
