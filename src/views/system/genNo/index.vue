@@ -1,7 +1,7 @@
 <template>
 	<page-content>
 		<div id="PartSearchBox" style="position: relative">
-			<n-card size="small" title="编号生成管理">
+			<n-card size="small">
 				<template #header>
 					<n-form :model="searchForm" inline label-placement="left" label-width="auto" class="search-card">
 						<n-form-item label="类型信息">

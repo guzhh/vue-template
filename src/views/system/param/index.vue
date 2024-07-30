@@ -1,6 +1,6 @@
 <template>
 	<page-content style="display: flex; justify-content: space-between">
-		<n-card size="small" title="参数列表" style="width: 290px">
+		<n-card size="small" style="width: 290px">
 			<template #header>参数分类</template>
 			<template #header-extra>
 				<n-button size="small" style="margin-left: 10px" type="primary" @click="dictModalRef.open({ code: 'PARAM_CLASS' })"

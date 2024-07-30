@@ -1,7 +1,7 @@
 <template>
 	<page-content>
 		<div id="roleSearchBox" style="position: relative">
-			<n-card size="small" title="角色列表">
+			<n-card size="small">
 				<template #header>
 					<n-space>
 						<n-select

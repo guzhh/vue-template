@@ -1,7 +1,7 @@
 <template>
 	<page-content>
 		<div id="sysSearchBox" style="position: relative">
-			<n-card size="small" title="系统列表">
+			<n-card size="small">
 				<template #header>
 					<n-space>
 						<n-select

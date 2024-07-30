@@ -1,6 +1,6 @@
 <template>
 	<page-content>
-		<n-card size="small" title="字典列表">
+		<n-card size="small">
 			<template #header>
 				<n-form inline label-placement="left" :model="searchForm" label-width="auto" :show-feedback="false" size="small">
 					<n-space>

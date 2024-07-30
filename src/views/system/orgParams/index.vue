@@ -1,6 +1,6 @@
 <template>
 	<page-content>
-		<n-card size="small" title="参数列表">
+		<n-card size="small">
 			<template #header>
 				<n-input
 					size="small"
