@@ -1,7 +1,5 @@
-
-// 修改scss变量
-//$vxe-font-size-mini: 12px !default;
-//$vxe-table-row-height-mini: 28px !default;
-// ...
-
+$vxe-table-header-background-color: #F1F3F6;
+//$vxe-table-row-current-background-color: #F6F6F7;
+$vxe-table-row-striped-background-color: #F5F7FA;
+$vxe-font-color: #2B2B2E;
 @import 'vxe-table/styles/index.scss';

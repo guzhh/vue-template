@@ -27,7 +27,6 @@
 						<n-select
 							v-model:value="ifDel"
 							clearable
-							size="small"
 							style="width: 150px"
 							placeholder="是否已删除"
 							:options="[
@@ -37,16 +36,13 @@
 							@update:value="getDepartList"
 						>
 						</n-select>
-						<n-input placeholder="科室名称\拼音码" size="small" v-model:value="deptName" @keydown.enter="getDepartList" clearable>
-						</n-input>
-						<n-button size="small" type="primary" @click="getDepartList">查询</n-button>
-						<n-button size="small" @click="resetQuery">重置</n-button>
+						<n-input placeholder="科室名称\拼音码" v-model:value="deptName" @keydown.enter="getDepartList" clearable> </n-input>
+						<n-button type="primary" @click="getDepartList">查询</n-button>
+						<n-button @click="resetQuery">重置</n-button>
 					</n-space>
 				</template>
 				<template #header-extra>
-					<n-button style="margin-right: 15px" v-action:addDeptButton size="small" type="primary" @click="addNewDep({})"
-						>新增科室
-					</n-button>
+					<n-button style="margin-right: 15px" v-action:addDeptButton type="primary" @click="addNewDep({})">新增科室 </n-button>
 
 					<n-tooltip>
 						<span>上传科室excel文件</span>

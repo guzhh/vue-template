@@ -2,7 +2,7 @@
 	<page-content>
 		<n-card size="small">
 			<template #header>
-				<n-form inline label-placement="left" :model="searchForm" label-width="auto" :show-feedback="false" size="small">
+				<n-form inline label-placement="left" :model="searchForm" label-width="auto" :show-feedback="false">
 					<n-space>
 						<n-form-item label="顶级节点" path="pcode" v-if="false">
 							<n-input
@@ -28,14 +28,14 @@
 								@update:value="resetTableList"
 							/>
 						</n-form-item>
-						<n-button size="small" type="primary" @click="resetTableList">查询</n-button>
-						<n-button size="small" @click="resetQuery">重置</n-button>
+						<n-button type="primary" @click="resetTableList">查询</n-button>
+						<n-button @click="resetQuery">重置</n-button>
 					</n-space>
 				</n-form>
 			</template>
 			<template #header-extra>
-				<n-button size="small" type="primary" @click="addDict('')"> 新增字典</n-button>
-				<n-button size="small" @click="rebuildTheCache('')" style="margin-left: 10px">清除缓存</n-button>
+				<n-button type="primary" @click="addDict('')"> 新增字典</n-button>
+				<n-button @click="rebuildTheCache('')" style="margin-left: 10px">清除缓存</n-button>
 				<n-tooltip>
 					<span>折叠</span>
 					<template #trigger>
@@ -71,7 +71,7 @@
 				stripe
 				ref="tableRef"
 				:data="tableList"
-				:height="height - 120"
+				:height="height - 125"
 				:loading="tableLoading"
 				:size="tableSize"
 				align="center"

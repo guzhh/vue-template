@@ -17,7 +17,6 @@
 									placeholder="用户姓名\拼音码"
 									@keydown.enter="resetTableList"
 									clearable
-									size="small"
 								/>
 								<n-input
 									style="width: 150px"
@@ -25,24 +24,22 @@
 									placeholder="请输入账号"
 									@keydown.enter="resetTableList"
 									clearable
-									size="small"
 								/>
 
-								<n-select v-model:value="searchForm.state" :options="stateJudgeOption" style="width: 100px" size="small" />
+								<n-select v-model:value="searchForm.state" :options="stateJudgeOption" style="width: 100px" />
 								<n-select
 									clearable
 									placeholder="请选择用户角色"
 									v-model:value="searchForm.roleId"
 									:options="roleList"
 									style="width: 150px"
-									size="small"
 								/>
-								<n-button size="small" type="primary" @click="resetTableList">查询</n-button>
-								<n-button size="small" @click="resetQuery">重置</n-button>
+								<n-button type="primary" @click="resetTableList">查询</n-button>
+								<n-button @click="resetQuery">重置</n-button>
 							</n-space>
 						</template>
 						<template #header-extra>
-							<n-button size="small" type="primary" @click="handleAddUser">新增用户</n-button>
+							<n-button type="primary" @click="handleAddUser">新增用户</n-button>
 							<n-divider vertical />
 							<search-box :placement="'top'" :to="'#userSearchBox'" @reset="resetQuery" @search="resetTableList">
 								<n-form
@@ -138,7 +135,7 @@
 							stripe
 							ref="tableRef"
 							:data="tableList"
-							:height="height - 120"
+							:height="height - 130"
 							:loading="tableLoading"
 							:size="tableSize"
 							align="center"

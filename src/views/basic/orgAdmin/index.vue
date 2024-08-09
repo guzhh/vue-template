@@ -5,7 +5,6 @@
 				<n-select
 					v-model:value="ifDel"
 					clearable
-					size="small"
 					style="width: 150px"
 					placeholder="是否删除"
 					:options="[
@@ -17,7 +16,7 @@
 				</n-select>
 			</template>
 			<template #header-extra>
-				<n-button v-action:addOrgButton size="small" type="primary" @click="addNewOrg({})">新增机构</n-button>
+				<n-button v-action:addOrgButton type="primary" @click="addNewOrg({})">新增机构</n-button>
 				<n-tooltip>
 					<span>折叠</span>
 					<template #trigger>
@@ -53,7 +52,7 @@
 				stripe
 				ref="tableRef"
 				:data="tableData"
-				:height="height - 90"
+				:height="height - 95"
 				:loading="tableLoading"
 				:row-config="{
 					useKey: true,

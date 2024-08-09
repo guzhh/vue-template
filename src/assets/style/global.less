@@ -11,53 +11,97 @@
 @import "./formGenerator.less";
 
 // table 样式
-@import "vxe-table/lib/style.css";
+//@import "vxe-table/lib/style.css";
 // 自定义表单样式
 @import "@guzhh/custom-form/dist/style.css";
 @import "variable";
+
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
+
 html,
 body {
-	width: 100%;
-	height: 100%;
-	padding: 0;
-	margin: 0;
-	font-size: 14px;
-	-moz-osx-font-smoothing: grayscale;
-	-webkit-font-smoothing: antialiased;
-}
-::-webkit-scrollbar {
-	width: 6px;
-	height: 6px;
-}
-::-webkit-scrollbar-button {
-	width: 0;
-	height: 0;
-}
-::-webkit-scrollbar-thumb {
-	background-color: rgb(0 0 0 / 10%);
-	border-radius: 2px;
-}
-::-webkit-scrollbar-thumb:hover {
-	background-color: rgb(0 0 0 / 20%);
-}
-::-webkit-scrollbar-thumb:active {
-	background-color: rgb(0 0 0 / 30%);
-}
-::-webkit-scrollbar-corner {
-	background-color: transparent;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+
+  .inputDropdowmMenu {
+    .n-dropdown-menu {
+      max-height: 300px;
+      scroll-behavior: smooth;
+      overflow: auto;
+      //z-index: 10000;
+      .n-dropdown-option-body__label {
+        text-align: center
+      }
+    }
+  }
+
+
 }
 
-.n-layout-sider-scroll-container,.widget-form-container {
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(0 0 0 / 10%);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(0 0 0 / 20%);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: rgb(0 0 0 / 30%);
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+.n-layout-sider-scroll-container, .widget-form-container {
   scrollbar-width: thin;
 }
+
 .n-card-header__extra > .n-icon {
   cursor: pointer;
 }
+
 .n-card-header__extra > .n-icon:hover {
   background: #eee;
 }
+
+.v-images-wrap {
+  background: rgba(0, 0, 0, 0) !important;
+  backdrop-filter: none !important;
+  pointer-events: none;
+
+  * {
+    pointer-events: auto;
+  }
+
+  .img-container {
+    pointer-events: none;
+
+    * {
+      pointer-events: auto;
+    }
+  }
+}
+
+

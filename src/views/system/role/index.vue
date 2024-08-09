@@ -12,21 +12,14 @@
 							style="width: 180px"
 							@update:value="resetTableList"
 							clearable
-							size="small"
 						/>
-						<n-input
-							v-model:value="searchForm.name"
-							placeholder="请输入角色名称"
-							@keydown.enter="resetTableList"
-							clearable
-							size="small"
-						/>
-						<n-button type="primary" size="small" @click="resetTableList">查询 </n-button>
-						<n-button size="small" @click="reset">重置 </n-button>
+						<n-input v-model:value="searchForm.name" placeholder="请输入角色名称" @keydown.enter="resetTableList" clearable />
+						<n-button type="primary" @click="resetTableList">查询 </n-button>
+						<n-button @click="reset">重置 </n-button>
 					</n-space>
 				</template>
 				<template #header-extra>
-					<n-button size="small" type="primary" @click="addRole">新增角色</n-button>
+					<n-button type="primary" @click="addRole">新增角色</n-button>
 					<n-divider vertical />
 					<n-tooltip>
 						<span>刷新</span>
@@ -52,7 +45,7 @@
 				<vxe-table
 					stripe
 					:data="tableList"
-					:height="height - 120"
+					:height="height - 125"
 					:loading="tableLoading"
 					:size="tableSize"
 					align="center"

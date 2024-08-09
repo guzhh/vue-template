@@ -3,9 +3,7 @@
 		<n-card size="small" style="width: 290px">
 			<template #header>参数分类</template>
 			<template #header-extra>
-				<n-button size="small" style="margin-left: 10px" type="primary" @click="dictModalRef.open({ code: 'PARAM_CLASS' })"
-					>新增分类</n-button
-				>
+				<n-button style="margin-left: 10px" type="primary" @click="dictModalRef.open({ code: 'PARAM_CLASS' })">新增分类</n-button>
 			</template>
 			<vxe-table
 				stripe
@@ -50,18 +48,17 @@
 		<n-card size="small" title="参数列表" style="width: calc(100% - 300px)">
 			<template #header>
 				<n-input
-					size="small"
 					style="width: 300px"
 					v-model:value="searchForm.query"
 					placeholder="参数编码/参数名称/参数值/参数描述"
 					@keydown.enter.prevent="resetTableList"
 				/>
-				<n-button size="small" type="primary" @click="resetTableList" style="margin-left: 10px"> 查询</n-button>
-				<n-button size="small" type="default" @click="reset" style="margin-left: 10px"> 重置</n-button>
+				<n-button type="primary" @click="resetTableList" style="margin-left: 10px"> 查询</n-button>
+				<n-button type="default" @click="reset" style="margin-left: 10px"> 重置</n-button>
 			</template>
 			<template #header-extra>
-				<n-button size="small" style="margin-right: 10px" type="primary" @click="addParam">新增参数</n-button>
-				<n-button size="small" style="margin-right: 20px" @click="clearAndRebuild">清除重建</n-button>
+				<n-button style="margin-right: 10px" type="primary" @click="addParam">新增参数</n-button>
+				<n-button style="margin-right: 20px" @click="clearAndRebuild">清除重建</n-button>
 				<n-tooltip>
 					<span>刷新</span>
 					<template #trigger>
@@ -87,7 +84,7 @@
 				stripe
 				ref="paramTableRef"
 				:data="tableList"
-				:height="height - 120"
+				:height="height - 125"
 				:loading="tableLoading"
 				:size="tableSize"
 				align="center"

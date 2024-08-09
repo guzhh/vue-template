@@ -1,7 +1,7 @@
 <template>
 	<base-modal style="width: 1100px" title="字典列表" v-model:show="visible" :footer="false" @close="handleClose">
 		<n-card size="small">
-			<n-form inline label-placement="left" label-width="auto" :show-feedback="false" size="small">
+			<n-form inline label-placement="left" label-width="auto" :show-feedback="false">
 				<n-space>
 					<n-form-item label="字典名称/编码">
 						<n-input v-model:value="queryStr" placeholder="字典名称/编码" @keydown.stop.enter="getDictList"></n-input>
@@ -18,9 +18,9 @@
 							]"
 						/>
 					</n-form-item>
-					<n-button size="small" type="primary" @click="getDictList">查询</n-button>
-					<n-button size="small" @click="resetQuery">重置</n-button>
-					<n-button size="small" type="primary" @click="addDict">新增字典</n-button>
+					<n-button type="primary" @click="getDictList">查询</n-button>
+					<n-button @click="resetQuery">重置</n-button>
+					<n-button type="primary" @click="addDict">新增字典</n-button>
 				</n-space>
 			</n-form>
 		</n-card>
@@ -30,7 +30,6 @@
 				ref="tableRef"
 				:data="tableData"
 				:loading="tableLoading"
-				size="mini"
 				align="center"
 				border="none"
 				:max-height="500"

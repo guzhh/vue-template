@@ -26,7 +26,7 @@ async function bootstrap() {
 	// 导入弹窗组件
 	app.use(TinyLayer);
 	// 挂载状态管理
-	setupStore(app);
+	await setupStore(app);
 	// 注册全局图标
 	setupIcon(app);
 	// 注册全局自定义组件

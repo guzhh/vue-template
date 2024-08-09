@@ -20,7 +20,7 @@ export function formatTheRoute(data) {
 		// 该路由对应页面的 组件
 		// eslint-disable-next-line no-param-reassign
 		father.component = constantRouterComponents[father.component] || NotPage;
-		const branchArr = cloneData.filter(child => parseInt(father.id, 10) === parseInt(child.pid, 10)); // 返回每一项的子级数组
+		const branchArr = cloneData.filter(child => `${father.id}` === `${child.pid}`); // 返回每一项的子级数组
 		// 如果存在子级，则给父级添加一个children属性，并赋值
 		if (branchArr.length > 0) {
 			// eslint-disable-next-line no-unused-expressions,no-param-reassign
@@ -28,7 +28,7 @@ export function formatTheRoute(data) {
 			// eslint-disable-next-line no-unused-expressions,no-param-reassign
 			father.redirect = { name: branchArr[0].name };
 		}
-		return parseInt(father.pid, 10) === 0; // 返回第一层
+		return `${father.pid}` === "0"; // 返回第一层
 	});
 }
 

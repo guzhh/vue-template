@@ -1,5 +1,6 @@
 // 应用主题预设颜色
 export const appThemeList = [
+	"#177DFB",
 	"#465CFF",
 	"#18a058",
 	"#409eff",
@@ -37,5 +38,5 @@ export default {
 	globalSettings: false, // 是否显示 全局设置
 	tabBar: true, // 是否开启多页签
 	device: "desktop", // 当前界面模式 desktop || mobile
-	tableSize: "mini" // table size medium / small / mini
+	tableSize: "medium" // table size medium / small / mini
 };

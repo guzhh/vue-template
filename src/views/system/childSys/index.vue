@@ -7,7 +7,6 @@
 						<n-select
 							v-model:value="searchForm.ifDel"
 							clearable
-							size="small"
 							style="width: 150px"
 							placeholder="是否删除"
 							:options="[
@@ -17,20 +16,14 @@
 							@update:value="resetTableList"
 						>
 						</n-select>
-						<n-input
-							placeholder="系统名称"
-							size="small"
-							v-model:value="searchForm.sysName"
-							@keydown.enter="resetTableList"
-							clearable
-						>
+						<n-input placeholder="系统名称" v-model:value="searchForm.sysName" @keydown.enter="resetTableList" clearable>
 						</n-input>
-						<n-button size="small" type="primary" @click="resetTableList">查询</n-button>
-						<n-button size="small" @click="reset">重置</n-button>
+						<n-button type="primary" @click="resetTableList">查询</n-button>
+						<n-button @click="reset">重置</n-button>
 					</n-space>
 				</template>
 				<template #header-extra>
-					<n-button size="small" type="primary" @click="add"> 新增系统</n-button>
+					<n-button type="primary" @click="add"> 新增系统</n-button>
 					<n-divider vertical />
 					<search-box :placement="'top'" :to="'#sysSearchBox'" @reset="reset" @search="resetTableList">
 						<n-form ref="formRef" :label-width="100" :model="searchForm" inline label-placement="left">
@@ -101,7 +94,7 @@
 				<vxe-table
 					stripe
 					:data="tableList"
-					:height="height - 120"
+					:height="height - 125"
 					:loading="tableLoading"
 					:size="tableSize"
 					align="center"
