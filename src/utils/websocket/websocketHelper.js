@@ -105,8 +105,10 @@ export default class WebsocketHelper {
 
 	/**
 	 * 发送消息
-	 * @param msg 消息内容
-	 * @param callback 收到消息回调方法
+	 * @param data 消息内容
+	 * @param handler 消息处理器
+	 * @param waitTime 超时时间
+	 * @returns {undefined|Promise<unknown>}
 	 */
 	send(data, handler, waitTime = 3000) {
 		if (handler) {

@@ -45,7 +45,7 @@
 			</vxe-table>
 			<DictModal ref="dictModalRef"></DictModal>
 		</n-card>
-		<n-card size="small" title="参数列表" style="width: calc(100% - 300px)">
+		<n-card size="small" style="width: calc(100% - 300px)">
 			<template #header>
 				<n-input
 					style="width: 300px"

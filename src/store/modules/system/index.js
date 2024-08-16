@@ -137,7 +137,7 @@ const useSystemStore = defineStore("system", {
 		 * @returns {Promise<void>}
 		 */
 		async getAllParam() {
-			getAllParam().then(res => {
+			await getAllParam({}).then(res => {
 				if (res.success) {
 					const paramMap = new Map();
 					res.result.forEach(param => {

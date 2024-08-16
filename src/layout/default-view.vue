@@ -56,7 +56,7 @@ import { computed, provide, ref } from "vue";
 import useAppStore from "@/store/modules/app";
 import NavBar from "@/components/Navbar/index.vue";
 import Menu from "@/components/Menu/index.vue";
-import Footer from "@/components/footer/index.vue";
+import Footer from "@/components/Footer/index.vue";
 import TabBar from "@/components/TabBar/index.vue";
 import useResponsive from "@/hooks/responsive";
 import DarkLogo from "@/components/LogoTitle/darkLogo.vue";

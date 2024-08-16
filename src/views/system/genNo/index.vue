@@ -10,17 +10,16 @@
 								placeholder="类型编码或类型名称"
 								@keydown.enter="resetTableList"
 								clearable
-								size="small"
 							/>
 						</n-form-item>
 						<n-form-item>
-							<n-button type="primary" size="small" @click="resetTableList" style="margin-right: 10px">查询 </n-button>
-							<n-button size="small" @click="reset">重置 </n-button>
+							<n-button type="primary" @click="resetTableList" style="margin-right: 10px">查询 </n-button>
+							<n-button @click="reset">重置 </n-button>
 						</n-form-item>
 					</n-form>
 				</template>
 				<template #header-extra>
-					<n-button size="small" type="primary" @click="addGenNo">新增编号</n-button>
+					<n-button type="primary" @click="addGenNo">新增编号</n-button>
 					<n-divider vertical />
 					<n-tooltip>
 						<span>刷新</span>
